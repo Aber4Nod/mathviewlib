@@ -1,0 +1,15 @@
+# This is a comment
+prefix=/Users/n.mikhnenko/libmathview/build/../install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+
+Name: MathView
+Description: MathML rendering engine (libxml2 frontend)
+Version: 1.0.0
+Requires: libxml-2.0 mathview-core
+Libs: -lxml2 -L${libdir} -lmathview_frontend_libxml2
+Cflags: -I/usr/include/libxml2 -I${includedir}/mathview
+

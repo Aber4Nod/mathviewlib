@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mstyle mathvariant="bold">
+    <mtext>bold</mtext>
+  </mstyle>
+  <mtext fontstyle="italic">normal weight, but italics</mtext>
+</math>

@@ -1,0 +1,62 @@
+try:
+    from lxml import etree
+except ImportError:
+    from xml.etree import ElementTree as etree
+
+import sys
+
+space_map = (
+    "0em",
+    "veryverythinmathspace",
+    "verythinmathspace",
+    "thinmathspace",
+    "mediummathspace",
+    "thickmathspace",
+    "verythickmathspace",
+    "veryverythickmathspace",
+)
+
+def getOperators(tree):
+    root = tree.getroot()
+    operators = {}
+    for character in root.findall(".//character"):
+        for operator in character.findall(".//operator-dictionary"):
+            dec = character.get("dec")
+            value = ""
+            for d in dec.split("-"):
+                d = int(d)
+                c = unichr(d)
+                value += "".join([r"\x%02x" %(ord(b)) for b in c.encode("utf8")])
+            if not value in operators:
+                operators[value] = []
+            operators[value].append(operator)
+
+    return operators
+
+attributes = ("accent", "fence", "form", "largeop", "linebreakstyle",
+              "lspace", "movablelimits", "priority", "rspace", "separator",
+              "stretchy", "symmetric")
+
+def dumpOperators(tree, fd):
+    operators = getOperators(tree)
+    text = ""
+    for key in sorted(operators.keys()):
+        for operator in operators[key]:
+            text += '  { "%s"' % key
+            for attribute in attributes:
+                value = operator.get(attribute, None)
+                if value is not None:
+                    if attribute in ("lspace", "rspace"):
+                        value = space_map[int(value)]
+                    text += ', "%s"' % value
+                else:
+                    text += ', NULL'
+            text += ' },'
+            text += '\n'
+
+    fd.write(text)
+    fd.write("\n")
+
+if __name__ == "__main__":
+    doc = etree.parse(sys.argv[1])
+    dumpOperators(doc, sys.stdout)

@@ -1,0 +1,46 @@
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+  <mpadded width="0em">
+    <munder>
+      <mrow>
+	<msup>
+	  <mi>x</mi>
+	  <mn>2</mn>
+	</msup>
+	<mo>+</mo>
+	<mrow>
+	  <mn>2</mn>
+	  <mo>&#x2062;</mo>
+	  <mi>x</mi>
+	</mrow>
+	<mpadded width="0em">
+	  <mi>&#x200b;</mi>
+	  <mo>+</mo>
+	  <mn>1</mn>
+	</mpadded>
+      </mrow>
+      <mo>&#xfe38;</mo>
+    </munder>
+  </mpadded>
+  <mrow>
+    <mphantom>
+      <msup>
+	<mi>x</mi>
+	<mn>2</mn>
+      </msup>
+      <mo>+</mo>
+      <mrow/>
+    </mphantom>    
+    <mover>
+      <mphantom>
+	<mrow>
+	  <mn>2</mn>
+	  <mo>&#x2062;</mo>
+	  <mi>x</mi>
+	</mrow>
+	<mo>+</mo>
+	<mn>1</mn>
+      </mphantom>
+      <mo>&#xfe37;</mo>
+    </mover>
+  </mrow>
+</math>

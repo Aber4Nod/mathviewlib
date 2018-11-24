@@ -1,0 +1,22 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mfrac>
+    <mtable frame="solid">
+      <mtr>
+        <mtd>
+	  <mphantom>
+	    <mtext>M</mtext>
+	  </mphantom>
+	</mtd>
+      </mtr>
+    </mtable>
+    <mtable frame="solid">
+      <mtr>
+        <mtd>
+	  <mphantom>
+	    <mtext>M</mtext>
+	  </mphantom>
+	</mtd>
+      </mtr>
+    </mtable>
+  </mfrac>
+</math>

@@ -1,0 +1,1252 @@
+\input texinfo   @c -*-texinfo-*-
+@c %**start of header
+@setfilename gtkmathview.info
+@settitle GtkMathView Reference Manual
+@c %**end of header
+@setchapternewpage off
+@include version.texi
+
+
+@ifinfo
+This file documents GtkMathView, a GTK widget for rendering MathML documents.
+
+Copyright @copyright{} 2000 Free Software Foundation, Inc.
+
+Permission is granted to make and distribute verbatim
+copies of this manual provided the copyright notice and
+this permission notice are preserved on all copies.
+
+@ignore
+Permission is granted to process this file through TeX
+and print the results, provided the printed document
+carries a copying permission notice identical to this
+one except for the removal of this paragraph (this
+paragraph not being relevant to the printed manual).
+
+@end ignore
+Permission is granted to copy and distribute modified
+versions of this manual under the conditions for
+verbatim copying, provided also that the sections
+entitled ``Copying'' and ``GNU General Public License''
+are included exactly as in the original, and provided
+that the entire resulting derived work is distributed
+under the terms of a permission notice identical to this
+one.
+
+Permission is granted to copy and distribute
+translations of this manual into another language,
+under the above conditions for modified versions,
+except that this permission notice may be stated in a
+translation approved by the Free Software Foundation.
+@end ifinfo
+
+
+@titlepage
+@title GtkMathView Reference Manual
+@subtitle A GTK Widget for Rendering MathML Documents
+@subtitle Version @value{VERSION}
+@subtitle @value{UPDATED}
+@author by Luca Padovani, University of Bologna, Italy
+
+@c The following two commands start the copyright page.
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 2000 Free Software Foundation, Inc.
+
+Permission is granted to make and distribute verbatim
+copies of this manual provided the copyright notice and
+this permission notice are preserved on all copies.
+
+Permission is granted to copy and distribute modified
+versions of this manual under the conditions for
+verbatim copying, provided also that the sections
+entitled ``Copying'' and ``GNU General Public License''
+are included exactly as in the original, and provided
+that the entire resulting derived work is distributed
+under the terms of a permission notice identical to this
+one.
+
+Permission is granted to copy and distribute
+translations of this manual into another language,
+under the above conditions for modified versions,
+except that this permission notice may be stated in a
+translation approved by the Free Software Foundation.
+@end titlepage
+
+
+@node    Top, Overview, (dir), (dir)
+@comment node-name, next,         previous, up
+@menu
+* Overview::                    General information about GtkMathView.
+* Usage::                       Compiling and installation instructions.
+* Interactivity Support::       
+* Sample Application::          
+* C++ Interface::               Summary of the C++ interface.
+* GTK+ Interface::              Summary of the GTK+ interface.
+* Tools::                       Tools coming along the widget.
+* Bugs::                        How to report a bug.
+
+@detailmenu
+ --- The Detailed Node Listing ---
+
+Usage
+
+* Download::                    Where the source code is
+* Requirements::                Auxiliary packages to compile and run GtkMathView.
+* Installing::                  How to compile the source code of the widget.
+* Compile and Link::            How to link against your source code.
+
+Source Document
+
+* MathML
+* Extensions to MathML
+* MathML Entities
+*
+Interactivity Support
+
+* Selection::                   Highlighting sub-expressions
+* Point-and-click Functionalities::  Handling of basic mouse events
+* Editing::                     Changing the source document tree
+
+C++ Interface
+
+* Lengths::                     About Lengths
+
+Tools
+
+* mathmlviewer::                A simple viewer application.
+
+@end detailmenu
+@end menu
+
+@node     Overview, Usage, Top, Top
+@comment  node-name,    next,  previous,  up
+@chapter  Overview
+@noindent
+GtkMathView is a C++ rendering engine for MathML (see
+@url{http://www.w3.org/Math}) documents.  Although GtkMathView is, by
+its own definition, related to the GTK+ framework, its internal
+architecture is designed so as to isolate as much as possible platform
+dependencies. A large part of GtkMathView, the one dealing with proper
+formula layout, is completely platform independent. On top of this
+internal library of C++ classes is the GTK+ interface. The
+implementation of a new interface is a relatively easy and
+straightforward task.
+
+More specifically, GtkMathView is structured as follows:
+@itemize
+@item
+the @emph{frontend} is the part of the widget that has to do with the
+source MathML document. Currently GtkMathView provides the following
+frontends: @emph{DOM} (uses @code{Gdome2} for the C interface and
+@code{GMetaDOM} for the C++ interface), @emph{libxml2} tree,
+@emph{libxml2 reader}, @emph{custom reader}. 
+@item
+the @emph{formatting engine} is the part of the widget that implements
+the MathML layout algorithm. This part is completely independent of
+how the source document is represented, and what the target medium is.
+@item
+the @emph{backend} is the part of the widget that determines the
+target medium on which MathML is going to be displayed, along with all
+the parameters that affect it (mainly available fonts).
+@end itemize
+
+@noindent
+For questions, comments, suggestions, bug reports, contributions,
+please contact the author at the following email address:
+@email{lpadovan@@cs.unibo.it}
+
+@node     Usage, Interactivity Support, Overview, Top
+@comment  node-name,  next,  previous,  up
+@chapter  Usage
+@menu
+* Download::                    Where the source code is
+* Requirements::                Auxiliary packages to compile and run GtkMathView.
+* Installing::                  How to compile the source code of the widget.
+* Compile and Link::            How to link against your source code.
+@end menu
+
+@node     Download, Requirements, Usage, Usage
+@comment  node-name,  next,  previous,  up
+@section  Download
+@noindent
+The latest version of the source code of the GtkMathView widget, along
+with this documentation, can be obtained directly from
+@url{http://helm.cs.unibo.it/mml-widget/}.
+
+In the same page you will find @emph{unofficial} RedHat packages and
+@emph{official} Debian packages for the widget and related tools.
+
+The source code is also available from the GNOME CVS repository, which
+can be accesses anonymously via CVS at the following address
+@code{:pserver:anonymous@@anoncvs.gnome.org:/cvs/gnome}
+
+@noindent
+The module name is @code{gtkmathview}. The CVS repository can also be
+browsed online at the address
+@url{http://cvs.gnome.org/lxr/source/gtkmathview/}.
+
+@node     Requirements, Installing, Download, Usage
+@comment  node-name,  next,  previous,  up
+@section  Requirements
+@noindent
+To compile and use the widget you need the following packages
+installed on your system:
+
+@itemize @bullet
+@item
+@code{GTK+} (version 2.x) @url{http://www.gtk.org/}, of course.
+@item
+@code{GMetaDOM} (at least version 0.1.5)
+@url{http://gmetadom.sourceforge.org/}. This library provides a C++
+DOM implementation based on @code{Gdome2}
+@url{http://gdome2.cs.unibo.it/} which in turn is based on
+@code{libxml2} @url{http://xmlsoft.org/}.  This library is required
+only if you want to use GtkMathView with the @emph{DOM} frontend.
+@item
+@code{libxml2} @url{http://xmlsoft.org/}. This library is required
+only if you want to use GtkMathView with the @emph{libxml2} or
+@emph{libxml2 reader} frontends.
+@end itemize
+
+@node     Installing, Compile and Link, Requirements, Usage
+@comment  node-name,  next,  previous,  up
+@section  Installing
+@noindent
+See the INSTALL file included in the source distribution for detailed
+compilation and installation instructions. After installation you will
+have the following files:
+
+@itemize @bullet
+@item
+@file{/usr/local/bin/gtkmathview-config} this is the configuration
+script. Use @command{gtkmathview-config --cflags} to get compilation
+flags of source files using the widget. Use @command{gtkmathview-config
+--libs} to get linking flags and libraries to be linked with your object
+files.
+@item
+@file{/usr/local/include/gtkmathview/} include files (you have to include
+@file{gtkmathview.h}).
+@item
+@file{/usr/local/lib/} libraries. Unless you
+gave @command{configure} one of @option{--disable-static} or
+@option{--disable-shared} you will find in this directory both static and shared
+versions of the widget.
+@item
+@file{/usr/local/info/}, the info file. You can browse it with the
+command @command{info -f /usr/local/info/gtkmathview.info}.
+@item
+@file{/usr/local/share/gtkmathview/} some configuration files (fonts,
+operator dictionary and general configuration) along with their DTDs.
+@end itemize
+
+
+@node     Compile and Link, Installing, Usage
+@comment  node-name,  next,  previous,  up
+@section  Compile and Link
+
+@noindent
+To compile a source file which uses the widget use the command
+
+@command{gcc -c filename.c -l... -I... `gtkmathview-config --cflags`}
+
+@noindent
+The widget is compiled by default to generate both static and shared
+object file.  It can be linked dynamically against your applications
+with the command:
+
+@command{gcc -o appname *.o `gtkmathview-config --libs`}
+
+@node     onfiguration, Compile and Link, Usage
+@section  Configuration
+
+The widget can be configured after instantiation by using the
+provided methods described in @ref{GTK+ Interface}.
+
+@node     Interactivity Support, Sample Application, Usage, Top
+@chapter  Interactivity Support
+
+GtkMathView's support for interaction support can be summarized in
+three aspects, @emph{selection}, @emph{point-and-click}, and
+@emph{editing}, which we will define more precisely in the sections
+that follows.
+
+Interactivity support often implies re-rendering of the displayed
+MathML document. As this can be an expensive operation, especially
+when several actions take place in rapid succession, GtkMathView
+provides for two methods (@code{gtk_math_view_freeze} and
+@code{gtk_math_view_thaw}) that delay any re-computation and update of
+the displaying window until the application has terminated the action.
+
+As a matter of fact, due to the current design of GtkMathView's
+architecture, the use of these two methods is @emph{mandatory} in that
+the displayed window is guaranteed to be updated correctly only if the
+two methods are properly used. Although we perceive this as a
+limitation, the points in favor are the following:
+
+@itemize
+@item we found that in most cases the handling of the action already
+justifies the use of @code{gtk_math_view_freeze} and
+@code{gtk_math_view_thaw}, as a way of improving performances;
+
+@item they are lightweight methods that have a negligible impact in
+the user application;
+
+@item because of the DOM-driven architecture, the implementation of
+the alternative mechanism seems to violate the clear separation of the
+platform-independent engine from the graphical interface.
+@end itemize
+
+It is safe to nest calls to @code{gtk_math_view_freeze} and
+@code{gtk_math_view_thaw} methods at any level.
+
+@menu
+* Selection::                   Highlighting sub-expressions
+* Point-and-click Functionalities::  Handling of basic mouse events
+* Editing::                     Changind the source document tree
+@end menu
+
+@node Selection, Point-and-click Functionalities, Interactivity Support, Interactivity Support
+@section Selection
+
+By @emph{selection} we mean the possibility for the user to
+distinguish one or more DOM elements from the others in a MathML
+document. The typical visual feedback for selected elements is that of
+displaying them with a different background color.
+
+Selection support in GtkMathView consists of three methods and four
+signals. The methods are needed to set and query about the selection
+status of a particular MathML element, as this information is hidden
+within the internal data structures of GtkMathView and is not
+available as part of the MathML document itself. Selection is a
+boolean property: an element can be either selected or not, there are
+no multiple levels of selection.
+
+Both @code{gtk_math_view_select} and @code{gtk_math_view_unselect}
+operate recursively on the given MathML element and also on all its
+descendants, but the @code{gtk_math_view_unselect} method can be used
+to perforate a previously selected element thus leaving a ``hole''
+within a selection. This mechanism can be exploited for representing
+@emph{patterns} of elements within the MathML documents.
+
+The signals related to selection are @code{select_begin},
+@code{select_end}, @code{select_over}, and @code{select_abort}. The
+first three signals have two arguments, the MathML element on which
+the signal has been emitted and the status of control keys on the
+keyboard. The four signals are fired in disjoint sequences matching
+the following regular expression:
+@example
+select_begin select_over* (select_end | select_abort)
+@end example
+
+@noindent
+which is to be read as follows: selection begins when the user presses
+the first mouse button and moves it a bit from the original
+position. As the user moves the mouse with the button pressed, an
+arbitrary number of @code{select_over} signals is emitted. Selection
+can terminate in two cases: either the user releases the button
+(@code{select_end}) or he/she presses another mouse button, hence
+aborting the selection (@code{select_abort}).
+
+An interface for which multiple selections are required can check the
+status of control keys on the keyboard in order to determine whether a
+new selection sequence replaces a previous selection or adds a new
+selection to it.
+
+@strong{Support for semantic selection.} The widget does not highlight
+automatically the parts of the document on which the user is dragging
+the mouse. It is complete responsibility of the application to handle
+the selection signals and to invoke the @code{gtk_math_view_select}
+method appropriately. Although this puts some burden on the
+application side, it also enables the maximum flexibility, as
+selection may be constrained in ways that, in the most general case,
+are infeasible to hard code within GtkMathView.
+
+@node Point-and-click Functionalities, Editing, Selection, Interactivity Support
+@section Point-and-click Functionalities
+
+Point-and-click is supported by the @code{click} signal, which is
+emitted when the users clicks on the MathML document. The two
+arguments of the signal are the deepest MathML element on which the
+mouse was placed at the time of the click or @code{NULL} if there is
+no such element, and the status of the control keys on the keyboard.
+
+Among the possible usages for this signal are the activation of
+hyperlinks and the management of @code{maction} elements. When the
+user clicks on the document, the event handler can look for a MathML
+element that has a @code{xlink:href} attribute set, and render that
+document. The search is typically done by starting from the element
+provided by the signal, and possibly climbing up the chain of elements
+until one with the required attribute is found, or the root element is
+reached, or any other application-specific condition applies.
+
+Activation of @code{maction} elements works in the same way. Currently
+only the @code{toggle} action is supported by GtkMathView. In
+particular, once the @code{maction} element is found, it is possible
+to increase the number found in the @code{selection} attribute, which
+determines which of the @code{maction}'s children is displayed. If the
+@code{selection} is increased beyond the actual number of children,
+GtkMathView will recast it into a valid range via a modulo
+operation. This way the application code for handling @code{maction}
+does not have to know the exact number of children, and is thus
+simplified. Note however that this behavior is not mandated by the
+MathML recommendation, and can differ in other MathML rendering
+engines. Once the @code{selection} attribute is set with the new
+value, GtkMathView will recompute automatically the document's layout.
+
+Possible conflicts in case the @code{xlink:href} is set on an
+@code{maction} element must be resolved by the signal handler.
+
+@node Editing,  , Point-and-click Functionalities, Interactivity Support
+@section Editing
+
+The notion of @emph{editing} in the context of GtkMathView is very
+limited. It simply refers to the fact that GtkMathView reacts
+@emph{automatically} as the source MathML document changes, but
+GtkMathView itself does not enforce any constraints on how and when
+the document can change. The management of @code{maction} can be seen
+as a very particular kind of editing, as it involves a modification of
+the source document tree.
+
+GtkMathView implements a number of internal mechanisms that try to
+optimize rendering, in the sense of minimizing the amount of
+computation that is needed to re-render a document after a
+modification has occurred.
+
+Note also that in some cases local modifications may have non-local
+effects. For instance, modifying the content of a table cell may
+cause the re-computation of the whole table layout, as MathML
+attributes for table can specify constraints among cells in different
+columns or rows.
+
+@node Sample Application, C++ Interface, Interactivity Support, Top
+@chapter Sample Application
+
+In this section we show a minimal GTK+ application that uses
+GtkMathView for displaying a MathML document. The application is
+intentionally small and only shows a small subset of GtkMathView
+capabilities. More complex examples, including sophisticated
+selections and @code{maction} handling, can be found in the
+GtkMathView source distribution.
+
+The application begins, as usual, with some @code{#include} directives
+that load the necessary @code{.h} files. Note in particular that the
+@code{gtkmathview.h} header file must be included in order to use the
+widget.
+
+@example
+#include <stdio.h>
+#include <gtk/gtk.h>
+#include <gtkmathview.h>
+@end example
+
+Next we declare a number of global variables that represent the main
+components of the graphical interface. The reason why these variables
+are global is that we may need to reference them from outside the
+@code{main} function, where they are initialized.
+
+@example
+static GtkWidget* window = NULL;
+static GtkWidget* main_vbox = NULL;
+static GtkWidget* main_area = NULL;
+static GtkWidget* scrolled_area = NULL;
+@end example
+
+We also need two global variables to support selection:
+
+@example
+static GdomeElement* first_selected = NULL;
+static GdomeElement* root_selected = NULL;
+@end example
+
+The following is an auxiliary function that loads the MathML document
+whose URI is specified in @code{name} inside the widget.
+
+@example
+static int
+load_document(const char* name)
+@{
+  GtkMathView* math_view = GTK_MATH_VIEW(main_area);
+
+  g_return_val_if_fail(name != NULL, -1);
+  g_return_val_if_fail(math_view != NULL, -1);
+
+  return gtk_math_view_load_uri(math_view, name);
+@}
+@end example
+
+The @code{click} function will be responsible for handling
+@code{click} signals as they are emitted. Note that the function takes
+three arguments: the GtkMathView widget that has generated the signal
+(@var{math_view}), the MathML element on which the user has clicked
+(@var{elem}), and finally the status of control keys.
+
+@example
+static void
+click(GtkMathView* math_view, GdomeElement* elem, gint state)
+@{
+  g_return_if_fail(math_view != NULL);
+
+  printf("*** click signal: %p %x\n", elem, state);
+
+  if (elem != NULL)
+    @{
+      /* do something with the element */
+    @}
+@}
+@end example
+
+The implementation of the selection mechanism is slightly more
+complicated as it involves handling at least two different signals.
+Upon receiving the @code{select_begin} signal the current selection,
+if present, is deleted, and the two global variables
+@code{first_selected} and @code{root_selected} are initialized with
+the element @var{elem} under the mouse pointer at the time selection
+was initiated. The element, if not @code{NULL}, is highlighted.
+
+Note that the whole body of the signal handler begins with a
+@code{gtk_math_view_freeze} operation and ends with a
+@code{gtk_math_view_thaw} operation. This means that the display
+window is not updated until the signal handler terminates, with two
+advantages: the method is more efficient as GtkMathView updates
+only once, after two operations have been completed, and also we avoid
+the problem of flickering in case the previously selected area
+overlaps with the new one.
+
+@example
+static void
+select_begin(GtkMathView* math_view, GdomeElement* elem, gint state)
+@{
+  gtk_math_view_freeze(math_view);
+
+  if (root_selected != NULL)
+    gtk_math_view_unselect(math_view, root_selected);
+
+  first_selected = root_selected = elem;
+
+  if (root_selected != NULL)
+    gtk_math_view_select(math_view, elem);
+
+  gtk_math_view_thaw(math_view);
+@}
+@end example
+
+Next we have to handle the signal emitted as the user drags the mouse
+keeping the button pressed. The idea is that @var{first_selected}
+remembers the element on which selection was initiated. As the mouse
+pointer is moved over the document, it crosses other elements. From
+@var{first_selected} and the current element @var{elem} it is possible
+to compute the smallest DOM subtree selected. In the sample code this
+operation is accomplished by the @var{common_ancestor}, which is left
+unspecified here.
+
+@example
+static void
+select_over(GtkMathView* math_view, GdomeElement* elem, gint state)
+@{
+  gtk_math_view_freeze(math_view);
+
+  if (root_selected != NULL)
+    gtk_math_view_unselect(math_view, root_selected);
+
+  root_selected = common_ancestor(first_selected, elem);
+
+  if (root_selected != NULL)
+    gtk_math_view_select(math_view, elem);
+
+  gtk_math_view_thaw(math_view);
+@}
+@end example
+
+Note that the sample code does not implement any mechanism for
+semantic selection, but the idea is that the two signal handlers (as
+well as the remaining ones not shown here for simplicity), can be made
+as complex as the application needs. In particular, the computation of
+the selected root (@var{common_ancestor}) can be specialized so to
+search the smallest DOM subtree that meets the desired requirements as
+the application needs.
+
+In order to complete the application, let us examine the @code{main}
+function, which creates the graphical interface, along with an
+instance of the GtkMathView widget, attaches the @code{delete_event}
+to the closing button of the window so that the window is
+automatically destroyed when the user closes it, and connects the
+signal handlers. Then the document whose URI is passed on the command
+line of the application is loaded into GtkMathView, and the control is
+finally transferred to GTK+.
+
+@example
+main(int argc, char *argv[])
+@{
+  gtk_init(&argc, &argv);
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_signal_connect(GTK_OBJECT(window), "delete_event",
+                     (GtkSignalFunc) gtk_main_quit, NULL);
+  gtk_widget_show(window);
+
+  main_vbox = gtk_vbox_new(FALSE, 1);
+  gtk_container_border_width(GTK_CONTAINER(main_vbox), 1);
+  gtk_container_add(GTK_CONTAINER(window), main_vbox);
+  gtk_widget_show(main_vbox);
+
+  main_area = gtk_math_view_new(NULL, NULL);
+  gtk_widget_show(main_area);
+
+  gtk_signal_connect_object (GTK_OBJECT (main_area), 
+                             "click", GTK_SIGNAL_FUNC(click),
+                             (gpointer) main_area);
+
+  gtk_signal_connect_object (GTK_OBJECT (main_area), 
+                             "select_begin", GTK_SIGNAL_FUNC(select_begin),
+                             (gpointer) main_area);
+
+  gtk_signal_connect_object (GTK_OBJECT (main_area), 
+                             "select_over", GTK_SIGNAL_FUNC(select_over),
+                             (gpointer) main_area);
+
+  scrolled_area = gtk_scrolled_window_new(NULL, NULL);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_area),
+                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+  gtk_widget_show(scrolled_area);
+  gtk_container_add(GTK_CONTAINER(scrolled_area), main_area);
+  gtk_box_pack_start(GTK_BOX(main_vbox), scrolled_area, TRUE, TRUE, 0);
+
+  load_document(argv[1]);
+
+  gtk_main();
+@}
+@end example
+
+@strong{A note on memory management.} It is important to mention that
+the objects of the DOM implementation (@code{Gdome2}) used in the
+sample code are subject to a memory management system that is based on
+reference counting. This means that every time a pointer to a DOM
+object (like a @code{GdomeElement*} in the example) is stored in some
+variable, the application has to explicitly increment its reference
+counter so that the object is not deallocated. For the sake of brevity
+every operation involving the reference counting mechanism has been
+omitted, but it is crucial to use it correctly in every application,
+no matter how simple the operations are. In this respect, the use of
+the corresponding C++ library (@code{GMetaDOM}) simplifies
+significantly the work of the programmer, as the DOM objects are
+accessed by means of @emph{smart pointers} that take care of the
+reference counter automatically, without explicit intervention from
+the programmer's side.
+
+@node     C++ Interface, GTK+ Interface, Sample Application, Top
+@chapter  C++ Interface
+@noindent
+In this chapter we will describe the C++ class
+@code{MathMLRenderingEngine} which provides access to all the
+functionalities of the rendering engine from a C++ program. The GTK+
+widget is just a wrapper of this class with particular support for
+GTK.
+
+@menu
+* Lengths::                     About Lengths
+* Boxes and Rectangles::        Boxes and Rectangles
+* MathMLRenderingEngine::       The MathMLRenderingEngine Class
+@end menu
+
+@node    Lengths, Boxes and Rectangles, C++ Interface, C++ Interface
+@section Lengths
+@noindent
+A brief introduction is devoted to lengths, since they are a
+fundamental concept in the engine. From the user point of view,
+lengths can be expressed in many ways. For example, one might prefer
+using decimal units such as centimeters of millimeters, while others
+might prefer using inches or other typographical units. However, the
+engine uses internally a single unit which is called @emph{scaled
+point}. It is the same unit as used by TeX.
+
+From the point of view of the programmer, a @emph{scaled point} is a
+floating point number, though it can be turned into fixed-pointer
+number giving the option @option{--disable-floating} while configuring
+the widget.  Doing so is not particularly recommended, since with most
+modern microprocessor floating-point arithmetics is rather efficient.
+
+Another unit of measure which is of particular interest for the
+programmer is the @emph{pixel}. Unfortunately, there is not a unique
+correspondence between pixels and scaled points. Theoretically, their
+relationship should depend on the resolution of the output device
+involved for rendering (usually, the display). Since this resolution
+is not available in general and often is also misconfigured, it has
+been fixed in the rendering engine to be 72 dots per inch (DPI), which
+gives pretty good results. Its value can be changed by modifing the
+file @file{src/defs.h}.
+
+The following table summarizes the relationships between scaled points
+and the other units of measure recognized by the widget.
+
+@anchor{units}
+@multitable @columnfractions .22 .10 .20 .25 .22
+@item @tab @emph{Unit} @tab @emph{Name} @tab @emph{scaled points} @tab 
+@item @tab mm @tab millimeter @tab 186467.98 @tab 
+@item @tab cm @tab centimeter @tab 1864679.8 @tab 
+@item @tab pt @tab point @tab 65536 @tab 
+@item @tab pc @tab pica @tab 786432 @tab 
+@item @tab in @tab inch @tab 65536 * 72.27 @tab 
+@item @tab px @tab pixel @tab 65536 * 72.27 / DPI @tab 
+@end multitable
+
+The include file @file{src/scaled.hh} defines several conversion
+functions to convert from one unit to another. The following table
+summarizes the conversion availables.
+
+@deftypefn {Inline Function} scaled @var{xx}2sp (float @var{v})
+convert the value @var{v} expressed in the @var{xx} unit into scaled
+points.
+@end deftypefn
+
+@deftypefn {Inline Function} float sp2@var{xx} (scaled @var{sp})
+convert @var{sp} scaled points into the unit @var{xx}.
+@end deftypefn
+
+@deftypefn {Inline Function} int sp2ipx (scaled @var{sp})
+convert @var{sp} scaled points into an integral number of pixels.
+@end deftypefn
+
+The system of coordinates depends on the actual drawing area used for
+the rendering. For example, the standard ``browser-like'' coordinate
+system has the vertical components growing to the bottom. On the other
+hand, PostScript has the vertical components growing to the top. In
+either case, when referring to vertical coordinates, ``lower'' means
+``nearer to the origin''.
+
+
+@node Boxes and Rectangles, MathMLRenderingEngine, Lengths, C++ Interface
+@section Boxes and Rectangles
+@noindent
+MathML elements are enclosed inside rectangles and boxes.
+
+@menu
+* Rectangles::                  Rectangles
+* Bounding Boxes::              Bounding Boxes
+@end menu
+
+@node Rectangles, Bounding Boxes, Boxes and Rectangles, Boxes and Rectangles
+@subsection Rectangles
+
+A rectangle is a tuple consisting of four components which locate the
+element by means of absolute coordinates.
+@ignore
+@deftypeivar Rectangle scaled x
+Horizontal coordinate of the lower-left corner.
+@end deftypeivar
+
+@deftypeivar Rectangle scaled y
+Vertical coordinate of the lower-left corner.
+@end deftypeivar
+
+@deftypeivar Rectangle scaled width
+Width of the rectangle.
+@end deftypeivar
+
+@deftypeivar Rectangle scaled height
+Height of the rectangle.
+@end deftypeivar
+@end ignore
+
+@deftypemethod Rectangle void Zero ()
+Set all the instance variables @var{x}, @var{y}, @var{width} and @var{height} to zero.
+@end deftypemethod
+
+@deftypemethod Rectangle bool Overlaps (const Rectangle& @var{rect})
+Return @code{true} if the rectangle (partially) overlaps with @var{rect}.
+@end deftypemethod
+
+@deftypemethod Rectangle bool Overlaps (scaled @var{x0}, scaled @var{y0}, scaled @var{w0}, scaled @var{h0})
+Same as the previous method, but the rectangle is given in its components.
+@end deftypemethod
+
+@deftypemethod Rectangle bool IsNull ()
+Return @code{true} if the rectangle is null, that is if either @var{width} or @var{height}
+is strictly less than a predefined constant @code{EPSILON}.
+@end deftypemethod
+
+@deftypemethod Rectangle bool IsInside (scaled @var{x}, scaled @var{y})
+Return @code{true} if the point (@var{x}, @var{y}) is inside the rectangle.
+@end deftypemethod
+
+@deftypemethod Rectangle void Union (const Rectangle& @var{rect})
+Set the rectangle as the smallest rectangle which comprises both @var{*this} and @var{rect}.
+@end deftypemethod
+
+@deftypemethod Rectangle void Dump ()
+Debug method.
+@end deftypemethod
+
+
+@node Bounding Boxes,  , Rectangles, Boxes and Rectangles
+@subsection Bounding Boxes
+
+A bounding box is a tuple which identifies the @emph{extent}
+of an element, but not its absolute position.
+@ignore
+@deftypeivar BoundingBox bool null
+@code{true} if the bounding box is null, that is it is not valid or not initialized
+yet.
+@end deftypeivar
+
+@deftypeivar BoundingBox scaled width
+Width of the bounding box, that is, amount of horizontal space to shift in order to
+render the subsequent entity.
+@end deftypeivar
+
+@deftypeivar BoundingBox scaled ascent
+Ascent of the bounding box, that is the distance from the baseline of the
+topmost pixel on of the entity enclosed in this box. Note that this
+field may be negative for entities laying completely below the baseline,
+such as the underscore @code{_}.
+@end deftypeivar
+
+@deftypeivar BoundingBox scaled descent
+Descent of the bounding box, that is the distance from the baseline of the
+bottommost pixel on of the entity enclosed in this box. Note that this
+field may be negative for entities laying completely above the baseline,
+such as the minus sign and many diacritical marks.  
+@end deftypeivar
+
+@deftypeivar BoundingBox scaled lBearing
+Distance from the origin of the box to the leftmost pixel on of the entity
+enclosed in the box.
+@end deftypeivar
+
+@deftypeivar BoundingBox scaled rBearing
+Distance from the origin of the box to the rightmost pixel on of the entity
+enclosed in the box.
+@end deftypeivar
+@end ignore
+
+@deftypemethod BoundingBox void Null ()
+Nullify the box.
+@end deftypemethod
+
+@deftypemethod BoundingBox bool IsNull ()
+Return @code{true} if the box is null.
+@end deftypemethod
+
+@deftypemethod BoundingBox scaled GetHeight ()
+Return the height of the box, given as the sum of @var{ascent} and @var{descent}.
+@end deftypemethod
+
+@deftypemethod BoundingBox scaled GetTotalHeight ()
+Return the ``total height'' of the box, given as the sum of @var{tAscent} and @var{tDescent}.
+@end deftypemethod
+
+@deftypemethod BoundingBox void Set (scaled @var{w}, scaled @var{a}, scaled @var{d})
+Set the box to be non-null, with width @var{w}, ascent @var{a}, descent @var{d},
+left bearing 0 and right bearing @var{w}.
+@end deftypemethod
+
+@deftypemethod BoundingBox void Set (scaled @var{w}, scaled @var{a}, scaled @var{d}, scaled @var{l}, scaled @var{r})
+Set the box to be non-null, with width @var{w}, ascent @var{a}, descent @var{d},
+left bearing @var{l} and right bearing @var{r}.
+@end deftypemethod
+
+@deftypemethod BoundingBox void Append (const BoundingBox& @var{box})
+Enlarge current bounding box as if @var{box} was ``appended'' right after it. All the instance
+variable are updated accordingly.
+@end deftypemethod
+
+@deftypemethod BoundingBox void Append (scaled @var{w})
+Augment the @var{width} of the current bounding box by @var{w}.
+@end deftypemethod
+
+@deftypemethod BoundingBox void Max (const BoundingBox& @var{box})
+Enlarge current bounding box as if @var{box} was ``overlaid'' on top of it.
+@end deftypemethod
+
+@deftypemethod BoundingBox void ToRectangle (scaled @var{x}, scaled @var{y}, Rectangle& @var{rect})
+Initialize a rectangle @var{rect} from the current bounding box as if it was placed at
+(@var{x}, @var{y}).
+@end deftypemethod
+
+@deftypemethod BoundingBox void Dump ()
+Debug method.
+@end deftypemethod
+
+
+@node    MathMLRenderingEngine,  , Boxes and Rectangles, C++ Interface
+@section The MathMLRenderingEngine Class
+
+@defmethod MathMLRenderingEngine MathMLRenderingEngine ()
+This is the default constructor of the rendering engine.
+@end defmethod
+
+@defmethod MathMLRenderingEngine ~MathMLRenderingEngine ()
+The descructor.
+@end defmethod
+
+@deftypemethod MathMLRenderingEngine void InitGlobalData (const char* @var{confPath})
+Global initialization function. Must be called once (and only once) no
+matter how many instances of the rendering engine are
+created. @var{confPath} is the full path to the engine's configuration
+file. If it is @code{NULL} then the engine will try to open the
+default configuration file (usually located in
+@file{/usr/local/share/gtkmathview}).
+@end deftypemethod
+
+@deftypemethod MathMLRenderingEngine void Init (DrawingArea* @var{area}, FontManager* @var{fm})
+Initialization function. Must be called before any other method of
+this class is invoked. @var{area} must be a non-@code{NULL} pointer to
+an already instantiated @code{DrawingArea} object and @var{fm} must be
+a non-@code{NULL} pointer to an already instantiated
+@code{FontManager} object.
+@end deftypemethod
+
+@deftypemethod MathMLRenderingEngine bool Load (const char* @var{uri})
+Load the document whose URI is @var{uri}. The document is parsed, the
+setup is done (see below). Return @code{true} if the document has been
+loaded correctly, @code{false} otherwise.
+@end deftypemethod
+
+@deftypemethod MathMLRenderingEngine bool Load (const DOM::Document& @var{doc})
+Load the document whose DOM structure is @var{doc}. Return @code{true}
+if the document has been loaded correctly, @code{false} otherwise.
+@end deftypemethod
+
+@deftypemethod MathMLRenderingEngine bool Load (const DOM::Element& @var{elem})
+Load the MathML document whose root @code{math} element is
+@var{elem}. Return @code{true} if the document has been loaded
+correctly, @code{false} otherwise.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void Unload ()
+Unload the document currently loaded and release all resources associated
+to it. This method is implicitly called by the load method.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void SetDirty (const Rectangle* @var{rect} = 0)
+Force a set of MathML elements to be redrawn. If @var{rect} is
+specified (i.e. it is non-@code{NULL}), then only elements whose
+bounding box has a non-empty intersection with @var{rect} are set as
+``dirty''. If @var{rect} is @code{NULL}, all the elements in the
+document are set as ``dirty''. Only dirty elements will be drawn in
+the next call to the update method.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void Render (const Rectangle* @var{rect} = 0)
+Render the whole document if @var{rect} is @code{NULL}, or all MathML
+elements whose bounding box has a non-empty intersection with
+@var{rect}.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine Ptr<MathMLElement> GetRoot ()
+Return the document's root element.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine Ptr<MathMLDocument> GetDocument ()
+Return the document.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine Ptr<MathMLElement> GetElementAt (scaled @var{x}, scaled @var{y})
+Return the element pointed to by (@var{x}, @var{y}), or @code{0} if
+there is no element at that coordinates.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void GetDocumentBoundingBox (BoundingBox& @var{box})
+Initialize @var{box} with the bounding box of the whole document.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void GetDocumentRectangle (Rectangle& @var{rect})
+Initialize @var{rect} with the rectangle of the whole document.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void SetDefaultFontSize (unsigned @var{size})
+Set the default font size for the document. @var{size} is supposed to
+be expressed in points.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine unsigned GetDefaultFontSize ()
+Return the current default font size for the document in points.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine void SetVerbosity (int @var{level})
+Set the verbosity level to @var{level}. Valid levels are the integers from
+0 to 3, each associated to an increasing verbosity of messages.
+@end deftypemethod
+
+@deftypemethod  MathMLRenderingEngine int GetVerbosity ()
+Return the current level of verbosity as an index from 0 to 3.
+@end deftypemethod
+
+@node     GTK+ Interface, Tools, C++ Interface, Top
+@comment  node-name,  next,  previous,  up
+@chapter  GTK+ Interface
+
+The GTK+ interface provides a set of @emph{high-level} methods for the
+creation, the usage, and the destruction of instances of the
+GtkMathView widget.
+
+@defmac GTK_TYPE_MATH_VIEW
+used to get the GTK type for the @code{GtkMathView} class. It is not
+normally needed, unless one is subclassing @code{gtkmathview}.
+@end defmac
+
+@defmac GTK_MATH_VIEW (@var{object})
+used to cast a Gtk widget to a @code{GtkMathView} class. Remember that
+all methods working with the widget takes a pointer to
+@code{GtkMathView}.
+@end defmac
+
+@defmac GTK_MATH_VIEW_CLASS (@var{klass})
+used to cast a Gtk class to a @code{GtkMathView} class. This macro is
+used internally, it is not normally needed.
+@end defmac
+
+@defmac GTK_IS_MATH_VIEW (@var{object})
+used to test wether a Gtk object is indeed a @code{GtkMathView}
+object.  It is normally used as a runtime check before casting
+@var{object} to the @code{GtkMathView} type.
+@end defmac
+
+@deftypefn {Method} GType gtk_math_view_get_type ()
+allocates a new Gtk type for the class @code{GtkMathView}. Used
+internally.
+@end deftypefn
+
+@deftypefn {Method} GtkWidget* gtk_math_view_new (GtkAdjustment* @var{h_adj}, GtkAdjustment* @var{v_adj})
+this is the main constructor for @code{GtkMathView}. It allocates a
+new @code{GtkMathView} object. You can pass a couple of adjustments
+for the scrolling bars, or just @code{NULL} in the case you want the
+widget to allocate its own scrolling bars.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_freeze (GtkMathView* @var{widget})
+after the invocation of this method any update of the widget is
+postponed until the invocation of the @code{gtk_math_view_thaw}
+method. It can be useful to stop automatic update of the widget in
+those cases in which a large number of modifications to the source
+document tree are done, so that it would be inefficient and useless to
+update the view at every single modification.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_thaw (GtkMathView* @var{widget})
+update the widget after the invocation of the
+@code{gtk_math_view_freeze} method. Any modification to the source
+document tree that occurred while the widget was ``frozen'' is
+displayed at this time.
+@end deftypefn
+
+@deftypefn {Method} gboolean gtk_math_view_load (GtkMathView* @var{widget}, const gchar* @var{uri})
+load the MathML document whose URI is @var{uri} and display it. If the
+loading succeed then @code{TRUE} is returned, @code{FALSE} otherwise.
+@end deftypefn
+
+@deftypefn {Method} gboolean gtk_math_view_load_doc (GtkMathView* @var{widget}, GdomeDocument* @var{doc})
+display the @var{doc} document. If the operation succeeds then
+@code{TRUE} is returned, @code{FALSE} otherwise.
+@end deftypefn
+
+@deftypefn {Method} gboolean gtk_math_view_load_tree (GtkMathView* @var{widget}, GdomeElement* @var{elem})
+display the MathML fragment whose root is @var{elem} in the widget's
+window. @var{elem} must be a @code{math} element in the MathML
+namespace.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_unload (GtkMathView* @var{widget})
+unload a document from the widget, release all resources related to the document
+itself. This is automatically invoked if you load two subsequent documents, so you don't need
+to call this method explicitly.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_load_select (GtkMathView* @var{widget}, GdomeElement* @var{elem})
+mark the element @var{elem} as ``selected.'' This has the effect of
+highlighting the portion of the widget's window that include the
+element itself, along with all its children.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_load_unselect (GtkMathView* @var{widget}, GdomeElement* @var{elem})
+mark the element @var{elem} as ``not selected.''
+@end deftypefn
+
+@deftypefn {Method} gboolean gtk_math_view_load_is_selected (GtkMathView* @var{widget}, GdomeElement* @var{elem})
+query about the selection status of the element @var{elem}, return
+@code{TRUE} if @var{elem} is selected, @code{FALSE} otherwise.
+@end deftypefn
+
+@deftypefn {Method} gboolean gtk_math_view_get_element_coords (GtkMathView* @var{widget}, GdomeElement* @var{elem}, gint* @var{x}, gint* @var{y})
+return the coordinates of the upper-left corner of the rectangular
+area covered by the element @var{elem}. If @var{elem} does not belong
+to the rendered document, or if it has no corresponding visual object,
+the method returns @code{FALSE} and @var{x} and @var{y} are left
+unchanged.
+@end deftypefn
+
+@deftypefn {Method} gboolean gtk_math_view_get_element_rectangle (GtkMathView* @var{widget}, GdomeElement* @var{elem}, GdkRectangle* @var{rect})
+return the position and the extents of the rectangular area covered by
+the element @var{elem}. If @var{elem} does not belong to the rendered
+document, or if it has no corresponding visual object, the method
+returns @code{FALSE} and @var{rect} is left unchanged.
+@end deftypefn
+
+@deftypefn {Method} guint gtk_math_view_get_width (GtkMathView* @var{widget})
+return the width of the drawable area of the @var{widget}. Note that
+this is not necessarily equal to the whole @var{widget} width, due to
+the inner frame.
+@end deftypefn
+
+@deftypefn {Method} guint gtk_math_view_get_height (GtkMathView* @var{widget})
+return the height of the drawable area of the @var{widget}. Same
+remark as for @code{gtk_math_view_get_width}.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_get_top (GtkMathView* @var{widget}, guint* @var{top_x}, guint* @var{top_y})
+return in @var{top_x} and @var{top_y} the coordinates (in pixels) of
+the upper left displayed corner of the document. Either @var{top_x} or
+@var{top_y} may be @code{NULL}, if you are interested in only one of
+the two values.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_set_top (GtkMathView* @var{widget}, guint @var{top_x}, guint @var{top_y})
+set the coordinates (in pixels) of the upper left displayed corner of
+the document.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_set_adjustments (GtkMathView* @var{widget}, GtkAdjustment* @var{h_adj}, GtkAdjustment* @var{v_adj})
+set the horizontal and vertical adjustments for the @var{widget}.
+@end deftypefn
+
+@deftypefn {Method} GtkAdjustment* gtk_math_view_get_hadjustment (GtkMathView* @var{widget})
+return a pointer to the horizontal adjustment of the @var{widget}.
+@end deftypefn
+
+@deftypefn {Method} GtkAdjustment* gtk_math_view_get_vadjustment (GtkMathView* @var{widget})
+return a pointer to the vertical adjustment of the @var{widget}.
+@end deftypefn
+
+@deftypefn {Method} cairo_surface_t* gtk_math_view_get_buffer (GtkMathView* @var{widget})
+return a pointer to the internal Cairo surface used by the
+@var{widget} as the backbuffer.
+@end deftypefn
+
+@deftypefn {Method} GtkFrame* gtk_math_view_get_frame (GtkMathView* @var{widget})
+return a pointer to the @code{GtkFrame} used by the @var{widget} to
+draw the border around the drawable area.
+@end deftypefn
+
+@deftypefn {Method} GtkDrawingArea* gtk_math_view_get_drawing_area (GtkMathView* @var{widget})
+Returns the GTK+ widget representing the drawing area that the widget
+uses for rendering on the screen. The returned widget can be used for
+setting signal handlers other than those generated directly by
+GtkMathView.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_set_font_size (GtkMathView* @var{widget}, guint @var{size})
+set the default font @var{size} (in points) for displaying documents.
+@end deftypefn
+
+@deftypefn {Method} guint gtk_math_view_get_font_size (GtkMathView* @var{widget})
+return the default font size (in points) for displaying documents.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_log_set_verbosity (GtkMathView* @var{widget}, gint @var{level})
+set the level of verbosity for displayed messages. @var{level} can be
+an integer from @code{0} (very few messages, in case of error only) to
+@code{3} (all messages). Useful for debugging purposes.
+@end deftypefn
+
+@deftypefn {Method} gint gtk_math_view_log_get_verbosity (GtkMathView* @var{widget})
+return the current level of verbosity.
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_export_to_postscript (GtkMathView* @var{widget}, gint @var{width}, gint @var{height}, gint @var{x0}, gint @var{y0}, gboolean @var{disable_colors}, FILE* @var{f})
+write a rendered document to the file @var{f} in PostScript
+format. @var{width}, @var{height}, @var{x0} and @var{y0} give the size
+and the margins (in pixels) of the rendering area used by this
+method. @var{disable_colors} can be set to @code{TRUE} if you don't
+want to render colors in PostScript (this may be useful to print the
+document on a black-and-white printer).
+@end deftypefn
+
+@deftypefn {Method} void gtk_math_view_set_font_manager_type (GtkMathview* @var{widget}, FontManagerId @var{id})
+Set the font manager used by the @var{widget} to retrieve fonts. Up
+'till now, there are two valid values for @var{id}: use
+@code{FONT_MANAGER_GTK} to use the GTK font manager (actually, this is
+just a wrapper for the X font manager). This is the default.
+Return the current font manager id.
+@end deftypefn
+
+@deftypefn {Signal} void "click" (GdomeElement* @var{elem}, gint @var{state})
+emitted whenever the user click on the displaying window. @var{elem}
+is the reference to the DOM element on which the used clicked, or
+@code{NULL} if the area clicked does not correspond to any MathML
+element. @var{state} represents the status of the control keys at the
+moment of the click event. Its possible values are the same as for the
+@code{GdkModifier} type.
+@end deftypefn
+
+@deftypefn {Signal} void "select_begin" (GdomeElement* @var{elem}, gint @var{state})
+emitted when the user starts a selection, that is the first mouse
+button is pressed and the mouse is moved a bit from the original
+location. The @var{elem} and @var{state} arguments have the same
+meaning as for the @code{click} signal.
+@end deftypefn
+
+@deftypefn {Signal} void select_over (GtkWidget* @var{widget}, GdomeElement* @var{elem}, int @var{state})
+emitted when the user moves the mouse while keeping the first button
+pressed. @var{elem} is the element which the mouse pointer is
+currently on.
+@end deftypefn
+
+@deftypefn {Signal} void "select_end" (GdomeElement* @var{node}, gint @var{state})
+emitted when the user finally releases the mouse button after a
+selection.
+@end deftypefn
+
+@deftypefn {Signal} void "select_abort" ()
+emitted when the user presses the second mouse button when selection
+is progress, to notify that selection is aborted.
+@end deftypefn
+
+@deftypefn {Signal} void "element_over" (GdomeElement* @var{elem}, gint @var{state})
+emitted as the user moves the mouse on the document, no matter of the
+state of the mouse buttons.
+@end deftypefn
+
+
+@node     Tools, Bugs, GTK+ Interface, Top
+@comment  name , next, prev,          up
+@chapter  Tools
+@noindent
+
+There are some tools provided along the widget. We will shortly describe them
+in the following two sections.
+
+@menu
+* mathmlviewer::                A simple viewer application.
+@end menu
+
+
+@node     mathmlviewer, Tools, Tools
+@comment  node-name,  next,  previous,  up
+@section  @code{mathmlviewer}
+@noindent
+This is a simple browsing application whose purpose is twofold. First,
+it is an example of application using the GtkMathView widget. Second,
+it allows viewing MathML documents. A document is referenced by means
+of a URL or just a file name.
+
+
+@node     Bugs, Tools, Top
+@comment  node-name,  next,  previous,  up
+@chapter  Bugs and Contributions
+@noindent
+I appreciate any kind of contribution. The most basic (and, maybe,
+frequent) one is bug report. You can either send me an email
+(@email{luca.padovani at cs.unibo.it}) with a short description of the
+problem encountered, a list of the error messages or failed assertions
+and the simplest MathML document that causes the trouble, or use the
+Bugzilla Web interface at @url{http://bugs.mowgli.cs.unibo.it}, the
+module name is obviously GtkMathView.
+
+If you think that the problem may be of interest for other people too,
+then I encourage to subscribe and post the report on the mailing
+list. You can subscribe by sending an empty email to the address
+@email{gtkmathview-subscribe at cs.unibo.it}.
+
+@summarycontents
+@contents
+@bye

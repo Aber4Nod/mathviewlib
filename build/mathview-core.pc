@@ -1,0 +1,14 @@
+# This is a comment
+prefix=/Users/n.mikhnenko/libmathview/build/../install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+
+Name: MathView
+Description: MathML rendering engine (core)
+Version: 1.0.0
+Libs: -L${libdir} -lmathview
+Cflags: -I${includedir}/mathview
+

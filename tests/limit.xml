@@ -1,0 +1,17 @@
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <munder>
+      <mi>lim</mi>
+      <mrow>
+        <mi>x</mi>
+        <mo>&RightArrow;</mo>
+        <msub>
+          <mi>x</mi>
+	  <mn>0</mn>
+	</msub>
+      </mrow>
+    </munder>
+    <mi>x</mi>
+  </mrow>
+</math>

@@ -1,0 +1,14 @@
+# This is a comment
+prefix=/Users/n.mikhnenko/libmathview/build/../install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+
+Name: GtkMathView
+Description: MathML rendering engine (Qt backend)
+Version: 1.0.0
+Requires: mathview-core
+Libs: -L${libdir} -lmathview_backend_qt
+Cflags: -I${includedir}/mathview

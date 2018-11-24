@@ -1,0 +1,15 @@
+# This is a comment
+prefix=/Users/n.mikhnenko/libmathview/build/../install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+
+Name: MathView
+Description: MathML rendering engine QPainter-based widgets
+Version: 1.0.0
+Requires: Qt5Widgets mathview-core mathview-backend-qt mathview-frontend-libxml2
+Libs: -lxml2 -L${libdir} -lmathview_widget_qt
+Cflags: -I/usr/include/libxml2 -I${includedir}/mathview
+

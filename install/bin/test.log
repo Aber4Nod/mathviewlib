@@ -1,0 +1,930 @@
+returning hb_blob_create, tags:  maxp
+returning hb_blob_create, tags:  cmap
+returning hb_blob_create, tags:  OS/2
+returning hb_blob_create, tags:  hhea
+returning hb_blob_create, tags:  hmtx
+table is empty, tags:  HVAR
+table is empty, tags:  vhea
+table is empty, tags:  vmtx
+table is empty, tags:  VVAR
+table is empty, tags:  MATH
+table is empty, tags:  MATH
+[MathView] *** Warning[1:1]: parsing time: 14ms
+Getting bounding box!
+createMathMLElement math
+createMathMLElement mrow
+createMathMLElement mrow
+createMathMLElement munder
+createMathMLElement mo
+creating string node: 0x7fbdad0c3da0 with content: lim
+[setParentElement]: for node 0x7fbdad0c3da0
+createMathMLElement mrow
+createMathMLElement mi
+creating string node: 0x7fbdad0c3d70 with content: x1
+[setParentElement]: for node 0x7fbdad0c3d70
+createMathMLElement mo
+creating string node: 0x7fbdad0cfd30 with content: →
+[setParentElement]: for node 0x7fbdad0cfd30
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad0cfe10 with content: +
+[setParentElement]: for node 0x7fbdad0cfe10
+createMathMLElement mn
+creating string node: 0x7fbdad0cff00 with content: ∞
+[setParentElement]: for node 0x7fbdad0cff00
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement msup
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f06c0 with content: (
+[setParentElement]: for node 0x7fbdad1f06c0
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f06f0 with content: 1
+[setParentElement]: for node 0x7fbdad1f06f0
+createMathMLElement mo
+creating string node: 0x7fbdad1f0830 with content: +
+[setParentElement]: for node 0x7fbdad1f0830
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f0910 with content: x
+[setParentElement]: for node 0x7fbdad1f0910
+createMathMLElement mn
+creating string node: 0x7fbdad1f0db0 with content: 2
+[setParentElement]: for node 0x7fbdad1f0db0
+createMathMLElement mo
+creating string node: 0x7fbdad1f0f90 with content: )
+[setParentElement]: for node 0x7fbdad1f0f90
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f0360 with content: −
+[setParentElement]: for node 0x7fbdad1f0360
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement mn
+creating string node: 0x7fbdad1f0390 with content: 1
+[setParentElement]: for node 0x7fbdad1f0390
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f1480 with content: 1
+[setParentElement]: for node 0x7fbdad1f1480
+createMathMLElement mo
+creating string node: 0x7fbdad1f1610 with content: +
+[setParentElement]: for node 0x7fbdad1f1610
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f18f0 with content: λ
+[setParentElement]: for node 0x7fbdad1f18f0
+createMathMLElement mn
+creating string node: 0x7fbdad1f1920 with content: 2
+[setParentElement]: for node 0x7fbdad1f1920
+createMathMLElement msup
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f1c20 with content: (
+[setParentElement]: for node 0x7fbdad1f1c20
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement mn
+creating string node: 0x7fbdad1f1c50 with content: 1
+[setParentElement]: for node 0x7fbdad1f1c50
+createMathMLElement mi
+creating string node: 0x7fbdad1f1de0 with content: x
+[setParentElement]: for node 0x7fbdad1f1de0
+createMathMLElement mo
+creating string node: 0x7fbdad1f1fc0 with content: )
+[setParentElement]: for node 0x7fbdad1f1fc0
+createMathMLElement mi
+creating string node: 0x7fbdad1f1ac0 with content: n
+[setParentElement]: for node 0x7fbdad1f1ac0
+createMathMLElement mo
+creating string node: 0x7fbdad1efc00 with content: =
+[setParentElement]: for node 0x7fbdad1efc00
+createMathMLElement mrow
+createMathMLElement munder
+createMathMLElement mo
+creating string node: 0x7fbdad1f2130 with content: lim
+[setParentElement]: for node 0x7fbdad1f2130
+createMathMLElement mrow
+createMathMLElement mi
+creating string node: 0x7fbdad1f23d0 with content: x
+[setParentElement]: for node 0x7fbdad1f23d0
+createMathMLElement mo
+creating string node: 0x7fbdad1f2560 with content: →
+[setParentElement]: for node 0x7fbdad1f2560
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f2640 with content: +
+[setParentElement]: for node 0x7fbdad1f2640
+createMathMLElement mn
+creating string node: 0x7fbdad1f1240 with content: ∞
+[setParentElement]: for node 0x7fbdad1f1240
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f22e0 with content: x
+[setParentElement]: for node 0x7fbdad1f22e0
+createMathMLElement mi
+creating string node: 0x7fbdad1f2dd0 with content: n
+[setParentElement]: for node 0x7fbdad1f2dd0
+createMathMLElement msup
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f3150 with content: (
+[setParentElement]: for node 0x7fbdad1f3150
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f3180 with content: 1
+[setParentElement]: for node 0x7fbdad1f3180
+createMathMLElement mo
+creating string node: 0x7fbdad1f3310 with content: +
+[setParentElement]: for node 0x7fbdad1f3310
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f33f0 with content: x
+[setParentElement]: for node 0x7fbdad1f33f0
+createMathMLElement mn
+creating string node: 0x7fbdad1f3580 with content: 2
+[setParentElement]: for node 0x7fbdad1f3580
+createMathMLElement mo
+creating string node: 0x7fbdad1f3760 with content: )
+[setParentElement]: for node 0x7fbdad1f3760
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement mn
+creating string node: 0x7fbdad1f2ff0 with content: 1
+[setParentElement]: for node 0x7fbdad1f2ff0
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f3910 with content: 1
+[setParentElement]: for node 0x7fbdad1f3910
+createMathMLElement mo
+creating string node: 0x7fbdad1f3aa0 with content: +
+[setParentElement]: for node 0x7fbdad1f3aa0
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f3d80 with content: λ
+[setParentElement]: for node 0x7fbdad1f3d80
+createMathMLElement mn
+creating string node: 0x7fbdad1f3db0 with content: 2
+[setParentElement]: for node 0x7fbdad1f3db0
+createMathMLElement mo
+creating string node: 0x7fbdad1f21f0 with content: =
+[setParentElement]: for node 0x7fbdad1f21f0
+createMathMLElement mrow
+createMathMLElement munder
+createMathMLElement mo
+creating string node: 0x7fbdad1f39d0 with content: lim
+[setParentElement]: for node 0x7fbdad1f39d0
+createMathMLElement mrow
+createMathMLElement mi
+creating string node: 0x7fbdad1f4150 with content: x
+[setParentElement]: for node 0x7fbdad1f4150
+createMathMLElement mo
+creating string node: 0x7fbdad1f42e0 with content: →
+[setParentElement]: for node 0x7fbdad1f42e0
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f43c0 with content: +
+[setParentElement]: for node 0x7fbdad1f43c0
+createMathMLElement mn
+creating string node: 0x7fbdad1f4570 with content: ∞
+[setParentElement]: for node 0x7fbdad1f4570
+createMathMLElement msup
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f48d0 with content: [
+[setParentElement]: for node 0x7fbdad1f48d0
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f4900 with content: x
+[setParentElement]: for node 0x7fbdad1f4900
+createMathMLElement mrow
+createMathMLElement mi
+creating string node: 0x7fbdad1f4b60 with content: n
+[setParentElement]: for node 0x7fbdad1f4b60
+createMathMLElement mo
+[setParentElement]: for node 0x7fbdad1f4cf0
+createMathMLElement mrow
+createMathMLElement mo
+creating string node: 0x7fbdad1f5060 with content: (
+[setParentElement]: for node 0x7fbdad1f5060
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f5090 with content: 1
+[setParentElement]: for node 0x7fbdad1f5090
+createMathMLElement mo
+creating string node: 0x7fbdad1f5220 with content: +
+[setParentElement]: for node 0x7fbdad1f5220
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f2770 with content: λ
+[setParentElement]: for node 0x7fbdad1f2770
+createMathMLElement mn
+creating string node: 0x7fbdad1f27a0 with content: 2
+[setParentElement]: for node 0x7fbdad1f27a0
+createMathMLElement mo
+creating string node: 0x7fbdad1f29f0 with content: )
+[setParentElement]: for node 0x7fbdad1f29f0
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f4a90 with content: 1
+[setParentElement]: for node 0x7fbdad1f4a90
+createMathMLElement mo
+creating string node: 0x7fbdad1f2b70 with content: +
+[setParentElement]: for node 0x7fbdad1f2b70
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f2c50 with content: x
+[setParentElement]: for node 0x7fbdad1f2c50
+createMathMLElement mn
+creating string node: 0x7fbdad1f5560 with content: 2
+[setParentElement]: for node 0x7fbdad1f5560
+createMathMLElement mo
+creating string node: 0x7fbdad1f5720 with content: ]
+[setParentElement]: for node 0x7fbdad1f5720
+createMathMLElement mfrac
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+createMathMLElement mn
+creating string node: 0x7fbdad1f4770 with content: 1
+[setParentElement]: for node 0x7fbdad1f4770
+createMathMLElement mrow
+createMathMLElement mn
+creating string node: 0x7fbdad1f58d0 with content: 1
+[setParentElement]: for node 0x7fbdad1f58d0
+createMathMLElement mo
+creating string node: 0x7fbdad1f5a60 with content: +
+[setParentElement]: for node 0x7fbdad1f5a60
+createMathMLElement msup
+createMathMLElement mi
+creating string node: 0x7fbdad1f5d40 with content: λ
+[setParentElement]: for node 0x7fbdad1f5d40
+createMathMLElement mn
+creating string node: 0x7fbdad1f5d70 with content: 2
+[setParentElement]: for node 0x7fbdad1f5d70
+[MathView] *** Warning[1:1]: build time: 2ms
+[MathGraphicDevice]::string // checking context for str = x1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = x1
+[MathShaper]::shape // shaping this char: 120
+[MathShaper]::shape // shaping next char: 49
+table is empty, tags:  Silf
+returning hb_blob_create, tags:  morx
+table is empty, tags:  
+table is empty, tags:  GSUB
+table is empty, tags:  GPOS
+table is empty, tags:  GDEF
+table is empty, tags:  kern
+[MathShaper]::shape // getting GlyphArea with glyphId: 91, len: 2
+[getGlyphArea] creating glyph area with glyph:  91
+[getGlyphArea]:  0x7fbdad0cfed0
+[MathShaper]::shape // getting GlyphArea with glyphId: 20, len: 2
+[getGlyphArea] creating glyph area with glyph:  20
+[getGlyphArea]:  0x7fbdad0d0440
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d0c00
+[GlyphStringArea]: this 0x7fbdad0d0e50
+[GlyphStringArea]: child 0x7fbdad0d0c00
+this harea: 0x7fbdad0d0e50
+[MathGraphicDevice]::string // checking context for str = →
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = →
+[MathShaper]::shape // shaping this char: 8594
+[MathShaper]::shape // getting GlyphArea with glyphId: 927, len: 1
+[getGlyphArea] creating glyph area with glyph:  927
+[getGlyphArea]:  0x7fbdad0d0f00
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d0bc0
+[GlyphStringArea]: this 0x7fbdad0d18d0
+[GlyphStringArea]: child 0x7fbdad0d0bc0
+this harea: 0x7fbdad0d18d0
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = +
+[MathShaper]::shape // shaping this char: 43
+[MathShaper]::shape // getting GlyphArea with glyphId: 14, len: 1
+[getGlyphArea] creating glyph area with glyph:  14
+[getGlyphArea]:  0x7fbdad0d1c60
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d1ef0
+[GlyphStringArea]: this 0x7fbdad0d1860
+[GlyphStringArea]: child 0x7fbdad0d1ef0
+this harea: 0x7fbdad0d1860
+[MathGraphicDevice]::string // checking context for str = ∞
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = ∞
+[MathShaper]::shape // shaping this char: 8734
+[MathShaper]::shape // getting GlyphArea with glyphId: 146, len: 1
+[getGlyphArea] creating glyph area with glyph:  146
+[getGlyphArea]:  0x7fbdad0d1f80
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d21d0
+[GlyphStringArea]: this 0x7fbdad0d2290
+[GlyphStringArea]: child 0x7fbdad0d21d0
+this harea: 0x7fbdad0d2290
+[MathGraphicDevice]::string // checking context for str = →
+[MathShaper]::shape // shaping this char: 8594
+[MathShaper]::shape // getting GlyphArea with glyphId: 927, len: 1
+[getGlyphArea] creating glyph area with glyph:  927
+[getGlyphArea]:  0x7fbdad0d2b10
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d2b40
+[GlyphStringArea]: this 0x7fbdad0d2870
+[GlyphStringArea]: child 0x7fbdad0d2b40
+this harea: 0x7fbdad0d2870
+[MathGraphicDevice]::string // checking context for str = lim
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = lim
+[MathShaper]::shape // shaping this char: 108
+[MathShaper]::shape // shaping next char: 105
+[MathShaper]::shape // getting GlyphArea with glyphId: 79, len: 3
+[getGlyphArea] creating glyph area with glyph:  79
+[getGlyphArea]:  0x7fbdad0d2ae0
+[MathShaper]::shape // getting GlyphArea with glyphId: 76, len: 3
+[getGlyphArea] creating glyph area with glyph:  76
+[getGlyphArea]:  0x7fbdad0d3480
+[MathShaper]::shape // getting GlyphArea with glyphId: 80, len: 3
+[getGlyphArea] creating glyph area with glyph:  80
+[getGlyphArea]:  0x7fbdad0d3560
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d3380
+[GlyphStringArea]: this 0x7fbdad0d31f0
+[GlyphStringArea]: child 0x7fbdad0d3380
+this harea: 0x7fbdad0d31f0
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = (
+[MathShaper]::shape // shaping this char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 11, len: 1
+[getGlyphArea] creating glyph area with glyph:  11
+[getGlyphArea]:  0x7fbdad0d0fe0
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d1500
+[GlyphStringArea]: this 0x7fbdad0d1420
+[GlyphStringArea]: child 0x7fbdad0d1500
+this harea: 0x7fbdad0d1420
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 1
+[MathShaper]::shape // shaping this char: 49
+[MathShaper]::shape // getting GlyphArea with glyphId: 20, len: 1
+[getGlyphArea] creating glyph area with glyph:  20
+[getGlyphArea]:  0x7fbdad0d4080
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d4030
+[GlyphStringArea]: this 0x7fbdad0d3f50
+[GlyphStringArea]: child 0x7fbdad0d4030
+this harea: 0x7fbdad0d3f50
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = +
+[MathShaper]::shape // shaping this char: 43
+[MathShaper]::shape // getting GlyphArea with glyphId: 14, len: 1
+[getGlyphArea] creating glyph area with glyph:  14
+[getGlyphArea]:  0x7fbdad0d3fc0
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d4320
+[GlyphStringArea]: this 0x7fbdad0d4240
+[GlyphStringArea]: child 0x7fbdad0d4320
+this harea: 0x7fbdad0d4240
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = x
+[MathShaper]::shape // shaping this char: 119909
+[MathShaper]::shape // getting GlyphArea with glyphId: 0, len: 1
+[getGlyphArea] creating glyph area with glyph:  0
+[getGlyphArea]:  0x7fbdad1f6620
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f6910
+[GlyphStringArea]: this 0x7fbdad1f7d00
+[GlyphStringArea]: child 0x7fbdad1f6910
+this harea: 0x7fbdad1f7d00
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 2
+[MathShaper]::shape // shaping this char: 50
+[MathShaper]::shape // getting GlyphArea with glyphId: 21, len: 1
+[getGlyphArea] creating glyph area with glyph:  21
+[getGlyphArea]:  0x7fbdad1f7f30
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f87b0
+[GlyphStringArea]: this 0x7fbdad1f8b20
+[GlyphStringArea]: child 0x7fbdad1f87b0
+this harea: 0x7fbdad1f8b20
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = )
+[MathShaper]::shape // shaping this char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[getGlyphArea] creating glyph area with glyph:  12
+[getGlyphArea]:  0x7fbdad1f8c80
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f84b0
+[GlyphStringArea]: this 0x7fbdad1f8cf0
+[GlyphStringArea]: child 0x7fbdad1f84b0
+this harea: 0x7fbdad1f8cf0
+[MathGraphicDevice]::string // checking context for str = (
+[MathShaper]::shape // shaping this char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 11, len: 1
+[getGlyphArea] creating glyph area with glyph:  11
+[getGlyphArea]:  0x7fbdad1f90c0
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f9070
+[GlyphStringArea]: this 0x7fbdad1f8f90
+[GlyphStringArea]: child 0x7fbdad1f9070
+this harea: 0x7fbdad1f8f90
+[MathGraphicDevice]::string // checking context for str = )
+[MathShaper]::shape // shaping this char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[getGlyphArea] creating glyph area with glyph:  12
+[getGlyphArea]:  0x7fbdad1f93b0
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f9360
+[GlyphStringArea]: this 0x7fbdad1f9280
+[GlyphStringArea]: child 0x7fbdad1f9360
+this harea: 0x7fbdad1f9280
+[MathGraphicDevice]::string // checking context for str = −
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = −
+[MathShaper]::shape // shaping this char: 8722
+[MathShaper]::shape // getting GlyphArea with glyphId: 237, len: 1
+[getGlyphArea] creating glyph area with glyph:  237
+[getGlyphArea]:  0x7fbdad1f95f0
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f9bc0
+[GlyphStringArea]: this 0x7fbdad1f9e30
+[GlyphStringArea]: child 0x7fbdad1f9bc0
+this harea: 0x7fbdad1f9e30
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 1
+[MathShaper]::shape // shaping this char: 49
+[MathShaper]::shape // getting GlyphArea with glyphId: 20, len: 1
+[getGlyphArea] creating glyph area with glyph:  20
+[getGlyphArea]:  0x7fbdad1f82d0
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f9b80
+[GlyphStringArea]: this 0x7fbdad1f9fa0
+[GlyphStringArea]: child 0x7fbdad1f9b80
+this harea: 0x7fbdad1f9fa0
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad1f9fa0
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = +
+[MathShaper]::shape // shaping this char: 43
+[MathShaper]::shape // getting GlyphArea with glyphId: 14, len: 1
+[getGlyphArea] creating glyph area with glyph:  14
+[getGlyphArea]:  0x7fbdad1f9930
+[MathShaper::shape]: pushing to harea: 0x7fbdad1faae0
+[GlyphStringArea]: this 0x7fbdad1fab20
+[GlyphStringArea]: child 0x7fbdad1faae0
+this harea: 0x7fbdad1fab20
+[MathGraphicDevice]::string // checking context for str = λ
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = λ
+[MathShaper]::shape // shaping this char: 955
+[MathShaper]::shape // getting GlyphArea with glyphId: 446, len: 1
+[getGlyphArea] creating glyph area with glyph:  446
+[getGlyphArea]:  0x7fbdad1faf80
+[MathShaper::shape]: pushing to harea: 0x7fbdad1f9880
+[GlyphStringArea]: this 0x7fbdad1faea0
+[GlyphStringArea]: child 0x7fbdad1f9880
+this harea: 0x7fbdad1faea0
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 2
+[MathShaper]::shape // shaping this char: 50
+[MathShaper]::shape // getting GlyphArea with glyphId: 21, len: 1
+[getGlyphArea] creating glyph area with glyph:  21
+[getGlyphArea]:  0x7fbdad1fb770
+[MathShaper::shape]: pushing to harea: 0x7fbdad1fb2d0
+[GlyphStringArea]: this 0x7fbdad1fb5a0
+[GlyphStringArea]: child 0x7fbdad1fb2d0
+this harea: 0x7fbdad1fb5a0
+[MathGraphicDevice]::string // checking context for str = (
+this harea: 0x7fbdad0d1420
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 1
+[MathShaper]::shape // shaping this char: 49
+[MathShaper]::shape // getting GlyphArea with glyphId: 20, len: 1
+[getGlyphArea] creating glyph area with glyph:  20
+[getGlyphArea]:  0x7fbdad1fc030
+[MathShaper::shape]: pushing to harea: 0x7fbdad1fbcb0
+[GlyphStringArea]: this 0x7fbdad1fa770
+[GlyphStringArea]: child 0x7fbdad1fbcb0
+this harea: 0x7fbdad1fa770
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = x
+[MathShaper]::shape // shaping this char: 119909
+[MathShaper]::shape // getting GlyphArea with glyphId: 0, len: 1
+[getGlyphArea] creating glyph area with glyph:  0
+[getGlyphArea]:  0x7fbdad1fa820
+[MathShaper::shape]: pushing to harea: 0x7fbdad200e30
+[GlyphStringArea]: this 0x7fbdad200a00
+[GlyphStringArea]: child 0x7fbdad200e30
+this harea: 0x7fbdad200a00
+[MathGraphicDevice]::string // checking context for str = )
+this harea: 0x7fbdad1f8cf0
+[MathGraphicDevice]::string // checking context for str = (
+[MathShaper]::shape // shaping this char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 11, len: 1
+[getGlyphArea] creating glyph area with glyph:  11
+[getGlyphArea]:  0x7fbdad200380
+[MathShaper::shape]: pushing to harea: 0x7fbdad200330
+[GlyphStringArea]: this 0x7fbdad200250
+[GlyphStringArea]: child 0x7fbdad200330
+this harea: 0x7fbdad200250
+[MathGraphicDevice]::string // checking context for str = )
+[MathShaper]::shape // shaping this char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[getGlyphArea] creating glyph area with glyph:  12
+[getGlyphArea]:  0x7fbdad2004d0
+[MathShaper::shape]: pushing to harea: 0x7fbdad201900
+[GlyphStringArea]: this 0x7fbdad201a40
+[GlyphStringArea]: child 0x7fbdad201900
+this harea: 0x7fbdad201a40
+[MathGraphicDevice]::string // checking context for str = n
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = n
+[MathShaper]::shape // shaping this char: 119899
+[MathShaper]::shape // getting GlyphArea with glyphId: 0, len: 1
+[getGlyphArea] creating glyph area with glyph:  0
+[getGlyphArea]:  0x7fbdad201820
+[MathShaper::shape]: pushing to harea: 0x7fbdad200df0
+[GlyphStringArea]: this 0x7fbdad201be0
+[GlyphStringArea]: child 0x7fbdad200df0
+this harea: 0x7fbdad201be0
+[MathGraphicDevice]::string // checking context for str = =
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = =
+[MathShaper]::shape // shaping this char: 61
+[MathShaper]::shape // getting GlyphArea with glyphId: 32, len: 1
+[getGlyphArea] creating glyph area with glyph:  32
+[getGlyphArea]:  0x7fbdad201450
+[MathShaper::shape]: pushing to harea: 0x7fbdad202a50
+[GlyphStringArea]: this 0x7fbdad202aa0
+[GlyphStringArea]: child 0x7fbdad202a50
+this harea: 0x7fbdad202aa0
+[MathGraphicDevice]::string // checking context for str = x
+this harea: 0x7fbdad200a00
+[MathGraphicDevice]::string // checking context for str = →
+this harea: 0x7fbdad0d18d0
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad0d1860
+[MathGraphicDevice]::string // checking context for str = ∞
+this harea: 0x7fbdad0d2290
+[MathGraphicDevice]::string // checking context for str = →
+[MathShaper]::shape // shaping this char: 8594
+[MathShaper]::shape // getting GlyphArea with glyphId: 927, len: 1
+[getGlyphArea] creating glyph area with glyph:  927
+[getGlyphArea]:  0x7fbdad1f9250
+[MathShaper::shape]: pushing to harea: 0x7fbdad203250
+[GlyphStringArea]: this 0x7fbdad202140
+[GlyphStringArea]: child 0x7fbdad203250
+this harea: 0x7fbdad202140
+[MathGraphicDevice]::string // checking context for str = lim
+this harea: 0x7fbdad0d31f0
+[MathGraphicDevice]::string // checking context for str = x
+this harea: 0x7fbdad1f7d00
+[MathGraphicDevice]::string // checking context for str = n
+this harea: 0x7fbdad201be0
+[MathGraphicDevice]::string // checking context for str = (
+this harea: 0x7fbdad0d1420
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad0d3f50
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad0d4240
+[MathGraphicDevice]::string // checking context for str = x
+this harea: 0x7fbdad1f7d00
+[MathGraphicDevice]::string // checking context for str = 2
+this harea: 0x7fbdad1f8b20
+[MathGraphicDevice]::string // checking context for str = )
+this harea: 0x7fbdad1f8cf0
+[MathGraphicDevice]::string // checking context for str = (
+this harea: 0x7fbdad1f8f90
+[MathGraphicDevice]::string // checking context for str = )
+this harea: 0x7fbdad1f9280
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad1f9fa0
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad1f9fa0
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad1fab20
+[MathGraphicDevice]::string // checking context for str = λ
+this harea: 0x7fbdad1faea0
+[MathGraphicDevice]::string // checking context for str = 2
+this harea: 0x7fbdad1fb5a0
+[MathGraphicDevice]::string // checking context for str = =
+this harea: 0x7fbdad202aa0
+[MathGraphicDevice]::string // checking context for str = x
+this harea: 0x7fbdad200a00
+[MathGraphicDevice]::string // checking context for str = →
+this harea: 0x7fbdad0d18d0
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad0d1860
+[MathGraphicDevice]::string // checking context for str = ∞
+this harea: 0x7fbdad0d2290
+[MathGraphicDevice]::string // checking context for str = →
+this harea: 0x7fbdad202140
+[MathGraphicDevice]::string // checking context for str = lim
+this harea: 0x7fbdad0d31f0
+[MathGraphicDevice]::string // checking context for str = [
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = [
+[MathShaper]::shape // shaping this char: 91
+[MathShaper]::shape // getting GlyphArea with glyphId: 62, len: 1
+[getGlyphArea] creating glyph area with glyph:  62
+[getGlyphArea]:  0x7fbdaad4cf80
+[MathShaper::shape]: pushing to harea: 0x7fbdaad4d310
+[GlyphStringArea]: this 0x7fbdaad4d360
+[GlyphStringArea]: child 0x7fbdaad4d310
+this harea: 0x7fbdaad4d360
+[MathGraphicDevice]::string // checking context for str = x
+this harea: 0x7fbdad1f7d00
+[MathGraphicDevice]::string // checking context for str = n
+this harea: 0x7fbdad201be0
+[MathGraphicDevice]::string // checking context for str =  
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str =  
+[GlyphStringArea]: this 0x7fbdad0d1250
+[GlyphStringArea]: child 0x0
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = (
+[MathShaper]::shape // shaping this char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 11, len: 1
+[getGlyphArea] creating glyph area with glyph:  11
+[getGlyphArea]:  0x7fbdad0d12e0
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d4620
+[GlyphStringArea]: this 0x7fbdad0d4540
+[GlyphStringArea]: child 0x7fbdad0d4620
+this harea: 0x7fbdad0d4540
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad1fa770
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad0d1860
+[MathGraphicDevice]::string // checking context for str = λ
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = λ
+[MathShaper]::shape // shaping this char: 955
+[MathShaper]::shape // getting GlyphArea with glyphId: 446, len: 1
+[getGlyphArea] creating glyph area with glyph:  446
+[getGlyphArea]:  0x7fbdad0d3d80
+[MathShaper::shape]: pushing to harea: 0x7fbdad0d3d30
+[GlyphStringArea]: this 0x7fbdad0d4b70
+[GlyphStringArea]: child 0x7fbdad0d3d30
+this harea: 0x7fbdad0d4b70
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 2
+[MathShaper]::shape // shaping this char: 50
+[MathShaper]::shape // getting GlyphArea with glyphId: 21, len: 1
+[getGlyphArea] creating glyph area with glyph:  21
+[getGlyphArea]:  0x7fbdad0d50c0
+[MathShaper::shape]: pushing to harea: 0x7fbdad2032e0
+[GlyphStringArea]: this 0x7fbdad1f96c0
+[GlyphStringArea]: child 0x7fbdad2032e0
+this harea: 0x7fbdad1f96c0
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = )
+[MathShaper]::shape // shaping this char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[getGlyphArea] creating glyph area with glyph:  12
+[getGlyphArea]:  0x7fbdad205440
+[MathShaper::shape]: pushing to harea: 0x7fbdad205ac0
+[GlyphStringArea]: this 0x7fbdad2060f0
+[GlyphStringArea]: child 0x7fbdad205ac0
+this harea: 0x7fbdad2060f0
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad0d3f50
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad0d4240
+[MathGraphicDevice]::string // checking context for str = x
+this harea: 0x7fbdad1f7d00
+[MathGraphicDevice]::string // checking context for str = 2
+this harea: 0x7fbdad1f8b20
+[MathGraphicDevice]::string // checking context for str = ]
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = ]
+[MathShaper]::shape // shaping this char: 93
+[MathShaper]::shape // getting GlyphArea with glyphId: 64, len: 1
+[getGlyphArea] creating glyph area with glyph:  64
+[getGlyphArea]:  0x7fbdad2065c0
+[MathShaper::shape]: pushing to harea: 0x7fbdad206c30
+[GlyphStringArea]: this 0x7fbdad206d50
+[GlyphStringArea]: child 0x7fbdad206c30
+this harea: 0x7fbdad206d50
+[MathGraphicDevice]::string // checking context for str = [
+[MathShaper]::shape // shaping this char: 91
+[MathShaper]::shape // getting GlyphArea with glyphId: 62, len: 1
+[getGlyphArea] creating glyph area with glyph:  62
+[getGlyphArea]:  0x7fbdad207000
+[MathShaper::shape]: pushing to harea: 0x7fbdad206fb0
+[GlyphStringArea]: this 0x7fbdad207120
+[GlyphStringArea]: child 0x7fbdad206fb0
+this harea: 0x7fbdad207120
+[MathGraphicDevice]::string // checking context for str = ]
+[MathShaper]::shape // shaping this char: 93
+[MathShaper]::shape // getting GlyphArea with glyphId: 64, len: 1
+[getGlyphArea] creating glyph area with glyph:  64
+[getGlyphArea]:  0x7fbdad206b50
+[MathShaper::shape]: pushing to harea: 0x7fbdad207350
+[GlyphStringArea]: this 0x7fbdad207270
+[GlyphStringArea]: child 0x7fbdad207350
+this harea: 0x7fbdad207270
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad1f9fa0
+[MathGraphicDevice]::string // checking context for str = 1
+this harea: 0x7fbdad1f9fa0
+[MathGraphicDevice]::string // checking context for str = +
+this harea: 0x7fbdad1fab20
+[MathGraphicDevice]::string // checking context for str = λ
+this harea: 0x7fbdad1faea0
+[MathGraphicDevice]::string // checking context for str = 2
+this harea: 0x7fbdad1fb5a0
+[MathView] *** Warning[1:1]: formatting time: 22ms
+Got bounding box!
+[MathView] *** Warning[1:1]: formatting time: 0ms
+[MathView] *** Warning[1:1]: formatting time: 0ms
+[MathView] *** Warning[1:1]: rendering time: 7ms
+[MathView] *** Warning[1:1]: formatting time: 0ms
+this area: 0x7fbdad2078a0current edges:  = -2.09715e+06
+origin points: x = 237.031
+searching [HorizontalArrayArea]: x = 41 y = 10
+this area: 0x7fbdad2013a0current edges:  = -2.09715e+06
+origin points: x = 40.541
+searching [HorizontalArrayArea]: x = 41 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202370current edges:  = -2.09715e+06
+origin points: x = 43.9004
+searching [HorizontalArrayArea]: x = 0.458984 y = 23.0244
+searching [HorizontalArrayArea]: x = -22.9102 y = 23.0244
+searching [HorizontalArrayArea]: x = -43.4414 y = 23.0244
+this area: 0x7fbdad2023d0current edges:  = -2.09715e+06
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202450current edges:  = -2.09715e+06
+origin points: x = 67.2695
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8060current edges:  = -2.09714e+06
+origin points: x = 44.5977
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f94d0current edges:  = -2.09714e+06
+origin points: x = 40.707
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8f90current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+this area: 0x7fbdad1f9070current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+got glyph area:  0x7fbdad1f90c0
+[MathView] *** Warning[1:1]: formatting time: 0ms
+this area: 0x7fbdad2078a0current edges:  = -2.09715e+06
+origin points: x = 237.031
+searching [HorizontalArrayArea]: x = 41 y = 10
+this area: 0x7fbdad2013a0current edges:  = -2.09715e+06
+origin points: x = 40.541
+searching [HorizontalArrayArea]: x = 41 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202370current edges:  = -2.09715e+06
+origin points: x = 43.9004
+searching [HorizontalArrayArea]: x = 0.458984 y = 23.0244
+searching [HorizontalArrayArea]: x = -22.9102 y = 23.0244
+searching [HorizontalArrayArea]: x = -43.4414 y = 23.0244
+this area: 0x7fbdad2023d0current edges:  = -2.09715e+06
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202450current edges:  = -2.09715e+06
+origin points: x = 67.2695
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8060current edges:  = -2.09714e+06
+origin points: x = 44.5977
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f94d0current edges:  = -2.09714e+06
+origin points: x = 40.707
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8f90current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+this area: 0x7fbdad1f9070current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+got parent area:  0x7fbdad1f9070
+[MathView] *** Warning[1:1]: formatting time: 0ms
+this area: 0x7fbdad2078a0current edges:  = -2.09715e+06
+origin points: x = 237.031
+searching [HorizontalArrayArea]: x = 41 y = 10
+this area: 0x7fbdad2013a0current edges:  = -2.09715e+06
+origin points: x = 40.541
+searching [HorizontalArrayArea]: x = 41 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202370current edges:  = -2.09715e+06
+origin points: x = 43.9004
+searching [HorizontalArrayArea]: x = 0.458984 y = 23.0244
+searching [HorizontalArrayArea]: x = -22.9102 y = 23.0244
+searching [HorizontalArrayArea]: x = -43.4414 y = 23.0244
+this area: 0x7fbdad2023d0current edges:  = -2.09715e+06
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202450current edges:  = -2.09715e+06
+origin points: x = 67.2695
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8060current edges:  = -2.09714e+06
+origin points: x = 44.5977
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f94d0current edges:  = -2.09714e+06
+origin points: x = 40.707
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8f90current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+this area: 0x7fbdad1f9070current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+got parent parent area:  0x7fbdad1f8f90
+[MathView] *** Warning[1:1]: formatting time: 0ms
+this area: 0x7fbdad2078a0current edges:  = -2.09715e+06
+origin points: x = 237.031
+searching [HorizontalArrayArea]: x = 41 y = 10
+this area: 0x7fbdad2013a0current edges:  = -2.09715e+06
+origin points: x = 40.541
+searching [HorizontalArrayArea]: x = 41 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202370current edges:  = -2.09715e+06
+origin points: x = 43.9004
+searching [HorizontalArrayArea]: x = 0.458984 y = 23.0244
+searching [HorizontalArrayArea]: x = -22.9102 y = 23.0244
+searching [HorizontalArrayArea]: x = -43.4414 y = 23.0244
+this area: 0x7fbdad2023d0current edges:  = -2.09715e+06
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202450current edges:  = -2.09715e+06
+origin points: x = 67.2695
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8060current edges:  = -2.09714e+06
+origin points: x = 44.5977
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f94d0current edges:  = -2.09714e+06
+origin points: x = 40.707
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8f90current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+this area: 0x7fbdad1f9070current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+got node:  0x7fbdad1f3150
+[MathView] *** Warning[1:1]: formatting time: 0ms
+this area: 0x7fbdad2078a0current edges:  = -2.09715e+06
+origin points: x = 237.031
+searching [HorizontalArrayArea]: x = 41 y = 10
+this area: 0x7fbdad2013a0current edges:  = -2.09715e+06
+origin points: x = 40.541
+searching [HorizontalArrayArea]: x = 41 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202370current edges:  = -2.09715e+06
+origin points: x = 43.9004
+searching [HorizontalArrayArea]: x = 0.458984 y = 23.0244
+searching [HorizontalArrayArea]: x = -22.9102 y = 23.0244
+searching [HorizontalArrayArea]: x = -43.4414 y = 23.0244
+this area: 0x7fbdad2023d0current edges:  = -2.09715e+06
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202450current edges:  = -2.09715e+06
+origin points: x = 67.2695
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8060current edges:  = -2.09714e+06
+origin points: x = 44.5977
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f94d0current edges:  = -2.09714e+06
+origin points: x = 40.707
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8f90current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+this area: 0x7fbdad1f9070current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+Content: '('
+[MathView] *** Warning[1:1]: formatting time: 0ms
+this area: 0x7fbdad2078a0current edges:  = -2.09715e+06
+origin points: x = 237.031
+searching [HorizontalArrayArea]: x = 41 y = 10
+this area: 0x7fbdad2013a0current edges:  = -2.09715e+06
+origin points: x = 40.541
+searching [HorizontalArrayArea]: x = 41 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202370current edges:  = -2.09715e+06
+origin points: x = 43.9004
+searching [HorizontalArrayArea]: x = 0.458984 y = 23.0244
+searching [HorizontalArrayArea]: x = -22.9102 y = 23.0244
+searching [HorizontalArrayArea]: x = -43.4414 y = 23.0244
+this area: 0x7fbdad2023d0current edges:  = -2.09715e+06
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+searching [HorizontalArrayArea]: x = 0.458984 y = 10
+this area: 0x7fbdad202450current edges:  = -2.09715e+06
+origin points: x = 67.2695
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8060current edges:  = -2.09714e+06
+origin points: x = 44.5977
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f94d0current edges:  = -2.09714e+06
+origin points: x = 40.707
+searching [HorizontalArrayArea]: x = 0.458984 y = 9.49902
+this area: 0x7fbdad1f8f90current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+this area: 0x7fbdad1f9070current edges:  = 0.71875
+origin points: x = 0
+searching [HorizontalArrayArea]: x = 0.458984 y = 7.22559
+[MathGraphicDevice]::string // checking context for str = =
+this harea: 0x7fbdad202aa0
+[MathGraphicDevice]::string // checking context for str = 
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = �
+[MathShaper]::shape // shaping this char: 65533
+[MathShaper]::shape // getting GlyphArea with glyphId: 1466, len: 1
+[getGlyphArea] creating glyph area with glyph:  1466
+[getGlyphArea]:  0x7fbdaae514c0
+[MathShaper::shape]: pushing to harea: 0x7fbdaae511e0
+[GlyphStringArea]: this 0x7fbdaae51220
+[GlyphStringArea]: child 0x7fbdaae511e0
+this harea: 0x0
+Assertion failed: (ptr), function operator->, file ../../src/common/SmartPtr.hh, line 36.

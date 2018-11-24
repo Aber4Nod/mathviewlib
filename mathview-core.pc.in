@@ -1,0 +1,14 @@
+# This is a comment
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+
+Name: MathView
+Description: MathML rendering engine (core)
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lmathview
+Cflags: -I${includedir}/@PACKAGE@
+

@@ -1,0 +1,80 @@
+
+// Legend
+
+* = URGENT
++ = SHORT TERM
+- = LONG TERM
+? = unsure
+O = OK, done
+
+// General
+
+* Priorities for the next minor release:
+  * Make the widget more robust (font management)
+
++ make DPI a configurable parameter
+? make pangolayout pangolinelayout areas configurable (glyph area?)
+? have callback functions to notify progress while building/formatting/etc?
+  these should not depend on the backend
+- use step area to implement linebreaking in mrows
+- add possibility of disabling shaping of certain characters for shapers. Eg:
+  <section name="disable-shaping">
+    <key name="char">03BB</key>
+    <section name="range">
+      <key name="from">A0</key>
+      <key name="to">B0</key>
+    </section>
+  </section>
+
+// AbiWord
+
+* commit default shaper in abimathview
+
+// MathML
+
+BUGS
+
+? when index == length in a glyph area the caret is drawn
+  at the right end of the focus' bounding box. It would be
+  more appropriate to draw it just after the glyph, especially
+  for mo elements. Is this really better?
+? selecting the root <math> element does not show selection
+
+ARCH IMPROVEMENTS
+
+* MathMLNormalizingContainerElement::format can be removed
+? make default value of attributes configurable
+? make GlyphStringArea a leaf-like area?
+- change the clone method for areas so that it checks if the
+  content is unchanged, and possibly implement the replace this
+  way
+- implement auxiliary methods for searching into the area model
+- It may be feasible to generalize searching functions
+  over areas by implementing a visitor
+O it seems like the choice of having that the first child of a
+  vertical area is the bottommost is a bit weird. Think of the cursor:
+  intuitively at increasing indices the cursor should go forward (that
+  is right or down depending on the container). No, it is consistent
+  with the coordinate system used by areas where the origin is at the
+  bottom
+
+PERFORMANCE IMPROVEMENTS
+
+- in TemplateBuilder do not use the hash map for retrieving old
+  elements, but use accessor methods instead. Much faster 
+
+MISSING
+
+? make setSelected virtual in Gtk_WrapperArea and implement
+  an open Wrapper area that selects all its children. Use the
+  open wrapper for groups
+- runtime selection of backend
+
+// GTK Backend
+
+ARCH IMPROVEMENTS
+
++ define selection as a pluggable feature (much like decorators)
+instead of a built-in feature. For some operations it may be desirable
+not to have selection implemented this way
++ same with click

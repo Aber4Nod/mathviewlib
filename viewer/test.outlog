@@ -1,0 +1,297 @@
+[MathView] *** Warning[1:1]: parsing time: 1ms
+loaded URI
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathMLFractionElement]:MathMLFractionElement // creating MathMLFractionElement element
+[MathView] *** Warning[1:1]: build time: 1ms
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = x
+[MathShaper]::shape // shaping char: 119909
+[MathShaper]::shape // getting GlyphArea with glyphId: 2407, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 2407
+[MathGraphicDevice]::string // checking context for str = →
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = →
+[MathShaper]::shape // shaping char: 8594
+[MathShaper]::shape // getting GlyphArea with glyphId: 944, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 944
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = +
+[MathShaper]::shape // shaping char: 43
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 12
+[MathGraphicDevice]::string // checking context for str = ∞
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = ∞
+[MathShaper]::shape // shaping char: 8734
+[MathShaper]::shape // getting GlyphArea with glyphId: 1075, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 1075
+[MathGraphicDevice]::string // checking context for str = →
+[MathShaper]::shape // shaping char: 8594
+[MathShaper]::shape // getting GlyphArea with glyphId: 944, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 944
+[MathGraphicDevice]::string // checking context for str = lim
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = lim
+[MathShaper]::shape // shaping char: 108
+[MathShaper]::shape // getting GlyphArea with glyphId: 77, len: 3
+[Cairo_Shaper]:getGlyphArea : glyph value: 77
+[MathShaper]::shape // getting GlyphArea with glyphId: 74, len: 3
+[Cairo_Shaper]:getGlyphArea : glyph value: 74
+[MathShaper]::shape // getting GlyphArea with glyphId: 78, len: 3
+[Cairo_Shaper]:getGlyphArea : glyph value: 78
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = (
+[MathShaper]::shape // shaping char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 9, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 9
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 1
+[MathShaper]::shape // shaping char: 49
+[MathShaper]::shape // getting GlyphArea with glyphId: 18, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 18
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = +
+[MathShaper]::shape // shaping char: 43
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 12
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = x
+[MathShaper]::shape // shaping char: 119909
+[MathShaper]::shape // getting GlyphArea with glyphId: 2407, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 2407
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 2
+[MathShaper]::shape // shaping char: 50
+[MathShaper]::shape // getting GlyphArea with glyphId: 19, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 19
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = )
+[MathShaper]::shape // shaping char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 10, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 10
+[MathGraphicDevice]::string // checking context for str = (
+[MathShaper]::shape // shaping char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 9, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 9
+[MathGraphicDevice]::string // checking context for str = )
+[MathShaper]::shape // shaping char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 10, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 10
+[MathGraphicDevice]::string // checking context for str = −
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = −
+[MathShaper]::shape // shaping char: 8722
+[MathShaper]::shape // getting GlyphArea with glyphId: 1063, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 1063
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 1
+[MathShaper]::shape // shaping char: 49
+[MathShaper]::shape // getting GlyphArea with glyphId: 18, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 18
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = +
+[MathShaper]::shape // shaping char: 43
+[MathShaper]::shape // getting GlyphArea with glyphId: 12, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 12
+[MathGraphicDevice]::string // checking context for str = λ
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = λ
+[MathShaper]::shape // shaping char: 955
+[MathShaper]::shape // getting GlyphArea with glyphId: 634, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 634
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 2
+[MathShaper]::shape // shaping char: 50
+[MathShaper]::shape // getting GlyphArea with glyphId: 19, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 19
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 1
+[MathShaper]::shape // shaping char: 49
+[MathShaper]::shape // getting GlyphArea with glyphId: 18, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 18
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::string // checking context for str = (
+[MathShaper]::shape // shaping char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 9, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 9
+[MathGraphicDevice]::string // checking context for str = )
+[MathShaper]::shape // shaping char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 10, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 10
+[MathGraphicDevice]::string // checking context for str = n
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = n
+[MathShaper]::shape // shaping char: 119899
+[MathShaper]::shape // getting GlyphArea with glyphId: 2397, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 2397
+[MathGraphicDevice]::string // checking context for str = =
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = =
+[MathShaper]::shape // shaping char: 61
+[MathShaper]::shape // getting GlyphArea with glyphId: 30, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 30
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = →
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = ∞
+[MathGraphicDevice]::string // checking context for str = →
+[MathGraphicDevice]::string // checking context for str = lim
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = n
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = λ
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::string // checking context for str = =
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = →
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = ∞
+[MathGraphicDevice]::string // checking context for str = →
+[MathGraphicDevice]::string // checking context for str = lim
+[MathGraphicDevice]::string // checking context for str = [
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = [
+[MathShaper]::shape // shaping char: 91
+[MathShaper]::shape // getting GlyphArea with glyphId: 60, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 60
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = n
+[MathGraphicDevice]::string // checking context for str =  
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str =  
+[MathGraphicDevice]::string // checking context for str = (
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = (
+[MathShaper]::shape // shaping char: 40
+[MathShaper]::shape // getting GlyphArea with glyphId: 9, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 9
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = λ
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = λ
+[MathShaper]::shape // shaping char: 955
+[MathShaper]::shape // getting GlyphArea with glyphId: 634, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 634
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = 2
+[MathShaper]::shape // shaping char: 50
+[MathShaper]::shape // getting GlyphArea with glyphId: 19, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 19
+[MathGraphicDevice]::string // checking context for str = )
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = )
+[MathShaper]::shape // shaping char: 41
+[MathShaper]::shape // getting GlyphArea with glyphId: 10, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 10
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = x
+[MathGraphicDevice]::string // checking context for str = 2
+[MathGraphicDevice]::string // checking context for str = ]
+[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = ]
+[MathShaper]::shape // shaping char: 93
+[MathShaper]::shape // getting GlyphArea with glyphId: 62, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 62
+[MathGraphicDevice]::string // checking context for str = [
+[MathShaper]::shape // shaping char: 91
+[MathShaper]::shape // getting GlyphArea with glyphId: 60, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 60
+[MathGraphicDevice]::string // checking context for str = ]
+[MathShaper]::shape // shaping char: 93
+[MathShaper]::shape // getting GlyphArea with glyphId: 62, len: 1
+[Cairo_Shaper]:getGlyphArea : glyph value: 62
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = 1
+[MathGraphicDevice]::string // checking context for str = +
+[MathGraphicDevice]::string // checking context for str = λ
+[MathGraphicDevice]::string // checking context for str = 2
+[MathView] *** Warning[1:1]: formatting time: 8ms
+getted bounded box
+created surface
+[Cairo_RenderingContext]::draw // drawing with coords x = 3.33301 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 8.33301 y = -33.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 16.333 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 22.333 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 9.33301 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 12.333 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 15.333 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 53.8311 y = -35.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 57.8311 y = -39.2559
+[Cairo_RenderingContext]::draw // drawing with coords x = 57.8311 y = 34.2529 width = 5 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 58.3311 y = -34.2529
+[Cairo_RenderingContext]::draw // drawing with coords x = 62.8311 y = -35.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 66.8311 y = -27.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 33.666 y = 22.501 width = 57.3311 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 33.666 y = -19.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 37.666 y = -21.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 46.332 y = -21.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 56.998 y = -21.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 63.9971 y = -15.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 67.9971 y = -19.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 71.9971 y = -9.50098
+[Cairo_RenderingContext]::draw // drawing with coords x = 77.9971 y = -18.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 80.9971 y = -18.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 84.9971 y = -18.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 87.9971 y = -14.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 77.9971 y = 9 width = 13 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 82.9971 y = -9
+[Cairo_RenderingContext]::draw // drawing with coords x = 94.3301 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 108.996 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 113.996 y = -33.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 121.996 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 127.996 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 114.996 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 117.996 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 120.996 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 139.329 y = -39.0049
+[Cairo_RenderingContext]::draw // drawing with coords x = 143.329 y = -41.0049
+[Cairo_RenderingContext]::draw // drawing with coords x = 151.995 y = -41.0049
+[Cairo_RenderingContext]::draw // drawing with coords x = 162.661 y = -41.0049
+[Cairo_RenderingContext]::draw // drawing with coords x = 169.66 y = -35.0049
+[Cairo_RenderingContext]::draw // drawing with coords x = 173.66 y = -39.0049
+[Cairo_RenderingContext]::draw // drawing with coords x = 177.66 y = -37.5068
+[Cairo_RenderingContext]::draw // drawing with coords x = 180.66 y = -37.5068
+[Cairo_RenderingContext]::draw // drawing with coords x = 184.66 y = -37.5068
+[Cairo_RenderingContext]::draw // drawing with coords x = 187.66 y = -33.5068
+[Cairo_RenderingContext]::draw // drawing with coords x = 177.66 y = 28.5039 width = 13 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 182.66 y = -28.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 139.329 y = 22.501 width = 51.3311 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 159.495 y = -22.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 166.494 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 193.993 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 208.659 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 213.659 y = -33.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 221.659 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 227.659 y = -31.0107
+[Cairo_RenderingContext]::draw // drawing with coords x = 214.659 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 217.659 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 220.659 y = -23.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 238.992 y = -24.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 245.772 y = -35.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 254.438 y = -35.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 265.104 y = -35.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 272.104 y = -29.5039
+[Cairo_RenderingContext]::draw // drawing with coords x = 242.992 y = 22.501 width = 35.8916 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 242.992 y = -22.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 249.991 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 255.884 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 258.884 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 262.884 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 268.884 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 272.884 y = -10.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 275.884 y = -16.501
+[Cairo_RenderingContext]::draw // drawing with coords x = 278.884 y = -24.002
+[Cairo_RenderingContext]::draw // drawing with coords x = 282.884 y = -14.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 285.884 y = -14.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 289.884 y = -14.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 292.884 y = -10.0029
+[Cairo_RenderingContext]::draw // drawing with coords x = 282.884 y = 5 width = 13 height = 1.00293
+[Cairo_RenderingContext]::draw // drawing with coords x = 287.884 y = -5
+[MathView] *** Warning[1:1]: rendering time: 1ms

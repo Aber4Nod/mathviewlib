@@ -1,0 +1,43 @@
+try:
+    from lxml import etree
+except ImportError:
+    from xml.etree import ElementTree as etree
+
+import sys
+
+def getSets(tree, names):
+    root = tree.getroot()
+    sets = set()
+    for group in root.findall(".//group"):
+        if group.get("name") in names:
+            for child in group:
+                sets.add(child.get("name"))
+
+    return sets
+
+def getEntities(tree, sets):
+    root = tree.getroot()
+    entities = {}
+    for character in root.findall(".//character"):
+        for s in sets:
+            for entity in character.findall(".//entity[@set='%s']" % s):
+                dec = character.get("dec")
+                value = ""
+                for d in dec.split("-"):
+                    value += (r"\U%08x" % int(d)).decode('unicode-escape')
+                entities[entity.get("id")] = value
+
+    return entities
+
+def dumpEntities(tree, fd):
+    sets = getSets(tree, ("mathml", "html5"))
+    entities = getEntities(tree, sets)
+
+    for entity in sorted(entities.keys()):
+        value = "".join([r"\x%02x" %(ord(b)) for b in entities[entity].encode("utf8")])
+        assert(value)
+        fd.write('{ "%s", "%s" },\n' %(entity, value))
+
+if __name__ == "__main__":
+    doc = etree.parse(sys.argv[1])
+    dumpEntities(doc, sys.stdout)

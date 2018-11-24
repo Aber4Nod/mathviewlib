@@ -1,0 +1,11 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>ciao</mi>
+  <mo>&minus;</mo>
+  <msup>
+    <mi>x</mi>
+    <mrow>
+      <mo>&minus;</mo>
+      <mn>2</mn>
+    </mrow>
+  </msup>
+</math>

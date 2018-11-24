@@ -1,0 +1,14 @@
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+  <mo>&int;</mo>
+    <mfenced separators=''>
+      <mn>5</mn>
+      <mi>x</mi>
+      <mo>+</mo>
+      <mn>2</mn>
+      <mi>sin</mi>
+      <mfenced separators=''>
+        <mi>x</mi>
+      </mfenced>
+    </mfenced>
+  <mi>dx</mi>
+</math>

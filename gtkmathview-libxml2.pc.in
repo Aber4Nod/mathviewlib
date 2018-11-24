@@ -1,0 +1,15 @@
+# This is a comment
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+
+Name: GtkMathView
+Description: A GTK+ Widget for Rendering MathML Documents (libxml2 frontend)
+Version: @PACKAGE_VERSION@
+Requires: gtk+-2.0 mathview-core mathview-backend-cairo mathview-frontend-libxml2
+Libs: @XML_LIBS@ -L${libdir} -lgtkmathview_libxml2
+Cflags: @XML_CFLAGS@ -I${includedir}/@PACKAGE@
+

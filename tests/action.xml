@@ -1,0 +1,11 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <maction actiontype="toggle" selection="2">
+      <mtext>ciao</mtext>
+      <mtext>da</mtext>
+      <mtext>Luca</mtext>
+    </maction>
+    <mo>+</mo>
+    <mn>1</mn>
+  </mrow>
+</math>

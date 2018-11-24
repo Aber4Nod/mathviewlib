@@ -1,0 +1,20 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+    <mtable>
+      <mtr>
+	<mtd>
+	  <mover>
+	    <mi>a</mi>
+	    <mo rspace="0em">&#x0307;</mo>
+	  </mover>
+	</mtd>
+	<mtd>
+	  <mover accent="true">
+	    <mi>&alpha;</mi>
+	    <mo>&#x0305;</mo>
+	  </mover>
+	</mtd>
+      </mtr>
+      <mtr>
+      </mtr>
+    </mtable>
+</math>
