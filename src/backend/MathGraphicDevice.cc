@@ -201,7 +201,10 @@ MathGraphicDevice::string(const FormattingContext& context,
 {
   std::cout << "[MathGraphicDevice]::string // checking context for str = " << str << std::endl;
   if (str.length() == 0)
-    return dummy(context);
+  {
+      std::cout << "[MathGraphicDevice]::string // alarm! null length" << std::endl;
+      return dummy(context);  
+  }
   else if (context.getMathMLElement() == context.getStretchOperator())
     return stretchedString(context, str);
   else

@@ -51,6 +51,8 @@ Qt_GlyphArea::box() const
     QRectF rect = m_glyphRun.boundingRect();
     QVector<QPointF> advances = m_glyphRun.rawFont().advancesForGlyphIndexes(m_glyphRun.glyphIndexes());
     qreal baseline = m_glyphRun.positions()[0].y();
+    qDebug() << this << " " << rect;
+    // qDebug() << "area: " << this << " width: " << Qt_RenderingContext::fromQtPixels(advances.at(0).x()).toDouble() << " height: " << Qt_RenderingContext::fromQtPixels(baseline - rect.top()).toDouble();
     return BoundingBox(Qt_RenderingContext::fromQtPixels(advances.at(0).x()),
                        Qt_RenderingContext::fromQtPixels(baseline - rect.top()),
                        Qt_RenderingContext::fromQtPixels(rect.bottom() - baseline));

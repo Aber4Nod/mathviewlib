@@ -30,6 +30,7 @@
 SmartPtr<HorizontalArrayArea>
 HorizontalArrayArea::create(const std::vector<AreaRef>& children)
 {
+    // std::cout << "[HorizontalArrayArea]: creating harea" << std::endl;
   SmartPtr<HorizontalArrayArea> harea = new HorizontalArrayArea(children);
   return harea;
 }

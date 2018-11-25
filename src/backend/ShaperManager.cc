@@ -35,6 +35,7 @@
 #include "MathMLElement.hh"
 #include "Area.hh"
 #include "GlyphArea.hh"
+#include <iostream>
 
 ShaperManager::ShaperManager(void)
   : nextShaperId(0)
@@ -59,9 +60,11 @@ ShaperManager::shapeAux(ShapingContext& context) const
     {
       const unsigned index = context.getIndex();
       if (SmartPtr<Shaper> shaper = getShaper(context.getShaperId()))
-	shaper->shape(context);
+	     shaper->shape(context);
+      // std::cout << "here in shaperamanager area: " << context.area() << std::endl;
       if (index == context.getIndex())
 	{
+        std::cout << "[ShaperManager]: shaping with null shapper" << std::endl;
 	  // this is very severe, either no shaper was configured, or
 	  // a Shaper has declared it is able to handle a character
 	  // but it turned out that it has eaten no characters from

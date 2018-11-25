@@ -42,6 +42,7 @@ public:
   virtual String   GetRawContent(void) const;
   virtual void     LookUpContent() const;
   virtual void     ClearContent();
+  virtual void     DeleteContent();
   
 private:
     // setDirtyLayout

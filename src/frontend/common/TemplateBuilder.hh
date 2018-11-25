@@ -70,6 +70,7 @@ protected:
 #endif
     if (elem->dirtyAttribute() || elem->dirtyAttributeP() || elem->dirtyStructure())
       {
+          std::cout << "Current element address: " << elem << std::endl;
 	ElementBuilder::begin(*this, el, elem);
 	ElementBuilder::refine(*this, el, elem);
 	ElementBuilder::construct(*this, el, elem);
@@ -349,7 +350,18 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLTokenElement>& elem)
     {
       std::vector<SmartPtr<MathMLTextNode> > content;
-      builder.getChildMathMLTextNodes(el, content);
+      // if (elem->contentSet())
+      // {
+      //     typename Model::Node n = Model::asNode(el);
+      //     assert(n); 
+      //     std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
+      //     if (Model::getNodeType(n) == Model::TEXT_NODE)
+      //     {
+      //         std::cout << "[construct]: settingNodeValue: " << elem->GetRawContent() << std::endl;
+      //         Model::setNodeValue(n, elem->GetRawContent());
+      //     }
+      // }
+      builder.getChildMathMLTextNodes(el, content, elem);
       elem->swapContent(content); // should normalize spaces etc.
     }
   };
@@ -991,7 +1003,7 @@ protected:
   }
 
   void
-  getChildMathMLTextNodes(const typename Model::Element& el, std::vector<SmartPtr<MathMLTextNode> >& content) const
+  getChildMathMLTextNodes(const typename Model::Element& el, std::vector<SmartPtr<MathMLTextNode> >& content, const SmartPtr<MathMLTokenElement>& elem) const
   {
     bool first = true;
     content.clear();
@@ -1000,19 +1012,28 @@ protected:
 	typename Model::Node n = iter.node();
 	assert(n);
 
+    // static int32_t counter;
 	switch (Model::getNodeType(n))
 	  {
 	  case Model::TEXT_NODE:
 	    {
 	      // ok, we have a chunk of text
-	      String s = collapseSpaces(Model::getNodeValue(n));
+          String s;
+          if (elem->contentSet())
+          {
+              std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
+              Model::setNodeValue(n, elem->GetRawContent());
+              elem->resetFlag(MathMLElement::FContentSet);
+          }
+	      s = collapseSpaces(Model::getNodeValue(n));
 	      iter.next();
 
 	      // ...but spaces at the at the beginning (end) are deleted only if this
 	      // is the very first (last) chunk in the token.
 	      if (first) s = trimSpacesLeft(s);
 	      if (!iter.more()) s = trimSpacesRight(s);
-	      
+
+          std::cout << "[getChildMathMLTextNodes]: pushing back textnode: " << s << std::endl;
 	      content.push_back(createMathMLTextNode(s));
 	    }
 	    break;

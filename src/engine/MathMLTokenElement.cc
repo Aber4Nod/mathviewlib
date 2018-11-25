@@ -41,6 +41,7 @@
 #include "mathVariantAux.hh"
 #include "traverseAux.hh"
 #include "MathMLAttributeSignatures.hh"
+#include <iostream>
 
 MathMLTokenElement::MathMLTokenElement(const SmartPtr<class MathMLNamespaceContext>& context)
   : MathMLElement(context)
@@ -105,6 +106,7 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
 #endif
 
   AreaRef res;
+  std::cout << "current size: [MathMLTokenElement]: " << c.size() << std::endl;
   if (c.size() == 0) res = ctxt.MGD()->dummy(ctxt);
   else if (c.size() == 1) res = c[0];
   else res = ctxt.MGD()->getFactory()->horizontalArray(c);

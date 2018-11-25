@@ -59,6 +59,7 @@ public:
   virtual AreaRef format(class FormattingContext&);
 
   virtual void setDirtyStructure(void);
+  virtual void setContentSet(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -68,6 +69,7 @@ public:
   bool dirtyAttribute(void) const { return getFlag(FDirtyAttribute) || getFlag(FDirtyAttributeD); }
   bool dirtyAttributeP(void) const { return getFlag(FDirtyAttributeP); }
   bool dirtyAttributeD(void) const { return getFlag(FDirtyAttributeD); }
+  bool contentSet(void) const { return getFlag(FContentSet); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -79,7 +81,8 @@ public:
     FDirtyAttributeP, // an attribute was modified in a descendant
     FDirtyAttributeD, // an attribute was modified and must set dirtyAttribute on all descendants
     FDirtyLayout,     // need to layout
-
+    FContentSet,
+    
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };
 
@@ -91,12 +94,13 @@ public:
   virtual void resetFlagDown(Flags);
   bool getFlag(Flags f) const { return flags.test(f); }
 
+  WeakPtr<class NamespaceContext> context; // todo return to private
 private:
-  WeakPtr<class NamespaceContext> context;
   WeakPtr<Element> parent;
   std::bitset<FUnusedFlag> flags;
   SmartPtr<class AttributeSet> attributes;
   AreaRef area;
+  
 };
 
 #endif // __Element_hh__

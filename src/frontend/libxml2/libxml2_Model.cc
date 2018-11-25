@@ -31,6 +31,7 @@
 #include <iostream>
 #include <libxml/parserInternals.h>
 #include <string.h>
+#include <iostream>
 
 static xmlEntity*
 entity_resolver(void* ctxt, const xmlChar *name) {
@@ -152,6 +153,17 @@ libxml2_Model::getNodeValue(const Node& n)
     }
   else
     return String();
+}
+
+void
+libxml2_Model::setNodeValue(const Node& n, const String& str)
+{
+    assert(n);
+    if (const xmlChar *res = toModelString(str))
+    {
+        std::cout << "[libxml2_Model::setNodeValue]: setting value to xmlnode: " << str << std::endl;
+        xmlNodeSetContent(n, res);
+    }
 }
 
 String

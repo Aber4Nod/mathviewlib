@@ -1,5 +1,5 @@
 # This is a comment
-prefix=/Users/n.mikhnenko/libmathview/build/../install
+prefix=/Users/n.mikhnenko/mathviewlib/build/../install
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

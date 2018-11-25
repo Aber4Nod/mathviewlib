@@ -30,6 +30,7 @@
 #include "AttributeSignature.hh"
 #include "AttributeSet.hh"
 #include "NamespaceContext.hh"
+#include <iostream>
 
 Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
 {
@@ -37,10 +38,12 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   setDirtyStructure();
   setDirtyAttribute();
   setDirtyLayout();
+  resetFlag(FContentSet);
 }
 
 Element::~Element()
 {
+    std::cout << "[~Element]: in destructor Element" << std::endl;
   context->getView()->getBuilder()->forgetElement(this);
 }
 
@@ -128,6 +131,13 @@ Element::setDirtyStructure()
       setFlag(FDirtyStructure);
       setFlagUp(FDirtyStructure);
     }
+}
+
+void
+Element::setContentSet()
+{
+  if (!(contentSet()))
+      setFlag(FContentSet);
 }
 
 void

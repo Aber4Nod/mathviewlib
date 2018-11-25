@@ -50,7 +50,7 @@ void Qt_RenderArea::loadURI(const char* mml_file) {
     m_view->loadURI(mml_file);
     qDebug() << "Getting bounding box!";
     const BoundingBox box = m_view->getBoundingBox();
-    qDebug() << "Got bounding box!";
+    qDebug() << "Got bounding box123!";
     qreal width = Qt_RenderingContext::toQtPixels(box.horizontalExtent());
     qreal height = Qt_RenderingContext::toQtPixels(box.verticalExtent());
     //qDebug() << width << height;
@@ -63,19 +63,34 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
 
     m_rc.setPainter(&painter);
     static int32_t i = 0;
-    m_view->render(m_rc, scaled::zero(), -m_view->getBoundingBox().height);
-    if (i++ < 1)
+    if (i++ < 2)
     {
-        qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
-        qDebug() << "got parent area: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent();
-        qDebug() << "got parent parent area: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent(); // getNode();
-        qDebug() << "got node: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode();
-        m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
-        m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
-        m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+        // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
+        // qDebug() << "got parent area: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent();
+        // qDebug() << "got parent parent area: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent(); // getNode();
+        // qDebug() << "got node: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode();
+        // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+        // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
+        // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
         
-        qDebug() << "starting reformat";
-        const BoundingBox box = m_view->getBoundingBox();
-        qDebug() << "ended reformat";    
+        if (i == 1)
+        {
+            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
+            qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
+            qDebug() << "starting reformat";
+            const BoundingBox box = m_view->getBoundingBox();
+            qDebug() << "ended reformat";    
+        }
+        else
+        {
+            // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
+            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteContent();
+            // qDebug() << "starting reformat";
+            // const BoundingBox box = m_view->getBoundingBox();
+            // qDebug() << "ended reformat";    
+            // qDebug() << "got glyph area2: " << m_view->getAreaAt(41,10)->getGlyphArea();
+        }
     }
+    qDebug() << "got glyph area3: " << m_view->getAreaAt(41,10)->getGlyphArea();
+    m_view->render(m_rc, scaled::zero(), -m_view->getBoundingBox().height);
 }

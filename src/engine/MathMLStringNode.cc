@@ -52,9 +52,16 @@ MathMLStringNode::format(FormattingContext& ctxt)
     // todo go threw area and set this node to them
     AreaRef cont = ctxt.MGD()->string(ctxt, content);
     SmartPtr<const HorizontalArrayArea> harea = smart_cast<const HorizontalArrayArea>(cont);
+    if (harea != nullptr)
+        harea->setNode(this);
+    // else
+    // {
+        // cont = ctxt.MGD()->dummy(ctxt); // make this dumm clever one and know his parent (right now there is arearef that if there and dummy is just what we see)
+        // harea->setNode(this);
+    // }
+
     std::cout << "this harea: " << harea << std::endl;
-    harea->setNode(this);
-    return harea; 
+    return cont; 
 }
 
 unsigned
@@ -83,7 +90,24 @@ MathMLStringNode::LookUpContent() const
 void
 MathMLStringNode::ClearContent()
 {
-    content.push_back('7');
+    // content.push_back('1');
     // content.clear();
+    content = "к";
     getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setContentSet();
+    getParentElement()->setDirtyAttribute();
+}
+
+void
+MathMLStringNode::DeleteContent()
+{
+    // content = "к";
+    // content.clear();
+    // std::cout << "setting dirty structure for parent element: " << getParentElement() << std::endl;
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    // getParentElement()->setContentSet();
+    getParentElement()->setDirtyAttribute();
+    // delete getParentElement();
 }
