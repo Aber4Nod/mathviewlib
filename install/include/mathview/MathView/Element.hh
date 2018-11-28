@@ -100,7 +100,8 @@ private:
   std::bitset<FUnusedFlag> flags;
   SmartPtr<class AttributeSet> attributes;
   AreaRef area;
-  
+// friend class TemplateBuilder;
+// friend class ElementBuilder;
 };
 
 #endif // __Element_hh__

@@ -97,6 +97,7 @@ MathMLStringNode::ClearContent()
     getParentElement()->setDirtyStructure();
     getParentElement()->setContentSet();
     getParentElement()->setDirtyAttribute();
+    // delete getParentElement();
 }
 
 void

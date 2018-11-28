@@ -166,6 +166,20 @@ libxml2_Model::setNodeValue(const Node& n, const String& str)
     }
 }
 
+void
+libxml2_Model::unlinkNode(const Node& n)
+{
+    assert(n);
+    xmlUnlinkNode(n);
+}
+
+void 
+libxml2_Model::freeNode(const Node& n)
+{
+    assert(n);
+    xmlFreeNode(n);
+}
+
 String
 libxml2_Model::getElementValue(const Element& el)
 { return getNodeValue(asNode(el)); }

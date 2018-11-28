@@ -85,6 +85,8 @@ struct libxml2_Model
   static const xmlChar* toModelString(const String& str) { return BAD_CAST(str.c_str()); }
 
   static void setNodeValue(const Node& n, const String& str);
+  static void unlinkNode(const Node& n);
+  static void freeNode(const Node& n);
 
   // MUST be available if the default linker is used
   struct Hash

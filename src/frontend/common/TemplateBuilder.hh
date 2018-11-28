@@ -970,7 +970,7 @@ protected:
   {
     if (el)
       {
-	std::cout << "createMathMLElement " << Model::getNodeName(Model::asNode(el)) << std::endl;
+	std::cout << "createMathMLElement " << Model::getNodeName(Model::asNode(el)) << std::endl; // todo if we need to delete element -> return -1 and then check this value (or just check flag of it and not push back to content)
 	typename MathMLBuilderMap::const_iterator m = mathmlMap.find(Model::getNodeName(Model::asNode(el))); // creating node
 	if (m != mathmlMap.end()) 
 	  {
@@ -997,9 +997,20 @@ protected:
   void
   getChildMathMLElements(const typename Model::Element& el, std::vector<SmartPtr<MathMLElement> >& content) const
   {
+      std::cout << "[getChildMathMLElements]: getting child elements" << std::endl;
     content.clear();
-    for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next())
-      content.push_back(getMathMLElement(iter.element()));
+    for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
+        SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+        if (!_elem->contentSet())
+        {
+            content.push_back(_elem);
+        }
+        else
+        {
+            // Model::unlinkNode(Model::asNode(iter.element()));
+            // Model::freeNode(Model::asNode(iter.element()));
+        }
+    }
   }
 
   void
@@ -1021,20 +1032,34 @@ protected:
           String s;
           if (elem->contentSet())
           {
-              std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
-              Model::setNodeValue(n, elem->GetRawContent());
-              elem->resetFlag(MathMLElement::FContentSet);
+              Model::unlinkNode(n);  
+              Model::freeNode(n);
+              forgetElement(elem);
+              // delete elem;
           }
-	      s = collapseSpaces(Model::getNodeValue(n));
-	      iter.next();
+         
+          // ------------- block fot changing node content
+          
+          // if (elem->contentSet())
+          // {
+          //     std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
+          //     Model::setNodeValue(n, elem->GetRawContent());
+          //     elem->resetFlag(MathMLElement::FContentSet);
+          // }
+          // -------------
+          iter.next();
+          if (!elem->contentSet()) {
+    	      s = collapseSpaces(Model::getNodeValue(n));
+    	      
 
-	      // ...but spaces at the at the beginning (end) are deleted only if this
-	      // is the very first (last) chunk in the token.
-	      if (first) s = trimSpacesLeft(s);
-	      if (!iter.more()) s = trimSpacesRight(s);
+    	      // ...but spaces at the at the beginning (end) are deleted only if this
+    	      // is the very first (last) chunk in the token.
+    	      if (first) s = trimSpacesLeft(s);
+    	      if (!iter.more()) s = trimSpacesRight(s);
 
-          std::cout << "[getChildMathMLTextNodes]: pushing back textnode: " << s << std::endl;
-	      content.push_back(createMathMLTextNode(s));
+              std::cout << "[getChildMathMLTextNodes]: pushing back textnode: " << s << std::endl;
+    	      content.push_back(createMathMLTextNode(s));
+          }
 	    }
 	    break;
       

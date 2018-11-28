@@ -76,21 +76,21 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
         if (i == 1)
         {
             m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
-            qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
-            qDebug() << "starting reformat";
-            const BoundingBox box = m_view->getBoundingBox();
-            qDebug() << "ended reformat";    
+            // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
+            // qDebug() << "starting reformat";
+            // const BoundingBox box = m_view->getBoundingBox();
+            // qDebug() << "ended reformat";    
         }
         else
         {
             // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
-            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteContent();
+            // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteContent();
             // qDebug() << "starting reformat";
             // const BoundingBox box = m_view->getBoundingBox();
             // qDebug() << "ended reformat";    
             // qDebug() << "got glyph area2: " << m_view->getAreaAt(41,10)->getGlyphArea();
         }
     }
-    qDebug() << "got glyph area3: " << m_view->getAreaAt(41,10)->getGlyphArea();
+    // qDebug() << "got glyph area3: " << m_view->getAreaAt(41,10)->getGlyphArea();
     m_view->render(m_rc, scaled::zero(), -m_view->getBoundingBox().height);
 }

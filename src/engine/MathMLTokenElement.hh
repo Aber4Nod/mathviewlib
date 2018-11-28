@@ -70,7 +70,6 @@ protected:
   AreaRef formatAux(class FormattingContext&);
   
   void AddItalicCorrection(void);
-
 };
 
 #endif // __MathMLTokenElement_hh__
