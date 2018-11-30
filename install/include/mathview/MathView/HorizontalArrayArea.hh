@@ -56,6 +56,8 @@ public:
   
   void setParent(SmartPtr<HorizontalArrayArea> _parent) const { parent = _parent; };
   SmartPtr<HorizontalArrayArea> getParent() const { return parent; };
+  
+  uint32_t getIndexOfChild(AreaRef) const;
 
 private:
   mutable MathMLStringNode *node;

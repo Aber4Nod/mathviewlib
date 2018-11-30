@@ -114,6 +114,7 @@ MathShaper::shape(ShapingContext& context) const
 
       areaV.push_back(glyphArea);
     }
+    
   SmartPtr<HorizontalArrayArea> harea = factory->horizontalArray(areaV);
   std::cout << "[MathShaper::shape]: pushing to harea: " << harea << std::endl;
   for (const auto & elem : areaV)

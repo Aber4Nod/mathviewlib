@@ -115,6 +115,22 @@ HorizontalArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y
   return nullptr;
 }
 
+uint32_t
+HorizontalArrayArea::getIndexOfChild(AreaRef area) const
+{
+    auto it = std::find(content.begin(), content.end(), area);
+    if (it == content.end())
+    {
+        std::cout << "[HorizontalArrayArea::getIndexOfChild]: area " << area << " not found in content" << std::endl;
+        return 0;
+    }
+    else
+    {
+        std::cout << "[HorizontalArrayArea::getIndexOfChild]: area was found, index: " << std::distance(content.begin(), it) << std::endl;
+        return std::distance(content.begin(), it);
+    }
+}
+
 scaled
 HorizontalArrayArea::leftEdge() const
 {

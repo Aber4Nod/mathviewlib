@@ -112,3 +112,57 @@ MathMLStringNode::DeleteContent()
     getParentElement()->setDirtyAttribute();
     // delete getParentElement();
 }
+
+void
+MathMLStringNode::DeleteGlyph(uint32_t index)
+{
+    std::cout << "[MathMLStringNode::DeleteGlyph]: got index: " << index << std::endl;
+    if (index >= content.length())
+        return;
+    content.erase(index);
+    std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setContentSet();
+}
+
+void
+MathMLStringNode::InsertGlyphAfter(uint32_t index, char glyph)
+{
+    std::cout << "[MathMLStringNode::InsertGlyphAfter]: got index: " << index << std::endl;
+    if (index == 0)
+        content.push_back(glyph);
+    else
+    if (index >= content.length())
+    {
+        std::cout << "[MathMLStringNode::InsertGlyphAfter]: index exceeded number of glyphes, pushing back: " << std::endl;
+        content.push_back(glyph);
+    }
+    else
+        content.insert(index + 1, 1, glyph);
+    std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setContentSet();
+}
+
+void
+MathMLStringNode::InsertGlyphBefore(uint32_t index, char glyph)
+{
+    std::cout << "[MathMLStringNode::InsertGlyphBefore]: got index: " << index << std::endl;
+    if (index == 0)
+        content.insert(index, 1, glyph);
+    else
+    if (index >= content.length())
+    {
+        std::cout << "[MathMLStringNode::InsertGlyphAfter]: index exceeded number of glyphes, pushing back: " << std::endl;
+        content.push_back(glyph);
+    }
+    else
+        content.insert(index - 1, 1, glyph);
+    std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setContentSet();
+}
+

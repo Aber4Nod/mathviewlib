@@ -97,6 +97,7 @@ View::formatElement(const SmartPtr<Element>& elem) const
 
   if (elem->dirtyLayout())
     {
+        std::cout << "its dirty!" << std::endl;
       const SmartPtr<MathGraphicDevice> mgd = mathmlContext ? mathmlContext->getGraphicDevice() : nullptr;
       assert(mgd != nullptr);
       FormattingContext ctxt(mgd);

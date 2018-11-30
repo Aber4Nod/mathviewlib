@@ -44,6 +44,10 @@ public:
   virtual void     ClearContent();
   virtual void     DeleteContent();
   
+  void DeleteGlyph(uint32_t index);
+  void InsertGlyphAfter(uint32_t index, char glyph);
+  void InsertGlyphBefore(uint32_t index, char glyph);
+  
 private:
     // setDirtyLayout
   String content;

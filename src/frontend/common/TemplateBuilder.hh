@@ -363,6 +363,7 @@ protected:
       // }
       builder.getChildMathMLTextNodes(el, content, elem);
       elem->swapContent(content); // should normalize spaces etc.
+      std::cout << "[MathMLTokenElementBuilder:construct]: element: " << elem << " current length of contents: " << elem->getContentSize() << std::endl;
     }
   };
 
@@ -1001,15 +1002,16 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
-        if (!_elem->contentSet())
-        {
+        // if (!_elem->contentSet())
+        // {
             content.push_back(_elem);
-        }
-        else
-        {
+        // }
+
+        // else
+        // {
             // Model::unlinkNode(Model::asNode(iter.element()));
             // Model::freeNode(Model::asNode(iter.element()));
-        }
+        // }
     }
   }
 
@@ -1030,25 +1032,25 @@ protected:
 	    {
 	      // ok, we have a chunk of text
           String s;
-          if (elem->contentSet())
-          {
-              Model::unlinkNode(n);  
-              Model::freeNode(n);
-              forgetElement(elem);
+          // if (elem->contentSet())
+          // {
+              // Model::unlinkNode(n);  
+              // Model::freeNode(n);
+              // forgetElement(elem);
               // delete elem;
-          }
+          // }
          
           // ------------- block fot changing node content
           
-          // if (elem->contentSet())
-          // {
-          //     std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
-          //     Model::setNodeValue(n, elem->GetRawContent());
-          //     elem->resetFlag(MathMLElement::FContentSet);
-          // }
+          if (elem->contentSet())
+          {
+              std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
+              Model::setNodeValue(n, elem->GetRawContent());
+              elem->resetFlag(MathMLElement::FContentSet);
+          }
           // -------------
           iter.next();
-          if (!elem->contentSet()) {
+          // if (!elem->contentSet()) {
     	      s = collapseSpaces(Model::getNodeValue(n));
     	      
 
@@ -1057,9 +1059,9 @@ protected:
     	      if (first) s = trimSpacesLeft(s);
     	      if (!iter.more()) s = trimSpacesRight(s);
 
-              std::cout << "[getChildMathMLTextNodes]: pushing back textnode: " << s << std::endl;
     	      content.push_back(createMathMLTextNode(s));
-          }
+              std::cout << "[getChildMathMLTextNodes]: pushing back textnode: " << s << "current size: " << content.size() << std::endl;
+          // }
 	    }
 	    break;
       

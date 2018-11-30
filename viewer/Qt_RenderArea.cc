@@ -73,9 +73,16 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
         // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
         // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
         
-        if (i == 1)
+        if (i == 2)
         {
-            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
+            uint32_t index = m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(41,10)->getGlyphArea());
+            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteGlyph(index);
+            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+            qDebug() << "[Qt_RenderArea::paintEvent]: got index: " << index;
+            qDebug() << "node address: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode();
+            
+            // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->ClearContent();
+            
             // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
             // qDebug() << "starting reformat";
             // const BoundingBox box = m_view->getBoundingBox();
@@ -83,6 +90,13 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
         }
         else
         {
+            uint32_t index = m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(41,10)->getGlyphArea());
+            // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphAfter(index, 'k');
+            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphBefore(index, 'k');
+            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+            qDebug() << "[Qt_RenderArea::paintEvent]: got index2: " << index;
+            // qDebug() << "node address: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode();
+
             // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
             // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteContent();
             // qDebug() << "starting reformat";

@@ -83,6 +83,7 @@ public:
 	    if (*p) T::setParent(*p, elem);
 	
 	content.swap(newContent);
+    // newContent.clear(); // testing
 	elem->setDirtyLayout();
       }
   }

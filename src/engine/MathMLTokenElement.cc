@@ -206,3 +206,18 @@ MathMLTokenElement::getContentLength() const
 { 
   return UCS4StringOfString(GetRawContent()).length();
 }
+
+uint32_t
+MathMLTokenElement::getContentSize() const
+{
+    // todo must be accumulate!
+    uint32_t size = 0;
+    for (const auto & elem : content)
+    {
+        assert(elem);
+        std::cout << "[MathMLTokenElement::getContentSize]: child: " << elem << std::endl;
+        size += 1;
+    }
+    
+    return size;
+}
