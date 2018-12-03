@@ -185,14 +185,16 @@ MathGraphicDevice::unstretchedString(const FormattingContext& context, const Str
   CachedShapedStringKey key(str, context.getVariant(), context.getSize());
 
   std::pair<ShapedStringCache::iterator, bool> r = stringCache.insert(std::make_pair(key, AreaRef(nullptr)));
-  if (r.second)
-    {
+  // if (r.second)
+    // {
         std::cout << "[MathGraphicDevice]::unstretchedString // beginning to shape via ShaperManager, str = " << str << std::endl;
       r.first->second = getShaperManager()->shape(context, str);
       return r.first->second;
-    }
-  else
-    return r.first->second;
+    // }
+  // else {
+      // std::cout << "[MathGraphicDevice]::unstretchedString // str already exists, restore: str = " << str << std::endl;
+      // return r.first->second;
+  // }
 }
 
 AreaRef
