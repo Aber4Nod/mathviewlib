@@ -63,7 +63,10 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
 
     m_rc.setPainter(&painter);
     static int32_t i = 0;
-    if (i++ < 2)
+    // qDebug() << "got glyph area3: " << m_view->getAreaAt(41,10)->getGlyphArea();
+    m_view->render(m_rc, scaled::zero(), -m_view->getBoundingBox().height);
+    
+    if (i++ < 0)
     {
         // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
         // qDebug() << "got parent area: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent();
@@ -90,11 +93,25 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
         }
         else
         {
-            uint32_t index = m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(41,10)->getGlyphArea());
+            // uint32_t index = m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(41,10)->getGlyphArea());
             // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphAfter(index, 'k');
-            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphBefore(index, 'k');
-            m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
-            qDebug() << "[Qt_RenderArea::paintEvent]: got index2: " << index;
+            // m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphBefore(index, 'k');
+            // m_view->getAreaAt(12,5)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+
+            if (m_view->getAreaAt(22,23) != nullptr) {
+                uint32_t index = m_view->getAreaAt(22,23)->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(22,23)->getGlyphArea());
+                // qDebug() << "index: " << index;
+                // m_view->getAreaAt(13,23)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteGlyph(index);
+                // m_view->getAreaAt(13,23)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+                m_view->getAreaAt(22,23)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+                m_view->getAreaAt(22,23)->getGlyphArea()->getParent()->getParent()->getNode()->DeleteGlyph(index);
+                m_view->render(m_rc, scaled::zero(), -m_view->getBoundingBox().height);
+                m_view->getAreaAt(14,23)->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+            }
+            else
+                qDebug() << "nullptr!";
+
+            // qDebug() << "[Qt_RenderArea::paintEvent]: got index2: " << index;
             // qDebug() << "node address: " << m_view->getAreaAt(41,10)->getGlyphArea()->getParent()->getParent()->getNode();
 
             // qDebug() << "got glyph area: " << m_view->getAreaAt(41,10)->getGlyphArea();
@@ -105,6 +122,21 @@ void Qt_RenderArea::paintEvent(QPaintEvent *event) {
             // qDebug() << "got glyph area2: " << m_view->getAreaAt(41,10)->getGlyphArea();
         }
     }
-    // qDebug() << "got glyph area3: " << m_view->getAreaAt(41,10)->getGlyphArea();
-    m_view->render(m_rc, scaled::zero(), -m_view->getBoundingBox().height);
+
 }
+
+void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        QPointF pos = event->pos();
+        qDebug() << "[Qt_RenderArea::mousePressEvent]: pressed on pos: " << pos;
+        if (m_view->getAreaAt(pos.x(),pos.y()))
+        {
+            uint32_t index = m_view->getAreaAt(pos.x(),pos.y())->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(pos.x(),pos.y())->getGlyphArea());
+            m_view->getAreaAt(pos.x(),pos.y())->getGlyphArea()->getParent()->getParent()->getNode()->DeleteGlyph(index);
+            repaint();
+        }
+    }
+}
+

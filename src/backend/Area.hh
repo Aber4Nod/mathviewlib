@@ -56,6 +56,7 @@ public:
 
   virtual bool searchByArea(class AreaId&, const AreaRef&) const = 0;
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const = 0;
+  virtual AreaRef searchByCoordsSimple(const scaled&, const scaled&) const = 0;
   virtual bool searchByIndex(class AreaId&, CharIndex) const = 0;
   virtual AreaRef flatten(void) const { return this; }
 

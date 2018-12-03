@@ -56,6 +56,7 @@ public:
 
   virtual bool searchByArea(class AreaId&, const AreaRef&) const;
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
+  virtual AreaRef searchByCoordsSimple(const scaled& x, const scaled& y) const;
   virtual bool searchByIndex(class AreaId&, CharIndex) const;
 
   virtual bool indexOfPosition(const scaled&, const scaled&, CharIndex&) const;

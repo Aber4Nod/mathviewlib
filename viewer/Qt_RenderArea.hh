@@ -35,6 +35,7 @@
 
 #include <QWidget>
 #include <QSize>
+#include <QMouseEvent>
 
 typedef libxml2_MathView MathView;
 
@@ -49,6 +50,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     SmartPtr<Backend> m_backend;

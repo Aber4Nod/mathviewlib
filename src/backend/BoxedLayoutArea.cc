@@ -56,6 +56,18 @@ BoxedLayoutArea::searchByArea(AreaId& id, const AreaRef& area) const
 }
 
 AreaRef
+BoxedLayoutArea::searchByCoordsSimple(const scaled& x0, const scaled& y0) const
+{
+    for (const auto& elem : content)
+    {
+        AreaRef area = elem.area->searchByCoordsSimple(x0 + elem.dx, y0 + elem.dy);
+        if (area)
+            return area;
+    }
+    return nullptr;
+}
+
+AreaRef
 BoxedLayoutArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
 {
   // See OverlapArrayArea for the reason why the search must be done

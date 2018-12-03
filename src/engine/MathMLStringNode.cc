@@ -119,7 +119,7 @@ MathMLStringNode::DeleteGlyph(uint32_t index)
     std::cout << "[MathMLStringNode::DeleteGlyph]: got index: " << index << std::endl;
     if (index >= content.length())
         return;
-    content.erase(index);
+    content.erase(index, 1);
     std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
     getParentElement()->setDirtyLayout();
     getParentElement()->setDirtyStructure();

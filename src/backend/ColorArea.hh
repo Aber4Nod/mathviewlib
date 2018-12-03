@@ -37,6 +37,7 @@ public:
   virtual AreaRef clone(const AreaRef&) const;
 
   void render(RenderingContext&, const scaled&, const scaled&) const;
+  AreaRef searchByCoordsSimple(const scaled&, const scaled&) const;
 
   RGBColor getColor(void) const { return color; }
 

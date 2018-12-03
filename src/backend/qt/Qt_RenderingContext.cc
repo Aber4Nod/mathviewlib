@@ -59,9 +59,9 @@ Qt_RenderingContext::draw(const scaled& x, const scaled& y, const QGlyphRun& gly
     RGBColor fg = getForegroundColor();
     m_painter->setPen(QColor(fg.red, fg.green, fg.blue, fg.alpha));
     m_painter->drawGlyphRun(QPointF(toQtX(x), toQtY(y)), glyphs);
-    // qDebug() << "glyph " << glyphs.glyphIndexes()[0] << "\n"
-            // << "x: " << toQtX(x) << "\ty: " << toQtY(y)
-            // << "QRectF: " << glyphs.boundingRect()
+    qDebug() << "glyph " << glyphs.glyphIndexes()[0]
+            << "point " << (QPointF(toQtX(x), toQtY(y)))
+            << "QRectF: " << glyphs.boundingRect();
             // << "Size: " << glyphs.rawFont().pixelSize();
 
     m_painter->restore();

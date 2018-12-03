@@ -47,6 +47,7 @@ public:
   virtual scaled getStep(void) const;
 
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
+  virtual AreaRef searchByCoordsSimple(const scaled& x0, const scaled& y0) const;
 
   scaled leftSide(AreaIndex) const;
   scaled rightSide(AreaIndex) const;

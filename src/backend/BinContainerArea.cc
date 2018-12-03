@@ -39,6 +39,15 @@ BinContainerArea::render(class RenderingContext& context, const scaled& x, const
   child->render(context, x, y);
 }
 
+AreaRef
+BinContainerArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+    AreaRef area = child->searchByCoordsSimple(x, y);
+    if (area)
+        return area;
+    return nullptr;
+}
+
 scaled
 BinContainerArea::leftEdge() const
 {

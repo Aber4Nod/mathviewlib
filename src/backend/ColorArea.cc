@@ -44,3 +44,12 @@ ColorArea::render(RenderingContext& context, const scaled& x, const scaled& y) c
   else
     getChild()->render(context, x, y);
 }
+
+AreaRef
+ColorArea::searchByCoordsSimple(const scaled& x0, const scaled& y0) const
+{
+    AreaRef area = getChild()->searchByCoordsSimple(x0, y0);
+    if (area)
+        return area;
+    return nullptr;
+}

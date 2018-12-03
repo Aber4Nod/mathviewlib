@@ -120,6 +120,20 @@ VerticalArrayArea::render(class RenderingContext& context, const scaled& x, cons
     }  
 }
 
+AreaRef
+VerticalArrayArea::searchByCoordsSimple(const scaled& x, const scaled& y0) const
+{
+    AreaRef area;
+    for (auto p = content.begin(); p != content.end(); p++)
+      {
+        const AreaIndex i = p - content.begin();
+        area = (*p)->searchByCoordsSimple(x, y0);
+        if (area)
+            return area;
+      }
+      return nullptr;
+}
+
 void
 VerticalArrayArea::strength(int& w, int& h, int& d) const
 {

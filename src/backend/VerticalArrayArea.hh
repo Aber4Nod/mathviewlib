@@ -49,6 +49,7 @@ public:
   AreaIndex getRefArea(void) const { return refArea; }
 
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
+  virtual AreaRef searchByCoordsSimple(const scaled& x, const scaled& y0) const;
   virtual bool searchByIndex(class AreaId&, CharIndex) const;
 
 protected:

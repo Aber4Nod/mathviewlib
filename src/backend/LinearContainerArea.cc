@@ -32,6 +32,17 @@ LinearContainerArea::render(class RenderingContext& context, const scaled& x, co
     elem->render(context, x, y);
 }
 
+AreaRef
+LinearContainerArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+    for (const auto & elem : content) {
+      AreaRef area = elem->searchByCoordsSimple(x, y);
+      if (area)
+        return area;
+    }
+    return nullptr;
+}
+
 bool
 LinearContainerArea::searchByArea(AreaId& id, const AreaRef& area) const
 {

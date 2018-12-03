@@ -80,6 +80,15 @@ WrapperArea::render(RenderingContext& context, const scaled& x, const scaled& y)
   context.setStyle(old_style);
 }
 
+AreaRef
+WrapperArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+    AreaRef area = getChild()->searchByCoordsSimple(x, y);
+    if (area)
+        return area;
+    return nullptr;
+}
+
 SmartPtr<Element>
 WrapperArea::getElement() const
 { return static_cast<Element*>(element); }

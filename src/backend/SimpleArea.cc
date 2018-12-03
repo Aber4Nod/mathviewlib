@@ -54,6 +54,14 @@ SimpleArea::searchByCoords(AreaId&, const scaled& x, const scaled& y) const
     return nullptr;
 }
 
+AreaRef
+SimpleArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+    if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y))
+        return this; 
+    return nullptr;
+}
+
 bool
 SimpleArea::searchByIndex(AreaId&, CharIndex index) const
 { return false; }

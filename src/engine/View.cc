@@ -162,8 +162,9 @@ View::getAreaAt(const scaled& x, const scaled& y) const
   if (AreaRef rootArea = getRootArea())
     {
       std::cout << "[getAreaAt]: current root area: " << rootArea << std::endl;
-      AreaId deepId(rootArea);
-      return rootArea->searchByCoords(deepId, x, y); // log it
+      return rootArea->searchByCoordsSimple(x, y); // log it
+      // AreaId deepId(rootArea);
+      // return rootArea->searchByCoords(deepId, x, y); // log it
     }
   return nullptr;
 }

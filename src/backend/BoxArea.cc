@@ -63,3 +63,18 @@ BoxArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
   else
     return nullptr;
 }
+
+AreaRef
+BoxArea::searchByCoordsSimple(const scaled& x0, const scaled& y0) const
+{
+    if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x0, y0))
+    {
+        AreaRef s_area = BinContainerArea::searchByCoordsSimple(x0, y0);
+        if (s_area)
+           return s_area;
+        return s_area;
+    }
+    else
+        return nullptr;
+}
+

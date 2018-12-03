@@ -328,6 +328,17 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qcursor.h \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qkeysequence.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/QSize \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/QMouseEvent \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qevent.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qcoreevent.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qvariant.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qmap.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qset.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qurl.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qfile.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qfiledevice.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qvector2d.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qtouchdevice.h \
   ../../src/backend/qt/Qt_GlyphArea.hh ../../src/backend/GlyphArea.hh \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/QGlyphRun \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qglyphrun.h \
@@ -338,11 +349,8 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qpen.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/QDebug \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qdebug.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qmap.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qtextstream.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qlocale.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qvariant.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qset.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontiguouscache.h
 
 ../../viewer/Qt_RenderArea.hh:
@@ -1185,6 +1193,28 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/QSize:
 
+/usr/local/Cellar/qt/5.11.2/include/QtGui/QMouseEvent:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qevent.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qcoreevent.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qvariant.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qmap.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qset.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qurl.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qfile.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qfiledevice.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qvector2d.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qtouchdevice.h:
+
 ../../src/backend/qt/Qt_GlyphArea.hh:
 
 ../../src/backend/GlyphArea.hh:
@@ -1207,14 +1237,8 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qdebug.h:
 
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qmap.h:
-
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qtextstream.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qlocale.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qvariant.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qset.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontiguouscache.h:

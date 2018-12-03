@@ -77,6 +77,14 @@ GlyphWrapperArea::searchByCoords(AreaId&, const scaled& x, const scaled& y) cons
     return nullptr;
 }
 
+AreaRef
+GlyphWrapperArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+    if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x,y))
+        return this;
+    return nullptr;
+}
+
 bool
 GlyphWrapperArea::searchByIndex(AreaId&, CharIndex index) const
 { return index >= 0 && index < contentLength; }

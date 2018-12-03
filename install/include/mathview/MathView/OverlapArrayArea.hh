@@ -42,6 +42,7 @@ public:
   virtual void origin(AreaIndex, struct Point&) const;
 
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
+  virtual AreaRef searchByCoordsSimple(const scaled&, const scaled&) const;
 
 private:
   static void flattenAux(std::vector<AreaRef>&, const std::vector<AreaRef>&);  

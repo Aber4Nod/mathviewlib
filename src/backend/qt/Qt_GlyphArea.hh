@@ -48,7 +48,9 @@ public:
     virtual scaled leftEdge() const;
     virtual scaled rightEdge() const;
     virtual void render(RenderingContext&, const scaled&, const scaled&) const;
+    virtual AreaRef searchByCoordsSimple(const scaled&, const scaled&) const;
 
+    mutable double x_coord, y_coord;
     QGlyphRun m_glyphRun;
     QRawFont m_rawFont;
 private:

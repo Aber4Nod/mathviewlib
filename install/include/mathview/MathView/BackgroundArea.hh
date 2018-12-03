@@ -37,6 +37,7 @@ public:
   AreaRef clone(const AreaRef& area) const { return create(area, getColor()); }
 
   void render(RenderingContext&, const scaled&, const scaled&) const;
+  AreaRef searchByCoordsSimple(const scaled&, const scaled&) const;
 };
 
 #endif // __BackgroundArea_hh__

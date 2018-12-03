@@ -52,6 +52,7 @@ public:
 
   virtual bool searchByArea(class AreaId&, const AreaRef&) const;
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
+  virtual AreaRef searchByCoordsSimple(const scaled& x0, const scaled& y0) const;
   virtual bool searchByIndex(class AreaId&, CharIndex) const;
 
   virtual SmartPtr<const class GlyphStringArea> getGlyphStringArea(void) const;  

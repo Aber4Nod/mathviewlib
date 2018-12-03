@@ -108,6 +108,17 @@ OverlapArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) c
   return nullptr;
 }
 
+AreaRef
+OverlapArrayArea::searchByCoordsSimple(const scaled& x0, const scaled& y0) const
+{
+    for (auto p = content.rbegin(); p != content.rend(); p++)
+      {
+        AreaRef s_area = (*p)->searchByCoordsSimple(x0, y0);
+        if (s_area) return s_area;
+      }
+    return nullptr;
+}
+
 void
 OverlapArrayArea::origin(AreaIndex i, struct Point&) const
 {

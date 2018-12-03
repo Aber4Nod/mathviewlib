@@ -40,6 +40,7 @@ public:
   virtual void strength(int&, int&, int&) const;
 
   virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
+  virtual AreaRef searchByCoordsSimple(const scaled& x0, const scaled& y0) const;
 
 private:
   BoundingBox bbox;

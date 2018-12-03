@@ -52,6 +52,15 @@ ShiftArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
   return nullptr;
 }
 
+AreaRef
+ShiftArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+    AreaRef area = getChild()->searchByCoordsSimple(x, y); // what is shift
+    if (area)
+        return area;
+    return nullptr;
+}
+
 void
 ShiftArea::origin(AreaIndex i, Point& p) const
 {

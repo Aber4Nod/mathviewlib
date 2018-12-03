@@ -45,3 +45,12 @@ BackgroundArea::render(RenderingContext& context, const scaled& x, const scaled&
   else
     getChild()->render(context, x, y);
 }
+
+AreaRef
+BackgroundArea::searchByCoordsSimple(const scaled& x0, const scaled& y0) const
+{
+    AreaRef area = getChild()->searchByCoordsSimple(x0, y0);
+    if (area)
+        return area;
+    return nullptr;
+}

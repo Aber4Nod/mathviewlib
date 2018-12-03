@@ -59,6 +59,21 @@ CombinedGlyphArea::render(class RenderingContext& rCxtx, const scaled& x, const 
   base->render(rCxtx, x, y);
 }
 
+AreaRef
+CombinedGlyphArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
+{
+	AreaRef area;
+	if (accent)
+		area = accent->searchByCoordsSimple(x, y);
+	if (under)
+		area = under->searchByCoordsSimple(x, y);
+	if (base)
+		area = base->searchByCoordsSimple(x, y);
+	if (area)
+		return area;
+    return nullptr;
+}
+
 AreaRef 
 CombinedGlyphArea::fit(const scaled& width, const scaled& height, const scaled& depth) const
 {

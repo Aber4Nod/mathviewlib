@@ -326,7 +326,18 @@ moc_Qt_RenderArea.o: moc_Qt_RenderArea.cc ../../viewer/Qt_RenderArea.hh \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qsizepolicy.h \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qcursor.h \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qkeysequence.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/QSize
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/QSize \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/QMouseEvent \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qevent.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qcoreevent.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qvariant.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qmap.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qset.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qurl.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qfile.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qfiledevice.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qvector2d.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qtouchdevice.h
 
 ../../viewer/Qt_RenderArea.hh:
 
@@ -1167,3 +1178,25 @@ moc_Qt_RenderArea.o: moc_Qt_RenderArea.cc ../../viewer/Qt_RenderArea.hh \
 /usr/local/Cellar/qt/5.11.2/include/QtGui/qkeysequence.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/QSize:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/QMouseEvent:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qevent.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qcoreevent.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qvariant.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qmap.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qset.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qurl.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qfile.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qfiledevice.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qvector2d.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qtouchdevice.h:

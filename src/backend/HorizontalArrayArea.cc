@@ -93,18 +93,31 @@ HorizontalArrayArea::render(class RenderingContext& context, const scaled& x0, c
 }
 
 AreaRef
+HorizontalArrayArea::searchByCoordsSimple(const scaled& x0, const scaled& y0) const
+{
+    scaled x = x0;
+    scaled y = y0;
+    for (const auto & elem : content)
+    {
+        AreaRef area = elem->searchByCoordsSimple(x0, y0);
+        if (area)
+            return area;
+        // x += elem->box().horizontalExtent();
+        // y += elem->getStep();
+    }
+    return nullptr;
+}
+
+AreaRef
 HorizontalArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y0) const
 {
   scaled offset;
   scaled y = y0;
-  std::cout << "this area: " << this << "current edges:  = " << this->leftEdge().toDouble() << std::endl;
   Point p;
   this->origin(this->content.size() - 1, p);
-  std::cout << "origin points: x = " << p.x.toDouble() << std::endl;
   for (auto p = content.begin(); p != content.end(); p++)
     {
       id.append(p - content.begin(), *p, offset, scaled::zero());
-      std::cout << "searching [HorizontalArrayArea]: x = " << x.toDouble() - offset.toDouble() << " y = " << y.toDouble() << std::endl;
       AreaRef s_area = (*p)->searchByCoords(id, x - offset, y);
       if (s_area) return s_area;
       id.pop_back();
