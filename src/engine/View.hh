@@ -29,6 +29,7 @@
 #include "BoundingBox.hh"
 // Area.hh moved down here for Win32 build
 #include "Area.hh"
+#include "GlyphArea.hh"
 
 class View : public Object
 {
@@ -83,6 +84,10 @@ public:
 
   scaled getAvailableWidth(void) const { return availableWidth; }
   void setAvailableWidth(const scaled&);
+
+  int32_t deleteGlyph(const scaled&, const scaled&) const;
+  int32_t insertGlyphAfter(const scaled&, const scaled&, char) const;
+  int32_t insertGlyphBefore(const scaled&, const scaled&, char) const;
 
 protected:
   SmartPtr<const class Area> getRootArea(void) const;

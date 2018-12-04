@@ -377,3 +377,48 @@ View::setAvailableWidth(const scaled& width)
       setDirtyLayout();
     }
 }
+
+int32_t
+View::deleteGlyph(const scaled& x, const scaled& y) const
+{
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());
+        area->getGlyphArea()->getParent()->getParent()->getNode()->DeleteGlyph(index);
+        return 1;
+    }
+
+    std::cout << "Glyph at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    return 0;
+}
+
+int32_t
+View::insertGlyphAfter(const scaled& x, const scaled& y, char c) const
+{
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());
+        area->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphAfter(index, c);
+        return 1;
+    }
+
+    std::cout << "Glyph at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    return 0;
+}
+
+int32_t
+View::insertGlyphBefore(const scaled& x, const scaled& y, char c) const
+{
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());
+        area->getGlyphArea()->getParent()->getParent()->getNode()->InsertGlyphBefore(index, c);
+        return 1;
+    }
+
+    std::cout << "Glyph at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    return 0;
+}

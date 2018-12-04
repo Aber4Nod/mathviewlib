@@ -187,6 +187,7 @@ engine/MathMLOperatorElement.lo: \
   ../../src/backend/CombinedGlyphArea.hh \
   ../../src/common/AbstractLogger.hh \
   ../../src/engine/NamespaceContext.hh ../../src/engine/View.hh \
+  ../../src/backend/GlyphArea.hh \
   ../../src/engine/MathMLOperatorElement.hh \
   ../../src/engine/MathMLEmbellishment.hh \
   ../../src/engine/MathMLTokenElement.hh \
@@ -760,6 +761,8 @@ engine/MathMLOperatorElement.lo: \
 ../../src/engine/NamespaceContext.hh:
 
 ../../src/engine/View.hh:
+
+../../src/backend/GlyphArea.hh:
 
 ../../src/engine/MathMLOperatorElement.hh:
 

@@ -130,7 +130,7 @@ void
 MathMLStringNode::InsertGlyphAfter(uint32_t index, char glyph)
 {
     std::cout << "[MathMLStringNode::InsertGlyphAfter]: got index: " << index << std::endl;
-    if (index == 0)
+    if (content.length() == 0)
         content.push_back(glyph);
     else
     if (index >= content.length())
@@ -150,8 +150,8 @@ void
 MathMLStringNode::InsertGlyphBefore(uint32_t index, char glyph)
 {
     std::cout << "[MathMLStringNode::InsertGlyphBefore]: got index: " << index << std::endl;
-    if (index == 0)
-        content.insert(index, 1, glyph);
+    if (content.length() == 0)
+        content.push_back(glyph);
     else
     if (index >= content.length())
     {
@@ -159,7 +159,7 @@ MathMLStringNode::InsertGlyphBefore(uint32_t index, char glyph)
         content.push_back(glyph);
     }
     else
-        content.insert(index - 1, 1, glyph);
+        content.insert(index, 1, glyph);
     std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
     getParentElement()->setDirtyLayout();
     getParentElement()->setDirtyStructure();

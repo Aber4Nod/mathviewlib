@@ -94,15 +94,10 @@ engine/MathMLNamespaceContext.lo: \
   /usr/include/wctype.h /usr/include/_types/_wctrans_t.h \
   ../../src/common/SmartPtr.hh ../../src/common/BoundingBox.hh \
   ../../src/common/scaled.hh ../../src/common/fixed.hh \
-  ../../src/backend/Area.hh ../../src/engine/MathMLNamespaceContext.hh \
-  ../../src/engine/NamespaceContext.hh ../../src/common/WeakPtr.hh \
-  ../../src/backend/MathGraphicDevice.hh \
-  ../../src/backend/GraphicDevice.hh ../../src/common/Length.hh \
-  ../../src/backend/AreaFactory.hh ../../src/backend/BackgroundArea.hh \
-  ../../src/backend/ColorArea.hh ../../src/common/RGBColor.hh \
-  ../../src/backend/BinContainerArea.hh \
-  ../../src/backend/ContainerArea.hh ../../src/backend/BoxArea.hh \
-  ../../src/backend/BoxedLayoutArea.hh \
+  ../../src/backend/Area.hh ../../src/backend/GlyphArea.hh \
+  ../../src/backend/SimpleArea.hh \
+  ../../src/backend/HorizontalArrayArea.hh \
+  ../../src/backend/LinearContainerArea.hh \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bit_reference \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/climits \
@@ -112,9 +107,7 @@ engine/MathMLNamespaceContext.lo: \
   /usr/include/i386/limits.h /usr/include/i386/_limits.h \
   /usr/include/sys/syslimits.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer \
-  ../../src/backend/GlyphStringArea.hh \
-  ../../src/backend/HorizontalArrayArea.hh \
-  ../../src/backend/LinearContainerArea.hh \
+  ../../src/backend/ContainerArea.hh \
   ../../src/engine/MathMLStringNode.hh \
   ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
   ../../src/engine/Node.hh \
@@ -177,10 +170,19 @@ engine/MathMLNamespaceContext.lo: \
   /usr/include/sys/_types/_fsfilcnt_t.h /usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
-  ../../src/engine/Element.hh ../../src/backend/GlyphWrapperArea.hh \
-  ../../src/backend/HideArea.hh \
+  ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  ../../src/engine/MathMLNamespaceContext.hh \
+  ../../src/engine/NamespaceContext.hh \
+  ../../src/backend/MathGraphicDevice.hh \
+  ../../src/backend/GraphicDevice.hh ../../src/common/Length.hh \
+  ../../src/backend/AreaFactory.hh ../../src/backend/BackgroundArea.hh \
+  ../../src/backend/ColorArea.hh ../../src/common/RGBColor.hh \
+  ../../src/backend/BinContainerArea.hh ../../src/backend/BoxArea.hh \
+  ../../src/backend/BoxedLayoutArea.hh \
+  ../../src/backend/GlyphStringArea.hh \
+  ../../src/backend/GlyphWrapperArea.hh ../../src/backend/HideArea.hh \
   ../../src/backend/HorizontalFillerArea.hh \
-  ../../src/backend/FillerArea.hh ../../src/backend/SimpleArea.hh \
+  ../../src/backend/FillerArea.hh \
   ../../src/backend/HorizontalSpaceArea.hh ../../src/backend/IdArea.hh \
   ../../src/backend/IgnoreArea.hh ../../src/backend/InkArea.hh \
   ../../src/backend/OverlapArrayArea.hh ../../src/backend/ShiftArea.hh \
@@ -481,33 +483,13 @@ engine/MathMLNamespaceContext.lo: \
 
 ../../src/backend/Area.hh:
 
-../../src/engine/MathMLNamespaceContext.hh:
+../../src/backend/GlyphArea.hh:
 
-../../src/engine/NamespaceContext.hh:
+../../src/backend/SimpleArea.hh:
 
-../../src/common/WeakPtr.hh:
+../../src/backend/HorizontalArrayArea.hh:
 
-../../src/backend/MathGraphicDevice.hh:
-
-../../src/backend/GraphicDevice.hh:
-
-../../src/common/Length.hh:
-
-../../src/backend/AreaFactory.hh:
-
-../../src/backend/BackgroundArea.hh:
-
-../../src/backend/ColorArea.hh:
-
-../../src/common/RGBColor.hh:
-
-../../src/backend/BinContainerArea.hh:
-
-../../src/backend/ContainerArea.hh:
-
-../../src/backend/BoxArea.hh:
-
-../../src/backend/BoxedLayoutArea.hh:
+../../src/backend/LinearContainerArea.hh:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector:
 
@@ -531,11 +513,7 @@ engine/MathMLNamespaceContext.lo: \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer:
 
-../../src/backend/GlyphStringArea.hh:
-
-../../src/backend/HorizontalArrayArea.hh:
-
-../../src/backend/LinearContainerArea.hh:
+../../src/backend/ContainerArea.hh:
 
 ../../src/engine/MathMLStringNode.hh:
 
@@ -705,7 +683,35 @@ engine/MathMLNamespaceContext.lo: \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset:
 
+../../src/common/WeakPtr.hh:
+
 ../../src/engine/Element.hh:
+
+../../src/engine/MathMLNamespaceContext.hh:
+
+../../src/engine/NamespaceContext.hh:
+
+../../src/backend/MathGraphicDevice.hh:
+
+../../src/backend/GraphicDevice.hh:
+
+../../src/common/Length.hh:
+
+../../src/backend/AreaFactory.hh:
+
+../../src/backend/BackgroundArea.hh:
+
+../../src/backend/ColorArea.hh:
+
+../../src/common/RGBColor.hh:
+
+../../src/backend/BinContainerArea.hh:
+
+../../src/backend/BoxArea.hh:
+
+../../src/backend/BoxedLayoutArea.hh:
+
+../../src/backend/GlyphStringArea.hh:
 
 ../../src/backend/GlyphWrapperArea.hh:
 
@@ -714,8 +720,6 @@ engine/MathMLNamespaceContext.lo: \
 ../../src/backend/HorizontalFillerArea.hh:
 
 ../../src/backend/FillerArea.hh:
-
-../../src/backend/SimpleArea.hh:
 
 ../../src/backend/HorizontalSpaceArea.hh:
 

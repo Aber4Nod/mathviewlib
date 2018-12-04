@@ -200,41 +200,10 @@ widget/QMathView.lo: ../../src/widget/QMathView.cc \
   ../../src/common/String.hh ../../src/common/SmartPtr.hh \
   ../../src/common/BoundingBox.hh ../../src/common/scaled.hh \
   ../../src/common/fixed.hh ../../src/backend/Area.hh \
-  ../../src/common/AbstractLogger.hh \
-  ../../src/engine/MathMLOperatorDictionary.hh \
-  ../../src/engine/AttributeSignature.hh ../../src/common/Value.hh \
-  ../../src/common/StringHash.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h \
-  /usr/include/math.h ../../src/backend/qt/Qt_Backend.hh \
-  ../../src/backend/Backend.hh \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/QRawFont \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qrawfont.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qpoint.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qfont.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qwindowdefs.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qtransform.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qmatrix.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qpolygon.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qrect.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qmargins.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qregion.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qdatastream.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qline.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qpainterpath.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtGui/qfontdatabase.h \
-  ../../src/backend/MathGraphicDevice.hh \
-  ../../src/backend/GraphicDevice.hh ../../src/common/Length.hh \
-  ../../src/backend/AreaFactory.hh ../../src/backend/BackgroundArea.hh \
-  ../../src/backend/ColorArea.hh ../../src/common/RGBColor.hh \
-  ../../src/backend/BinContainerArea.hh \
-  ../../src/backend/ContainerArea.hh ../../src/backend/BoxArea.hh \
-  ../../src/backend/BoxedLayoutArea.hh \
-  ../../src/backend/GlyphStringArea.hh \
+  ../../src/backend/GlyphArea.hh ../../src/backend/SimpleArea.hh \
   ../../src/backend/HorizontalArrayArea.hh \
   ../../src/backend/LinearContainerArea.hh \
+  ../../src/backend/ContainerArea.hh \
   ../../src/engine/MathMLStringNode.hh \
   ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
   ../../src/engine/Node.hh \
@@ -294,9 +263,41 @@ widget/QMathView.lo: ../../src/widget/QMathView.cc \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
   ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  ../../src/common/AbstractLogger.hh \
+  ../../src/engine/MathMLOperatorDictionary.hh \
+  ../../src/engine/AttributeSignature.hh ../../src/common/Value.hh \
+  ../../src/common/StringHash.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h \
+  /usr/include/math.h ../../src/backend/qt/Qt_Backend.hh \
+  ../../src/backend/Backend.hh \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/QRawFont \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qrawfont.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qpoint.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qfont.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qwindowdefs.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qtransform.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qmatrix.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qpolygon.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qrect.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qmargins.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qregion.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qdatastream.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qline.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qpainterpath.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qfontdatabase.h \
+  ../../src/backend/MathGraphicDevice.hh \
+  ../../src/backend/GraphicDevice.hh ../../src/common/Length.hh \
+  ../../src/backend/AreaFactory.hh ../../src/backend/BackgroundArea.hh \
+  ../../src/backend/ColorArea.hh ../../src/common/RGBColor.hh \
+  ../../src/backend/BinContainerArea.hh ../../src/backend/BoxArea.hh \
+  ../../src/backend/BoxedLayoutArea.hh \
+  ../../src/backend/GlyphStringArea.hh \
   ../../src/backend/GlyphWrapperArea.hh ../../src/backend/HideArea.hh \
   ../../src/backend/HorizontalFillerArea.hh \
-  ../../src/backend/FillerArea.hh ../../src/backend/SimpleArea.hh \
+  ../../src/backend/FillerArea.hh \
   ../../src/backend/HorizontalSpaceArea.hh ../../src/backend/IdArea.hh \
   ../../src/backend/IgnoreArea.hh ../../src/backend/InkArea.hh \
   ../../src/backend/OverlapArrayArea.hh ../../src/backend/ShiftArea.hh \
@@ -838,87 +839,15 @@ widget/QMathView.lo: ../../src/widget/QMathView.cc \
 
 ../../src/backend/Area.hh:
 
-../../src/common/AbstractLogger.hh:
+../../src/backend/GlyphArea.hh:
 
-../../src/engine/MathMLOperatorDictionary.hh:
-
-../../src/engine/AttributeSignature.hh:
-
-../../src/common/Value.hh:
-
-../../src/common/StringHash.hh:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h:
-
-/usr/include/math.h:
-
-../../src/backend/qt/Qt_Backend.hh:
-
-../../src/backend/Backend.hh:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/QRawFont:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qrawfont.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qpoint.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qfont.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qwindowdefs.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qtransform.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qmatrix.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qpolygon.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qrect.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qmargins.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qregion.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qdatastream.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtCore/qline.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qpainterpath.h:
-
-/usr/local/Cellar/qt/5.11.2/include/QtGui/qfontdatabase.h:
-
-../../src/backend/MathGraphicDevice.hh:
-
-../../src/backend/GraphicDevice.hh:
-
-../../src/common/Length.hh:
-
-../../src/backend/AreaFactory.hh:
-
-../../src/backend/BackgroundArea.hh:
-
-../../src/backend/ColorArea.hh:
-
-../../src/common/RGBColor.hh:
-
-../../src/backend/BinContainerArea.hh:
-
-../../src/backend/ContainerArea.hh:
-
-../../src/backend/BoxArea.hh:
-
-../../src/backend/BoxedLayoutArea.hh:
-
-../../src/backend/GlyphStringArea.hh:
+../../src/backend/SimpleArea.hh:
 
 ../../src/backend/HorizontalArrayArea.hh:
 
 ../../src/backend/LinearContainerArea.hh:
+
+../../src/backend/ContainerArea.hh:
 
 ../../src/engine/MathMLStringNode.hh:
 
@@ -1084,6 +1013,82 @@ widget/QMathView.lo: ../../src/widget/QMathView.cc \
 
 ../../src/engine/Element.hh:
 
+../../src/common/AbstractLogger.hh:
+
+../../src/engine/MathMLOperatorDictionary.hh:
+
+../../src/engine/AttributeSignature.hh:
+
+../../src/common/Value.hh:
+
+../../src/common/StringHash.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h:
+
+/usr/include/math.h:
+
+../../src/backend/qt/Qt_Backend.hh:
+
+../../src/backend/Backend.hh:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/QRawFont:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qrawfont.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qpoint.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qfont.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qwindowdefs.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qtransform.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qmatrix.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qpolygon.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qrect.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qmargins.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qregion.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qdatastream.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qline.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qpainterpath.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qfontdatabase.h:
+
+../../src/backend/MathGraphicDevice.hh:
+
+../../src/backend/GraphicDevice.hh:
+
+../../src/common/Length.hh:
+
+../../src/backend/AreaFactory.hh:
+
+../../src/backend/BackgroundArea.hh:
+
+../../src/backend/ColorArea.hh:
+
+../../src/common/RGBColor.hh:
+
+../../src/backend/BinContainerArea.hh:
+
+../../src/backend/BoxArea.hh:
+
+../../src/backend/BoxedLayoutArea.hh:
+
+../../src/backend/GlyphStringArea.hh:
+
 ../../src/backend/GlyphWrapperArea.hh:
 
 ../../src/backend/HideArea.hh:
@@ -1091,8 +1096,6 @@ widget/QMathView.lo: ../../src/widget/QMathView.cc \
 ../../src/backend/HorizontalFillerArea.hh:
 
 ../../src/backend/FillerArea.hh:
-
-../../src/backend/SimpleArea.hh:
 
 ../../src/backend/HorizontalSpaceArea.hh:
 

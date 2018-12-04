@@ -116,22 +116,16 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
   ../../src/engine/View.hh ../../src/common/SmartPtr.hh \
   ../../src/common/BoundingBox.hh ../../src/common/scaled.hh \
   ../../src/common/fixed.hh ../../src/backend/Area.hh \
-  ../../src/frontend/libxml2/libxml2_Model.hh \
-  ../../src/frontend/common/TemplateNodeIterator.hh \
-  ../../src/frontend/common/TemplateElementIterator.hh \
-  ../../src/frontend/common/TemplateElementValidator.hh \
-  ../../src/frontend/libxml2/libxml2_Builder.hh \
-  ../../src/frontend/common/TemplateLinker.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h \
-  /usr/include/math.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional \
-  ../../src/frontend/common/Builder.hh ../../src/engine/Element.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
+  ../../src/backend/GlyphArea.hh ../../src/backend/SimpleArea.hh \
+  ../../src/backend/HorizontalArrayArea.hh \
+  ../../src/backend/LinearContainerArea.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bit_reference \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/climits \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer \
+  ../../src/backend/ContainerArea.hh \
+  ../../src/engine/MathMLStringNode.hh \
+  ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
   ../../src/engine/Node.hh \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ios \
@@ -159,6 +153,7 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
   /usr/include/sys/_pthread/_pthread_t.h /usr/include/pthread/qos.h \
   /usr/include/sys/qos.h /usr/include/sys/_types/_mach_port_t.h \
   /usr/include/sched.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/locale.h \
   /usr/include/locale.h /usr/include/_locale.h /usr/include/xlocale.h \
   /usr/include/_xlocale.h /usr/include/xlocale/_ctype.h \
@@ -190,7 +185,19 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
   /usr/include/sys/_types/_fsblkcnt_t.h \
   /usr/include/sys/_types/_fsfilcnt_t.h /usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
-  ../../src/common/WeakPtr.hh
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
+  ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  ../../src/frontend/libxml2/libxml2_Model.hh \
+  ../../src/frontend/common/TemplateNodeIterator.hh \
+  ../../src/frontend/common/TemplateElementIterator.hh \
+  ../../src/frontend/common/TemplateElementValidator.hh \
+  ../../src/frontend/libxml2/libxml2_Builder.hh \
+  ../../src/frontend/common/TemplateLinker.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h \
+  /usr/include/math.h ../../src/frontend/common/Builder.hh
 
 ../config.h:
 
@@ -528,39 +535,29 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
 
 ../../src/backend/Area.hh:
 
-../../src/frontend/libxml2/libxml2_Model.hh:
+../../src/backend/GlyphArea.hh:
 
-../../src/frontend/common/TemplateNodeIterator.hh:
+../../src/backend/SimpleArea.hh:
 
-../../src/frontend/common/TemplateElementIterator.hh:
+../../src/backend/HorizontalArrayArea.hh:
 
-../../src/frontend/common/TemplateElementValidator.hh:
+../../src/backend/LinearContainerArea.hh:
 
-../../src/frontend/libxml2/libxml2_Builder.hh:
-
-../../src/frontend/common/TemplateLinker.hh:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h:
-
-/usr/include/math.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional:
-
-../../src/frontend/common/Builder.hh:
-
-../../src/engine/Element.hh:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bit_reference:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/climits:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer:
+
+../../src/backend/ContainerArea.hh:
+
+../../src/engine/MathMLStringNode.hh:
+
+../../src/engine/MathMLTextNode.hh:
+
+../../src/engine/MathMLNode.hh:
 
 ../../src/engine/Node.hh:
 
@@ -625,6 +622,8 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
 /usr/include/sys/_types/_mach_port_t.h:
 
 /usr/include/sched.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/locale.h:
 
@@ -720,4 +719,32 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset:
+
 ../../src/common/WeakPtr.hh:
+
+../../src/engine/Element.hh:
+
+../../src/frontend/libxml2/libxml2_Model.hh:
+
+../../src/frontend/common/TemplateNodeIterator.hh:
+
+../../src/frontend/common/TemplateElementIterator.hh:
+
+../../src/frontend/common/TemplateElementValidator.hh:
+
+../../src/frontend/libxml2/libxml2_Builder.hh:
+
+../../src/frontend/common/TemplateLinker.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h:
+
+/usr/include/math.h:
+
+../../src/frontend/common/Builder.hh:

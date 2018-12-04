@@ -103,15 +103,23 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
   /usr/include/wctype.h /usr/include/_types/_wctrans_t.h \
   ../../src/common/SmartPtr.hh ../../src/common/BoundingBox.hh \
   ../../src/common/scaled.hh ../../src/common/fixed.hh \
-  ../../src/backend/Area.hh ../../src/engine/Element.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
+  ../../src/backend/Area.hh ../../src/backend/GlyphArea.hh \
+  ../../src/backend/SimpleArea.hh \
+  ../../src/backend/HorizontalArrayArea.hh \
+  ../../src/backend/LinearContainerArea.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bit_reference \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/climits \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/limits.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include/limits.h \
   /usr/include/limits.h /usr/include/machine/limits.h \
   /usr/include/i386/limits.h /usr/include/i386/_limits.h \
-  /usr/include/sys/syslimits.h ../../src/engine/Node.hh \
+  /usr/include/sys/syslimits.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer \
+  ../../src/backend/ContainerArea.hh \
+  ../../src/engine/MathMLStringNode.hh \
+  ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
+  ../../src/engine/Node.hh \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/ios \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__locale \
@@ -164,7 +172,9 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
   /usr/include/sys/_types/_fsblkcnt_t.h \
   /usr/include/sys/_types/_fsfilcnt_t.h /usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
-  ../../src/common/WeakPtr.hh ../../src/frontend/common/Builder.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
+  ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  ../../src/frontend/common/Builder.hh \
   ../../src/engine/MathMLNamespaceContext.hh \
   ../../src/engine/NamespaceContext.hh \
   ../../src/engine/MathMLOperatorDictionary.hh \
@@ -175,8 +185,6 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/cmath \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h \
   /usr/include/math.h ../../src/backend/AreaId.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer \
   ../../src/common/Point.hh ../../src/common/AbstractLogger.hh \
   ../../src/backend/FormattingContext.hh ../../src/common/Variant.hh \
   ../../src/common/RGBColor.hh ../../src/common/Length.hh \
@@ -184,17 +192,12 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
   ../../src/backend/MathGraphicDevice.hh \
   ../../src/backend/GraphicDevice.hh ../../src/backend/AreaFactory.hh \
   ../../src/backend/BackgroundArea.hh ../../src/backend/ColorArea.hh \
-  ../../src/backend/BinContainerArea.hh \
-  ../../src/backend/ContainerArea.hh ../../src/backend/BoxArea.hh \
+  ../../src/backend/BinContainerArea.hh ../../src/backend/BoxArea.hh \
   ../../src/backend/BoxedLayoutArea.hh \
   ../../src/backend/GlyphStringArea.hh \
-  ../../src/backend/HorizontalArrayArea.hh \
-  ../../src/backend/LinearContainerArea.hh \
-  ../../src/engine/MathMLStringNode.hh \
-  ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
   ../../src/backend/GlyphWrapperArea.hh ../../src/backend/HideArea.hh \
   ../../src/backend/HorizontalFillerArea.hh \
-  ../../src/backend/FillerArea.hh ../../src/backend/SimpleArea.hh \
+  ../../src/backend/FillerArea.hh \
   ../../src/backend/HorizontalSpaceArea.hh ../../src/backend/IdArea.hh \
   ../../src/backend/IgnoreArea.hh ../../src/backend/InkArea.hh \
   ../../src/backend/OverlapArrayArea.hh ../../src/backend/ShiftArea.hh \
@@ -519,9 +522,15 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 
 ../../src/backend/Area.hh:
 
-../../src/engine/Element.hh:
+../../src/backend/GlyphArea.hh:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset:
+../../src/backend/SimpleArea.hh:
+
+../../src/backend/HorizontalArrayArea.hh:
+
+../../src/backend/LinearContainerArea.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bit_reference:
 
@@ -540,6 +549,16 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 /usr/include/i386/_limits.h:
 
 /usr/include/sys/syslimits.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer:
+
+../../src/backend/ContainerArea.hh:
+
+../../src/engine/MathMLStringNode.hh:
+
+../../src/engine/MathMLTextNode.hh:
+
+../../src/engine/MathMLNode.hh:
 
 ../../src/engine/Node.hh:
 
@@ -685,7 +704,11 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset:
+
 ../../src/common/WeakPtr.hh:
+
+../../src/engine/Element.hh:
 
 ../../src/frontend/common/Builder.hh:
 
@@ -712,10 +735,6 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 /usr/include/math.h:
 
 ../../src/backend/AreaId.hh:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer:
 
 ../../src/common/Point.hh:
 
@@ -745,23 +764,11 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 
 ../../src/backend/BinContainerArea.hh:
 
-../../src/backend/ContainerArea.hh:
-
 ../../src/backend/BoxArea.hh:
 
 ../../src/backend/BoxedLayoutArea.hh:
 
 ../../src/backend/GlyphStringArea.hh:
-
-../../src/backend/HorizontalArrayArea.hh:
-
-../../src/backend/LinearContainerArea.hh:
-
-../../src/engine/MathMLStringNode.hh:
-
-../../src/engine/MathMLTextNode.hh:
-
-../../src/engine/MathMLNode.hh:
 
 ../../src/backend/GlyphWrapperArea.hh:
 
@@ -770,8 +777,6 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 ../../src/backend/HorizontalFillerArea.hh:
 
 ../../src/backend/FillerArea.hh:
-
-../../src/backend/SimpleArea.hh:
 
 ../../src/backend/HorizontalSpaceArea.hh:
 

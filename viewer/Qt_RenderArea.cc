@@ -131,12 +131,18 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
     {
         QPointF pos = event->pos();
         qDebug() << "[Qt_RenderArea::mousePressEvent]: pressed on pos: " << pos;
-        if (m_view->getAreaAt(pos.x(),pos.y()))
-        {
-            uint32_t index = m_view->getAreaAt(pos.x(),pos.y())->getGlyphArea()->getParent()->getIndexOfChild(m_view->getAreaAt(pos.x(),pos.y())->getGlyphArea());
-            m_view->getAreaAt(pos.x(),pos.y())->getGlyphArea()->getParent()->getParent()->getNode()->DeleteGlyph(index);
+
+        // -- deletion of glyph
+        // if (m_view->deleteGlyph(pos.x(), pos.y()));
+        //     repaint();
+
+        // -- insertion of glyph after
+        // if (m_view->insertGlyphAfter(pos.x(), pos.y(), 'k'))
+        //     repaint();
+
+        // -- insertion of glyph before
+        if (m_view->insertGlyphBefore(pos.x(), pos.y(), 'k'))
             repaint();
-        }
     }
 }
 
