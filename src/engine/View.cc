@@ -389,7 +389,7 @@ View::deleteGlyph(const scaled& x, const scaled& y) const
         return 1;
     }
 
-    std::cout << "Glyph at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
 }
 
@@ -404,7 +404,7 @@ View::insertGlyphAfter(const scaled& x, const scaled& y, char c) const
         return 1;
     }
 
-    std::cout << "Glyph at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
 }
 
@@ -419,6 +419,19 @@ View::insertGlyphBefore(const scaled& x, const scaled& y, char c) const
         return 1;
     }
 
-    std::cout << "Glyph at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
+}
+
+void
+View::lookUpContent(const scaled& x, const scaled& y) const
+{
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        area->getGlyphArea()->getParent()->getParent()->getNode()->LookUpContent();
+        return;
+    }
+
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
 }
