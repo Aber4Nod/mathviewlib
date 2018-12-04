@@ -80,7 +80,8 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
   if (SmartPtr<Value> value = GET_ATTRIBUTE_VALUE(MathML, Token, mathvariant))
     ctxt.setVariant(toMathVariant(value));
   else if (is_a<MathMLIdentifierElement>(SmartPtr<MathMLTokenElement>(this)) && logicalContentLength == 1)
-    ctxt.setVariant(ITALIC_VARIANT);
+    // ctxt.setVariant(ITALIC_VARIANT); // turned off temporary for making qt appearance ok (while not fixed)
+    ctxt.setMathMode(false);
 
   if (is_a<MathMLTextElement>(SmartPtr<MathMLTokenElement>(this)) ||
       (is_a<MathMLIdentifierElement>(SmartPtr<MathMLTokenElement>(this)) && logicalContentLength > 1))
