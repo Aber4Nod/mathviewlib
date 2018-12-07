@@ -567,41 +567,55 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLFractionElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element());
+      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
       if (element->deleteSet())
       {
           std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype: " << Model::getNodeName(Model::asNode(iter.element())) << std::endl;
-          element->resetFlag(MathMLElement::FDeleteSet);
           typename Model::Element xml_element = iter.element();
-          ///
           typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
           Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
-          node->parent = Model::asNode(el);
-          Model::asNode(xml_element)->prev->next = node;
-          node->prev = Model::asNode(xml_element)->prev;
-          // node->parent = Model::getParent(Model::asNode(el));
-          // Model::insertChild(Model::asNode(iter.element()), node);
-          // node->parent->children = node;
-
-          Model::setNodeValue(node, "1");
+          Model::setParent(node, Model::asNode(el));
+          Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
+          // Model::setPrevSibling(node, Model::getPrevSibling(Model::asNode(xml_element))); // todo useless because of insertPrevSibling
           Model::insertPrevSibling(Model::asNode(xml_element), node);
-          elem->setNumerator(builder.getMathMLElement(Model::asElement(node)));
+          Model::setNodeValue(node, "1");
 
+          elem->setNumerator(builder.getMathMLElement(Model::asElement(node)));
           iter.next();
-          Model::asNode(iter.element())->prev = node;
+          // Model::asNode(xml_element)->prev = node; // total useless
+
           Model::unlinkNode(Model::asNode(xml_element));
           Model::freeNode(Model::asNode(xml_element));
+
+          element->resetFlag(MathMLElement::FDeleteSet);
           builder.forgetElement(element);
       }
       else
       {
           elem->setNumerator(element);
           iter.next();
-          std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype: [testing!]: " << Model::getNodeName(Model::asNode(iter.element())) << std::endl;
       }
-      // std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype2: " << Model::getNodeName(Model::getFirstChild(Model::asNode(el))) << std::endl;
-      // std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype3: " << Model::getNodeName(node->parent) << std::endl;
-      elem->setDenominator(builder.getMathMLElement(iter.element()));
+      element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
+      if (element->deleteSet())
+      {
+          typename Model::Element xml_element = iter.element();
+          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+          Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
+          Model::setParent(node, Model::asNode(el));
+          Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
+          Model::insertPrevSibling(Model::asNode(xml_element), node);
+          Model::setNodeValue(node, "1");
+
+          elem->setDenominator(builder.getMathMLElement(Model::asElement(node)));
+
+          Model::unlinkNode(Model::asNode(xml_element));
+          Model::freeNode(Model::asNode(xml_element));
+
+          element->resetFlag(MathMLElement::FDeleteSet);
+          builder.forgetElement(element);
+      }
+      else
+          elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
   };
 

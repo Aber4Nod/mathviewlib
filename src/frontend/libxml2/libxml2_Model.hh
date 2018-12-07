@@ -77,12 +77,18 @@ struct libxml2_Model
   // must be available if the default iterators are used
   static Node getParent(const Node& n)
   { return n->parent; }
-  static Node getNextSibling(const Node& n)
-  { return n->next; }
-  static void setNextSibling(const Node& curNode, const Node& nextNode)
-  { curNode->next = nextNode; }
   static Node getFirstChild(const Node& n)
   { return n->children; }
+  static Node getNextSibling(const Node& n)
+  { return n->next; }
+  static Node getPrevSibling(const Node& n)
+  { return n->prev; }
+  static void setNextSibling(const Node& curNode, const Node& nextNode)
+  { curNode->next = nextNode; }
+  static void setPrevSibling(const Node& curNode, const Node& prevNode)
+  { curNode->prev = prevNode; }
+  static void setParent(const Node& curNode, const Node& parent)
+  { curNode->parent = parent; }
 
   // auxiliary conversion functions from/to libxml2 strings
   static String fromModelString(const xmlChar* str) { return reinterpret_cast<const String::value_type*>(str); }
