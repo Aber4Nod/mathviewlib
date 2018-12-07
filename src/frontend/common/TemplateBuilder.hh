@@ -570,52 +570,21 @@ protected:
       SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
       if (element->deleteSet())
       {
-          std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype: " << Model::getNodeName(Model::asNode(iter.element())) << std::endl;
-          typename Model::Element xml_element = iter.element();
-          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
-          Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
-          Model::setParent(node, Model::asNode(el));
-          Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
-          // Model::setPrevSibling(node, Model::getPrevSibling(Model::asNode(xml_element))); // todo useless because of insertPrevSibling
-          Model::insertPrevSibling(Model::asNode(xml_element), node);
-          Model::setNodeValue(node, "1");
-
-          elem->setNumerator(builder.getMathMLElement(Model::asElement(node)));
-          iter.next();
-          // Model::asNode(xml_element)->prev = node; // total useless
-
-          Model::unlinkNode(Model::asNode(xml_element));
-          Model::freeNode(Model::asNode(xml_element));
-
-          element->resetFlag(MathMLElement::FDeleteSet);
           builder.forgetElement(element);
+          typename Model::Node node = iter.updateCurrent(el);
+          element = builder.getMathMLElement(Model::asElement(node));
       }
-      else
-      {
-          elem->setNumerator(element);
-          iter.next();
-      }
+      elem->setNumerator(element);
+      iter.next();
+
       element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      if (element->deleteSet())
+      if (element->deleteSet()) // todo total copipasta from numerator - must be unified
       {
-          typename Model::Element xml_element = iter.element();
-          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
-          Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
-          Model::setParent(node, Model::asNode(el));
-          Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
-          Model::insertPrevSibling(Model::asNode(xml_element), node);
-          Model::setNodeValue(node, "1");
-
-          elem->setDenominator(builder.getMathMLElement(Model::asElement(node)));
-
-          Model::unlinkNode(Model::asNode(xml_element));
-          Model::freeNode(Model::asNode(xml_element));
-
-          element->resetFlag(MathMLElement::FDeleteSet);
           builder.forgetElement(element);
+          typename Model::Node node = iter.updateCurrent(el);
+          element = builder.getMathMLElement(Model::asElement(node));
       }
-      else
-          elem->setDenominator(builder.getMathMLElement(iter.element()));
+      elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
   };
 

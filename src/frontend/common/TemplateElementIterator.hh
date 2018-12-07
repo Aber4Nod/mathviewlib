@@ -44,6 +44,26 @@ public:
   void setCurrent(typename Model::Element newElement)
   { currentElement = newElement; }
 
+  typename Model::Node updateCurrent(const typename Model::Element& el)
+  {
+      typename Model::Element xml_element = element();
+      typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+      Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
+      Model::setParent(node, Model::asNode(el));
+      Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
+      // Model::setPrevSibling(node, Model::getPrevSibling(Model::asNode(xml_element))); // todo useless because of insertPrevSibling
+      Model::insertPrevSibling(Model::asNode(xml_element), node);
+      Model::setNodeValue(node, "");
+
+      setCurrent(Model::asElement(node));
+      // iter.next();
+      // Model::asNode(xml_element)->prev = node; // total useless
+
+      Model::unlinkNode(Model::asNode(xml_element));
+      Model::freeNode(Model::asNode(xml_element));
+      return node;
+  }
+
 protected:
   typename Model::Element
   findValidNodeForward(const typename Model::Node& p0) const

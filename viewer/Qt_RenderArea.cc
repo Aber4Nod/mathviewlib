@@ -87,6 +87,7 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         // -- lookup content of stringnode
         // m_view->lookUpContent(pos.x(), pos.y());
 
+        // -- deletion of element here
         if (m_view->deleteElement(pos.x(), pos.y()))
             repaint();
     }
