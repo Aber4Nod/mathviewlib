@@ -60,6 +60,7 @@ public:
 
   virtual void setDirtyStructure(void);
   virtual void setContentSet(void);
+  virtual void setDeleteSet(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -70,6 +71,7 @@ public:
   bool dirtyAttributeP(void) const { return getFlag(FDirtyAttributeP); }
   bool dirtyAttributeD(void) const { return getFlag(FDirtyAttributeD); }
   bool contentSet(void) const { return getFlag(FContentSet); }
+  bool deleteSet(void) const { return getFlag(FDeleteSet); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -82,6 +84,7 @@ public:
     FDirtyAttributeD, // an attribute was modified and must set dirtyAttribute on all descendants
     FDirtyLayout,     // need to layout
     FContentSet,
+    FDeleteSet,
     
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

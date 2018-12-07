@@ -435,3 +435,17 @@ View::lookUpContent(const scaled& x, const scaled& y) const
 
     std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
 }
+
+int32_t
+View::deleteElement(const scaled& x, const scaled& y) const
+{
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        area->getGlyphArea()->getParent()->getParent()->getNode()->DeleteParentElement();
+        return 1;
+    }
+
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    return 0;
+}

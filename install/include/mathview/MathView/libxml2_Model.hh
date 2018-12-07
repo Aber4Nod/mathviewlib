@@ -75,8 +75,12 @@ struct libxml2_Model
 
   // methods for navigating the model
   // must be available if the default iterators are used
+  static Node getParent(const Node& n)
+  { return n->parent; }
   static Node getNextSibling(const Node& n)
   { return n->next; }
+  static void setNextSibling(const Node& curNode, const Node& nextNode)
+  { curNode->next = nextNode; }
   static Node getFirstChild(const Node& n)
   { return n->children; }
 
@@ -87,6 +91,15 @@ struct libxml2_Model
   static void setNodeValue(const Node& n, const String& str);
   static void unlinkNode(const Node& n);
   static void freeNode(const Node& n);
+  static Node createNode(xmlNsPtr ns, const String& str)
+  { return xmlNewNode(ns, xmlStrdup(toModelString(str))); };
+  static xmlNsPtr getNodeNamespace(const Node&);
+  static Node insertNextSibling(const Node& cur, const Node& elem)
+  { return xmlAddNextSibling(cur, elem); }
+  static Node insertPrevSibling(const Node& cur, const Node& elem)
+  { return xmlAddPrevSibling(cur, elem); }
+  static Node insertChild(const Node& parent, const Node& child)
+  { return xmlAddChild(parent, child); }
 
   // MUST be available if the default linker is used
   struct Hash

@@ -90,6 +90,8 @@ public:
   int32_t insertGlyphBefore(const scaled&, const scaled&, char) const;
   void lookUpContent(const scaled&, const scaled&) const;
 
+  int32_t deleteElement(const scaled&, const scaled&) const;
+
 protected:
   SmartPtr<const class Area> getRootArea(void) const;
   SmartPtr<const class Area> formatElement(const SmartPtr<class Element>&) const;

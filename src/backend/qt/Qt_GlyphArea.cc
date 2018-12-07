@@ -75,7 +75,7 @@ void
 Qt_GlyphArea::render(RenderingContext& c, const scaled& x, const scaled& y) const
 {
     Qt_RenderingContext& context = dynamic_cast<Qt_RenderingContext&>(c);
-    qDebug() << "[Qt_GlyphArea::render]: render coord: x: " << x.toDouble() << " y: " << y.toDouble() << this;
+    // qDebug() << "[Qt_GlyphArea::render]: render coord: x: " << x.toDouble() << " y: " << y.toDouble() << this;
     x_coord = x.toDouble();
     y_coord = y.toDouble();
     context.draw(x, y, m_glyphRun);
@@ -91,7 +91,7 @@ Qt_GlyphArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
     //         Qt_RenderingContext::toQtPixels(box1.width), Qt_RenderingContext::toQtPixels(box1.height+box1.depth));
     QPointF point = QPointF(Qt_RenderingContext::toQtX(x), Qt_RenderingContext::toQtY(y));
     // qDebug() << "[Qt_GlyphArea::searchByCoordsSimple]: in Qt_GlyphArea, point: " << point;
-    qDebug() << "[Qt_GlyphArea::searchByCoordsSimple]: " << rect << " glyph: " << m_glyphRun.glyphIndexes()[0] << " address: " << this;
+    // qDebug() << "[Qt_GlyphArea::searchByCoordsSimple]: " << rect << " glyph: " << m_glyphRun.glyphIndexes()[0] << " address: " << this;
     if (rect.contains(point))
         return this;
     return nullptr;

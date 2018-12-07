@@ -203,3 +203,10 @@ libxml2_Model::hasAttribute(const Element& el, const String& name)
   assert(el);
   return xmlHasProp((xmlNode*) el, toModelString(name));
 }
+
+xmlNsPtr
+libxml2_Model::getNodeNamespace(const Node& n)
+{
+    assert(n);
+    return (n->ns) ?: nullptr;
+}

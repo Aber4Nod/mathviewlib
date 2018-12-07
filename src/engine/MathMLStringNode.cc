@@ -166,3 +166,11 @@ MathMLStringNode::InsertGlyphBefore(uint32_t index, char glyph)
     getParentElement()->setContentSet();
 }
 
+void
+MathMLStringNode::DeleteParentElement() // deletion also must be supported w/ binding to stringnode
+{
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setDeleteSet();
+}
+

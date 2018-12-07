@@ -81,11 +81,14 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         //     repaint();
 
         // -- insertion of glyph before
-        if (m_view->insertGlyphBefore(pos.x(), pos.y(), 'k'))
-            repaint();
+        // if (m_view->insertGlyphBefore(pos.x(), pos.y(), 'k'))
+        //     repaint();
 
         // -- lookup content of stringnode
         // m_view->lookUpContent(pos.x(), pos.y());
+
+        if (m_view->deleteElement(pos.x(), pos.y()))
+            repaint();
     }
 }
 

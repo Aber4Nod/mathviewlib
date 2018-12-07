@@ -13,6 +13,10 @@
 	</mrow>
       </munder>
       <mfrac>
+          <mi>x1</mi>
+          <mo>x2</mo>
+      </mfrac>
+      <mfrac>
         <msup>
 	  <mrow>
 	    <mo symmetric="false">(</mo>

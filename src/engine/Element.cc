@@ -39,6 +39,7 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   setDirtyAttribute();
   setDirtyLayout();
   resetFlag(FContentSet);
+  resetFlag(FDeleteSet);
 }
 
 Element::~Element()
@@ -138,6 +139,13 @@ Element::setContentSet()
 {
   if (!(contentSet()))
       setFlag(FContentSet);
+}
+
+void
+Element::setDeleteSet()
+{
+    if (!(deleteSet()))
+        setFlag(FDeleteSet);
 }
 
 void

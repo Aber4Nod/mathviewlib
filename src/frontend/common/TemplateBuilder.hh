@@ -84,6 +84,15 @@ protected:
 	      << " dirtyStructure=" << elem->dirtyStructure()
 	      << " dirtyLayout=" << elem->dirtyLayout() << std::endl;
 #endif
+    // if (elem->deleteSet())
+    // {        
+        // Model::freeNode(Model::getFirstChild(Model::asNode(el)));
+        // Model::setNodeValue(n, "");
+        // forgetElement(elem);
+        // elem->resetFlag(MathMLElement::FDeleteSet);
+        // std::cout << "returning nullptr" << std::endl;
+        // return nullptr;
+    // }
     return elem;
   }
 
@@ -350,17 +359,14 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLTokenElement>& elem)
     {
       std::vector<SmartPtr<MathMLTextNode> > content;
-      // if (elem->contentSet())
+      // if (elem->deleteSet())
       // {
-      //     typename Model::Node n = Model::asNode(el);
-      //     assert(n); 
-      //     std::cout << "[construct]: FContentSet is set, value: " << elem->GetRawContent() << " xmlNodeType: " << Model::getNodeType(n) << std::endl;
-      //     if (Model::getNodeType(n) == Model::TEXT_NODE)
-      //     {
-      //         std::cout << "[construct]: settingNodeValue: " << elem->GetRawContent() << std::endl;
-      //         Model::setNodeValue(n, elem->GetRawContent());
-      //     }
+          // std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype: " << Model::getNodeName(Model::asNode(el)) << std::endl;
+          // Model::unlinkNode(Model::asNode(el));  
+          // Model::freeNode(Model::asNode(el));
+          // return;
       // }
+
       builder.getChildMathMLTextNodes(el, content, elem);
       elem->swapContent(content); // should normalize spaces etc.
       std::cout << "[MathMLTokenElementBuilder:construct]: element: " << elem << " current length of contents: " << elem->getContentSize() << std::endl;
@@ -561,8 +567,40 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLFractionElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setNumerator(builder.getMathMLElement(iter.element())); // setting numerator, if we need to create element manually -> may be create xml2 element and set it right herea
-      iter.next();
+      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element());
+      if (element->deleteSet())
+      {
+          std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype: " << Model::getNodeName(Model::asNode(iter.element())) << std::endl;
+          element->resetFlag(MathMLElement::FDeleteSet);
+          typename Model::Element xml_element = iter.element();
+          ///
+          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+          Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
+          node->parent = Model::asNode(el);
+          Model::asNode(xml_element)->prev->next = node;
+          node->prev = Model::asNode(xml_element)->prev;
+          // node->parent = Model::getParent(Model::asNode(el));
+          // Model::insertChild(Model::asNode(iter.element()), node);
+          // node->parent->children = node;
+
+          Model::setNodeValue(node, "1");
+          Model::insertPrevSibling(Model::asNode(xml_element), node);
+          elem->setNumerator(builder.getMathMLElement(Model::asElement(node)));
+
+          iter.next();
+          Model::asNode(iter.element())->prev = node;
+          Model::unlinkNode(Model::asNode(xml_element));
+          Model::freeNode(Model::asNode(xml_element));
+          builder.forgetElement(element);
+      }
+      else
+      {
+          elem->setNumerator(element);
+          iter.next();
+          std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype: [testing!]: " << Model::getNodeName(Model::asNode(iter.element())) << std::endl;
+      }
+      // std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype2: " << Model::getNodeName(Model::getFirstChild(Model::asNode(el))) << std::endl;
+      // std::cout << "[MathMLTokenElementBuilder:construct]: FDeleteSet for nodetype3: " << Model::getNodeName(node->parent) << std::endl;
       elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
   };
@@ -976,9 +1014,11 @@ protected:
 	if (m != mathmlMap.end()) 
 	  {
 	    SmartPtr<MathMLElement> elem = (this->*(m->second))(el);
-	    assert(elem);
+	    if (elem == nullptr)
+            return 0;
 	    elem->resetDirtyStructure();
 	    elem->resetDirtyAttribute();
+        std::cout << "ended of creation of mathmlelement: " <<  Model::getNodeName(Model::asNode(el)) << std::endl;
 	    return elem;
 	  }
       }

@@ -41,6 +41,8 @@ public:
     assert(currentElement);
     currentElement = findValidNodeForward(Model::getNextSibling(Model::asNode(currentElement)));
   }
+  void setCurrent(typename Model::Element newElement)
+  { currentElement = newElement; }
 
 protected:
   typename Model::Element

@@ -36,6 +36,8 @@ public:
     assert(currentNode);
     currentNode = Model::getNextSibling(currentNode);
   }
+  void setCurrent(typename Model::Node newNode)
+  { currentNode = newNode; }
   
 protected:
   typename Model::Node currentNode;
