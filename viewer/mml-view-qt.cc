@@ -31,6 +31,7 @@
 #include <QCommandLineParser>
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include <QPalette>
 
 int
 main(int argc, char *argv[])
@@ -57,6 +58,12 @@ main(int argc, char *argv[])
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget(ra);
     QWidget* window = new QWidget();
+
+    QPalette Pal;
+    Pal.setColor(QPalette::Background, Qt::white);
+    window->setAutoFillBackground(true);
+    window->setPalette(Pal);
+    
     window->setLayout(layout);
     w.setCentralWidget(window);
     w.show();

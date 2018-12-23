@@ -358,7 +358,8 @@ mml-view-qt.o: ../../viewer/mml-view-qt.cc ../config.h \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qboxlayout.h \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayout.h \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayoutitem.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qgridlayout.h
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qgridlayout.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/QPalette
 
 ../config.h:
 
@@ -1263,3 +1264,5 @@ mml-view-qt.o: ../../viewer/mml-view-qt.cc ../config.h \
 /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayoutitem.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qgridlayout.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/QPalette:

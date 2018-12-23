@@ -74,15 +74,15 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
 
         // -- deletion of glyph
         // if (m_view->deleteGlyph(pos.x(), pos.y()));
-        //     repaint();
+            // repaint();
 
         // -- insertion of glyph after
-        // if (m_view->insertGlyphAfter(pos.x(), pos.y(), 'k'))
-        //     repaint();
+        // if (m_view->insertGlyphAfter(pos.x(), pos.y(), 'q'))
+            // repaint();
 
         // -- insertion of glyph before
-        // if (m_view->insertGlyphBefore(pos.x(), pos.y(), 'k'))
-        //     repaint();
+        // if (m_view->insertGlyphBefore(pos.x(), pos.y(), 'q'))
+            // repaint();
 
         // -- lookup content of stringnode
         // m_view->lookUpContent(pos.x(), pos.y());

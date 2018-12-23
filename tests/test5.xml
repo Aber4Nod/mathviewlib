@@ -2,9 +2,9 @@
   <mrow>
     <mrow>
       <munder>
-        <mo>lim1</mo>
+        <mo>lim</mo>
 	<mrow>
-	  <mi>x1</mi>
+	  <mi>x</mi>
 	  <mo>&#x2192;</mo>
 	  <mrow>
 	    <mo>+</mo>
@@ -61,7 +61,7 @@
     <mo>=</mo>
     <mrow>
       <munder>
-        <mo>lim2</mo>
+        <mo>lim</mo>
 	<mrow>
 	  <mi>x</mi>
 	  <mo>&#x2192;</mo>
@@ -106,7 +106,7 @@
     <mo>=</mo>
     <mrow>
       <munder>
-        <mo>lim2</mo>
+        <mo>lim</mo>
 	<mrow>
 	  <mi>x</mi>
 	  <mo>&#x2192;</mo>
