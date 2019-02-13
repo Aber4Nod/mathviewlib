@@ -61,6 +61,7 @@ public:
   virtual void setDirtyStructure(void);
   virtual void setContentSet(void);
   virtual void setDeleteSet(void);
+  virtual void setInsertSet(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -72,6 +73,7 @@ public:
   bool dirtyAttributeD(void) const { return getFlag(FDirtyAttributeD); }
   bool contentSet(void) const { return getFlag(FContentSet); }
   bool deleteSet(void) const { return getFlag(FDeleteSet); }
+  bool insertSet(void) const { return getFlag(FInsertSet); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -85,6 +87,7 @@ public:
     FDirtyLayout,     // need to layout
     FContentSet,
     FDeleteSet,
+    FInsertSet,
     
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

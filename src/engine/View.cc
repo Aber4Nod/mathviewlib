@@ -449,3 +449,18 @@ View::deleteElement(const scaled& x, const scaled& y) const
     std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
 }
+
+int32_t
+View::insertElementAfter(const scaled& x, const scaled& y) const
+{
+    std::cout << "in insertElementAfter" << std::endl;
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        area->getGlyphArea()->getParent()->getParent()->getNode()->InsertElementAfter();
+        return 1;
+    }
+
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    return 0;
+}

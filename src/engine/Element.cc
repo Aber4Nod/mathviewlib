@@ -149,6 +149,13 @@ Element::setDeleteSet()
 }
 
 void
+Element::setInsertSet()
+{
+    if (!(insertSet()))
+        setFlag(FInsertSet);
+}
+
+void
 Element::setDirtyAttribute()
 {
   //std::cerr << "Element::setDirtyAttribute " << this << " " << dirtyAttribute() << std::endl;

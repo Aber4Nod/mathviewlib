@@ -91,6 +91,7 @@ public:
   void lookUpContent(const scaled&, const scaled&) const;
 
   int32_t deleteElement(const scaled&, const scaled&) const;
+  int32_t insertElementAfter(const scaled&, const scaled&) const;
 
 protected:
   SmartPtr<const class Area> getRootArea(void) const;

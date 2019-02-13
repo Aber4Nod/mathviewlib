@@ -88,7 +88,11 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         // m_view->lookUpContent(pos.x(), pos.y());
 
         // -- deletion of element here
-        if (m_view->deleteElement(pos.x(), pos.y()))
+        // if (m_view->deleteElement(pos.x(), pos.y()))
+            // repaint();
+
+        // -- addition of element after here
+        if (m_view->insertElementAfter(pos.x(), pos.y()))
             repaint();
     }
 }

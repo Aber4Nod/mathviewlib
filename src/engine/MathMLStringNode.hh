@@ -48,6 +48,7 @@ public:
   void InsertGlyphAfter(uint32_t index, char glyph);
   void InsertGlyphBefore(uint32_t index, char glyph);
   void DeleteParentElement(void);
+  void InsertElementAfter(void);
   
 private:
     // setDirtyLayout

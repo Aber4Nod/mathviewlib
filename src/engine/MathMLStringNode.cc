@@ -174,3 +174,12 @@ MathMLStringNode::DeleteParentElement() // deletion also must be supported w/ bi
     getParentElement()->setDeleteSet();
 }
 
+void
+MathMLStringNode::InsertElementAfter()
+{
+    std::cout << "[MathMLStringNode::InsertElementAfter]: inserting element after" << std::endl;
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setInsertSet();
+}
+

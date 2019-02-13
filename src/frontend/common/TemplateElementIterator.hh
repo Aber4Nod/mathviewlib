@@ -63,6 +63,33 @@ public:
       Model::freeNode(Model::asNode(xml_element));
       return node;
   }
+  
+  typename Model::Node
+  insertAfter(const typename Model::Element& el)
+  {
+      typename Model::Element xml_element = element();
+
+      // creating mrow parent element
+      typename Model::Node nodeParent = Model::createNode(
+          Model::getNodeNamespace(Model::asNode(xml_element)), "mrow");
+      Model::setParent(nodeParent, Model::asNode(el));
+      Model::insertChild(nodeParent, xml_element);
+
+      // creating default next element
+      typename Model::Node node = Model::createNode(
+          Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+      Model::insertChild(nodeParent, node);
+
+      Model::setParent(xml_element, Model::asNode(nodeParent));
+      Model::setParent(node, Model::asNode(nodeParent));
+
+      Model::insertNextSibling(Model::asNode(xml_element), node);
+      Model::setNodeValue(node, "");
+
+      return node;
+  }
+  
+
 
 protected:
   typename Model::Element
