@@ -574,12 +574,12 @@ protected:
           typename Model::Node node = iter.updateCurrent(el);
           element = builder.getMathMLElement(Model::asElement(node));
       }
-      // else
-      // if (element->insertSet())
-      // {
-          // typename Model::Node node = iter.insertAfter(el);
-          // element = builder.getMathMLElement(Model::asElement(node));
-      // }
+      else
+      if (element->insertSet())
+      {
+          typename Model::Node node = iter.insertAfter(el);
+          element = builder.getMathMLElement(Model::asElement(node));
+      }
       elem->setNumerator(element);
       iter.next();
 
@@ -590,12 +590,12 @@ protected:
           typename Model::Node node = iter.updateCurrent(el);
           element = builder.getMathMLElement(Model::asElement(node));
       }
-      // else
-      // if (element->insertSet())
-      // {
-          // typename Model::Node node = iter.insertAfter(el);
-          // element = builder.getMathMLElement(Model::asElement(node));
-      // }
+      else
+      if (element->insertSet())
+      {
+          typename Model::Node node = iter.insertAfter(el);
+          element = builder.getMathMLElement(Model::asElement(node));
+      }
       elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
   };

@@ -38,8 +38,9 @@ public:
   bool more(void) const { return currentElement; }
   void next(void)
   { 
-    assert(currentElement);
-    currentElement = findValidNodeForward(Model::getNextSibling(Model::asNode(currentElement)));
+    // assert(currentElement);
+    if (currentElement != nullptr)
+        currentElement = findValidNodeForward(Model::getNextSibling(Model::asNode(currentElement)));
   }
   void setCurrent(typename Model::Element newElement)
   { currentElement = newElement; }
@@ -63,30 +64,56 @@ public:
       Model::freeNode(Model::asNode(xml_element));
       return node;
   }
-  
+
   typename Model::Node
   insertAfter(const typename Model::Element& el)
   {
       typename Model::Element xml_element = element();
+      typename Model::Node nextS = Model::getNextSibling(
+          Model::asNode(xml_element));
+      typename Model::Node prevS = Model::getPrevSibling(
+          Model::asNode(xml_element));
+          
+      printf("current value %s\n", Model::getNodeValue(Model::asNode(xml_element)).c_str());
+      printf("next value %s\n", Model::getNodeValue(nextS).c_str());
+      printf("prev value %s\n", Model::getNodeValue(prevS).c_str());
 
       // creating mrow parent element
       typename Model::Node nodeParent = Model::createNode(
           Model::getNodeNamespace(Model::asNode(xml_element)), "mrow");
+      Model::unlinkNode(Model::asNode(xml_element));
+
       Model::setParent(nodeParent, Model::asNode(el));
-      Model::insertChild(nodeParent, xml_element);
+      Model::insertChild(Model::asNode(el), nodeParent);
+      Model::insertChild(nodeParent, Model::asNode(xml_element));
+      // std::cout << "xml_element value: " << Model::getNodeValue(Model::asNode(xml_element));
 
       // creating default next element
       typename Model::Node node = Model::createNode(
-          Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+          Model::getNodeNamespace(Model::asNode(xml_element)), "munderover");
       Model::insertChild(nodeParent, node);
 
-      Model::setParent(xml_element, Model::asNode(nodeParent));
-      Model::setParent(node, Model::asNode(nodeParent));
+      Model::setParent(Model::asNode(xml_element), nodeParent);
+      Model::setParent(node, nodeParent);
+      
+      Model::setNextSibling(nodeParent, nextS);
+      // Model::setNextSibling(prevS, nodeParent);
+      // Model::insertNextSibling(nodeParent, nextS);
+      Model::setPrevSibling(nextS, nodeParent);
+      // Model::setPrevSibling(nodeParent, prevS);
+      // Model::setNextSibling(nodeParent, Model::getNextSibling(
+      //     Model::asNode(xml_element)));
+          
+      Model::setNextSibling(Model::asNode(xml_element), node);
+      Model::setPrevSibling(node, Model::asNode(xml_element));
 
-      Model::insertNextSibling(Model::asNode(xml_element), node);
+      // Model::insertNextSibling(Model::asNode(xml_element), node);
       Model::setNodeValue(node, "");
 
-      return node;
+      // Model::insertNextSibling(nodeParent, Model::getNextSibling(
+          // Model::asNode(xml_element)));
+      setCurrent(Model::asElement(nodeParent));
+      return nodeParent;
   }
   
 
