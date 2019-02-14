@@ -109,6 +109,8 @@ struct libxml2_Model
   { return xmlAddPrevSibling(cur, elem); }
   static Node insertChild(const Node& parent, const Node& child)
   { return xmlAddChild(parent, child); }
+  static Node copyNode(const Node& node, int extended)
+  { return xmlCopyNode(node, extended); }
 
   // MUST be available if the default linker is used
   struct Hash
