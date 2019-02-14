@@ -81,34 +81,29 @@ public:
       typename Model::Node xml_element_copy = 
             Model::copyNode(Model::asNode(xml_element), 1);
       xml_element = Model::asElement(nodeParent);
-      // Model::unlinkNode(Model::asNode(xml_element));
 
       Model::insertChild(nodeParent, xml_element_copy);
 
       // creating default next element
+      // typename Model::Node node = Model::createNewChild(nodeParent, 
+            // Model::getNodeNamespace(xml_element_copy),
+            // Model::toModelString("munderover"), Model::toModelString(""));
+
       typename Model::Node node = Model::createNode(
           Model::getNodeNamespace(xml_element_copy), "munderover");
-      Model::insertChild(nodeParent, node);
+      Model::insertNextSibling(xml_element_copy, node);
+      // Model::insertChild(nodeParent, node);
 
-      Model::setParent(xml_element_copy, nodeParent);
-      Model::setParent(node, nodeParent);
+      // Model::setParent(xml_element_copy, nodeParent);
+      // Model::setParent(node, nodeParent);
       
       Model::setNextSibling(nodeParent, nextS);
-      // Model::setNextSibling(prevS, nodeParent);
-      // Model::insertNextSibling(nodeParent, nextS);
       Model::setPrevSibling(nextS, nodeParent);
-      // Model::setPrevSibling(nodeParent, prevS);
-      // Model::setNextSibling(nodeParent, Model::getNextSibling(
-      //     Model::asNode(xml_element)));
-          
-      Model::setNextSibling(xml_element_copy, node);
-      Model::setPrevSibling(node, xml_element_copy);
 
-      // Model::insertNextSibling(Model::asNode(xml_element), node);
+      // Model::setNextSibling(xml_element_copy, node);
+      // Model::setPrevSibling(node, xml_element_copy);
       Model::setNodeValue(node, "");
 
-      // Model::insertNextSibling(nodeParent, Model::getNextSibling(
-          // Model::asNode(xml_element)));
       setCurrent(Model::asElement(nodeParent));
       return nodeParent;
   }
