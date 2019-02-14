@@ -79,14 +79,16 @@ public:
       printf("prev value %s\n", Model::getNodeValue(prevS).c_str());
 
       // creating mrow parent element
-      typename Model::Node nodeParent = Model::createNode(
-          Model::getNodeNamespace(Model::asNode(xml_element)), "mrow");
+      // typename Model::Node nodeParent = Model::createNode(
+          // Model::getNodeNamespace(Model::asNode(xml_element)), "mrow");
+      typename Model::Node nodeParent = Model::createNewChild(Model::asNode(el), 
+            Model::getNodeNamespace(Model::asNode(xml_element)),
+            Model::toModelString("mrow"), Model::toModelString(""));
+
       Model::unlinkNode(Model::asNode(xml_element));
 
-      Model::setParent(nodeParent, Model::asNode(el));
-      Model::insertChild(Model::asNode(el), nodeParent);
+      // Model::setParent(nodeParent, Model::asNode(el));
       Model::insertChild(nodeParent, Model::asNode(xml_element));
-      // std::cout << "xml_element value: " << Model::getNodeValue(Model::asNode(xml_element));
 
       // creating default next element
       typename Model::Node node = Model::createNode(

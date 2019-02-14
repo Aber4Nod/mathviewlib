@@ -99,6 +99,9 @@ struct libxml2_Model
   static void freeNode(const Node& n);
   static Node createNode(xmlNsPtr ns, const String& str)
   { return xmlNewNode(ns, xmlStrdup(toModelString(str))); };
+  static Node createNewChild(const Node& parent, xmlNsPtr ns, 
+      const xmlChar *name, const xmlChar *content)
+  { return xmlNewChild(parent, ns, name, content); };
   static xmlNsPtr getNodeNamespace(const Node&);
   static Node insertNextSibling(const Node& cur, const Node& elem)
   { return xmlAddNextSibling(cur, elem); }
