@@ -581,6 +581,7 @@ protected:
       {
           printf("[construct]: insertSet triggered: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
           typename Model::Node node = iter.insertAfter(el);
+          element->resetFlag(MathMLActionElement::FInsertSet);
           element = builder.getMathMLElement(Model::asElement(node));
       }
       // std::cout << "Address of iter1 after element: " << iter.element() << std::endl;
@@ -606,6 +607,7 @@ protected:
       if (element->insertSet())
       {
           typename Model::Node node = iter.insertAfter(el);
+          element->resetFlag(MathMLActionElement::FInsertSet);
           element = builder.getMathMLElement(Model::asElement(node));
       }
       printf("[construct]: insertSet triggered2: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());

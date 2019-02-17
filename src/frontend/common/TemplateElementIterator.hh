@@ -80,23 +80,17 @@ public:
                 Model::getNodeNamespace(Model::asNode(el)),
                 Model::toModelString("mrow"), Model::toModelString(""));
           printf("[insertAfter]: nodeParent node name: %s\n", Model::getNodeName(nodeParent).c_str());
-          typename Model::Node xml_element_copy = 
-                Model::copyNode(Model::asNode(xml_element), 1);
           Model::replaceNode(Model::asNode(xml_element), nodeParent);
-          // Model::unlinkNode(Model::asNode(xml_element));
-          Model::freeNode(Model::asNode(xml_element));
-          // xml_element = Model::asElement(nodeParent);
-
-          Model::insertChild(nodeParent, xml_element_copy);
+          Model::insertChild(nodeParent, Model::asNode(xml_element));
 
           // creating default next element
           typename Model::Node node = Model::createNewChild(nodeParent, 
-                Model::getNodeNamespace(xml_element_copy),
+                Model::getNodeNamespace(Model::asNode(xml_element)),
                 Model::toModelString("munderover"), Model::toModelString(""));
 
           // typename Model::Node node = Model::createNode(
               // Model::getNodeNamespace(xml_element_copy), "munderover");
-          Model::insertNextSibling(xml_element_copy, node);
+          Model::insertNextSibling(Model::asNode(xml_element), node);
           // Model::insertChild(nodeParent, node);
 
           // Model::setParent(xml_element_copy, nodeParent);
