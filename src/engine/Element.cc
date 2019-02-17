@@ -40,6 +40,7 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   setDirtyLayout();
   resetFlag(FContentSet);
   resetFlag(FDeleteSet);
+  resetFlag(FInsertSet);
 }
 
 Element::~Element()

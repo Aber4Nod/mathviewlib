@@ -568,6 +568,8 @@ protected:
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
+      std::cout << "Address of iter1 element: " << iter.element() << std::endl;
+      //testing
       if (element->deleteSet())
       {
           builder.forgetElement(element);
@@ -577,9 +579,19 @@ protected:
       else
       if (element->insertSet())
       {
+          printf("[construct]: insertSet triggered: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
           typename Model::Node node = iter.insertAfter(el);
           element = builder.getMathMLElement(Model::asElement(node));
       }
+      // std::cout << "Address of iter1 after element: " << iter.element() << std::endl;
+      // typename Model::ElementIterator iter3(el, MATHML_NS_URI);
+      // std::cout << "Address of iter3 element: " << iter3.element() << std::endl;
+
+      printf("[construct]: insertSet triggered2: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
+      typename Model::ElementIterator iter2(el, MATHML_NS_URI);
+      // std::cout << "Address of iter2 element: " << iter2.element() << std::endl;
+      printf("[construct]: insertSet triggered3: %s\n", Model::getNodeName(Model::asNode(iter2.element())).c_str());
+      
       elem->setNumerator(element);
       iter.next();
 
@@ -596,6 +608,13 @@ protected:
           typename Model::Node node = iter.insertAfter(el);
           element = builder.getMathMLElement(Model::asElement(node));
       }
+      printf("[construct]: insertSet triggered2: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
+      typename Model::ElementIterator iter3(el, MATHML_NS_URI);
+      // std::cout << "Address of iter2 element: " << iter2.element() << std::endl;
+      iter3.next();
+      // TODO mrow address is correct but it is need to support change of mrow
+      printf("[construct]: insertSet triggered3: %s\n", Model::getNodeName(Model::asNode(iter3.element())).c_str());
+
       elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
   };
@@ -1025,7 +1044,18 @@ protected:
   getMathMLElement(const typename Model::Element& el) const
   {
     if (SmartPtr<MathMLElement> elem = getMathMLElementNoCreate(el))
-      return elem;
+    {
+        if (elem->insertSet())
+        {
+            printf("[getMathMLElement]: insertSet triggered\n");
+            // static int counter = 0;
+            // if (counter++ > 1)
+                // assert(0 == 1);
+            // typename Model::Node node = iter.insertAfter(el);
+            // _elem = getMathMLElement(Model::asElement(node));
+        }
+        return elem;
+    }
     else
       return createMathMLDummyElement();
   }
@@ -1037,6 +1067,19 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+        if (_elem->insertSet())
+        {
+            printf("[getChildMathMLElements]: insertSet triggered\n");
+            // todo think about recursion for mrow here!
+
+            // static int check = 0;
+            // if (check++ < 1) {
+                // _elem->resetFlag(MathMLActionElement::FInsertSet);
+                typename Model::Node node = iter.insertAfter(el);
+                _elem = getMathMLElement(Model::asElement(node));
+            // }
+        }
+
         // if (!_elem->contentSet())
         // {
             content.push_back(_elem);

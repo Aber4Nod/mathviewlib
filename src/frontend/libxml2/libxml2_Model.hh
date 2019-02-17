@@ -111,6 +111,8 @@ struct libxml2_Model
   { return xmlAddChild(parent, child); }
   static Node copyNode(const Node& node, int extended)
   { return xmlCopyNode(node, extended); }
+  static Node replaceNode(const Node& old, const Node& cur)
+  { return xmlReplaceNode(old, cur); }
 
   // MUST be available if the default linker is used
   struct Hash
