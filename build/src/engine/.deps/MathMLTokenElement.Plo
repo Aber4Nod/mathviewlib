@@ -740,6 +740,8 @@ engine/MathMLTokenElement.lo: ../../src/engine/MathMLTokenElement.cc \
 
 ../../src/engine/MathMLDummyElement.hh:
 
+../../src/engine/MathMLCursorElement.hh:
+
 ../../src/engine/MathMLEncloseElement.hh:
 
 ../../src/common/RGBColor.hh:

@@ -762,8 +762,9 @@ am__noinst_HEADERS_DIST = common/CharTraits.hh common/Clock.hh \
 	engine/MathMLAttributeSignatures.hh \
 	engine/MathMLBinContainerElement.hh \
 	engine/MathMLContainerElement.hh engine/MathMLDummyElement.hh \
-	engine/MathMLEmbellishment.hh engine/MathMLEncloseElement.hh \
-	engine/MathMLErrorElement.hh engine/MathMLFractionElement.hh \
+	engine/MathMLCursorElement.hh engine/MathMLEmbellishment.hh \
+	engine/MathMLEncloseElement.hh engine/MathMLErrorElement.hh \
+	engine/MathMLFractionElement.hh \
 	engine/MathMLFunctionApplicationNode.hh \
 	engine/MathMLGlyphNode.hh engine/MathML.hh \
 	engine/MathMLIdentifierElement.hh \
@@ -1037,8 +1038,9 @@ noinst_HEADERS = $(NULL) common/CharTraits.hh common/Clock.hh \
 	engine/MathMLAttributeSignatures.hh \
 	engine/MathMLBinContainerElement.hh \
 	engine/MathMLContainerElement.hh engine/MathMLDummyElement.hh \
-	engine/MathMLEmbellishment.hh engine/MathMLEncloseElement.hh \
-	engine/MathMLErrorElement.hh engine/MathMLFractionElement.hh \
+	engine/MathMLCursorElement.hh engine/MathMLEmbellishment.hh \
+	engine/MathMLEncloseElement.hh engine/MathMLErrorElement.hh \
+	engine/MathMLFractionElement.hh \
 	engine/MathMLFunctionApplicationNode.hh \
 	engine/MathMLGlyphNode.hh engine/MathML.hh \
 	engine/MathMLIdentifierElement.hh \
@@ -1111,6 +1113,7 @@ libengine_la_SOURCES = \
   engine/MathMLBinContainerElement.cc \
   engine/MathMLContainerElement.cc \
   engine/MathMLDummyElement.cc \
+  engine/MathMLCursorElement.cc \
   engine/MathMLElement.cc \
   engine/MathMLEmbellishment.cc \
   engine/MathMLEncloseElement.cc \
@@ -1620,6 +1623,8 @@ engine/MathMLContainerElement.lo: engine/$(am__dirstamp) \
 	engine/$(DEPDIR)/$(am__dirstamp)
 engine/MathMLDummyElement.lo: engine/$(am__dirstamp) \
 	engine/$(DEPDIR)/$(am__dirstamp)
+engine/MathMLCursorElement.lo: engine/$(am__dirstamp) \
+	engine/$(DEPDIR)/$(am__dirstamp)
 engine/MathMLElement.lo: engine/$(am__dirstamp) \
 	engine/$(DEPDIR)/$(am__dirstamp)
 engine/MathMLEmbellishment.lo: engine/$(am__dirstamp) \
@@ -1959,6 +1964,7 @@ include engine/$(DEPDIR)/MathMLAlignMarkElement.Plo # am--include-marker
 include engine/$(DEPDIR)/MathMLAttributeSignatures.Plo # am--include-marker
 include engine/$(DEPDIR)/MathMLBinContainerElement.Plo # am--include-marker
 include engine/$(DEPDIR)/MathMLContainerElement.Plo # am--include-marker
+include engine/$(DEPDIR)/MathMLCursorElement.Plo # am--include-marker
 include engine/$(DEPDIR)/MathMLDummyElement.Plo # am--include-marker
 include engine/$(DEPDIR)/MathMLElement.Plo # am--include-marker
 include engine/$(DEPDIR)/MathMLEmbellishment.Plo # am--include-marker

@@ -41,6 +41,8 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   resetFlag(FContentSet);
   resetFlag(FDeleteSet);
   resetFlag(FInsertSet);
+  resetFlag(FInsertSetCursor);
+  resetFlag(FCursorSet);
 }
 
 Element::~Element()
@@ -154,6 +156,20 @@ Element::setInsertSet()
 {
     if (!(insertSet()))
         setFlag(FInsertSet);
+}
+
+void
+Element::setInsertSetCursor()
+{
+    if (!(insertSetCursor()))
+        setFlag(FInsertSetCursor);
+}
+
+void
+Element::setCursorSet()
+{
+    if (!(cursorSet()))
+        setFlag(FCursorSet);
 }
 
 void

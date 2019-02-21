@@ -144,6 +144,13 @@ MathGraphicDevice::dummy(const FormattingContext& context) const
   return getFactory()->color(unstretchedString(context, StringOfUCS4String(UCS4String(1, 0xfffd))), RGBColor::RED());
 }
 
+AreaRef
+MathGraphicDevice::cursor(const FormattingContext& context) const
+{
+    return getFactory()->fixedVerticalLine(2, 10, 0, RGBColor::BLACK());
+  // return getFactory()->verticalLine(defaultLineThickness(context), context.getColor());
+}
+
 #include "CachedShapedString.hh"
 #include <unordered_map>
 typedef std::unordered_map<CachedShapedStringKey, AreaRef, CachedShapedStringKeyHash> ShapedStringCache;

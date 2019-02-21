@@ -49,6 +49,8 @@ public:
   void InsertGlyphBefore(uint32_t index, char glyph);
   void DeleteParentElement(void);
   void InsertElementAfter(void);
+  // todo remove this logic to base element class (must be supported by all elements)
+  void insertElementCursor(void);
   
 private:
     // setDirtyLayout

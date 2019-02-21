@@ -1056,10 +1056,15 @@ protected:
             // typename Model::Node node = iter.insertAfter(el);
             // _elem = getMathMLElement(Model::asElement(node));
         }
+        else
+        if (elem->cursorSet())
+            return createMathMLCursorElement();
         return elem;
     }
-    else
+    else {
+      printf("[getMathMLElement]: creating createMathMLCursorElement\n");
       return createMathMLDummyElement();
+    }
   }
 
   void
@@ -1076,7 +1081,7 @@ protected:
 
             // static int check = 0;
             // if (check++ < 1) {
-                // _elem->resetFlag(MathMLActionElement::FInsertSet);
+                _elem->resetFlag(MathMLActionElement::FInsertSet);
                 typename Model::Node node = iter.insertAfter(el);
                 _elem = getMathMLElement(Model::asElement(node));
             // }
@@ -1182,6 +1187,15 @@ protected:
   createMathMLDummyElement(void) const
   {
     SmartPtr<MathMLElement> elem = MathMLDummyElement::create(this->getMathMLNamespaceContext());
+    elem->resetDirtyStructure();
+    elem->resetDirtyAttribute();
+    return elem;
+  }
+  
+  SmartPtr<MathMLElement>
+  createMathMLCursorElement(void) const
+  {
+    SmartPtr<MathMLElement> elem = MathMLCursorElement::create(this->getMathMLNamespaceContext());
     elem->resetDirtyStructure();
     elem->resetDirtyAttribute();
     return elem;

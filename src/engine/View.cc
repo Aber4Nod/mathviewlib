@@ -464,3 +464,19 @@ View::insertElementAfter(const scaled& x, const scaled& y) const
     std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
 }
+
+int32_t
+View::insertElementCursor(const scaled& x, const scaled& y) const
+{
+    std::cout << "in insertElementCursor" << std::endl;
+    // todo make finding nearest area/element instead of clicked glyphArea
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        area->getGlyphArea()->getParent()->getParent()->getNode()->insertElementCursor();
+        return 1;
+    }
+
+    std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
+    return 0;
+}

@@ -62,6 +62,8 @@ public:
   virtual void setContentSet(void);
   virtual void setDeleteSet(void);
   virtual void setInsertSet(void);
+  virtual void setInsertSetCursor(void);
+  virtual void setCursorSet(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -74,6 +76,8 @@ public:
   bool contentSet(void) const { return getFlag(FContentSet); }
   bool deleteSet(void) const { return getFlag(FDeleteSet); }
   bool insertSet(void) const { return getFlag(FInsertSet); }
+  bool insertSetCursor(void) const { return getFlag(FInsertSetCursor); }
+  bool cursorSet(void) const { return getFlag(FCursorSet); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -88,6 +92,8 @@ public:
     FContentSet,
     FDeleteSet,
     FInsertSet,
+    FInsertSetCursor,
+    FCursorSet,
     
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

@@ -183,3 +183,11 @@ MathMLStringNode::InsertElementAfter()
     getParentElement()->setInsertSet();
 }
 
+void
+MathMLStringNode::insertElementCursor()
+{
+    std::cout << "[MathMLStringNode::insertElementCursor]: inserting element after" << std::endl;
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setInsertSetCursor();
+}

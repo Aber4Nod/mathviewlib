@@ -86,6 +86,7 @@ public:
 
   virtual AreaRef wrapper(const class FormattingContext&, const AreaRef& area) const;
   virtual AreaRef dummy(const class FormattingContext& context) const;
+  virtual AreaRef cursor(const FormattingContext& context) const;
 
 protected:
   AreaRef stretchedString(const class FormattingContext&, const String& str) const;

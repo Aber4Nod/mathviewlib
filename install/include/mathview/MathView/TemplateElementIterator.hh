@@ -86,7 +86,7 @@ public:
           // creating default next element
           typename Model::Node node = Model::createNewChild(nodeParent, 
                 Model::getNodeNamespace(Model::asNode(xml_element)),
-                Model::toModelString("munderover"), Model::toModelString(""));
+                Model::toModelString("mi"), Model::toModelString("t"));
 
           // typename Model::Node node = Model::createNode(
               // Model::getNodeNamespace(xml_element_copy), "munderover");
@@ -102,13 +102,20 @@ public:
           // Model::setNextSibling(xml_element_copy, node);
           // Model::setPrevSibling(node, xml_element_copy);
           setCurrent(Model::asElement(nodeParent));
-          Model::setNodeValue(node, "");
+          // Model::setNodeValue(node, "");
+
+          // inserting cursor
+          // typename Model::Node node1 = Model::createNewChild(Model::asNode(el), 
+                // Model::getNodeNamespace(Model::asNode(xml_element)),
+                // Model::toModelString("mi"), Model::toModelString(""));
+          // Model::insertNextSibling(node, node1);
+
           return nodeParent;
       }
 
       typename Model::Node node = Model::createNewChild(Model::asNode(el), 
             Model::getNodeNamespace(Model::asNode(xml_element)),
-            Model::toModelString("munderover"), Model::toModelString(""));
+            Model::toModelString("mi"), Model::toModelString("t"));
       Model::insertNextSibling(Model::asNode(xml_element), node);
       // setCurrent(Model::asElement(node));
       return Model::asNode(xml_element);

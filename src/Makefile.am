@@ -105,6 +105,7 @@ libengine_la_SOURCES = \
   engine/MathMLBinContainerElement.cc \
   engine/MathMLContainerElement.cc \
   engine/MathMLDummyElement.cc \
+  engine/MathMLCursorElement.cc \
   engine/MathMLElement.cc \
   engine/MathMLEmbellishment.cc \
   engine/MathMLEncloseElement.cc \
@@ -179,6 +180,7 @@ noinst_HEADERS += \
   engine/MathMLBinContainerElement.hh \
   engine/MathMLContainerElement.hh \
   engine/MathMLDummyElement.hh \
+  engine/MathMLCursorElement.hh \
   engine/MathMLEmbellishment.hh \
   engine/MathMLEncloseElement.hh \
   engine/MathMLErrorElement.hh \

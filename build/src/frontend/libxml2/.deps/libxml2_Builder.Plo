@@ -206,6 +206,7 @@ frontend/libxml2/libxml2_Builder.lo: \
   ../../src/engine/MathMLAlignGroupElement.hh \
   ../../src/engine/MathMLAlignMarkElement.hh ../../src/common/token.hh \
   ../../auto/token.dec ../../src/engine/MathMLDummyElement.hh \
+  ../../src/engine/MathMLCursorElement.hh \
   ../../src/engine/MathMLEncloseElement.hh ../../src/common/RGBColor.hh \
   ../../src/engine/MathMLNormalizingContainerElement.hh \
   ../../src/engine/MathMLBinContainerElement.hh \
@@ -818,6 +819,8 @@ frontend/libxml2/libxml2_Builder.lo: \
 ../../auto/token.dec:
 
 ../../src/engine/MathMLDummyElement.hh:
+
+../../src/engine/MathMLCursorElement.hh:
 
 ../../src/engine/MathMLEncloseElement.hh:
 
