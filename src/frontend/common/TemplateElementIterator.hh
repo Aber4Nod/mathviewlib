@@ -64,6 +64,29 @@ public:
       Model::freeNode(Model::asNode(xml_element));
       return node;
   }
+  
+typename Model::Node
+insertAfterPrepareMROW(const typename Model::Element& el)
+{
+    typename Model::Element xml_element = element();
+    typename Model::Node nextS = Model::getNextSibling(
+        Model::asNode(xml_element));
+    typename Model::Node prevS = Model::getPrevSibling(
+        Model::asNode(xml_element));
+
+    if (Model::getNodeName(Model::asNode(el)) == "mrow") 
+        return Model::asNode(xml_element);
+
+    typename Model::Node nodeParent = Model::createNewChild(Model::asNode(el), 
+          Model::getNodeNamespace(Model::asNode(el)),
+          Model::toModelString("mrow"), Model::toModelString(""));
+    printf("[insertAfter]: nodeParent node name: %s\n", Model::getNodeName(nodeParent).c_str());
+    Model::replaceNode(Model::asNode(xml_element), nodeParent);
+    Model::insertChild(nodeParent, Model::asNode(xml_element));
+
+    setCurrent(Model::asElement(nodeParent));
+    return nodeParent;
+}
 
   typename Model::Node
   insertAfter(const typename Model::Element& el)
@@ -113,9 +136,12 @@ public:
           return nodeParent;
       }
 
-      typename Model::Node node = Model::createNewChild(Model::asNode(el), 
-            Model::getNodeNamespace(Model::asNode(xml_element)),
-            Model::toModelString("mi"), Model::toModelString("t"));
+      typename Model::Node node = Model::createNode(
+          Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+      Model::setNodeValue(node, "q");
+      // typename Model::Node node = Model::createNewChild(Model::asNode(el), 
+            // Model::getNodeNamespace(Model::asNode(xml_element)),
+            // Model::toModelString("mi"), Model::toModelString("t"));
       Model::insertNextSibling(Model::asNode(xml_element), node);
       // setCurrent(Model::asElement(node));
       return Model::asNode(xml_element);

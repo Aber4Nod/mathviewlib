@@ -568,8 +568,7 @@ protected:
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      std::cout << "Address of iter1 element: " << iter.element() << std::endl;
-      //testing
+
       if (element->deleteSet())
       {
           builder.forgetElement(element);
@@ -579,20 +578,19 @@ protected:
       else
       if (element->insertSet())
       {
-          printf("[construct]: insertSet triggered: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
-          typename Model::Node node = iter.insertAfter(el);
-          element->resetFlag(MathMLActionElement::FInsertSet);
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          // element->resetFlag(MathMLActionElement::FInsertSet);
+          // todo remove inserting after element (let if be in getmathmlchildelements)
           element = builder.getMathMLElement(Model::asElement(node));
       }
-      // std::cout << "Address of iter1 after element: " << iter.element() << std::endl;
-      // typename Model::ElementIterator iter3(el, MATHML_NS_URI);
-      // std::cout << "Address of iter3 element: " << iter3.element() << std::endl;
+      else
+      if (element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          // element->resetFlag(MathMLActionElement::FInsertSetCursor);
+          element = builder.getMathMLElement(Model::asElement(node));
+      }
 
-      printf("[construct]: insertSet triggered2: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
-      typename Model::ElementIterator iter2(el, MATHML_NS_URI);
-      // std::cout << "Address of iter2 element: " << iter2.element() << std::endl;
-      printf("[construct]: insertSet triggered3: %s\n", Model::getNodeName(Model::asNode(iter2.element())).c_str());
-      
       elem->setNumerator(element);
       iter.next();
 
@@ -606,16 +604,17 @@ protected:
       else
       if (element->insertSet())
       {
-          typename Model::Node node = iter.insertAfter(el);
-          element->resetFlag(MathMLActionElement::FInsertSet);
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          // element->resetFlag(MathMLActionElement::FInsertSet);
           element = builder.getMathMLElement(Model::asElement(node));
       }
-      printf("[construct]: insertSet triggered2: %s\n", Model::getNodeName(Model::asNode(iter.element())).c_str());
-      typename Model::ElementIterator iter3(el, MATHML_NS_URI);
-      // std::cout << "Address of iter2 element: " << iter2.element() << std::endl;
-      iter3.next();
-      // TODO mrow address is correct but it is need to support change of mrow
-      printf("[construct]: insertSet triggered3: %s\n", Model::getNodeName(Model::asNode(iter3.element())).c_str());
+      else
+      if (element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          // element->resetFlag(MathMLActionElement::FInsertSetCursor);
+          element = builder.getMathMLElement(Model::asElement(node));
+      }
 
       elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
@@ -1057,8 +1056,10 @@ protected:
             // _elem = getMathMLElement(Model::asElement(node));
         }
         else
-        if (elem->cursorSet())
+        if (elem->cursorSet()) {
+            printf("[getMathMLElement]: cursorSet triggered\n");
             return createMathMLCursorElement();
+        }
         return elem;
     }
     else {
@@ -1077,26 +1078,27 @@ protected:
         if (_elem->insertSet())
         {
             printf("[getChildMathMLElements]: insertSet triggered\n");
-            // todo think about recursion for mrow here!
-
-            // static int check = 0;
-            // if (check++ < 1) {
-                _elem->resetFlag(MathMLActionElement::FInsertSet);
-                typename Model::Node node = iter.insertAfter(el);
-                _elem = getMathMLElement(Model::asElement(node));
-            // }
+            _elem->resetFlag(MathMLActionElement::FInsertSet);
+            typename Model::Node node = iter.insertAfter(el);
+            _elem = getMathMLElement(Model::asElement(node));
         }
+        else
+        if (_elem->insertSetCursor())
+        {
+            typename Model::Node node = iter.insertAfter(el);
+            _elem = getMathMLElement(Model::asElement(node));
+        }
+        content.push_back(_elem);
 
-        // if (!_elem->contentSet())
-        // {
-            content.push_back(_elem);
-        // }
+        if (_elem->insertSetCursor())
+        {
+            _elem->resetFlag(MathMLActionElement::FInsertSetCursor);
+            iter.next();
 
-        // else
-        // {
-            // Model::unlinkNode(Model::asNode(iter.element()));
-            // Model::freeNode(Model::asNode(iter.element()));
-        // }
+            _elem = getMathMLElement(iter.element());
+            _elem->setFlag(MathMLActionElement::FCursorSet);
+            content.push_back(createMathMLCursorElement());
+        }
     }
   }
 

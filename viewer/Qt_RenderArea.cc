@@ -92,8 +92,13 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
             // repaint();
 
         // -- addition of element after here
-        if (m_view->insertElementAfter(pos.x(), pos.y()))
+        // if (m_view->insertElementAfter(pos.x(), pos.y()))
+            // repaint();
+
+        // -- addition of cursor after here
+        if (m_view->insertElementCursor(pos.x(), pos.y()))
             repaint();
+
     }
 }
 
