@@ -230,6 +230,13 @@ Element::setFlagUp(Flags f)
     p->setFlag(f);
 }
 
+const Element *
+Element::getElementByFlag(Flags f)
+{
+    std::cout << "[Element:getElementByFlag]: checking element address: " << this << std::endl;
+    return getFlag(f) ? this : nullptr;
+}
+
 void
 Element::resetFlagUp(Flags f)
 {

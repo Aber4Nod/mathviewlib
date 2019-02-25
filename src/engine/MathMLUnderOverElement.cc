@@ -168,6 +168,22 @@ MathMLUnderOverElement::setFlagDown(Flags f)
   overScript.setFlagDown(f);
 }
 
+const Element *
+MathMLUnderOverElement::getElementByFlag(Flags f)
+{
+    printf("[MathMLUnderOverElement::getElementByFlag]: //\n");
+    const Element *__element = base.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = underScript.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = overScript.getElementByFlag(f);
+    if (__element)
+        return __element;
+    return nullptr;
+}
+
 void
 MathMLUnderOverElement::resetFlagDown(Flags f)
 {

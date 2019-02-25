@@ -24,7 +24,7 @@
 
 #include "VerticalFillerArea.hh"
 #include "VerticalSpaceArea.hh"
-
+#include <iostream>
 SmartPtr<VerticalFillerArea>
 VerticalFillerArea::create()
 {
@@ -40,6 +40,7 @@ VerticalFillerArea::box() const
 AreaRef
 VerticalFillerArea::fit(const scaled&, const scaled& height, const scaled& depth) const
 {
+  std::cout << "[VerticalFillerArea::fit]: filling verticalfiller! //\n";
   return VerticalSpaceArea::create(height, depth);
 }
 

@@ -121,13 +121,33 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
   return res;
 }
 
+// todo make special formatting for cursor (temporary solution? -> come up w/ better solution)
 AreaRef
 MathMLTokenElement::format(FormattingContext& ctxt)
 {
   if (dirtyLayout())
     {
       ctxt.push(this);
-      setArea(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+      if (cursorSet()) {
+        // must be binded to prev or next element (to be fitted) -> prevential formatting size (i.e. simple text); 
+        // also there is an actual formatting size - after selecting which element to insert.
+        std::vector<AreaRef> c;
+        if (!getContentLength())
+        {
+            c.push_back(ctxt.MGD()->cursor(ctxt));
+            c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+        }
+        else
+        {
+            c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+            c.push_back(ctxt.MGD()->cursor(ctxt));
+        }
+        // c.push_back(ctxt.MGD()->dummy(ctxt));
+        setArea(ctxt.MGD()->getFactory()->horizontalArray(c));
+        // setArea(ctxt.MGD()->wrapper(ctxt, ctxt.MGD()->cursor(ctxt)));
+      }
+      else
+        setArea(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
       ctxt.pop();
       resetDirtyLayout();
     }

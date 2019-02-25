@@ -46,6 +46,16 @@ MathMLLabeledTableRowElement::setFlagDown(Flags f)
   label.setFlagDown(f);
 }
 
+const Element *
+MathMLLabeledTableRowElement::getElementByFlag(Flags f)
+{
+    printf("[MathMLLabeledTableRowElement::getElementByFlag]: //\n");
+    const Element *__element = label.getElementByFlag(f);
+    if (__element)
+        return __element;
+    return nullptr;
+}
+
 void
 MathMLLabeledTableRowElement::resetFlagDown(Flags f)
 {

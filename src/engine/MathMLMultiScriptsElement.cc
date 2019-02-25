@@ -219,6 +219,28 @@ MathMLMultiScriptsElement::setFlagDown(Flags f)
   preSuperScript.setFlagDown(f);
 }
 
+const Element*
+MathMLMultiScriptsElement::getElementByFlag(Flags f)
+{
+    printf("[MathMLMultiScriptsElement::getElementByFlag]: //\n");
+    const Element *__element = base.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = subScript.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = superScript.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = preSubScript.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = preSuperScript.getElementByFlag(f);
+    if (__element)
+        return __element;
+    return nullptr;
+}
+
 void
 MathMLMultiScriptsElement::resetFlagDown(Flags f)
 {

@@ -48,6 +48,7 @@ public:
   const std::vector< SmartPtr<MathMLElement> >& getContent(void) const { return content.getContent(); }
 
   virtual void setFlagDown(Flags);
+  virtual const Element *getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
 
 protected:

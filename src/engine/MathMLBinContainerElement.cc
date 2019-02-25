@@ -58,6 +58,16 @@ MathMLBinContainerElement::setFlagDown(Flags f)
   content.setFlagDown(f);
 }
 
+const Element *
+MathMLBinContainerElement::getElementByFlag(Flags f)
+{
+    printf("[MathMLBinContainerElement::getElementByFlag]: //\n");
+    const Element *__element = content.getElementByFlag(f);
+    if (__element)
+        return __element;
+    return nullptr;
+}
+
 void
 MathMLBinContainerElement::resetFlagDown(Flags f)
 {

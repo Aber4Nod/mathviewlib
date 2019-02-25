@@ -243,9 +243,9 @@ am_libengine_la_OBJECTS = engine/Attribute.lo engine/AttributeSet.lo \
 	engine/MathMLAttributeSignatures.lo \
 	engine/MathMLBinContainerElement.lo \
 	engine/MathMLContainerElement.lo engine/MathMLDummyElement.lo \
-	engine/MathMLElement.lo engine/MathMLEmbellishment.lo \
-	engine/MathMLEncloseElement.lo engine/MathMLErrorElement.lo \
-	engine/MathMLFractionElement.lo \
+	engine/MathMLCursorElement.lo engine/MathMLElement.lo \
+	engine/MathMLEmbellishment.lo engine/MathMLEncloseElement.lo \
+	engine/MathMLErrorElement.lo engine/MathMLFractionElement.lo \
 	engine/MathMLFunctionApplicationNode.lo \
 	engine/MathMLGlyphNode.lo engine/MathMLIdentifierElement.lo \
 	engine/MathMLInferredRowElement.lo \
@@ -565,6 +565,7 @@ am__depfiles_remade = ./$(DEPDIR)/dummy.Plo backend/$(DEPDIR)/Area.Plo \
 	engine/$(DEPDIR)/MathMLAttributeSignatures.Plo \
 	engine/$(DEPDIR)/MathMLBinContainerElement.Plo \
 	engine/$(DEPDIR)/MathMLContainerElement.Plo \
+	engine/$(DEPDIR)/MathMLCursorElement.Plo \
 	engine/$(DEPDIR)/MathMLDummyElement.Plo \
 	engine/$(DEPDIR)/MathMLElement.Plo \
 	engine/$(DEPDIR)/MathMLEmbellishment.Plo \
@@ -2390,6 +2391,7 @@ distclean: distclean-am
 	-rm -f engine/$(DEPDIR)/MathMLAttributeSignatures.Plo
 	-rm -f engine/$(DEPDIR)/MathMLBinContainerElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLContainerElement.Plo
+	-rm -f engine/$(DEPDIR)/MathMLCursorElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLDummyElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLEmbellishment.Plo
@@ -2572,6 +2574,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f engine/$(DEPDIR)/MathMLAttributeSignatures.Plo
 	-rm -f engine/$(DEPDIR)/MathMLBinContainerElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLContainerElement.Plo
+	-rm -f engine/$(DEPDIR)/MathMLCursorElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLDummyElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLElement.Plo
 	-rm -f engine/$(DEPDIR)/MathMLEmbellishment.Plo

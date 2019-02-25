@@ -46,6 +46,18 @@ public:
       }
   }
 
+  const Element *
+  getElementByFlag(Element::Flags f)
+  {
+      for (unsigned i = 0; i < content.size(); ++i)
+      {
+          const Element *__elem = content[i]->getElementByFlag(f);
+          if (__elem != nullptr)
+            return __elem;
+      }
+      return nullptr;
+  }
+
   TPtr getChild(unsigned i) const
   {
     assert(i < getSize());
@@ -108,7 +120,7 @@ public:
 
   void setFlagDown(Element::Flags f)
   { for_each(std::bind2nd(SetFlagDownAdapter<T,TPtr>(), f)); }
-
+  
   void resetFlagDown(Element::Flags f)
   { for_each(std::bind2nd(ResetFlagDownAdapter<T,TPtr>(), f)); }
 

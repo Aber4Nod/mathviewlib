@@ -52,3 +52,10 @@ MathMLErrorElement::format(FormattingContext& ctxt)
   return getArea();
 }
 
+const Element *
+MathMLErrorElement::getElementByFlag(Flags flag)
+{
+    printf("[MathMLErrorElement::getElementByFlag]: //\n");
+    return getChild() ? getChild()->getElementByFlag(flag) : nullptr;
+}
+

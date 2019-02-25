@@ -134,6 +134,19 @@ MathMLFractionElement::setFlagDown(Flags f)
   denominator.setFlagDown(f);
 }
 
+const Element *
+MathMLFractionElement::getElementByFlag(Flags f)
+{
+    printf("[MathMLFractionElement::getElementByFlag]: //\n");
+    const Element *__elem = numerator.getElementByFlag(f);
+    if (__elem)
+        return __elem;
+    __elem = denominator.getElementByFlag(f);
+    if (__elem)
+        return __elem;
+    return nullptr;
+}
+
 void
 MathMLFractionElement::resetFlagDown(Flags f)
 {

@@ -480,3 +480,17 @@ View::insertElementCursor(const scaled& x, const scaled& y) const
     std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
 }
+
+const Element*
+View::getElementByFlag(Element::Flags f) const
+{
+    return getRootElement()->getElementByFlag(f);
+}
+
+int32_t
+View::insertElementAfterCursor() const
+{
+    const Element *_elem = getElementByFlag(Element::FCursorSet);
+    std::cout << "[View::insertElementAfterCursor]: Cursor element address: " << _elem << std::endl;
+    return 1;
+}

@@ -57,6 +57,7 @@ public:
   virtual AreaRef format(class FormattingContext&);
 
   virtual void setFlagDown(Flags);
+  virtual const Element *getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
   virtual SmartPtr<class MathMLOperatorElement> getCoreOperator(void);
 

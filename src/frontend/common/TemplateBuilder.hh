@@ -1056,10 +1056,6 @@ protected:
             // _elem = getMathMLElement(Model::asElement(node));
         }
         else
-        if (elem->cursorSet()) {
-            printf("[getMathMLElement]: cursorSet triggered\n");
-            return createMathMLCursorElement();
-        }
         return elem;
     }
     else {
@@ -1097,7 +1093,7 @@ protected:
 
             _elem = getMathMLElement(iter.element());
             _elem->setFlag(MathMLActionElement::FCursorSet);
-            content.push_back(createMathMLCursorElement());
+            content.push_back(_elem);
         }
     }
   }

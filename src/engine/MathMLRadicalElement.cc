@@ -73,6 +73,19 @@ MathMLRadicalElement::setFlagDown(Flags f)
   index.setFlagDown(f);
 }
 
+const Element *
+MathMLRadicalElement::getElementByFlag(Flags f)
+{
+    printf("[MathMLRadicalElement::getElementByFlag]: //\n");
+    const Element *__element = base.getElementByFlag(f);
+    if (__element)
+        return __element;
+    __element = index.getElementByFlag(f);
+    if (__element)
+        return __element;
+    return nullptr;
+}
+
 void
 MathMLRadicalElement::resetFlagDown(Flags f)
 {

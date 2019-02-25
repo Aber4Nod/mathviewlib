@@ -147,8 +147,8 @@ MathGraphicDevice::dummy(const FormattingContext& context) const
 AreaRef
 MathGraphicDevice::cursor(const FormattingContext& context) const
 {
-    return getFactory()->fixedVerticalLine(2, 10, 0, RGBColor::BLACK());
-  // return getFactory()->verticalLine(defaultLineThickness(context), context.getColor());
+    // return getFactory()->fixedVerticalLine(2, 10, 0, RGBColor::BLACK());
+  return getFactory()->verticalLine(defaultLineThickness(context), context.getColor());
 }
 
 #include "CachedShapedString.hh"

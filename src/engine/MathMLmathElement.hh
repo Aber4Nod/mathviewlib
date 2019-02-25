@@ -36,6 +36,12 @@ public:
   { return new MathMLmathElement(view); }
 
   virtual AreaRef format(class FormattingContext&);
+  
+  virtual const Element *
+  getElementByFlag(Flags flag)
+  {
+      return getChild() ? getChild()->getElementByFlag(flag) : nullptr;
+  }
 };
 
 #endif // __MathMLmathElement_hh__

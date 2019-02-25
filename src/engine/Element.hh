@@ -105,6 +105,7 @@ public:
   virtual void setFlagDown(Flags);
   virtual void resetFlagDown(Flags);
   bool getFlag(Flags f) const { return flags.test(f); }
+  virtual const Element *getElementByFlag(Flags);
 
   WeakPtr<class NamespaceContext> context; // todo return to private
 private:

@@ -52,6 +52,13 @@ MathMLNormalizingContainerElement::format(FormattingContext& ctxt)
   return getArea();
 }
 
+const Element *
+MathMLNormalizingContainerElement::getElementByFlag(Flags flags)
+{
+    printf("[MathMLNormalizingContainerElement::getElementByFlag]: //\n");
+    return getChild() ? getChild()->getElementByFlag(flags) : nullptr;
+}
+
 void
 MathMLNormalizingContainerElement::setDirtyStructure()
 {

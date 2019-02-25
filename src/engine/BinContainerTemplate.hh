@@ -45,6 +45,12 @@ public:
   {
     if (child) child->setFlagDown(f);
   }
+  
+  const Element *
+  getElementByFlag(Element::Flags f)
+  {
+      return (child) ? child->getElementByFlag(f) : nullptr;
+  }
 
   void resetFlagDown(Element::Flags f)
   {

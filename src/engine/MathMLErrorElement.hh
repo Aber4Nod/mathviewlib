@@ -36,6 +36,9 @@ public:
   { return new MathMLErrorElement(view); }
 
   virtual AreaRef format(class FormattingContext&);
+  
+  virtual const Element *
+  getElementByFlag(Flags flag);
 };
 
 #endif // __MathMLErrorElement_hh__

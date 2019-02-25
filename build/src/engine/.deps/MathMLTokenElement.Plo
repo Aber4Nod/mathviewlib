@@ -175,6 +175,7 @@ engine/MathMLTokenElement.lo: ../../src/engine/MathMLTokenElement.cc \
   ../../src/engine/MathMLAlignMarkElement.hh ../../src/common/token.hh \
   ../../src/common/String.hh ../../auto/token.dec \
   ../../src/engine/MathMLDummyElement.hh \
+  ../../src/engine/MathMLCursorElement.hh \
   ../../src/engine/MathMLEncloseElement.hh ../../src/common/RGBColor.hh \
   ../../src/engine/MathMLNormalizingContainerElement.hh \
   ../../src/engine/MathMLBinContainerElement.hh \

@@ -138,7 +138,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
 
       typename Model::Node node = Model::createNode(
           Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
-      Model::setNodeValue(node, "q");
+      Model::setNodeValue(node, "");
       // typename Model::Node node = Model::createNewChild(Model::asNode(el), 
             // Model::getNodeNamespace(Model::asNode(xml_element)),
             // Model::toModelString("mi"), Model::toModelString("t"));
