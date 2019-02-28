@@ -105,11 +105,11 @@ MathMLScriptElement::setFlagDown(Flags f)
   superScript.setFlagDown(f);
 }
 
-const Element *
+Element *
 MathMLScriptElement::getElementByFlag(Flags f)
 {
     printf("[MathMLScriptElement::getElementByFlag]: //\n");
-    const Element *__elem = base.getElementByFlag(f);
+    Element *__elem = base.getElementByFlag(f);
     if (__elem)
         return __elem;
     __elem = subScript.getElementByFlag(f);

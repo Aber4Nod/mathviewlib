@@ -127,10 +127,10 @@ MathMLStringNode::DeleteGlyph(uint32_t index)
 }
 
 void
-MathMLStringNode::InsertGlyphAfter(uint32_t index, char glyph)
+MathMLStringNode::InsertGlyphAfter(int32_t index, char glyph)
 {
     std::cout << "[MathMLStringNode::InsertGlyphAfter]: got index: " << index << std::endl;
-    if (content.length() == 0)
+    if (content.length() == 0 || index == -1)
         content.push_back(glyph);
     else
     if (index >= content.length())
@@ -147,10 +147,10 @@ MathMLStringNode::InsertGlyphAfter(uint32_t index, char glyph)
 }
 
 void
-MathMLStringNode::InsertGlyphBefore(uint32_t index, char glyph)
+MathMLStringNode::InsertGlyphBefore(int32_t index, char glyph)
 {
     std::cout << "[MathMLStringNode::InsertGlyphBefore]: got index: " << index << std::endl;
-    if (content.length() == 0)
+    if (content.length() == 0 || index == -1)
         content.push_back(glyph);
     else
     if (index >= content.length())

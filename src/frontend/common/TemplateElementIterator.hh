@@ -138,11 +138,11 @@ insertAfterPrepareMROW(const typename Model::Element& el)
 
       typename Model::Node node = Model::createNode(
           Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
-      Model::setNodeValue(node, "");
-      // typename Model::Node node = Model::createNewChild(Model::asNode(el), 
-            // Model::getNodeNamespace(Model::asNode(xml_element)),
-            // Model::toModelString("mi"), Model::toModelString("t"));
+
+      // Model::setNodeValue(node, "");
       Model::insertNextSibling(Model::asNode(xml_element), node);
+      typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+      Model::insertChild(node, node_text);
       // setCurrent(Model::asElement(node));
       return Model::asNode(xml_element);
   }

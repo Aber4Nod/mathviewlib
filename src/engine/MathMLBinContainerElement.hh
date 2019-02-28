@@ -40,7 +40,7 @@ public:
   void setChild(const SmartPtr<MathMLElement>& child) { content.setChild(this, child); }
 
   virtual void setFlagDown(Flags);
-  virtual const Element *getElementByFlag(Flags);
+  virtual Element *getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
 
 protected:

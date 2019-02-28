@@ -102,7 +102,8 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
                 repaint();
         }
         else
-            m_view->insertElementAfterCursor();
+        if (m_view->insertElementAfterCursor())
+            repaint();
     }
 }
 

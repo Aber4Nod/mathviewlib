@@ -38,7 +38,7 @@ public:
   { return new MathMLTableElement(view); }
 
   virtual void setFlagDown(Flags);
-  virtual const Element* getElementByFlag(Flags);
+  virtual Element* getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
   virtual void setDirtyAttribute(void);
   virtual void setDirtyAttributeD(void);

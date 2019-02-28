@@ -218,7 +218,10 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
   /usr/local/include/harfbuzz/hb-shape.h \
   /usr/local/include/harfbuzz/hb-shape-plan.h \
   /usr/local/include/harfbuzz/hb-version.h \
-  ../../src/backend/MathTable.hh
+  ../../src/backend/MathTable.hh ../../src/engine/MathMLTokenElement.hh \
+  ../../src/engine/MathMLElement.hh \
+  ../../src/engine/LinearContainerTemplate.hh \
+  ../../src/common/for_each_if.h ../../src/engine/Adapters.hh
 
 ../config.h:
 
@@ -831,3 +834,13 @@ engine/View.lo: ../../src/engine/View.cc ../config.h \
 /usr/local/include/harfbuzz/hb-version.h:
 
 ../../src/backend/MathTable.hh:
+
+../../src/engine/MathMLTokenElement.hh:
+
+../../src/engine/MathMLElement.hh:
+
+../../src/engine/LinearContainerTemplate.hh:
+
+../../src/common/for_each_if.h:
+
+../../src/engine/Adapters.hh:

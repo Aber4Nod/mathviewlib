@@ -38,7 +38,7 @@ MathMLLinearContainerElement::setFlagDown(Flags f)
   content.setFlagDown(f);
 }
 
-const Element *
+Element *
 MathMLLinearContainerElement::getElementByFlag(Flags f)
 {
     printf("[MathMLLinearContainerElement::getElementByFlag]: //\n");

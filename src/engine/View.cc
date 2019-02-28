@@ -34,6 +34,7 @@
 #include "AbstractLogger.hh"
 #include "FormattingContext.hh"
 #include "MathGraphicDevice.hh"
+#include "MathMLTokenElement.hh"
 
 #include <iostream>
 
@@ -481,7 +482,7 @@ View::insertElementCursor(const scaled& x, const scaled& y) const
     return 0;
 }
 
-const Element*
+Element*
 View::getElementByFlag(Element::Flags f) const
 {
     return getRootElement()->getElementByFlag(f);
@@ -490,7 +491,16 @@ View::getElementByFlag(Element::Flags f) const
 int32_t
 View::insertElementAfterCursor() const
 {
-    const Element *_elem = getElementByFlag(Element::FCursorSet);
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    // printf("[View::insertElementAfterCursor]: size of content: %d", _elem->getSize());
+    
+    // MathMLTextNode *last_node = static_cast<MathMLTextNode *>(_elem->getChild(_elem->getSize()));
+    // static_cast<MathMLStringNode *>(last_node)->InsertGlyphAfter(-1, 't');
+    _elem->append("t");
+    printf("[View::insertElementAfterCursor]: content after inserting: %s", _elem->GetRawContent().c_str());
+    _elem->setDirtyLayout();
+    _elem->setDirtyStructure();
+    _elem->setContentSet();
     std::cout << "[View::insertElementAfterCursor]: Cursor element address: " << _elem << std::endl;
     return 1;
 }

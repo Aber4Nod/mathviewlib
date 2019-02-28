@@ -46,12 +46,12 @@ public:
       }
   }
 
-  const Element *
+  Element *
   getElementByFlag(Element::Flags f)
   {
       for (unsigned i = 0; i < content.size(); ++i)
       {
-          const Element *__elem = content[i]->getElementByFlag(f);
+          Element *__elem = content[i]->getElementByFlag(f);
           if (__elem != nullptr)
             return __elem;
       }

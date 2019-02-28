@@ -36,7 +36,7 @@ protected:
 public:
   virtual AreaRef format(class FormattingContext&);
   
-  virtual const Element *
+  virtual Element *
   getElementByFlag(Flags flags);
 
   virtual void setDirtyStructure(void);

@@ -49,7 +49,7 @@ public:
 
   virtual void setDirtyAttribute(void);
   virtual void setFlagDown(Flags);
-  virtual const Element *getElementByFlag(Flags);
+  virtual Element *getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
 
   virtual SmartPtr<class MathMLOperatorElement> getCoreOperator(void);

@@ -53,6 +53,7 @@ MathMLTokenElement::~MathMLTokenElement()
 void
 MathMLTokenElement::append(const String& s)
 {
+  std::cout << "[MathMLTokenElement::append]: creating mathmlstringnode w/ text: " << s << std::endl;
   content.appendChild(this, MathMLStringNode::create(s));
 }
 
@@ -134,11 +135,14 @@ MathMLTokenElement::format(FormattingContext& ctxt)
         std::vector<AreaRef> c;
         if (!getContentLength())
         {
+            printf("[MathMLTokenElement::format]: no content length \n");
             c.push_back(ctxt.MGD()->cursor(ctxt));
             c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
         }
         else
         {
+            printf("[MathMLTokenElement::format]: content length = %d | data = %.*s \n", 
+                    getContentLength(), getContentLength(), GetRawContent().c_str());
             c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
             c.push_back(ctxt.MGD()->cursor(ctxt));
         }

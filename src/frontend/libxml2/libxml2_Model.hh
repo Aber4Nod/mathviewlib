@@ -35,7 +35,7 @@ struct libxml2_Model
 {
   enum {
     TEXT_NODE = XML_TEXT_NODE,
-    ELEMENT_NODE = XML_ELEMENT_NODE
+    ELEMENT_NODE = XML_ELEMENT_NODE,
   };
 
   typedef xmlNode* Node;
@@ -113,6 +113,8 @@ struct libxml2_Model
   { return xmlCopyNode(node, extended); }
   static Node replaceNode(const Node& old, const Node& cur)
   { return xmlReplaceNode(old, cur); }
+  static Node NewText(const xmlChar *content)
+  { return xmlNewText(content); }
 
   // MUST be available if the default linker is used
   struct Hash

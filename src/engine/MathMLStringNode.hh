@@ -45,8 +45,8 @@ public:
   virtual void     DeleteContent();
   
   void DeleteGlyph(uint32_t index);
-  void InsertGlyphAfter(uint32_t index, char glyph);
-  void InsertGlyphBefore(uint32_t index, char glyph);
+  void InsertGlyphAfter(int32_t index, char glyph);
+  void InsertGlyphBefore(int32_t index, char glyph);
   void DeleteParentElement(void);
   void InsertElementAfter(void);
   // todo remove this logic to base element class (must be supported by all elements)

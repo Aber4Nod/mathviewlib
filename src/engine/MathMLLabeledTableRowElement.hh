@@ -40,7 +40,7 @@ public:
   virtual SmartPtr<MathMLElement> getLabel(void) const { return label.getChild(); }
 
   virtual void setFlagDown(Flags);
-  virtual void getElementByFlag(Flags);
+  virtual Element *getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
 
   friend class MathMLTableElement;

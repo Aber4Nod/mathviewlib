@@ -38,7 +38,7 @@ public:
 
   virtual AreaRef format(class FormattingContext&);
   virtual void setFlagDown(Flags);
-  virtual const Element *getElementByFlag(Flags);
+  virtual Element *getElementByFlag(Flags);
   virtual void resetFlagDown(Flags);
 
   SmartPtr<class MathMLElement> getBase(void) const { return base.getChild(); }

@@ -168,11 +168,11 @@ MathMLTableElement::setFlagDown(Flags f)
   label.setFlagDown(f);
 }
 
-const Element*
+Element*
 MathMLTableElement::getElementByFlag(Flags f)
 {
     printf("[MathMLTableElement::getElementByFlag]: //\n");
-    const Element *__elem = cell.getElementByFlag(f);
+    Element *__elem = cell.getElementByFlag(f);
     if (__elem)
         return __elem;
     __elem = label.getElementByFlag(f);
