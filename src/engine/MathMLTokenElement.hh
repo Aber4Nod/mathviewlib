@@ -64,9 +64,14 @@ public:
   unsigned getContentLength(void) const;
   
   uint32_t getContentSize(void) const;
+  
+  std::string getInsertElementName(void) const { return insertElementName; }
+  void setInsertElementName(std::string name) { insertElementName = name; }
 
 private:
   LinearContainerTemplate<MathMLTokenElement,class MathMLTextNode> content;
+  std::string insertElementName;
+
 
 protected:
   AreaRef formatAux(class FormattingContext&);

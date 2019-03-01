@@ -504,3 +504,13 @@ View::insertElementAfterCursor(char c) const
     std::cout << "[View::insertElementAfterCursor]: Cursor element address: " << _elem << std::endl;
     return 1;
 }
+
+int32_t 
+View::insertElementAfterCursor(std::string name) const
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    _elem->setInsertElementName(name);
+    _elem->setDirtyLayout();
+    _elem->setDirtyStructure();
+    return 1;
+}

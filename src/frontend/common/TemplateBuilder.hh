@@ -1084,6 +1084,13 @@ protected:
             typename Model::Node node = iter.insertAfter(el);
             _elem = getMathMLElement(Model::asElement(node));
         }
+        else
+        if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())
+        {
+            printf("[getChildMathMLElements]: cursorSet triggered\n");
+            typename Model::Node node = iter.insertAfter(el, "munderover");
+            _elem = getMathMLElement(Model::asElement(node));
+        }
         content.push_back(_elem);
 
         if (_elem->insertSetCursor())

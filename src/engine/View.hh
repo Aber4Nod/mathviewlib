@@ -95,6 +95,7 @@ public:
   int32_t insertElementCursor(const scaled&, const scaled&) const;
   Element *getElementByFlag(Element::Flags) const;
   int32_t insertElementAfterCursor(char c) const;
+  int32_t insertElementAfterCursor(std::string name) const;
 
 protected:
   SmartPtr<const class Area> getRootArea(void) const;

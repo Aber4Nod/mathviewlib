@@ -89,7 +89,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
 }
 
   typename Model::Node
-  insertAfter(const typename Model::Element& el)
+  insertAfter(const typename Model::Element& el, std::string name = "mi")
   {
       typename Model::Element xml_element = element();
       typename Model::Node nextS = Model::getNextSibling(
@@ -137,12 +137,13 @@ insertAfterPrepareMROW(const typename Model::Element& el)
       }
 
       typename Model::Node node = Model::createNode(
-          Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
-
-      // Model::setNodeValue(node, "");
+          Model::getNodeNamespace(Model::asNode(xml_element)), name);
       Model::insertNextSibling(Model::asNode(xml_element), node);
-      typename Model::Node node_text = Model::NewText(Model::toModelString(""));
-      Model::insertChild(node, node_text);
+      // Model::setNodeValue(node, "");
+      if (!name.compare("mi")) {
+          typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+          Model::insertChild(node, node_text);
+      }
       // setCurrent(Model::asElement(node));
       return Model::asNode(xml_element);
   }

@@ -106,7 +106,13 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
 {
     int key = event->key();
     qDebug() << "[Qt_RenderArea::keyPressEvent]: pressed on key: " << key;
-    if(key >= Qt::Key_Space && key <= Qt::Key_AsciiTilde)
+    if (key == Qt::Key_Q && (event->modifiers() & Qt::ShiftModifier))
+    {
+        if (m_view->insertElementAfterCursor("munderover"))
+            repaint();
+    }
+    else
+    if (key >= Qt::Key_Space && key <= Qt::Key_AsciiTilde)
     {
         if (m_view->insertElementAfterCursor(std::tolower(key)))
             repaint();
