@@ -39,6 +39,7 @@ Qt_RenderArea::Qt_RenderArea(SmartPtr<AbstractLogger> logger,
     m_view->setOperatorDictionary(m_dictionary);
     m_view->setMathMLNamespaceContext(MathMLNamespaceContext::create(m_view, m_device));
     m_view->setDefaultFontSize(DEFAULT_FONT_SIZE);
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 Qt_RenderArea::~Qt_RenderArea()
@@ -95,14 +96,19 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         // if (m_view->insertElementAfter(pos.x(), pos.y()))
             // repaint();
 
-        static int _test;
-        if (++_test == 1) {
-            // -- addition of cursor after here
-            if (m_view->insertElementCursor(pos.x(), pos.y()))
-                repaint();
-        }
-        else
-        if (m_view->insertElementAfterCursor())
+        // -- addition of cursor after here
+        if (m_view->insertElementCursor(pos.x(), pos.y()))
+            repaint();
+    }
+}
+
+void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
+{
+    int key = event->key();
+    qDebug() << "[Qt_RenderArea::keyPressEvent]: pressed on key: " << key;
+    if(key >= Qt::Key_Space && key <= Qt::Key_AsciiTilde)
+    {
+        if (m_view->insertElementAfterCursor(std::tolower(key)))
             repaint();
     }
 }

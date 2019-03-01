@@ -489,14 +489,14 @@ View::getElementByFlag(Element::Flags f) const
 }
 
 int32_t
-View::insertElementAfterCursor() const
+View::insertElementAfterCursor(char c) const
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
     // printf("[View::insertElementAfterCursor]: size of content: %d", _elem->getSize());
     
     // MathMLTextNode *last_node = static_cast<MathMLTextNode *>(_elem->getChild(_elem->getSize()));
     // static_cast<MathMLStringNode *>(last_node)->InsertGlyphAfter(-1, 't');
-    _elem->append("t");
+    _elem->append(std::string(1, c));
     printf("[View::insertElementAfterCursor]: content after inserting: %s", _elem->GetRawContent().c_str());
     _elem->setDirtyLayout();
     _elem->setDirtyStructure();

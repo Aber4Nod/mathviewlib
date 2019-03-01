@@ -51,6 +51,7 @@ public:
 protected:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     SmartPtr<Backend> m_backend;

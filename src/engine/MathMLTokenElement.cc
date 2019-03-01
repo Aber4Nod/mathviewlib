@@ -137,7 +137,7 @@ MathMLTokenElement::format(FormattingContext& ctxt)
         {
             printf("[MathMLTokenElement::format]: no content length \n");
             c.push_back(ctxt.MGD()->cursor(ctxt));
-            c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+            // c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
         }
         else
         {
