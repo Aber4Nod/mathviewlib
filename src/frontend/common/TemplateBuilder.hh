@@ -56,6 +56,14 @@ protected:
   }
 
   template <typename ElementBuilder>
+  typename Model::Node
+  createNode(const typename Model::Element& el) const
+  {
+      // todo make creating default nodes like in updateElement
+      return ElementBuilder::create(*this, el);
+  }
+  
+  template <typename ElementBuilder>
   SmartPtr<typename ElementBuilder::target_type>
   updateElement(const typename Model::Element& el) const
   {
@@ -102,9 +110,10 @@ protected:
     {
       String tag;
       MathMLUpdateMethod update;
+      MathMLCreateNode create;
     } mathml_tab[] = {
       { "math",          &TemplateBuilder::template updateElement<MathML_math_ElementBuilder> },
-      { "mi",            &TemplateBuilder::template updateElement<MathML_mi_ElementBuilder> },
+      { "mi",            &TemplateBuilder::template updateElement<MathML_mi_ElementBuilder> ,       &TemplateBuilder::template createNode<MathML_mi_ElementBuilder> },
       { "mn",            &TemplateBuilder::template updateElement<MathML_mn_ElementBuilder> },
       { "mo",            &TemplateBuilder::template updateElement<MathML_mo_ElementBuilder> },
       { "mtext",         &TemplateBuilder::template updateElement<MathML_mtext_ElementBuilder> },
@@ -139,8 +148,10 @@ protected:
 
     if (!mathmlMapInitialized)
       {
-	for (unsigned i = 0; mathml_tab[i].update; i++)
-	  mathmlMap[mathml_tab[i].tag] = mathml_tab[i].update;
+	for (unsigned i = 0; mathml_tab[i].update; i++) {
+	  mathmlMap[mathml_tab[i].tag].updateMethod = mathml_tab[i].update;
+      mathmlMap[mathml_tab[i].tag].createMethod = mathml_tab[i].create;
+    }
 
 	mathmlMapInitialized = true;
       }
@@ -306,6 +317,13 @@ protected:
     static void
     construct(const TemplateBuilder&, const typename Model::Element&, const SmartPtr<MathMLElement>&)
     { }
+    
+    static typename Model::Node
+    create(const TemplateBuilder&, const typename Model::Element& el)
+    {
+        typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mi");
+        return node;
+    }
   };
 
   struct MathMLBinContainerElementBuilder : public MathMLElementBuilder
@@ -374,7 +392,19 @@ protected:
   };
 
   struct MathML_mi_ElementBuilder : public MathMLTokenElementBuilder
-  { typedef MathMLIdentifierElement type; };
+  { 
+      typedef MathMLIdentifierElement type;
+
+      static typename Model::Node
+      create(const TemplateBuilder&, const typename Model::Element& el)
+      {
+          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mi");
+          // todo make better default index node (with square where cursor can be put later)
+          typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+          Model::insertChild(node, node_text);
+          return node;
+      }
+  };
 
   struct MathML_mn_ElementBuilder : public MathMLTokenElementBuilder
   { typedef MathMLNumberElement type; };
@@ -1028,7 +1058,7 @@ protected:
 	typename MathMLBuilderMap::const_iterator m = mathmlMap.find(Model::getNodeName(Model::asNode(el))); // creating node
 	if (m != mathmlMap.end()) 
 	  {
-	    SmartPtr<MathMLElement> elem = (this->*(m->second))(el);
+	    SmartPtr<MathMLElement> elem = (this->*(m->second.updateMethod))(el);
 	    if (elem == nullptr)
             return 0;
 	    elem->resetDirtyStructure();
@@ -1088,8 +1118,13 @@ protected:
         if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())
         {
             printf("[getChildMathMLElements]: cursorSet triggered\n");
-            typename Model::Node node = iter.insertAfter(el, "munderover");
-            _elem = getMathMLElement(Model::asElement(node));
+            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+
+            typename Model::Node node = (this->*(m->second.createMethod))(el);
+            Model::insertNextSibling(Model::asNode(iter.element()), node);
+            // typename Model::Node node = iter.insertAfter(el, "mtable");
+            // _elem = getMathMLElement(Model::asElement(node));
+            _elem = getMathMLElement(iter.element());
         }
         content.push_back(_elem);
 
@@ -1226,7 +1261,9 @@ public:
 
 private:
   typedef SmartPtr<class MathMLElement> (TemplateBuilder::* MathMLUpdateMethod)(const typename Model::Element&) const;
-  typedef std::unordered_map<String, MathMLUpdateMethod, StringHash, StringEq> MathMLBuilderMap;
+  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::Element&) const;
+  typedef struct { MathMLUpdateMethod updateMethod; MathMLCreateNode createMethod; } servingMethods; 
+  typedef std::unordered_map<String, servingMethods, StringHash, StringEq> MathMLBuilderMap;
   static MathMLBuilderMap mathmlMap;
   static bool mathmlMapInitialized;
   mutable RefinementContext refinementContext;
