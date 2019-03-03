@@ -409,22 +409,37 @@ protected:
           typename Model::Node node_mtd = Model::createNewChild(node_mtr, 
                 Model::getNodeNamespace(node_mtr),
                 Model::toModelString("mtd"), Model::toModelString(""));
-          if (setCursor)
-          {
-              Model::replaceNode(Model::asNode(el), node);
-              Model::insertChild(node_mtd, Model::asNode(el));
-          }
-          else
-          {
+          // if (setCursor)
+          // {
+              // Model::replaceNode(Model::asNode(el), node);
+              // Model::insertChild(node_mtd, Model::asNode(el));
+
+              // typename Model::Node node_mtd2 = Model::createNewChild(node_mtr, 
+                    // Model::getNodeNamespace(node_mtr),
+                    // Model::toModelString("mtd"), Model::toModelString(""));
+              // typename Model::Node node_default = Model::createNewChild(node_mtd, 
+                    // Model::getNodeNamespace(node_mtd),
+                    // Model::toModelString("mi"), Model::toModelString(""));
+              // typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+              // Model::insertChild(node_default, node_text);
+
+              // typename Model::Node node_default = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mi");
+              // typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+              // Model::insertChild(node_default, node_text);
+
+              // Model::insertNextSibling(Model::asNode(el), node_default);
+          // }
+          // else
+          // {
               typename Model::Node node_default = Model::createNewChild(node_mtd, 
                     Model::getNodeNamespace(node_mtd),
                     Model::toModelString("mi"), Model::toModelString(""));
               typename Model::Node node_text = Model::NewText(Model::toModelString(""));
               Model::insertChild(node_default, node_text);
               Model::insertNextSibling(Model::asNode(el), node);
-          }
+          // }
 
-          return (setCursor) ? node : Model::asNode(el);
+          return node_default;
       }
   };
 
@@ -1143,9 +1158,12 @@ protected:
             smart_cast<MathMLTokenElement>(_elem)->setInsertElementName("");
 
             typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
-            typename Model::Node node = (this->*(m->second.createMethod))(iter.element(), true);
+            typename Model::Node node = (this->*(m->second.createMethod))(iter.element(), true); // returning node where cursor must be set
             // Model::insertNextSibling(Model::asNode(iter.element()), node);
-            _elem = getMathMLElement(Model::asElement(node));
+            _elem->resetFlag(MathMLActionElement::FCursorSet);
+             getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FCursorSet);
+             
+            _elem = getMathMLElement(iter.element());
             // ### old version below
             // typename Model::Node node = (this->*(m->second.createMethod))(el);
             // Model::insertNextSibling(Model::asNode(iter.element()), node);
