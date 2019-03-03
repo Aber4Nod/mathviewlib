@@ -137,12 +137,13 @@ MathMLTokenElement::format(FormattingContext& ctxt)
         {
             printf("[MathMLTokenElement::format]: no content length \n");
             c.push_back(ctxt.MGD()->cursor(ctxt));
-            // c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
-        }
+            c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+        } 
         else
         {
             printf("[MathMLTokenElement::format]: content length = %d | data = %.*s \n", 
                     getContentLength(), getContentLength(), GetRawContent().c_str());
+            ctxt.addScriptLevel(-1);
             c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
             c.push_back(ctxt.MGD()->cursor(ctxt));
         }

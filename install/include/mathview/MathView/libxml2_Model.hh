@@ -115,6 +115,8 @@ struct libxml2_Model
   { return xmlReplaceNode(old, cur); }
   static Node NewText(const xmlChar *content)
   { return xmlNewText(content); }
+  static void setNewProp(const Node& node, const xmlChar *name, const xmlChar *value)
+  { xmlSetProp(node, name, value); }
 
   // MUST be available if the default linker is used
   struct Hash

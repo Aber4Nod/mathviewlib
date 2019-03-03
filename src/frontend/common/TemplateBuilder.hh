@@ -57,10 +57,10 @@ protected:
 
   template <typename ElementBuilder>
   typename Model::Node
-  createNode(const typename Model::Element& el) const
+  createNode(const typename Model::Element& el, bool setCursor) const
   {
       // todo make creating default nodes like in updateElement
-      return ElementBuilder::create(*this, el);
+      return ElementBuilder::create(*this, el, setCursor);
   }
   
   template <typename ElementBuilder>
@@ -319,7 +319,7 @@ protected:
     { }
     
     static typename Model::Node
-    create(const TemplateBuilder&, const typename Model::Element& el)
+    create(const TemplateBuilder&, const typename Model::Element& el, bool setCursor)
     {
         typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mi");
         return node;
@@ -396,13 +396,35 @@ protected:
       typedef MathMLIdentifierElement type;
 
       static typename Model::Node
-      create(const TemplateBuilder&, const typename Model::Element& el)
+      create(const TemplateBuilder&, const typename Model::Element& el, bool setCursor) // sending cursor here element in arguments
       {
-          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mi");
-          // todo make better default index node (with square where cursor can be put later)
-          typename Model::Node node_text = Model::NewText(Model::toModelString(""));
-          Model::insertChild(node, node_text);
-          return node;
+          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mtable");
+          Model::setNewProp(node, Model::toModelString("frame"), Model::toModelString("dashed"));
+          Model::setNewProp(node, Model::toModelString("equalcolumns"), Model::toModelString("false"));
+          Model::setNewProp(node, Model::toModelString("framespacing"), Model::toModelString("0.5mm 0mm"));
+        
+          typename Model::Node node_mtr = Model::createNewChild(node, 
+                Model::getNodeNamespace(node),
+                Model::toModelString("mtr"), Model::toModelString(""));
+          typename Model::Node node_mtd = Model::createNewChild(node_mtr, 
+                Model::getNodeNamespace(node_mtr),
+                Model::toModelString("mtd"), Model::toModelString(""));
+          if (setCursor)
+          {
+              Model::replaceNode(Model::asNode(el), node);
+              Model::insertChild(node_mtd, Model::asNode(el));
+          }
+          else
+          {
+              typename Model::Node node_default = Model::createNewChild(node_mtd, 
+                    Model::getNodeNamespace(node_mtd),
+                    Model::toModelString("mi"), Model::toModelString(""));
+              typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+              Model::insertChild(node_default, node_text);
+              Model::insertNextSibling(Model::asNode(el), node);
+          }
+
+          return (setCursor) ? node : Model::asNode(el);
       }
   };
 
@@ -1118,13 +1140,18 @@ protected:
         if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())
         {
             printf("[getChildMathMLElements]: cursorSet triggered\n");
-            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+            smart_cast<MathMLTokenElement>(_elem)->setInsertElementName("");
 
-            typename Model::Node node = (this->*(m->second.createMethod))(el);
-            Model::insertNextSibling(Model::asNode(iter.element()), node);
-            // typename Model::Node node = iter.insertAfter(el, "mtable");
-            // _elem = getMathMLElement(Model::asElement(node));
-            _elem = getMathMLElement(iter.element());
+            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+            typename Model::Node node = (this->*(m->second.createMethod))(iter.element(), true);
+            // Model::insertNextSibling(Model::asNode(iter.element()), node);
+            _elem = getMathMLElement(Model::asElement(node));
+            // ### old version below
+            // typename Model::Node node = (this->*(m->second.createMethod))(el);
+            // Model::insertNextSibling(Model::asNode(iter.element()), node);
+            // // typename Model::Node node = iter.insertAfter(el, "mtable");
+            // // _elem = getMathMLElement(Model::asElement(node));
+            // _elem = getMathMLElement(iter.element());
         }
         content.push_back(_elem);
 
@@ -1261,7 +1288,7 @@ public:
 
 private:
   typedef SmartPtr<class MathMLElement> (TemplateBuilder::* MathMLUpdateMethod)(const typename Model::Element&) const;
-  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::Element&) const;
+  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::Element&, bool setCursor) const;
   typedef struct { MathMLUpdateMethod updateMethod; MathMLCreateNode createMethod; } servingMethods; 
   typedef std::unordered_map<String, servingMethods, StringHash, StringEq> MathMLBuilderMap;
   static MathMLBuilderMap mathmlMap;
