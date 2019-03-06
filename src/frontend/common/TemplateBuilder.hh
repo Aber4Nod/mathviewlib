@@ -128,12 +128,12 @@ protected:
       { "mpadded",       &TemplateBuilder::template updateElement<MathML_mpadded_ElementBuilder> },
       { "mphantom",      &TemplateBuilder::template updateElement<MathML_mphantom_ElementBuilder> },
       { "mfenced",       &TemplateBuilder::update_MathML_mfenced_Element },
-      { "msub",          &TemplateBuilder::template updateElement<MathML_msub_ElementBuilder> },
-      { "msup",          &TemplateBuilder::template updateElement<MathML_msup_ElementBuilder> },
-      { "msubsup",       &TemplateBuilder::template updateElement<MathML_msubsup_ElementBuilder> },
-      { "munder",        &TemplateBuilder::template updateElement<MathML_munder_ElementBuilder> },
-      { "mover",         &TemplateBuilder::template updateElement<MathML_mover_ElementBuilder> },
-      { "munderover",    &TemplateBuilder::template updateElement<MathML_munderover_ElementBuilder> },
+      { "msub",          &TemplateBuilder::template updateElement<MathML_msub_ElementBuilder> ,     &TemplateBuilder::template createNode<MathML_msub_ElementBuilder> },
+      { "msup",          &TemplateBuilder::template updateElement<MathML_msup_ElementBuilder> ,     &TemplateBuilder::template createNode<MathML_msup_ElementBuilder> },
+      { "msubsup",       &TemplateBuilder::template updateElement<MathML_msubsup_ElementBuilder> ,  &TemplateBuilder::template createNode<MathML_msubsup_ElementBuilder> },
+      { "munder",        &TemplateBuilder::template updateElement<MathML_munder_ElementBuilder> ,  &TemplateBuilder::template createNode<MathML_munder_ElementBuilder> },
+      { "mover",         &TemplateBuilder::template updateElement<MathML_mover_ElementBuilder> ,  &TemplateBuilder::template createNode<MathML_mover_ElementBuilder> },
+      { "munderover",    &TemplateBuilder::template updateElement<MathML_munderover_ElementBuilder> ,  &TemplateBuilder::template createNode<MathML_munderover_ElementBuilder> },
       { "mmultiscripts", &TemplateBuilder::template updateElement<MathML_mmultiscripts_ElementBuilder> },
       { "mtable",        &TemplateBuilder::template updateElement<MathML_mtable_ElementBuilder> },
       { "mtd",           &TemplateBuilder::template updateElement<MathML_mtd_ElementBuilder> },
@@ -785,6 +785,23 @@ protected:
       elem->setSubScript(builder.getMathMLElement(iter.element()));
       elem->setSuperScript(0);
     }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "msub");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        new_elem = node;
+        return node_base;
+    }
   };
 
   struct MathML_msup_ElementBuilder : public MathMLElementBuilder
@@ -803,6 +820,23 @@ protected:
       iter.next();
       elem->setSubScript(0);
       elem->setSuperScript(builder.getMathMLElement(iter.element()));
+    }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "msup");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        new_elem = node;
+        return node_base;
     }
   };
   
@@ -827,6 +861,27 @@ protected:
       iter.next();
       elem->setSuperScript(builder.getMathMLElement(iter.element()));
     }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "msubsup");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        typename Model::Node node_table_3;
+        typename Model::Node node_superscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_3);
+        Model::insertNextSibling(node_table_2, node_table_3);
+
+        new_elem = node;
+        return node_base;
+    }
   };
 
   struct MathML_munder_ElementBuilder : public MathMLElementBuilder
@@ -846,6 +901,23 @@ protected:
       elem->setUnderScript(builder.getMathMLElement(iter.element()));
       elem->setOverScript(0);
     }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "munder");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        new_elem = node;
+        return node_base;
+    }
   };
 
   struct MathML_mover_ElementBuilder : public MathMLElementBuilder
@@ -864,6 +936,23 @@ protected:
       iter.next();
       elem->setUnderScript(0);
       elem->setOverScript(builder.getMathMLElement(iter.element()));
+    }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "mover");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        new_elem = node;
+        return node_base;
     }
   };
 
@@ -887,6 +976,27 @@ protected:
       elem->setUnderScript(builder.getMathMLElement(iter.element()));
       iter.next();
       elem->setOverScript(builder.getMathMLElement(iter.element()));
+    }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "munderover");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        typename Model::Node node_table_3;
+        typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_3);
+        Model::insertNextSibling(node_table_2, node_table_3);
+
+        new_elem = node;
+        return node_base;
     }
   };
 
@@ -1203,7 +1313,7 @@ protected:
             printf("[getChildMathMLElements]: cursorSet triggered\n");
             smart_cast<MathMLTokenElement>(_elem)->setInsertElementName("");
 
-            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("msqrt");
+            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("munderover");
             typename Model::Node node_table;
             typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
             Model::insertNextSibling(Model::asNode(iter.element()), node_table);
