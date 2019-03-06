@@ -57,10 +57,10 @@ protected:
 
   template <typename ElementBuilder>
   typename Model::Node
-  createNode(const typename Model::Element& el, bool setCursor) const
+  createNode(const typename Model::NameSpace& ns, typename Model::Node& new_elem) const
   {
       // todo make creating default nodes like in updateElement
-      return ElementBuilder::create(*this, el, setCursor);
+      return ElementBuilder::create(*this, ns, new_elem);
   }
   
   template <typename ElementBuilder>
@@ -120,9 +120,9 @@ protected:
       { "mspace",        &TemplateBuilder::template updateElement<MathML_mspace_ElementBuilder> },
       { "ms",            &TemplateBuilder::template updateElement<MathML_ms_ElementBuilder> },
       { "mrow",          &TemplateBuilder::template updateElement<MathML_mrow_ElementBuilder> },
-      { "mfrac",         &TemplateBuilder::template updateElement<MathML_mfrac_ElementBuilder> },
-      { "msqrt",         &TemplateBuilder::template updateElement<MathML_msqrt_ElementBuilder> },
-      { "mroot",         &TemplateBuilder::template updateElement<MathML_mroot_ElementBuilder> },
+      { "mfrac",         &TemplateBuilder::template updateElement<MathML_mfrac_ElementBuilder> ,    &TemplateBuilder::template createNode<MathML_mfrac_ElementBuilder> },
+      { "msqrt",         &TemplateBuilder::template updateElement<MathML_msqrt_ElementBuilder> ,    &TemplateBuilder::template createNode<MathML_msqrt_ElementBuilder> },
+      { "mroot",         &TemplateBuilder::template updateElement<MathML_mroot_ElementBuilder> ,    &TemplateBuilder::template createNode<MathML_mroot_ElementBuilder> },
       { "mstyle",        &TemplateBuilder::template updateElement<MathML_mstyle_ElementBuilder> },
       { "merror",        &TemplateBuilder::template updateElement<MathML_merror_ElementBuilder> },
       { "mpadded",       &TemplateBuilder::template updateElement<MathML_mpadded_ElementBuilder> },
@@ -319,10 +319,9 @@ protected:
     { }
     
     static typename Model::Node
-    create(const TemplateBuilder&, const typename Model::Element& el, bool setCursor)
+    create(const TemplateBuilder&, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
     {
-        typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mi");
-        return node;
+        return Model::createNode(ns, "mi");
     }
   };
 
@@ -396,9 +395,9 @@ protected:
       typedef MathMLIdentifierElement type;
 
       static typename Model::Node
-      create(const TemplateBuilder&, const typename Model::Element& el, bool setCursor) // sending cursor here element in arguments
+      create(const TemplateBuilder&, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
       {
-          typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mtable");
+          typename Model::Node node = Model::createNode(ns, "mtable");
           Model::setNewProp(node, Model::toModelString("frame"), Model::toModelString("dashed"));
           Model::setNewProp(node, Model::toModelString("equalcolumns"), Model::toModelString("false"));
           Model::setNewProp(node, Model::toModelString("framespacing"), Model::toModelString("0.5mm 0mm"));
@@ -436,7 +435,7 @@ protected:
                     Model::toModelString("mi"), Model::toModelString(""));
               typename Model::Node node_text = Model::NewText(Model::toModelString(""));
               Model::insertChild(node_default, node_text);
-              Model::insertNextSibling(Model::asNode(el), node);
+              new_elem = node;
           // }
 
           return node_default;
@@ -685,6 +684,23 @@ protected:
 
       elem->setDenominator(builder.getMathMLElement(iter.element()));
     }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "mfrac");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_numerator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_denominator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        new_elem = node;
+        return node_numerator;
+    }
   };
 
   struct MathML_mroot_ElementBuilder : public MathMLElementBuilder
@@ -698,6 +714,23 @@ protected:
       elem->setBase(builder.getMathMLElement(iter.element()));
       iter.next();
       elem->setIndex(builder.getMathMLElement(iter.element()));
+    }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "mroot");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        typename Model::Node node_table_2;
+        typename Model::Node node_index = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        Model::insertNextSibling(node_table_1, node_table_2);
+
+        new_elem = node;
+        return node_base;
     }
   };
 
@@ -719,6 +752,19 @@ protected:
 	  elem->setBase(row);
 	}
       elem->setIndex(0);
+    }
+
+    static typename Model::Node
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    {
+        typename Model::Node node = Model::createNode(ns, "msqrt");
+        typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+        typename Model::Node node_table_1;
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        Model::insertChild(node, node_table_1);
+
+        new_elem = node;
+        return node_base;
     }
   };
 
@@ -1157,13 +1203,14 @@ protected:
             printf("[getChildMathMLElements]: cursorSet triggered\n");
             smart_cast<MathMLTokenElement>(_elem)->setInsertElementName("");
 
-            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
-            typename Model::Node node = (this->*(m->second.createMethod))(iter.element(), true); // returning node where cursor must be set
-            // Model::insertNextSibling(Model::asNode(iter.element()), node);
+            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("msqrt");
+            typename Model::Node node_table;
+            typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
+            Model::insertNextSibling(Model::asNode(iter.element()), node_table);
             _elem->resetFlag(MathMLActionElement::FCursorSet);
              getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FCursorSet);
-             
             _elem = getMathMLElement(iter.element());
+
             // ### old version below
             // typename Model::Node node = (this->*(m->second.createMethod))(el);
             // Model::insertNextSibling(Model::asNode(iter.element()), node);
@@ -1306,7 +1353,7 @@ public:
 
 private:
   typedef SmartPtr<class MathMLElement> (TemplateBuilder::* MathMLUpdateMethod)(const typename Model::Element&) const;
-  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::Element&, bool setCursor) const;
+  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::NameSpace&, typename Model::Node&) const;
   typedef struct { MathMLUpdateMethod updateMethod; MathMLCreateNode createMethod; } servingMethods; 
   typedef std::unordered_map<String, servingMethods, StringHash, StringEq> MathMLBuilderMap;
   static MathMLBuilderMap mathmlMap;

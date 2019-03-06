@@ -41,6 +41,7 @@ struct libxml2_Model
   typedef xmlNode* Node;
   typedef xmlElement* Element;
   typedef xmlDoc* Document;
+  typedef xmlNsPtr NameSpace;
   typedef TemplateNodeIterator<libxml2_Model> NodeIterator;
   typedef TemplateElementIterator<libxml2_Model> ElementIterator;
 
