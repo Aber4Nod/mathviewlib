@@ -986,14 +986,17 @@ protected:
         typename Model::Node node_table_1;
         typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
         Model::insertChild(node, node_table_1);
+        builder.getMathMLElement(Model::asElement(node_table_1))->setFlag(MathMLActionElement::FWrapperSet);
 
         typename Model::Node node_table_2;
         typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
+        builder.getMathMLElement(Model::asElement(node_table_2))->setFlag(MathMLActionElement::FWrapperSet);
 
         typename Model::Node node_table_3;
         typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_3);
         Model::insertNextSibling(node_table_2, node_table_3);
+        builder.getMathMLElement(Model::asElement(node_table_3))->setFlag(MathMLActionElement::FWrapperSet);
 
         new_elem = node;
         return node_base;
@@ -1247,13 +1250,37 @@ protected:
   {
     if (el)
       {
-	std::cout << "createMathMLElement " << Model::getNodeName(Model::asNode(el)) << std::endl; // todo if we need to delete element -> return -1 and then check this value (or just check flag of it and not push back to content)
+	std::cout << "createMathMLElement " << Model::getNodeName(Model::asNode(el)) << std::endl;
 	typename MathMLBuilderMap::const_iterator m = mathmlMap.find(Model::getNodeName(Model::asNode(el))); // creating node
 	if (m != mathmlMap.end()) 
 	  {
 	    SmartPtr<MathMLElement> elem = (this->*(m->second.updateMethod))(el);
 	    if (elem == nullptr)
             return 0;
+
+        if (elem->wrapperSet())
+        {
+            std::cout << "entering in wrapperSet block for node: " << Model::getNodeName(Model::asNode(el)) << std::endl;
+            typename Model::Node mtr     = Model::getFirstChild(Model::asNode(el));
+            typename Model::Node mtd     = Model::getFirstChild(mtr);
+            typename Model::Node mtoken  = Model::getFirstChild(mtd);
+            SmartPtr<MathMLElement> elem_token = getMathMLElement(Model::asElement(mtoken));
+            // TODO: add exception for mathmltoken type - raw content
+            if (smart_cast<MathMLTokenElement>(elem_token)->getContentLength())
+            {
+                // relink nodes (unlink mtr, mtd and replace mtoken)
+                std::cout << "beginning ro relinking nodes for node with content: " << smart_cast<MathMLTokenElement>(elem_token)->GetRawContent() << std::endl;
+
+                Model::unlinkNode(mtoken);
+                Model::replaceNode(Model::asNode(el), mtoken);
+                Model::unlinkNode(Model::asNode(el));
+                Model::freeNode(Model::asNode(el));
+                
+                // el = Model::asElement(mtoken);
+                elem = elem_token;
+            }
+        }
+
 	    elem->resetDirtyStructure();
 	    elem->resetDirtyAttribute();
         std::cout << "ended of creation of mathmlelement: " <<  Model::getNodeName(Model::asNode(el)) << std::endl;

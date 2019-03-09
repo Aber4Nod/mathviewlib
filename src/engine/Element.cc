@@ -43,6 +43,7 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   resetFlag(FInsertSet);
   resetFlag(FInsertSetCursor);
   resetFlag(FCursorSet);
+  resetFlag(FWrapperSet);
 }
 
 Element::~Element()
@@ -170,6 +171,13 @@ Element::setCursorSet()
 {
     if (!(cursorSet()))
         setFlag(FCursorSet);
+}
+
+void
+Element::setWrapperSet()
+{
+    if (!(wrapperSet()))
+        setFlag(FWrapperSet);
 }
 
 void
