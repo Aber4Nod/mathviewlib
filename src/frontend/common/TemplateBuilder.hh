@@ -395,7 +395,7 @@ protected:
       typedef MathMLIdentifierElement type;
 
       static typename Model::Node
-      create(const TemplateBuilder&, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+      create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
       {
           typename Model::Node node = Model::createNode(ns, "mtable");
           Model::setNewProp(node, Model::toModelString("frame"), Model::toModelString("dashed"));
@@ -435,6 +435,8 @@ protected:
                     Model::toModelString("mi"), Model::toModelString(""));
               typename Model::Node node_text = Model::NewText(Model::toModelString(""));
               Model::insertChild(node_default, node_text);
+
+              builder.getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FWrapperSet);
               new_elem = node;
           // }
 
@@ -986,17 +988,14 @@ protected:
         typename Model::Node node_table_1;
         typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
         Model::insertChild(node, node_table_1);
-        builder.getMathMLElement(Model::asElement(node_table_1))->setFlag(MathMLActionElement::FWrapperSet);
 
         typename Model::Node node_table_2;
         typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
-        builder.getMathMLElement(Model::asElement(node_table_2))->setFlag(MathMLActionElement::FWrapperSet);
 
         typename Model::Node node_table_3;
         typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_3);
         Model::insertNextSibling(node_table_2, node_table_3);
-        builder.getMathMLElement(Model::asElement(node_table_3))->setFlag(MathMLActionElement::FWrapperSet);
 
         new_elem = node;
         return node_base;
