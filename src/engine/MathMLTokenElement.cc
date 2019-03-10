@@ -103,8 +103,16 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
   std::transform(content.begin(), content.end(), std::back_inserter(c),
 		 std::bind2nd(FormatAdapter<FormattingContext,MathMLTextNode,AreaRef>(), &ctxt));
 #else
-  for (const auto & elem : content)
-    c.push_back(elem->format(ctxt));
+  uint32_t curIndex = 0;
+  for (const auto & elem : content) {
+      if (curIndex++ == cursorNodeIndex) {
+          elem->setCursorIndex(cursorNodeContentIndex);
+          c.push_back(elem->format(ctxt));
+          c.push_back(ctxt.MGD()->cursor(ctxt)); 
+      }
+      if (elem->GetLogicalContentLength() > elem->getCursorIndex() + 1)
+          c.push_back(elem->format(ctxt));
+  }
 #endif
 
   AreaRef res;
@@ -144,7 +152,7 @@ MathMLTokenElement::format(FormattingContext& ctxt)
             printf("[MathMLTokenElement::format]: content length = %d | data = %.*s \n", 
                     getContentLength(), getContentLength(), GetRawContent().c_str());
             // ctxt.addScriptLevel(-1);
-            c.push_back(ctxt.MGD()->cursor(ctxt));
+            // c.push_back(ctxt.MGD()->cursor(ctxt));
             c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
         }
         // c.push_back(ctxt.MGD()->dummy(ctxt));
@@ -246,4 +254,18 @@ MathMLTokenElement::getContentSize() const
     }
     
     return size;
+}
+
+void
+MathMLTokenElement::setCursorPosition(const SmartPtr<class MathMLTextNode>& node, uint32_t index)
+{
+    uint32_t curIndex = 0;
+    for (const auto & elem : content) {
+        if (node == elem) {
+            cursorNodeIndex        = curIndex;
+            cursorNodeContentIndex = index;
+            std::cout << "[MathMLTokenElement::setCursorPosition]: found element " << elem << " with total node index: " << cursorNodeIndex << std::endl;
+        }
+        ++curIndex;
+    }
 }

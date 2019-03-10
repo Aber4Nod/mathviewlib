@@ -30,6 +30,7 @@
 #include "MathGraphicDevice.hh"
 #include <iostream>
 #include "HorizontalArrayArea.hh"
+#include "MathMLTokenElement.hh"
 
 inline bool
 isCombining(Char32 ch)
@@ -48,19 +49,34 @@ MathMLStringNode::~MathMLStringNode()
 
 AreaRef
 MathMLStringNode::format(FormattingContext& ctxt)
-{ 
+{
+    String currentContent = content;
+    if (cursorIndex >= 0) {
+        if (currentFormattingIndex == 0) {
+            currentContent = content.substr(0, cursorIndex + 1);
+            currentFormattingIndex = cursorIndex + 1;
+        }
+        else {
+            currentContent = content.substr(currentFormattingIndex);
+            // currentFormattingIndex = 0;
+        }
+    }
+    std::cout << "[MathMLStringNode::format]: cursorIndex: " << cursorIndex << "; formatting value: " << currentContent << std::endl;
     // todo go threw area and set this node to them
-    AreaRef cont = ctxt.MGD()->string(ctxt, content);
+    AreaRef cont = ctxt.MGD()->string(ctxt, currentContent);
     SmartPtr<const HorizontalArrayArea> harea = smart_cast<const HorizontalArrayArea>(cont);
     if (harea != nullptr)
         harea->setNode(this);
+    v_area.push_back(cont);
+    std::cout << "[MathMLStringNode::format]: v_area size: " << v_area.size() << std::endl;
+
     // else
     // {
         // cont = ctxt.MGD()->dummy(ctxt); // make this dumm clever one and know his parent (right now there is arearef that if there and dummy is just what we see)
         // harea->setNode(this);
     // }
 
-    std::cout << "this harea: " << harea << std::endl;
+    std::cout << "setting mathmlstringnode to this harea: " << harea << std::endl;
     return cont; 
 }
 
@@ -190,4 +206,28 @@ MathMLStringNode::insertElementCursor()
     getParentElement()->setDirtyLayout();
     getParentElement()->setDirtyStructure();
     getParentElement()->setInsertSetCursor();
+}
+
+void
+MathMLStringNode::insertInnerElementCursor(uint32_t index)
+{
+    std::cout << "[MathMLStringNode::insertInnerElementCursor]: setting cursor index: " << index << std::endl;
+    // std::cout << "[MathMLStringNode::insertInnerElementCursor]: setting cursor index: " << v_area.size() << std::endl;
+    static_cast<MathMLTokenElement *>(getParentElement())->setCursorPosition(this, index);
+    getParentElement()->setDirtyLayout();
+    getParentElement()->setDirtyStructure();
+    getParentElement()->setCursorSet();
+}
+
+uint32_t
+MathMLStringNode::normalizeGlyphAreaIndex(AreaRef area, uint32_t index)
+{
+    uint32_t curIndex = 0;
+    for (const auto & c_area : v_area)
+    {
+        if (c_area == area)
+            return curIndex + index;
+        curIndex += GetLogicalContentLength();
+    }
+    return index;
 }

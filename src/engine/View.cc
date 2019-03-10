@@ -474,10 +474,17 @@ View::insertElementCursor(const scaled& x, const scaled& y) const
     AreaRef area = getAreaAt(x, y);
     if (area)
     {
-        area->getGlyphArea()->getParent()->getParent()->getNode()->insertElementCursor();
+        uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());
+        AreaRef harea = area->getGlyphArea()->getParent()->getParent();
+        uint32_t normalized_index = area->getGlyphArea()->getParent()->getParent()->getNode()->normalizeGlyphAreaIndex(
+            harea, index);
+        // uint32_t normalized_index = index;
+        std::cout << "[View::insertElementCursor]: normalized_index: " << normalized_index << std::endl;
+        area->getGlyphArea()->getParent()->getParent()->getNode()->insertInnerElementCursor(normalized_index);
+        // area->getGlyphArea()->getParent()->getParent()->getNode()->insertElementCursor();
         return 1;
     }
-
+    std::cout << "Parent glypharea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     std::cout << "GlyphArea at x: " << x.toDouble() << " y: " << y.toDouble() << " not found" << std::endl;
     return 0;
 }

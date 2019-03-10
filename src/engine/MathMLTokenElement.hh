@@ -68,8 +68,12 @@ public:
   std::string getInsertElementName(void) const { return insertElementName; }
   void setInsertElementName(std::string name) { insertElementName = name; }
 
+  void setCursorPosition(const SmartPtr<class MathMLTextNode>& node, uint32_t index);
+
 private:
   LinearContainerTemplate<MathMLTokenElement,class MathMLTextNode> content;
+  int32_t cursorNodeIndex        = -1;
+  int32_t cursorNodeContentIndex = -1;
   std::string insertElementName;
 
 

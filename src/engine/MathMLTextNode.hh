@@ -35,11 +35,15 @@ protected:
   MathMLTextNode(void);
   virtual ~MathMLTextNode();
 
+  int32_t cursorIndex             = -1;
+  uint32_t currentFormattingIndex = 0;
+
 public:
   virtual AreaRef format(class FormattingContext&) = 0;
 
   virtual String   GetRawContent(void) const { return String(); }
   virtual unsigned GetLogicalContentLength(void) const { return 0; }
+
   // TODO make function to bind arearef to this node (for fixing text content)
   
   void setParentElement(Element *_parent) const 
@@ -48,7 +52,9 @@ public:
       parentElement = _parent; 
   };
   Element *getParentElement() const { return parentElement; };
-// 
+  void setCursorIndex(uint32_t index) { cursorIndex = index; };
+  int32_t getCursorIndex(void) const { return cursorIndex; };
+
 private:
   mutable Element *parentElement;
 };

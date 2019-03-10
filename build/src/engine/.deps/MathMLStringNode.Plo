@@ -165,10 +165,10 @@ engine/MathMLStringNode.lo: ../../src/engine/MathMLStringNode.cc \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   ../../src/common/WeakPtr.hh ../../src/engine/MathMLStringNode.hh \
   ../../src/engine/MathMLTextNode.hh ../../src/common/String.hh \
-  ../../src/engine/MathMLNode.hh ../../src/backend/FormattingContext.hh \
-  ../../src/common/Variant.hh \
+  ../../src/engine/MathMLNode.hh \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer \
+  ../../src/backend/FormattingContext.hh ../../src/common/Variant.hh \
   ../../src/common/Value.hh ../../src/common/RGBColor.hh \
   ../../src/common/Length.hh ../../src/common/MathVariant.hh \
   ../../src/common/FastScopedHashMap.hh \
@@ -204,7 +204,9 @@ engine/MathMLStringNode.lo: ../../src/engine/MathMLStringNode.cc \
   /usr/local/include/harfbuzz/hb-shape.h \
   /usr/local/include/harfbuzz/hb-shape-plan.h \
   /usr/local/include/harfbuzz/hb-version.h \
-  ../../src/backend/MathTable.hh
+  ../../src/backend/MathTable.hh ../../src/engine/MathMLTokenElement.hh \
+  ../../src/engine/LinearContainerTemplate.hh \
+  ../../src/common/for_each_if.h ../../src/engine/Adapters.hh
 
 ../config.h:
 
@@ -672,13 +674,13 @@ engine/MathMLStringNode.lo: ../../src/engine/MathMLStringNode.cc \
 
 ../../src/engine/MathMLNode.hh:
 
-../../src/backend/FormattingContext.hh:
-
-../../src/common/Variant.hh:
-
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer:
+
+../../src/backend/FormattingContext.hh:
+
+../../src/common/Variant.hh:
 
 ../../src/common/Value.hh:
 
@@ -777,3 +779,11 @@ engine/MathMLStringNode.lo: ../../src/engine/MathMLStringNode.cc \
 /usr/local/include/harfbuzz/hb-version.h:
 
 ../../src/backend/MathTable.hh:
+
+../../src/engine/MathMLTokenElement.hh:
+
+../../src/engine/LinearContainerTemplate.hh:
+
+../../src/common/for_each_if.h:
+
+../../src/engine/Adapters.hh:
