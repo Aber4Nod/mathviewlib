@@ -114,8 +114,16 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
     else
     if (key >= Qt::Key_Space && key <= Qt::Key_AsciiTilde)
     {
-        if (m_view->insertElementAfterCursor(std::tolower(key)))
-            repaint();
+        // if (m_view->insertElementAfterCursor(std::tolower(key)))
+            // repaint();
+        m_view->insertGlyphAfterCursor(std::tolower(key));
+        repaint();
+    }
+    else
+    if (key == Qt::Key_Backspace)
+    {
+        m_view->deleteGLyphBeforeCursor();
+        repaint();
     }
 }
 

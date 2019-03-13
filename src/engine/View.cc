@@ -521,3 +521,21 @@ View::insertElementAfterCursor(std::string name) const
     _elem->setDirtyStructure();
     return 1;
 }
+
+int32_t
+View::insertGlyphAfterCursor(char c)
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    _elem->insertGlyphAfterCursor(c);
+    _elem->setDirtyLayout();
+    _elem->setDirtyStructure();
+}
+
+void
+View::deleteGLyphBeforeCursor()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    _elem->deleteGLyphBeforeCursor();
+    _elem->setDirtyLayout();
+    _elem->setDirtyStructure();
+}

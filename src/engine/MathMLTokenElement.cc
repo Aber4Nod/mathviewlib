@@ -262,9 +262,39 @@ MathMLTokenElement::setCursorPosition(const SmartPtr<class MathMLTextNode>& node
     uint32_t curIndex = 0;
     for (const auto & elem : content) {
         if (node == elem) {
+            // if (cursorNodeIndex == curIndex)
+                
             cursorNodeIndex        = curIndex;
             cursorNodeContentIndex = index;
             std::cout << "[MathMLTokenElement::setCursorPosition]: found element " << elem << " with total node index: " << cursorNodeIndex << std::endl;
+        }
+        ++curIndex;
+    }
+}
+
+void
+MathMLTokenElement::insertGlyphAfterCursor(char glyph)
+{
+    uint32_t curIndex = 0;
+    for (const auto & elem : content) {
+        if (curIndex == cursorNodeIndex) {
+            smart_cast<MathMLStringNode>(elem)->InsertGlyphAfter(cursorNodeContentIndex, glyph);
+            cursorNodeContentIndex++;
+            return;
+        }
+        ++curIndex;
+    }
+}
+
+void
+MathMLTokenElement::deleteGLyphBeforeCursor()
+{
+    uint32_t curIndex = 0;
+    for (const auto & elem : content) {
+        if (curIndex == cursorNodeIndex) {
+            smart_cast<MathMLStringNode>(elem)->DeleteGlyph(cursorNodeContentIndex);
+            cursorNodeContentIndex--;
+            return;
         }
         ++curIndex;
     }

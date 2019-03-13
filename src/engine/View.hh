@@ -97,6 +97,9 @@ public:
   int32_t insertElementAfterCursor(char c) const;
   int32_t insertElementAfterCursor(std::string name) const;
 
+  int32_t insertGlyphAfterCursor(char);
+  void deleteGLyphBeforeCursor();
+
 protected:
   SmartPtr<const class Area> getRootArea(void) const;
   SmartPtr<const class Area> formatElement(const SmartPtr<class Element>&) const;
