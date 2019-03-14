@@ -107,10 +107,15 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
   for (const auto & elem : content) {
       if (curIndex++ == cursorNodeIndex) {
           elem->setCursorIndex(cursorNodeContentIndex);
-          c.push_back(elem->format(ctxt));
-          c.push_back(ctxt.MGD()->cursor(ctxt)); 
+          if (cursorNodeContentIndex == -1) {
+              c.push_back(ctxt.MGD()->cursor(ctxt)); 
+          }
+          else {
+              c.push_back(elem->format(ctxt));
+              c.push_back(ctxt.MGD()->cursor(ctxt)); 
+          }
       }
-      if (elem->GetLogicalContentLength() > elem->getCursorIndex() + 1)
+      if (elem->GetLogicalContentLength() == 0 || elem->GetLogicalContentLength() > elem->getCursorIndex() + 1)
           c.push_back(elem->format(ctxt));
   }
 #endif
@@ -144,7 +149,7 @@ MathMLTokenElement::format(FormattingContext& ctxt)
         if (!getContentLength())
         {
             printf("[MathMLTokenElement::format]: no content length \n");
-            c.push_back(ctxt.MGD()->cursor(ctxt));
+            // c.push_back(ctxt.MGD()->cursor(ctxt));
             c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
         } 
         else

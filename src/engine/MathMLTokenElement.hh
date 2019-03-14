@@ -72,6 +72,9 @@ public:
   void insertGlyphAfterCursor(char glyph);
   void deleteGLyphBeforeCursor();
 
+  void setNodeIndex(int32_t index) { cursorNodeIndex = index; };
+  void setNodeContentIndex(int32_t index) { cursorNodeContentIndex = index; };
+
 private:
   LinearContainerTemplate<MathMLTokenElement,class MathMLTextNode> content;
   int32_t cursorNodeIndex        = -1;

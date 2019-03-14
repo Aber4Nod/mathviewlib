@@ -474,6 +474,16 @@ View::insertElementCursor(const scaled& x, const scaled& y) const
     AreaRef area = getAreaAt(x, y);
     if (area)
     {
+        MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+        if (_elem != nullptr) {
+            std::cout << "[View::insertElementCursor]: reseting old cursor positions " << std::endl;
+            _elem->resetFlag(Element::FCursorSet);
+            _elem->setNodeIndex(-1);
+            _elem->setNodeContentIndex(-1);
+            _elem->setDirtyLayout();
+            _elem->setDirtyStructure();
+        }
+
         uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());
         AreaRef harea = area->getGlyphArea()->getParent()->getParent();
         uint32_t normalized_index = area->getGlyphArea()->getParent()->getParent()->getNode()->normalizeGlyphAreaIndex(

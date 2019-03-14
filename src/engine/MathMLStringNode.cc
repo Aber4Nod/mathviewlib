@@ -146,10 +146,11 @@ void
 MathMLStringNode::InsertGlyphAfter(int32_t index, char glyph)
 {
     std::cout << "[MathMLStringNode::InsertGlyphAfter]: got index: " << index << std::endl;
-    if (content.length() == 0 || index == -1)
+    std::cout << "[MathMLStringNode::InsertGlyphAfter]: current content: " << content << " length: " << content.length() << std::endl;
+    if (content.length() == 0)
         content.push_back(glyph);
     else
-    if (index >= content.length())
+    if (index >= 0 && index >= content.length())
     {
         std::cout << "[MathMLStringNode::InsertGlyphAfter]: index exceeded number of glyphes, pushing back: " << std::endl;
         content.push_back(glyph);
