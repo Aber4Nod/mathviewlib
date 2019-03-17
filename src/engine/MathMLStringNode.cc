@@ -51,6 +51,7 @@ AreaRef
 MathMLStringNode::format(FormattingContext& ctxt)
 {
     String currentContent = content;
+    std::cout << "[MathMLStringNode::format]: cursorIndex: " << cursorIndex << std::endl;
     if (cursorIndex >= 0) {
         if (currentFormattingIndex == 0) {
             currentContent = content.substr(0, cursorIndex + 1);
@@ -210,7 +211,7 @@ MathMLStringNode::insertElementCursor()
 }
 
 void
-MathMLStringNode::insertInnerElementCursor(uint32_t index)
+MathMLStringNode::insertInnerElementCursor(int32_t index)
 {
     std::cout << "[MathMLStringNode::insertInnerElementCursor]: setting cursor index: " << index << std::endl;
     // std::cout << "[MathMLStringNode::insertInnerElementCursor]: setting cursor index: " << v_area.size() << std::endl;
@@ -220,19 +221,20 @@ MathMLStringNode::insertInnerElementCursor(uint32_t index)
     getParentElement()->setCursorSet();
 }
 
-uint32_t
-MathMLStringNode::normalizeGlyphAreaIndex(AreaRef area, uint32_t index)
+int32_t
+MathMLStringNode::normalizeGlyphAreaIndex(AreaRef area, int32_t index)
 {
+    std::cout << "[MathMLStringNode::normalizeGlyphAreaIndex]: beginning to counting normalized index" << std::endl;
     uint32_t curIndex = 0;
     for (const auto & c_area : v_area)
     {
         if (c_area == area) {
             std::cout << "[MathMLStringNode::normalizeGlyphAreaIndex]: founded area, returning index: " << curIndex + index << std::endl;
-            return curIndex + index;
+            return (content.length() > 0) ? curIndex + index : -1;
         }
         // TODO: assuming that glyphstringarea\s (whose has link to this node) has only one child element
         curIndex += smart_cast<const LinearContainerArea>(c_area)->getChildren()[0]->size();
         std::cout << "[MathMLStringNode::normalizeGlyphAreaIndex]: incrementing index by size: " << c_area->size() << " current size: " << curIndex << std::endl;
     }
-    return index;
+    return (content.length() > 0) ? index : -1;
 }

@@ -141,7 +141,8 @@ MathGraphicDevice::wrapper(const FormattingContext& context, const AreaRef& area
 AreaRef
 MathGraphicDevice::dummy(const FormattingContext& context) const
 {
-  return getFactory()->color(unstretchedString(context, StringOfUCS4String(UCS4String(1, 0xfffd))), RGBColor::RED());
+  // return getFactory()->color(unstretchedString(context, StringOfUCS4String(UCS4String(1, 0xfffd))), RGBColor::RED());
+  return unstretchedString(context, StringOfUCS4String(UCS4String(1, 0xfffd)));
 }
 
 AreaRef

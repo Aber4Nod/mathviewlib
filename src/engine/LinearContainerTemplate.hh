@@ -51,9 +51,11 @@ public:
   {
       for (unsigned i = 0; i < content.size(); ++i)
       {
-          Element *__elem = content[i]->getElementByFlag(f);
-          if (__elem != nullptr)
-            return __elem;
+          if (content[i]) {
+              Element *__elem = content[i]->getElementByFlag(f);
+              if (__elem != nullptr)
+                return __elem;
+          }
       }
       return nullptr;
   }

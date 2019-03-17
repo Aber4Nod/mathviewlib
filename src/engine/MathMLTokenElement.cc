@@ -264,7 +264,7 @@ MathMLTokenElement::getContentSize() const
 }
 
 void
-MathMLTokenElement::setCursorPosition(const SmartPtr<class MathMLTextNode>& node, uint32_t index)
+MathMLTokenElement::setCursorPosition(const SmartPtr<class MathMLTextNode>& node, int32_t index)
 {
     uint32_t curIndex = 0;
     for (const auto & elem : content) {

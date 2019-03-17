@@ -249,7 +249,7 @@ Element::setFlagUp(Flags f)
 Element *
 Element::getElementByFlag(Flags f)
 {
-    std::cout << "[Element:getElementByFlag]: checking element address: " << this << std::endl;
+    std::cout << "[Element:getElementByFlag]: checking element address: " << this << " getFlag= " << getFlag(f) << std::endl;
     return getFlag(f) ? this : nullptr;
 }
 

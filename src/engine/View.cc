@@ -486,7 +486,8 @@ View::insertElementCursor(const scaled& x, const scaled& y) const
 
         uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());
         AreaRef harea = area->getGlyphArea()->getParent()->getParent();
-        uint32_t normalized_index = area->getGlyphArea()->getParent()->getParent()->getNode()->normalizeGlyphAreaIndex(
+        std::cout << "[View::insertElementCursor]: beginning to counting normalized index for node: " << area->getGlyphArea()->getParent()->getParent()->getNode() << std::endl;
+        int32_t normalized_index = area->getGlyphArea()->getParent()->getParent()->getNode()->normalizeGlyphAreaIndex(
             harea, index);
         // uint32_t normalized_index = index;
         std::cout << "[View::insertElementCursor]: normalized_index: " << normalized_index << std::endl;
@@ -546,6 +547,8 @@ void
 View::deleteGLyphBeforeCursor()
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (!_elem)
+        return;
     _elem->deleteGLyphBeforeCursor();
     _elem->setDirtyLayout();
     _elem->setDirtyStructure();

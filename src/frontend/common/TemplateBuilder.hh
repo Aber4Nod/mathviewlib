@@ -696,7 +696,7 @@ protected:
           iter.next();
       }
 
-      elem->setDenominator(builder.getMathMLElement(iter.element()));
+      elem->setDenominator(element);
     }
 
     static typename Model::Node
@@ -1295,7 +1295,10 @@ protected:
         else
         if (elem->wrapperIsNeeded() && !smart_cast<MathMLTokenElement>(elem)->getContentLength() && !elem->wrapperSet())
         {
-            typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mtable");
+            typename Model::Node node = Model::createNewChild(Model::asNode(el), 
+                  Model::getNodeNamespace(Model::asNode(el)),
+                  Model::toModelString("mtable"), Model::toModelString(""));
+            // typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mtable");
             Model::setNewProp(node, Model::toModelString("frame"), Model::toModelString("dashed"));
             Model::setNewProp(node, Model::toModelString("equalcolumns"), Model::toModelString("false"));
             Model::setNewProp(node, Model::toModelString("framespacing"), Model::toModelString("0.5mm 0mm"));
@@ -1305,7 +1308,7 @@ protected:
             typename Model::Node node_mtd = Model::createNewChild(node_mtr, 
                   Model::getNodeNamespace(node_mtr),
                   Model::toModelString("mtd"), Model::toModelString(""));
-
+        
             std::cout << "beginning getting new table wrapper element" << std::endl;
             elem->setWrapperSet();
             Model::replaceNode(Model::asNode(el), node);
@@ -1427,9 +1430,6 @@ protected:
               // forgetElement(elem);
               // delete elem;
           // }
-
-         std::cout << "[construct]: name of textnode: " << Model::getNodeName(n) << std::endl;
-         std::cout << "[construct]: name of parentnode: " << Model::getNodeName(Model::getParent(n)) << std::endl;
 
           // ------------- block fot changing node content
           

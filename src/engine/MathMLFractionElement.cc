@@ -137,10 +137,13 @@ MathMLFractionElement::setFlagDown(Flags f)
 Element *
 MathMLFractionElement::getElementByFlag(Flags f)
 {
-    printf("[MathMLFractionElement::getElementByFlag]: //\n");
+    printf("[MathMLFractionElement::getElementByFlag]: numerator//\n");
     Element *__elem = numerator.getElementByFlag(f);
-    if (__elem)
+    if (__elem) {
+        printf("[MathMLFractionElement::getElementByFlag]: found at numerator//\n");
         return __elem;
+    }
+    printf("[MathMLFractionElement::getElementByFlag]: denumerator//\n");
     __elem = denominator.getElementByFlag(f);
     if (__elem)
         return __elem;
