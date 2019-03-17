@@ -45,7 +45,9 @@
 
 MathMLTokenElement::MathMLTokenElement(const SmartPtr<class MathMLNamespaceContext>& context)
   : MathMLElement(context)
-{ }
+{
+    setWrapperIsNeeded();
+}
 
 MathMLTokenElement::~MathMLTokenElement()
 { }

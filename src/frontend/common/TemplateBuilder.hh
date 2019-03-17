@@ -659,6 +659,11 @@ protected:
           element = builder.getMathMLElement(Model::asElement(node));
       }
 
+      if (element->wrapperSet() || element->wrapperIsNeeded())
+      {
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+      }
+
       elem->setNumerator(element);
       iter.next();
 
@@ -682,6 +687,12 @@ protected:
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           // element->resetFlag(MathMLActionElement::FInsertSetCursor);
           element = builder.getMathMLElement(Model::asElement(node));
+      }
+
+      if (element->wrapperSet() || element->wrapperIsNeeded())
+      {
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+          iter.next();
       }
 
       elem->setDenominator(builder.getMathMLElement(iter.element()));
@@ -1257,7 +1268,7 @@ protected:
 	    if (elem == nullptr)
             return 0;
 
-        if (elem->wrapperSet())
+        if (elem->wrapperSet() && !elem->wrapperIsNeeded())
         {
             std::cout << "entering in wrapperSet block for node: " << Model::getNodeName(Model::asNode(el)) << std::endl;
             typename Model::Node mtr     = Model::getFirstChild(Model::asNode(el));
@@ -1275,9 +1286,32 @@ protected:
                 Model::unlinkNode(Model::asNode(el));
                 Model::freeNode(Model::asNode(el));
                 
+                elem_token->resetFlag(Element::FWrapperSet);
                 // el = Model::asElement(mtoken);
                 elem = elem_token;
             }
+        }
+        else
+        if (elem->wrapperIsNeeded() && !smart_cast<MathMLTokenElement>(elem)->getContentLength() && !elem->wrapperSet())
+        {
+            typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(el)), "mtable");
+            Model::setNewProp(node, Model::toModelString("frame"), Model::toModelString("dashed"));
+            Model::setNewProp(node, Model::toModelString("equalcolumns"), Model::toModelString("false"));
+            Model::setNewProp(node, Model::toModelString("framespacing"), Model::toModelString("0.5mm 0mm"));
+            typename Model::Node node_mtr = Model::createNewChild(node, 
+                  Model::getNodeNamespace(node),
+                  Model::toModelString("mtr"), Model::toModelString(""));
+            typename Model::Node node_mtd = Model::createNewChild(node_mtr, 
+                  Model::getNodeNamespace(node_mtr),
+                  Model::toModelString("mtd"), Model::toModelString(""));
+
+            std::cout << "beginning getting new table wrapper element" << std::endl;
+            elem->setWrapperSet();
+            Model::replaceNode(Model::asNode(el), node);
+            Model::unlinkNode(Model::asNode(el));
+            Model::insertChild(node_mtd, Model::asNode(el));
+            elem = getMathMLElement(Model::asElement(node));
+            elem->setWrapperSet();
         }
 
 	    elem->resetDirtyStructure();
@@ -1392,7 +1426,10 @@ protected:
               // forgetElement(elem);
               // delete elem;
           // }
-         
+
+         std::cout << "[construct]: name of textnode: " << Model::getNodeName(n) << std::endl;
+         std::cout << "[construct]: name of parentnode: " << Model::getNodeName(Model::getParent(n)) << std::endl;
+
           // ------------- block fot changing node content
           
           if (elem->contentSet())

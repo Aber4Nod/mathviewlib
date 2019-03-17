@@ -226,9 +226,13 @@ MathMLStringNode::normalizeGlyphAreaIndex(AreaRef area, uint32_t index)
     uint32_t curIndex = 0;
     for (const auto & c_area : v_area)
     {
-        if (c_area == area)
+        if (c_area == area) {
+            std::cout << "[MathMLStringNode::normalizeGlyphAreaIndex]: founded area, returning index: " << curIndex + index << std::endl;
             return curIndex + index;
-        curIndex += GetLogicalContentLength();
+        }
+        // TODO: assuming that glyphstringarea\s (whose has link to this node) has only one child element
+        curIndex += smart_cast<const LinearContainerArea>(c_area)->getChildren()[0]->size();
+        std::cout << "[MathMLStringNode::normalizeGlyphAreaIndex]: incrementing index by size: " << c_area->size() << " current size: " << curIndex << std::endl;
     }
     return index;
 }
