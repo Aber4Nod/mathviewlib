@@ -437,6 +437,7 @@ protected:
               Model::insertChild(node_default, node_text);
 
               builder.getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FWrapperSet);
+              builder.getMathMLElement(Model::asElement(node_default))->setFlag(MathMLActionElement::FWrapperSet);
               new_elem = node;
           // }
 
