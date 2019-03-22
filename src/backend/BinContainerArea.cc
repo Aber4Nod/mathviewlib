@@ -26,6 +26,7 @@
 #include "BinContainerArea.hh"
 #include "GlyphStringArea.hh"
 #include "GlyphArea.hh"
+#include <iostream>
 
 BoundingBox
 BinContainerArea::box() const
@@ -77,6 +78,7 @@ BinContainerArea::searchByArea(AreaId& id, const AreaRef& area) const
 AreaRef
 BinContainerArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
 {
+  std::cout << "[BinContainerArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
   id.append(0, child, scaled::zero(), scaled::zero());
   AreaRef s_area = child->searchByCoords(id, x, y);
   if (s_area) return s_area;

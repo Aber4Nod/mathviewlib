@@ -26,12 +26,13 @@
 #include "Point.hh"
 #include "HorizontalArrayArea.hh"
 #include <iostream>
+#include "Rectangle.hh"
 
 SmartPtr<HorizontalArrayArea>
 HorizontalArrayArea::create(const std::vector<AreaRef>& children)
 {
-    // std::cout << "[HorizontalArrayArea]: creating harea" << std::endl;
   SmartPtr<HorizontalArrayArea> harea = new HorizontalArrayArea(children);
+  // std::cout << "[HorizontalArrayArea]: creating harea: " << harea << std::endl;
   return harea;
 }
 
@@ -115,6 +116,8 @@ HorizontalArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y
   scaled y = y0;
   Point p;
   this->origin(this->content.size() - 1, p);
+
+  std::cout << "[HorizontalArrayArea::searchByCoords]: searching area: " << this << " by coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
   for (auto p = content.begin(); p != content.end(); p++)
     {
       id.append(p - content.begin(), *p, offset, scaled::zero());
@@ -123,6 +126,10 @@ HorizontalArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y
       id.pop_back();
       offset += (*p)->box().horizontalExtent();
       y += (*p)->getStep();
+    }
+    if (Rectangle(scaled::zero(), scaled::zero(), this->box()).isInside(x, y)) {
+        std::cout << "[HorizontalArrayArea::searchByCoords]: returning this: " << this << std::endl;
+        return this;
     }
 
   return nullptr;

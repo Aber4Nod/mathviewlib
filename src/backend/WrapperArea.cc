@@ -46,6 +46,8 @@ void
 WrapperArea::render(RenderingContext& context, const scaled& x, const scaled& y) const
 {
   RenderingContext::ColorStyle old_style = context.getStyle();
+  x_coord = x.toDouble();
+  y_coord = y.toDouble();
 
   switch (old_style)
     {
@@ -83,12 +85,40 @@ WrapperArea::render(RenderingContext& context, const scaled& x, const scaled& y)
 AreaRef
 WrapperArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
 {
+    std::cout << "[WrapperArea::searchByCoordsSimple]: coords: " << x.toDouble() << ", " << y.toDouble() << " elem address: " << getElement() << std::endl;
+    std::cout << "[WrapperArea::searchByCoordsSimple]2: x_coord: " << x_coord << ", y_coord: " << y_coord 
+            << " width: " << box().width.toDouble() << " height: " << box().height.toDouble() << " depth: " << box().depth.toDouble() << std::endl;
+    if (Rectangle(x_coord, (y_coord - box().depth.toDouble()), box().width, box().height + box().depth).isInside(x, -y)) {
+        std::cout << "[WrapperArea::searchByCoordsSimple]: is inside this! " << std::endl;
+    }
     AreaRef area = getChild()->searchByCoordsSimple(x, y);
+    std::cout << "[WrapperArea::searchByCoordsSimple]: child area " << getChild() << " found area: " << area << std::endl;
     if (area)
         return area;
+    if (Rectangle(x_coord, (y_coord - box().depth.toDouble()), box().width, box().height + box().depth).isInside(x, -y)) {
+        return this;
+    }
     return nullptr;
 }
 
 SmartPtr<Element>
 WrapperArea::getElement() const
 { return static_cast<Element*>(element); }
+
+AreaRef
+WrapperArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
+{
+  std::cout << "[WrapperArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << " elem address: " << getElement() << std::endl;
+  std::cout << "[WrapperArea::searchByCoords]: Rectangle: " << box().width.toDouble() << ", " << box().verticalExtent().toDouble() << " depth: " << box().depth.toDouble() << std::endl;
+  if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y))
+    {
+        std::cout << "[WrapperArea::searchByCoords]: going deeper! " << std::endl;
+        AreaRef s_area = BinContainerArea::searchByCoords(id, x, y);
+      if (s_area)
+	     return s_area;
+      return this;
+    }
+  else
+    return nullptr;
+}
+

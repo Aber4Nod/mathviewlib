@@ -26,6 +26,7 @@
 
 #include "GlyphWrapperArea.hh"
 #include "Rectangle.hh"
+#include <iostream>
 
 AreaRef
 GlyphWrapperArea::node(AreaIndex) const
@@ -72,6 +73,7 @@ GlyphWrapperArea::searchByArea(AreaId&, const AreaRef& area) const
 AreaRef
 GlyphWrapperArea::searchByCoords(AreaId&, const scaled& x, const scaled& y) const
 { 
+    std::cout << "[GlyphWrapperArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
     if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y))
         return this; 
     return nullptr;

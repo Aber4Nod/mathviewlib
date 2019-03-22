@@ -24,6 +24,8 @@
 
 #include "AreaId.hh"
 #include "OverlapArrayArea.hh"
+#include <iostream>
+#include "Rectangle.hh"
 
 AreaRef
 OverlapArrayArea::clone(const std::vector<AreaRef>& content) const
@@ -98,6 +100,7 @@ OverlapArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) c
   // it may overlap some previous child area. Hence, if the user sees
   // something, we must first check the last painted area because it is
   // what the user sees for sure
+  std::cout << "[OverlapArrayArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
   for (auto p = content.rbegin(); p != content.rend(); p++)
     {
       id.append(content.size() - (p - content.rbegin()) - 1, *p, scaled::zero(), scaled::zero());
@@ -105,6 +108,10 @@ OverlapArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) c
       if (s_area) return s_area;
       id.pop_back();
     }
+  if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y)) {
+      std::cout << "[OverlapArrayArea::searchByCoords]: returning this: " << this << std::endl;
+      return this;
+  }
   return nullptr;
 }
 

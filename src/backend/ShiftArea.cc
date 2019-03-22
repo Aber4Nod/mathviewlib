@@ -25,6 +25,7 @@
 #include "ShiftArea.hh"
 #include "AreaId.hh"
 #include "Point.hh"
+#include <iostream>
 
 void
 ShiftArea::render(class RenderingContext& context, const scaled& x, const scaled& y) const
@@ -45,6 +46,7 @@ ShiftArea::box() const
 AreaRef
 ShiftArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
 {
+  std::cout << "[ShiftArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
   id.append(0, getChild(), scaled::zero(), shift);
   AreaRef s_area = getChild()->searchByCoords(id, x, y - shift);
   if (s_area) return s_area; // ?????

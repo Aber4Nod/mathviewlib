@@ -31,14 +31,14 @@ Qt_RenderArea::Qt_RenderArea(SmartPtr<AbstractLogger> logger,
                        QWidget* parent)
     : QWidget(parent)
 {
-    m_rawFont = QRawFont::fromFont(QFont(DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE));
+    m_rawFont = QRawFont::fromFont(QFont(DEFAULT_FONT_FAMILY, 32));
     m_backend = Qt_Backend::create(m_rawFont);
     m_device = m_backend->getMathGraphicDevice();
     m_dictionary = MathMLOperatorDictionary::create();
     m_view = MathView::create(logger);
     m_view->setOperatorDictionary(m_dictionary);
     m_view->setMathMLNamespaceContext(MathMLNamespaceContext::create(m_view, m_device));
-    m_view->setDefaultFontSize(DEFAULT_FONT_SIZE);
+    m_view->setDefaultFontSize(32);
     setFocusPolicy(Qt::StrongFocus);
 }
 
@@ -73,6 +73,8 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         QPointF pos = event->pos();
         qDebug() << "[Qt_RenderArea::mousePressEvent]: pressed on pos: " << pos;
 
+        qDebug() << "[Qt_RenderArea::mousePressEvent]: widget pos: " << this->pos();
+        
         // -- deletion of glyph
         // if (m_view->deleteGlyph(pos.x(), pos.y()));
             // repaint();
@@ -97,6 +99,9 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
             // repaint();
 
         // -- addition of cursor after here
+        // if (m_view->insertElementCursor(pos.x() - this->pos().x(), pos.y() - this->pos().y()))
+            // repaint();
+
         if (m_view->insertElementCursor(pos.x(), pos.y()))
             repaint();
     }

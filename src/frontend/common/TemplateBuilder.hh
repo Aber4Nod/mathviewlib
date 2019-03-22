@@ -1290,6 +1290,7 @@ protected:
                 elem_token->resetFlag(Element::FWrapperSet);
                 // el = Model::asElement(mtoken);
                 elem = elem_token;
+                elem_token->setFlag(Element::FRebuildIsdNeeded);
             }
         }
         else
@@ -1316,11 +1317,12 @@ protected:
             Model::insertChild(node_mtd, Model::asNode(el));
             elem = getMathMLElement(Model::asElement(node));
             elem->setWrapperSet();
+            elem->setFlag(Element::FRebuildIsdNeeded);
         }
 
 	    elem->resetDirtyStructure();
 	    elem->resetDirtyAttribute();
-        std::cout << "ended of creation of mathmlelement: " <<  Model::getNodeName(Model::asNode(el)) << std::endl;
+        std::cout << "ended of creation of mathmlelement: " <<  Model::getNodeName(Model::asNode(el)) << " created_addr: " << elem << std::endl;
 	    return elem;
 	  }
       }
@@ -1358,6 +1360,13 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+        if (_elem->rebuildIsNeeded())
+        {
+            _elem->resetFlag(Element::FRebuildIsdNeeded);
+            iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+            content.clear();
+            SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+        }
         if (_elem->insertSet())
         {
             printf("[getChildMathMLElements]: insertSet triggered\n");

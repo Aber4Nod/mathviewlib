@@ -45,6 +45,7 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   resetFlag(FCursorSet);
   resetFlag(FWrapperSet);
   resetFlag(FWrapperIsNeeded);
+  resetFlag(FRebuildIsdNeeded);
 }
 
 Element::~Element()
@@ -186,6 +187,13 @@ Element::setWrapperIsNeeded()
 {
     if (!(wrapperIsNeeded()))
         setFlag(FWrapperIsNeeded);
+}
+
+void
+Element::setRebuildIsNeeded()
+{
+    if (!(rebuildIsNeeded()))
+        setFlag(FRebuildIsdNeeded);
 }
 
 void

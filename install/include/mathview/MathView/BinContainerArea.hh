@@ -60,6 +60,7 @@ public:
 
   AreaRef getChild(void) const { return child; }
 
+  mutable double x_coord, y_coord;
 private:
   AreaRef child;
 };

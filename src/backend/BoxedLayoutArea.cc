@@ -27,6 +27,8 @@
 #include "AreaId.hh"
 #include "Point.hh"
 #include "BoxedLayoutArea.hh"
+#include <iostream>
+#include "Rectangle.hh"
 
 void
 BoxedLayoutArea::render(class RenderingContext& context, const scaled& x, const scaled& y) const
@@ -72,6 +74,7 @@ BoxedLayoutArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) co
 {
   // See OverlapArrayArea for the reason why the search must be done
   // from the last to the first area
+  std::cout << "[BoxedLayoutArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
   for (auto p = content.rbegin();
        p != content.rend();
        p++)
@@ -80,6 +83,10 @@ BoxedLayoutArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) co
       AreaRef s_area = p->area->searchByCoords(id, x - p->dx, y - p->dy);
       if (s_area) return s_area;
       id.pop_back();
+    }
+    if (Rectangle(scaled::zero(), scaled::zero(), this->box()).isInside(x, y)) {
+        std::cout << "[BoxedLayoutArea::searchByCoords]: returning this: " << this << std::endl;
+        return this;
     }
   return nullptr;
 }

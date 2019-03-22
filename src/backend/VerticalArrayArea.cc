@@ -27,6 +27,8 @@
 #include "AreaId.hh"
 #include "Point.hh"
 #include "VerticalArrayArea.hh"
+#include <iostream>
+#include "Rectangle.hh"
 
 VerticalArrayArea::VerticalArrayArea(const std::vector<AreaRef>& children, AreaIndex r)
   : LinearContainerArea(children), refArea(r)
@@ -210,10 +212,12 @@ VerticalArrayArea::fit(const scaled& width, const scaled& height, const scaled& 
 AreaRef
 VerticalArrayArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
 {
+  std::cout << "[VerticalArrayArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
   std::vector<BoundingBox> box;
   scaled depth = prepareChildBoxes(box);
 
   scaled offset = -depth;
+  std::cout << "[VerticalArrayArea::searchByCoords]: offset: " << offset.toDouble() << std::endl;
   for (auto p = content.begin();
        p != content.end();
        p++)

@@ -27,6 +27,7 @@
 #include "AreaId.hh"
 #include "SimpleArea.hh"
 #include "Rectangle.hh"
+#include <iostream>
 
 AreaRef
 SimpleArea::fit(const scaled&, const scaled&, const scaled&) const
@@ -49,6 +50,7 @@ SimpleArea::searchByArea(AreaId&, const AreaRef& area) const
 AreaRef
 SimpleArea::searchByCoords(AreaId&, const scaled& x, const scaled& y) const
 { 
+    std::cout << "[SimpleArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
     if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y))
         return this; 
     return nullptr;

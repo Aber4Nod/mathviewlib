@@ -25,6 +25,7 @@
 #include "Rectangle.hh"
 #include "GlyphArea.hh"
 #include "GlyphStringArea.hh"
+#include <iostream>
 
 CombinedGlyphArea::CombinedGlyphArea(const AreaRef& b, const AreaRef& a, const AreaRef& u,
 		  		     const scaled& skewchar, const scaled& verticalSpace,
@@ -136,6 +137,7 @@ CombinedGlyphArea::searchByArea(class AreaId&, const AreaRef& area) const
 AreaRef
 CombinedGlyphArea::searchByCoords(class AreaId& id, const scaled& x, const scaled& y) const
 {
+	std::cout << "[CombinedGlyphArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
 	if (Rectangle(scaled::zero(), scaled::zero(), bbox).isInside(x, y))
   		return this;
 	return nullptr;

@@ -66,6 +66,7 @@ public:
   virtual void setCursorSet(void);
   virtual void setWrapperSet(void);
   virtual void setWrapperIsNeeded(void);
+  virtual void setRebuildIsNeeded(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -82,6 +83,7 @@ public:
   bool cursorSet(void) const { return getFlag(FCursorSet); }
   bool wrapperSet(void) const { return getFlag(FWrapperSet); }
   bool wrapperIsNeeded(void) const { return getFlag(FWrapperIsNeeded); }
+  bool rebuildIsNeeded(void) const { return getFlag(FRebuildIsdNeeded); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -100,6 +102,7 @@ public:
     FCursorSet,
     FWrapperSet,
     FWrapperIsNeeded,
+    FRebuildIsdNeeded,
     
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

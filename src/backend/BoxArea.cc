@@ -26,6 +26,7 @@
 
 #include "BoxArea.hh"
 #include "Rectangle.hh"
+#include <iostream>
 
 BoxArea::BoxArea(const AreaRef& area, const BoundingBox& b)
   : BinContainerArea(area->fit(b.width, b.height, b.depth)), bbox(b)
@@ -53,8 +54,11 @@ BoxArea::strength(int& w, int& h, int& d) const
 AreaRef
 BoxArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
 {
+  std::cout << "[BoxArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << std::endl;
+  std::cout << "[BoxArea::searchByCoords]: Rectangle: " << box().width.toDouble() << ", " << box().height.toDouble() << std::endl;
   if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y))
     {
+        std::cout << "[BoxArea::searchByCoords]: going deeper! " << std::endl;
         AreaRef s_area = BinContainerArea::searchByCoords(id, x, y);
       if (s_area)
 	     return s_area;
