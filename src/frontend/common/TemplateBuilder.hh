@@ -437,11 +437,16 @@ protected:
               typename Model::Node node_default = Model::createNewChild(node_mtd, 
                     Model::getNodeNamespace(node_mtd),
                     Model::toModelString("mi"), Model::toModelString(""));
-              typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+              typename Model::Node node_text = Model::NewText(Model::toModelString("wrapping"));
               Model::insertChild(node_default, node_text);
 
               builder.getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FWrapperSet);
-              builder.getMathMLElement(Model::asElement(node_default))->setFlag(MathMLActionElement::FWrapperSet);
+              SmartPtr<MathMLElement> node_default_elem = builder.getMathMLElement(Model::asElement(node_default));
+              node_default_elem->setFlag(MathMLActionElement::FWrapperSet);
+              Model::setNodeValue(node_text, "");
+              node_default_elem->setDirtyLayout();
+              node_default_elem->setDirtyStructure();
+
               new_elem = node;
           // }
 
@@ -1487,8 +1492,14 @@ protected:
             typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
             Model::insertNextSibling(Model::asNode(iter.element()), node_table);
             _elem->resetFlag(MathMLActionElement::FCursorSet);
-             getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FCursorSet);
-            _elem = getMathMLElement(iter.element());
+            SmartPtr<MathMLTokenElement> token_elem = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
+            token_elem->setFlag(MathMLActionElement::FCursorSet);
+            token_elem->setNodeIndex(0);
+            token_elem->setNodeContentIndex(-1);
+
+            // iter.deleteElement(iter.element());
+            // _elem = getMathMLElement(iter.element());
+
 
             // ### old version below
             // typename Model::Node node = (this->*(m->second.createMethod))(el);
@@ -1497,7 +1508,7 @@ protected:
             // // _elem = getMathMLElement(Model::asElement(node));
             // _elem = getMathMLElement(iter.element());
         }
-        else
+        // else
         if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength() && !_elem->cursorSet())
         {
             if (!iter.deleteElement(iter.element()))
