@@ -38,7 +38,6 @@ public:
 
   virtual void render(RenderingContext&, const scaled&, const scaled&) const;
   virtual AreaRef searchByCoordsSimple(const scaled&, const scaled&) const;
-  virtual AreaRef searchByCoords(class AreaId&, const scaled&, const scaled&) const;
 
   int getSelected(void) const { return selected; }
   void setSelected(int n) const { selected = n; }

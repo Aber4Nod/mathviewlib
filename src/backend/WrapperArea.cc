@@ -104,21 +104,3 @@ WrapperArea::searchByCoordsSimple(const scaled& x, const scaled& y) const
 SmartPtr<Element>
 WrapperArea::getElement() const
 { return static_cast<Element*>(element); }
-
-AreaRef
-WrapperArea::searchByCoords(AreaId& id, const scaled& x, const scaled& y) const
-{
-  std::cout << "[WrapperArea::searchByCoords]: coords: " << x.toDouble() << ", " << y.toDouble() << " elem address: " << getElement() << std::endl;
-  std::cout << "[WrapperArea::searchByCoords]: Rectangle: " << box().width.toDouble() << ", " << box().verticalExtent().toDouble() << " depth: " << box().depth.toDouble() << std::endl;
-  if (Rectangle(scaled::zero(), scaled::zero(), box()).isInside(x, y))
-    {
-        std::cout << "[WrapperArea::searchByCoords]: going deeper! " << std::endl;
-        AreaRef s_area = BinContainerArea::searchByCoords(id, x, y);
-      if (s_area)
-	     return s_area;
-      return this;
-    }
-  else
-    return nullptr;
-}
-

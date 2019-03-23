@@ -89,7 +89,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
 }
 
   typename Model::Node
-  insertAfter(const typename Model::Element& el, std::string name = "mi")
+  insertAfter(const typename Model::Element& el, std::string name = "mo")
   {
       typename Model::Element xml_element = element();
       typename Model::Node nextS = Model::getNextSibling(
@@ -140,14 +140,32 @@ insertAfterPrepareMROW(const typename Model::Element& el)
           Model::getNodeNamespace(Model::asNode(xml_element)), name);
       Model::insertNextSibling(Model::asNode(xml_element), node);
       // Model::setNodeValue(node, "");
-      if (!name.compare("mi")) {
+      if (!name.compare("mi") || !name.compare("mo") || !name.compare("mn") || !name.compare("mtext")) {
           typename Model::Node node_text = Model::NewText(Model::toModelString(""));
           Model::insertChild(node, node_text);
       }
       // setCurrent(Model::asElement(node));
       return Model::asNode(xml_element);
   }
-  
+
+    // 0 - no next Model::Element
+    // 1 - has next Model::Element - set it as current for ElementIterator
+
+    // todo remove mrow parent element, if it was constructed dynamically during runtime of program
+    bool
+    deleteElement(const typename Model::Element& el)
+    {
+        typename Model::Node curNode  = Model::asNode(el);
+        typename Model::Node nextNode = Model::asNode(findValidNodeForward(Model::getNextSibling(curNode)));
+
+        Model::unlinkNode(curNode);
+        Model::freeNode(curNode);
+        if (!nextNode)
+            return 0;
+        setCurrent(Model::asElement(nextNode));
+        return 1;
+    }
+
 
 
 protected:

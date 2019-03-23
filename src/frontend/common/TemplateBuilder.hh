@@ -386,6 +386,10 @@ protected:
 
       builder.getChildMathMLTextNodes(el, content, elem);
       elem->swapContent(content); // should normalize spaces etc.
+      if (is_a<MathMLIdentifierElement>(SmartPtr<MathMLTokenElement>(elem)) 
+              || is_a<MathMLOperatorElement>(SmartPtr<MathMLTokenElement>(elem))
+              || is_a<MathMLNumberElement>(SmartPtr<MathMLTokenElement>(elem)))
+          elem->setWrapperIsNeeded();
       std::cout << "[MathMLTokenElementBuilder:construct]: element: " << elem << " current length of contents: " << elem->getContentSize() << std::endl;
     }
   };
@@ -910,9 +914,24 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLUnderOverElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      // if (_element->rebuildIsNeeded()) {
+          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+      // }
+      elem->setBase(_element);
       iter.next();
-      elem->setUnderScript(builder.getMathMLElement(iter.element()));
+      _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      elem->setUnderScript(_element);
       elem->setOverScript(0);
     }
 
@@ -946,10 +965,25 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLUnderOverElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      // if (_element->rebuildIsNeeded()) {
+          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+      // }
+      elem->setBase(_element);
       iter.next();
       elem->setUnderScript(0);
-      elem->setOverScript(builder.getMathMLElement(iter.element()));
+      _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      elem->setOverScript(_element);
     }
 
     static typename Model::Node
@@ -985,11 +1019,37 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLUnderOverElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      // if (_element->rebuildIsNeeded()) {
+          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+      // }
+      elem->setBase(_element);
       iter.next();
-      elem->setUnderScript(builder.getMathMLElement(iter.element()));
+
+      _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      // if (_element->rebuildIsNeeded()) {
+          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+          // iter.next();
+      // }
+      elem->setUnderScript(_element);
       iter.next();
-      elem->setOverScript(builder.getMathMLElement(iter.element()));
+      _element = builder.getMathMLElement(iter.element());
+      if (_element->insertSetCursor())
+      {
+          typename Model::Node node = iter.insertAfterPrepareMROW(el);
+          _element = builder.getMathMLElement(Model::asElement(node));
+      }
+      elem->setOverScript(_element);
     }
 
     static typename Model::Node
@@ -1319,6 +1379,41 @@ protected:
             elem->setWrapperSet();
             elem->setFlag(Element::FRebuildIsdNeeded);
         }
+        // else
+        // if (elem->insertSetCursor())
+        // {
+        //     std::cout << "[getMathMLElementNoCreate:insertSetCursor]: handling insertSetCursor for element: " << elem << std::endl;
+        //     bool p_row = true;
+        //     typename Model::Node _parent = Model::getParent(Model::asNode(el));
+        //     if (Model::getNodeName(_parent) != "mrow")
+        //     {
+        //         std::cout << "[getMathMLElementNoCreate:insertSetCursor]: creating mrow parent element" << std::endl;
+        //         p_row = false;
+        //         _parent = Model::createNewChild(_parent, 
+        //               Model::getNodeNamespace(_parent),
+        //               Model::toModelString("mrow"), Model::toModelString(""));
+        //         Model::replaceNode(Model::asNode(el), _parent);
+        //         Model::insertChild(_parent, Model::asNode(el));
+        //     }
+        // 
+        //     std::cout << "[getMathMLElementNoCreate:insertSetCursor]: creating mi element" << std::endl;
+        //     typename Model::Node node = Model::createNode(
+        //         Model::getNodeNamespace(Model::asNode(el)), "mi");
+        //     Model::insertNextSibling(Model::asNode(el), node);
+        //     typename Model::Node node_text = Model::NewText(Model::toModelString("test"));
+        //     Model::insertChild(node, node_text);
+        // 
+        //     elem->resetFlag(Element::FInsertSetCursor);
+        //     getMathMLElement(Model::asElement(node))->setCursorSet();
+        // 
+        //     if (!p_row) {
+        //         elem = getMathMLElement(Model::asElement(_parent));
+        //         elem->setFlag(Element::FRebuildIsdNeeded);
+        //     }
+        //     else {
+        //         elem = getMathMLElement(Model::asElement(node));
+        //     }
+        // }
 
 	    elem->resetDirtyStructure();
 	    elem->resetDirtyAttribute();
@@ -1362,6 +1457,7 @@ protected:
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
         if (_elem->rebuildIsNeeded())
         {
+            std::cout << "[getChildMathMLElements]: rebuild is needed for element: " << _elem << std::endl;
             _elem->resetFlag(Element::FRebuildIsdNeeded);
             iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
             content.clear();
@@ -1377,7 +1473,7 @@ protected:
         else
         if (_elem->insertSetCursor())
         {
-            typename Model::Node node = iter.insertAfter(el);
+            typename Model::Node node = iter.insertAfter(el, "mtext");
             _elem = getMathMLElement(Model::asElement(node));
         }
         else
@@ -1401,6 +1497,13 @@ protected:
             // // _elem = getMathMLElement(Model::asElement(node));
             // _elem = getMathMLElement(iter.element());
         }
+        else
+        if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength() && !_elem->cursorSet())
+        {
+            if (!iter.deleteElement(iter.element()))
+                continue;
+            _elem = getMathMLElement(iter.element());
+        }
         content.push_back(_elem);
 
         if (_elem->insertSetCursor())
@@ -1409,7 +1512,13 @@ protected:
             iter.next();
 
             _elem = getMathMLElement(iter.element());
-            _elem->setFlag(MathMLActionElement::FCursorSet);
+            _elem->setDirtyLayout();
+            _elem->setDirtyStructure();
+            _elem->setCursorSet();
+            _elem->setFlag(Element::FRawTextElement);
+            smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
+            smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(-1);
+            _elem = getMathMLElement(iter.element());
             content.push_back(_elem);
         }
     }

@@ -45,9 +45,7 @@
 
 MathMLTokenElement::MathMLTokenElement(const SmartPtr<class MathMLNamespaceContext>& context)
   : MathMLElement(context)
-{
-    setWrapperIsNeeded();
-}
+{ }
 
 MathMLTokenElement::~MathMLTokenElement()
 { }
@@ -144,6 +142,7 @@ MathMLTokenElement::format(FormattingContext& ctxt)
   if (dirtyLayout())
     {
       ctxt.push(this);
+      printf("[MathMLTokenElement::format]: beginning to format dirty \n");
       if (cursorSet()) {
         // must be binded to prev or next element (to be fitted) -> prevential formatting size (i.e. simple text); 
         // also there is an actual formatting size - after selecting which element to insert.

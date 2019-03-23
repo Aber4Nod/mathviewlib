@@ -470,24 +470,9 @@ int32_t
 View::insertElementCursor(const scaled& x, const scaled& y) const
 {
     std::cout << "in insertElementCursor" << std::endl;
-    // todo make finding nearest area/element instead of clicked glyphArea
-    // SmartPtr<class Element> elem = getElementAt(x, y);
-    // if (elem)
-        // std::cout << "elem was found: " << elem << std::endl;
-    // else
-        // std::cout << "elem wasn't found!" << std::endl;
-    // return 1;
     AreaRef area = getAreaAt(x, y);
     if (area)
     {
-        const WrapperArea *wrapperArea = smart_cast<const WrapperArea>(area);
-        if (wrapperArea)
-        {
-            SmartPtr<Element> wrappedElem = wrapperArea->getElement();
-            std::cout << "testing wrapperElem: " << wrappedElem << std::endl;
-            return 1;
-        }
-        
         MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
         if (_elem != nullptr) {
             std::cout << "[View::insertElementCursor]: reseting old cursor positions " << std::endl;
@@ -496,6 +481,17 @@ View::insertElementCursor(const scaled& x, const scaled& y) const
             _elem->setNodeContentIndex(-1);
             _elem->setDirtyLayout();
             _elem->setDirtyStructure();
+        }
+
+        const WrapperArea *wrapperArea = smart_cast<const WrapperArea>(area);
+        if (wrapperArea)
+        {
+            SmartPtr<Element> wrappedElem = wrapperArea->getElement();
+            std::cout << "testing wrapperElem: " << wrappedElem << std::endl;
+            wrappedElem->setInsertSetCursor();
+            wrappedElem->setDirtyLayout();
+            wrappedElem->setDirtyStructure();
+            return 1;
         }
 
         uint32_t index = area->getGlyphArea()->getParent()->getIndexOfChild(area->getGlyphArea());

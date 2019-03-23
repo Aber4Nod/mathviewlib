@@ -84,6 +84,7 @@ public:
   bool wrapperSet(void) const { return getFlag(FWrapperSet); }
   bool wrapperIsNeeded(void) const { return getFlag(FWrapperIsNeeded); }
   bool rebuildIsNeeded(void) const { return getFlag(FRebuildIsdNeeded); }
+  bool rawTextElementSet(void) const { return getFlag(FRawTextElement); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -103,6 +104,7 @@ public:
     FWrapperSet,
     FWrapperIsNeeded,
     FRebuildIsdNeeded,
+    FRawTextElement,
     
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };
