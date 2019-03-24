@@ -925,9 +925,10 @@ protected:
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
       }
-      // if (_element->rebuildIsNeeded()) {
-          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
-      // }
+      else
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
       elem->setBase(_element);
       iter.next();
       _element = builder.getMathMLElement(iter.element());
@@ -976,9 +977,10 @@ protected:
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
       }
-      // if (_element->rebuildIsNeeded()) {
-          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
-      // }
+      else
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
       elem->setBase(_element);
       iter.next();
       elem->setUnderScript(0);
@@ -1030,9 +1032,10 @@ protected:
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
       }
-      // if (_element->rebuildIsNeeded()) {
-          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
-      // }
+      else
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
       elem->setBase(_element);
       iter.next();
 
@@ -1042,10 +1045,13 @@ protected:
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
       }
-      // if (_element->rebuildIsNeeded()) {
-          // iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
-          // iter.next();
-      // }
+      else
+      if (_element->rebuildIsNeeded())
+      {
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+          iter.next();
+      }
+
       elem->setUnderScript(_element);
       iter.next();
       _element = builder.getMathMLElement(iter.element());
