@@ -647,13 +647,13 @@ protected:
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
 
-      if (element->deleteSet())
-      {
-          builder.forgetElement(element);
-          typename Model::Node node = iter.updateCurrent(el);
-          element = builder.getMathMLElement(Model::asElement(node));
-      }
-      else
+      // if (element->deleteSet())
+      // {
+      //     builder.forgetElement(element);
+      //     typename Model::Node node = iter.updateCurrent(el);
+      //     element = builder.getMathMLElement(Model::asElement(node));
+      // }
+      // else
       if (element->insertSet())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
@@ -678,13 +678,13 @@ protected:
       iter.next();
 
       element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      if (element->deleteSet()) // todo total copipasta from numerator - must be unified
-      {
-          builder.forgetElement(element);
-          typename Model::Node node = iter.updateCurrent(el);
-          element = builder.getMathMLElement(Model::asElement(node));
-      }
-      else
+      // if (element->deleteSet()) // todo total copipasta from numerator - must be unified
+      // {
+      //     builder.forgetElement(element);
+      //     typename Model::Node node = iter.updateCurrent(el);
+      //     element = builder.getMathMLElement(Model::asElement(node));
+      // }
+      // else
       if (element->insertSet())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
@@ -1466,6 +1466,15 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+        if (_elem->deleteSet() && _elem->cursorSet())
+        {
+            _elem->resetFlag(Element::FDeleteSet);
+
+            typename Model::Node prevNode = Model::getPrevSibling(Model::asNode(iter.element()));
+            iter.deleteElement(Model::asElement(prevNode));
+            content.pop_back();
+        }
+        else
         if (_elem->rebuildIsNeeded())
         {
             std::cout << "[getChildMathMLElements]: rebuild is needed for element: " << _elem << std::endl;

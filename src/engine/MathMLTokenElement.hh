@@ -74,6 +74,8 @@ public:
 
   void setNodeIndex(int32_t index) { cursorNodeIndex = index; };
   void setNodeContentIndex(int32_t index) { cursorNodeContentIndex = index; };
+  int32_t getCursorNodeIndex(void) { return cursorNodeIndex; };
+  int32_t getcursorNodeContentIndex(void) { return cursorNodeContentIndex; };
 
 private:
   LinearContainerTemplate<MathMLTokenElement,class MathMLTextNode> content;

@@ -559,7 +559,12 @@ View::deleteGLyphBeforeCursor()
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
     if (!_elem)
         return;
-    _elem->deleteGLyphBeforeCursor();
+
+    if (_elem->getCursorNodeIndex() == 0 && _elem->getcursorNodeContentIndex() == -1)
+        _elem->setDeleteSet();
+    else
+        _elem->deleteGLyphBeforeCursor();
+
     _elem->setDirtyLayout();
     _elem->setDirtyStructure();
 }
