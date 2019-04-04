@@ -100,6 +100,9 @@ public:
   int32_t insertGlyphAfterCursor(char);
   void deleteGLyphBeforeCursor();
 
+  void moveCursorLeft(void);
+  void moveCursorRight(void);
+
 protected:
   SmartPtr<const class Area> getRootArea(void) const;
   SmartPtr<const class Area> formatElement(const SmartPtr<class Element>&) const;

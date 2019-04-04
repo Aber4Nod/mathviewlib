@@ -305,3 +305,78 @@ MathMLTokenElement::deleteGLyphBeforeCursor()
         ++curIndex;
     }
 }
+
+void
+MathMLTokenElement::setLastCursorPostition()
+{
+    cursorNodeIndex = content.getContent().size() - 1;
+    cursorNodeContentIndex = content.getContent().back()->GetLogicalContentLength() - 1;
+
+    setCursorSet();
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+MathMLTokenElement:: setFirstCursorPostition()
+{
+    cursorNodeIndex = 0;
+    cursorNodeContentIndex = -1;
+
+    setCursorSet();
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+int32_t
+MathMLTokenElement::decreaseCursorPosition()
+{
+    if (!cursorSet() || (cursorNodeIndex == 0 && cursorNodeContentIndex == -1))
+        return -1;
+
+    if (cursorNodeContentIndex == 0 && cursorNodeIndex != 0)
+    {
+        cursorNodeIndex--;
+        cursorNodeContentIndex = content.getContent()[cursorNodeIndex]->GetLogicalContentLength();
+    }
+    else
+        cursorNodeContentIndex--;
+
+    setDirtyStructure();
+    setDirtyLayout();
+    return 0;
+}
+
+int32_t
+MathMLTokenElement::increaseCursorPosition()
+{
+    if (!cursorSet() || (cursorNodeIndex == content.getContent().size() - 1
+               && cursorNodeContentIndex == content.getContent().back()->GetLogicalContentLength() - 1))
+        return -1;
+
+    if (cursorNodeContentIndex == content.getContent()[cursorNodeIndex]->GetLogicalContentLength() - 1
+            && cursorNodeIndex != content.getContent().size() - 1)
+    {
+        cursorNodeIndex++;
+        cursorNodeContentIndex = 0;
+    }
+    else
+        cursorNodeContentIndex++;
+
+    setDirtyStructure();
+    setDirtyLayout();
+    return 0;
+}
+
+void 
+MathMLTokenElement::resetCursor()
+{
+    if (!cursorSet())
+        return;
+
+    resetFlag(FCursorSet);
+    setDirtyStructure();
+    setDirtyLayout();
+    setNodeIndex(-1);
+    setNodeContentIndex(-1);
+}

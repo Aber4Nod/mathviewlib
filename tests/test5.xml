@@ -2,7 +2,10 @@
   <mrow>
     <mrow>
       <munder>
-        <mo>lim_test</mo>
+        <mrow>
+            <mi>lim_test</mi>
+            <mo>nst</mo>
+        </mrow>
 	<mrow>
 	  <mi>x</mi>
 	  <mo>&#x2192;</mo>

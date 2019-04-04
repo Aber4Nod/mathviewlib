@@ -140,5 +140,17 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
         m_view->deleteGLyphBeforeCursor();
         repaint();
     }
+    else
+    if (key == Qt::Key_Left)
+    {
+        m_view->moveCursorLeft();
+        repaint();
+    }
+    else
+    if (key == Qt::Key_Right)
+    {
+        m_view->moveCursorRight();
+        repaint();
+    }
 }
 

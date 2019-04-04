@@ -1529,6 +1529,37 @@ protected:
             // // _elem = getMathMLElement(Model::asElement(node));
             // _elem = getMathMLElement(iter.element());
         }
+
+        if (_elem->movePrevSet())
+        {
+            _elem->resetFlag(Element::FMovePrev);
+            if (iter.hasValidNodePrev(iter.element())) {
+                SmartPtr<MathMLTokenElement> prevElem = smart_cast<MathMLTokenElement>(content.back());
+                if (prevElem)
+                {
+                    prevElem->setLastCursorPostition();
+                    smart_cast<MathMLTokenElement>(_elem)->resetCursor();
+
+                    iter.setCurrent(iter.findValidNodePrev(Model::asNode(iter.element())));
+                    content.pop_back();
+                    _elem = getMathMLElement(iter.element());
+                }
+            }
+        }
+
+        if (_elem->moveNextSet())
+        {
+            _elem->resetFlag(Element::FMoveNext);
+            typename Model::Element next_element = iter.findValidNodeForward(Model::getNextSibling(Model::asNode(iter.element())));
+            SmartPtr<MathMLTokenElement> nextElem = smart_cast<MathMLTokenElement>(getMathMLElement(next_element));
+            if (nextElem && iter.hasValidNodeNext(iter.element()))
+            {
+                nextElem->setFirstCursorPostition();
+                smart_cast<MathMLTokenElement>(_elem)->resetCursor();
+                _elem = getMathMLElement(iter.element());
+            }
+        }
+
         // else
         if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength() && !_elem->cursorSet())
         {

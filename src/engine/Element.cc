@@ -197,6 +197,24 @@ Element::setRebuildIsNeeded()
 }
 
 void
+Element::setMoveNext()
+{
+    if (!(moveNextSet()))
+        setFlag(FMoveNext);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+Element::setMovePrev()
+{
+    if (!(movePrevSet()))
+        setFlag(FMovePrev);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
 Element::setDirtyAttribute()
 {
   //std::cerr << "Element::setDirtyAttribute " << this << " " << dirtyAttribute() << std::endl;

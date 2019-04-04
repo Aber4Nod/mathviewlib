@@ -166,9 +166,24 @@ insertAfterPrepareMROW(const typename Model::Element& el)
         return 1;
     }
 
+    bool
+    hasValidNodeNext(const typename Model::Element& _p0) const
+    {
+        typename Model::Node p0 = Model::getNextSibling(Model::asNode(_p0));
+        for (typename Model::Node p = p0; p; p = Model::getNextSibling(p))
+          if (this->valid(p)) return 1;
+        return 0;
+    }
 
+    bool
+    hasValidNodePrev(const typename Model::Element& _p0) const
+    {
+        typename Model::Node p0 = Model::getPrevSibling(Model::asNode(_p0));
+        for (typename Model::Node p = p0; p; p = Model::getPrevSibling(p))
+          if (this->valid(p)) return 1;
+        return 0;
+    }
 
-protected:
   typename Model::Element
   findValidNodeForward(const typename Model::Node& p0) const
   {
@@ -176,7 +191,16 @@ protected:
       if (this->valid(p)) return Model::asElement(p);
     return typename Model::Element();
   }
-    
+  
+  typename Model::Element
+  findValidNodePrev(const typename Model::Node& _p0) const
+  {
+      typename Model::Node p0 = Model::getPrevSibling(_p0);
+    for (typename Model::Node p = p0; p; p = Model::getPrevSibling(p))
+      if (this->valid(p)) return Model::asElement(p);
+    return typename Model::Element();
+  }
+
   typename Model::Element currentElement;
 };
 

@@ -67,6 +67,8 @@ public:
   virtual void setWrapperSet(void);
   virtual void setWrapperIsNeeded(void);
   virtual void setRebuildIsNeeded(void);
+  virtual void setMoveNext(void);
+  virtual void setMovePrev(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -85,6 +87,8 @@ public:
   bool wrapperIsNeeded(void) const { return getFlag(FWrapperIsNeeded); }
   bool rebuildIsNeeded(void) const { return getFlag(FRebuildIsdNeeded); }
   bool rawTextElementSet(void) const { return getFlag(FRawTextElement); }
+  bool moveNextSet(void) const { return getFlag(FMoveNext); }
+  bool movePrevSet(void) const { return getFlag(FMovePrev); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -105,7 +109,9 @@ public:
     FWrapperIsNeeded,
     FRebuildIsdNeeded,
     FRawTextElement,
-    
+    FMovePrev,
+    FMoveNext,
+
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };
 

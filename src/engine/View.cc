@@ -568,3 +568,19 @@ View::deleteGLyphBeforeCursor()
     _elem->setDirtyLayout();
     _elem->setDirtyStructure();
 }
+
+void
+View::moveCursorLeft()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem->decreaseCursorPosition() == -1)
+        _elem->setMovePrev();
+}
+
+void
+View::moveCursorRight()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem->increaseCursorPosition() == -1)
+        _elem->setMoveNext();
+}

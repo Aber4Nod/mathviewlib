@@ -77,6 +77,19 @@ public:
   int32_t getCursorNodeIndex(void) { return cursorNodeIndex; };
   int32_t getcursorNodeContentIndex(void) { return cursorNodeContentIndex; };
 
+  void setLastCursorPostition(void);
+  void setFirstCursorPostition(void);
+
+  // returning 0 if decreased index belongs to current element
+  // returning -1 if decreased index doesnt belongs to current element
+  int32_t decreaseCursorPosition(void);
+
+  // returning 0 if increased index belongs to current element
+  // returning -1 if increased index doesnt belongs to current element
+  int32_t increaseCursorPosition(void);
+
+  void resetCursor(void);
+
 private:
   LinearContainerTemplate<MathMLTokenElement,class MathMLTextNode> content;
   int32_t cursorNodeIndex        = -1;
