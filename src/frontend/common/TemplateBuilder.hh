@@ -1499,14 +1499,20 @@ protected:
         else
         if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())
         {
+            // TODO if cursor is in element (i.e. mi) and index is not in last node (and not last pos in it node) -> than change the logic below to split current element and insert new element in this place
+            // if the conditions are not like described upper -> than logic below is true
             printf("[getChildMathMLElements]: cursorSet triggered\n");
-            smart_cast<MathMLTokenElement>(_elem)->setInsertElementName("");
+            SmartPtr<MathMLTokenElement> cur_element = smart_cast<MathMLTokenElement>(_elem);
+            cur_element->setInsertElementName("");
 
             typename MathMLBuilderMap::const_iterator m = mathmlMap.find("munderover");
             typename Model::Node node_table;
             typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
             Model::insertNextSibling(Model::asNode(iter.element()), node_table);
             _elem->resetFlag(MathMLActionElement::FCursorSet);
+            cur_element->setNodeIndex(-1);
+            cur_element->setNodeContentIndex(-1);
+
             SmartPtr<MathMLTokenElement> token_elem = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
             token_elem->setFlag(MathMLActionElement::FCursorSet);
             token_elem->setNodeIndex(0);

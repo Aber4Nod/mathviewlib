@@ -49,6 +49,7 @@ public:
   SmartPtr<class Element> elementOfModelElement(xmlElement*) const;
 
   xmlDoc* getDocument(void) const { return currentDoc; }
+  void dumpDocument(FILE *file) const { xmlDocDump(file, currentDoc); }
 
 protected:
   xmlDoc* currentDoc;

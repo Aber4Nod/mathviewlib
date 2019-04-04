@@ -343,7 +343,11 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   ../../src/backend/qt/Qt_GlyphArea.hh \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/QGlyphRun \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qglyphrun.h \
-  ../../src/common/defs.h \
+  ../../src/common/defs.h /usr/include/unistd.h \
+  /usr/include/sys/unistd.h /usr/include/sys/_types/_posix_vdisable.h \
+  /usr/include/sys/_types/_seek_set.h /usr/include/sys/select.h \
+  /usr/include/sys/_select.h /usr/include/sys/_types/_uuid_t.h \
+  /usr/include/gethostuuid.h \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/QPainter \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qpainter.h \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qtextoption.h \
@@ -1225,6 +1229,22 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 /usr/local/Cellar/qt/5.11.2/include/QtGui/qglyphrun.h:
 
 ../../src/common/defs.h:
+
+/usr/include/unistd.h:
+
+/usr/include/sys/unistd.h:
+
+/usr/include/sys/_types/_posix_vdisable.h:
+
+/usr/include/sys/_types/_seek_set.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/sys/_select.h:
+
+/usr/include/sys/_types/_uuid_t.h:
+
+/usr/include/gethostuuid.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtGui/QPainter:
 

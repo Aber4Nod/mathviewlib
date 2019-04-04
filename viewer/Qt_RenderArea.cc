@@ -23,6 +23,7 @@
 #include "Qt_RenderArea.hh"
 #include "Qt_GlyphArea.hh"
 #include "defs.h"
+#include <unistd.h>
 #include <QPainter>
 #include <QRawFont>
 #include <QDebug>
@@ -102,8 +103,17 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         // if (m_view->insertElementCursor(pos.x() - this->pos().x(), pos.y() - this->pos().y()))
             // repaint();
 
-        if (m_view->insertElementCursor(pos.x(), pos.y()))
+        if (m_view->insertElementCursor(pos.x(), pos.y())) {
             repaint();
+        }
+
+        // Functionalty for dumping current snapshot of mathml
+        // QFile qf("TestFileDump.xml");
+        // qf.open(QIODevice::WriteOnly);
+        // int fd = qf.handle();
+        // FILE* f = fdopen(dup(fd), "wb");
+        // m_view->dumpDocument(f);
+        // fclose(f);
     }
 }
 
