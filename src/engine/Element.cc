@@ -169,6 +169,15 @@ Element::setInsertSetCursor()
 }
 
 void
+Element::setInsertSetCursorLeft()
+{
+    if (!(insertSetCursorLeft()))
+        setFlag(FInsertSetCursorLeft);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
 Element::setCursorSet()
 {
     if (!(cursorSet()))

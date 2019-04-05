@@ -143,13 +143,19 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
     else
     if (key == Qt::Key_Left)
     {
-        m_view->moveCursorLeft();
+        if (event->modifiers() & Qt::ShiftModifier)
+            m_view->stepCursorLeft();
+        else
+            m_view->moveCursorLeft();
         repaint();
     }
     else
     if (key == Qt::Key_Right)
     {
-        m_view->moveCursorRight();
+        if (event->modifiers() & Qt::ShiftModifier)
+            m_view->stepCursorRight();
+        else
+            m_view->moveCursorRight();
         repaint();
     }
 }

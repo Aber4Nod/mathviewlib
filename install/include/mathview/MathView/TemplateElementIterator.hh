@@ -148,6 +148,23 @@ insertAfterPrepareMROW(const typename Model::Element& el)
       return Model::asNode(xml_element);
   }
 
+  typename Model::Node
+  insertBefore(const typename Model::Element& el, std::string name = "mo")
+  {
+      typename Model::Element xml_element = element();
+      typename Model::Node node = Model::createNode(
+          Model::getNodeNamespace(Model::asNode(xml_element)), name);
+
+      Model::insertPrevSibling(Model::asNode(xml_element), node);
+
+      if (!name.compare("mi") || !name.compare("mo") || !name.compare("mn") || !name.compare("mtext"))
+      {
+          typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+          Model::insertChild(node, node_text);
+      }
+      return node;
+  }
+
     // 0 - no next Model::Element
     // 1 - has next Model::Element - set it as current for ElementIterator
 

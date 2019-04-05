@@ -584,3 +584,25 @@ View::moveCursorRight()
     if (_elem->increaseCursorPosition() == -1)
         _elem->setMoveNext();
 }
+
+void
+View::stepCursorRight()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem == nullptr || _elem->rawTextElementSet())
+        return;
+
+    _elem->resetCursor();
+    _elem->setInsertSetCursor();
+}
+
+void
+View::stepCursorLeft()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem == nullptr || _elem->rawTextElementSet())
+        return;
+
+    _elem->resetCursor();
+    _elem->setInsertSetCursorLeft();
+}

@@ -662,7 +662,7 @@ protected:
           element = builder.getMathMLElement(Model::asElement(node));
       }
       else
-      if (element->insertSetCursor())
+      if (element->insertSetCursor() || element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           // element->resetFlag(MathMLActionElement::FInsertSetCursor);
@@ -692,7 +692,7 @@ protected:
           element = builder.getMathMLElement(Model::asElement(node));
       }
       else
-      if (element->insertSetCursor())
+      if (element->insertSetCursor() || element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           // element->resetFlag(MathMLActionElement::FInsertSetCursor);
@@ -920,7 +920,7 @@ protected:
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
@@ -932,7 +932,7 @@ protected:
       elem->setBase(_element);
       iter.next();
       _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
@@ -972,7 +972,7 @@ protected:
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
@@ -985,7 +985,7 @@ protected:
       iter.next();
       elem->setUnderScript(0);
       _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
@@ -1027,7 +1027,7 @@ protected:
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
@@ -1040,13 +1040,13 @@ protected:
       iter.next();
 
       _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
       }
       else
-      if (_element->rebuildIsNeeded())
+      if (_element->rebuildIsNeeded() || _element->insertSetCursorLeft())
       {
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
           iter.next();
@@ -1055,7 +1055,7 @@ protected:
       elem->setUnderScript(_element);
       iter.next();
       _element = builder.getMathMLElement(iter.element());
-      if (_element->insertSetCursor())
+      if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
           typename Model::Node node = iter.insertAfterPrepareMROW(el);
           _element = builder.getMathMLElement(Model::asElement(node));
@@ -1480,6 +1480,7 @@ protected:
             std::cout << "[getChildMathMLElements]: rebuild is needed for element: " << _elem << std::endl;
             _elem->resetFlag(Element::FRebuildIsdNeeded);
             iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+            // incorrect
             content.clear();
             SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
         }
@@ -1495,6 +1496,22 @@ protected:
         {
             typename Model::Node node = iter.insertAfter(el, "mtext");
             _elem = getMathMLElement(Model::asElement(node));
+        }
+        else
+        if (_elem->insertSetCursorLeft())
+        {
+            _elem->resetFlag(Element::FInsertSetCursorLeft);
+
+            typename Model::Node node = iter.insertBefore(el, "mtext");
+            iter.setCurrent(Model::asElement(node));
+            _elem = getMathMLElement(iter.element());
+            _elem->setDirtyLayout();
+            _elem->setDirtyStructure();
+            _elem->setCursorSet();
+            _elem->setFlag(Element::FRawTextElement);
+            smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
+            smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(-1);
+            _elem = getMathMLElement(iter.element());
         }
         else
         if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())

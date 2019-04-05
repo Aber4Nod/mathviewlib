@@ -69,6 +69,7 @@ public:
   virtual void setRebuildIsNeeded(void);
   virtual void setMoveNext(void);
   virtual void setMovePrev(void);
+  virtual void setInsertSetCursorLeft(void);
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -82,6 +83,7 @@ public:
   bool deleteSet(void) const { return getFlag(FDeleteSet); }
   bool insertSet(void) const { return getFlag(FInsertSet); }
   bool insertSetCursor(void) const { return getFlag(FInsertSetCursor); }
+  bool insertSetCursorLeft(void) const { return getFlag(FInsertSetCursorLeft); }
   bool cursorSet(void) const { return getFlag(FCursorSet); }
   bool wrapperSet(void) const { return getFlag(FWrapperSet); }
   bool wrapperIsNeeded(void) const { return getFlag(FWrapperIsNeeded); }
@@ -104,6 +106,7 @@ public:
     FDeleteSet,
     FInsertSet,
     FInsertSetCursor,
+    FInsertSetCursorLeft,
     FCursorSet,
     FWrapperSet,
     FWrapperIsNeeded,
