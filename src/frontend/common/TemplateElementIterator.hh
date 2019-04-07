@@ -193,6 +193,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
     deleteElement(const typename Model::Element& el)
     {
         typename Model::Node curNode  = Model::asNode(el);
+        printf("[deleteElement]: preparing to unlink curNode\n");
         typename Model::Node nextNode = Model::asNode(findValidNodeForward(Model::getNextSibling(curNode)));
 
         Model::unlinkNode(curNode);

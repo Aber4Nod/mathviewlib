@@ -1463,6 +1463,7 @@ protected:
   getChildMathMLElements(const typename Model::Element& el, std::vector<SmartPtr<MathMLElement> >& content) const
   {
       std::cout << "[getChildMathMLElements]: getting child elements" << std::endl;
+
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
@@ -1470,8 +1471,8 @@ protected:
         {
             _elem->resetFlag(Element::FDeleteSet);
 
-            typename Model::Node prevNode = Model::getPrevSibling(Model::asNode(iter.element()));
-            iter.deleteElement(Model::asElement(prevNode));
+            typename Model::Element prevElement = iter.findValidNodePrev(Model::asNode(iter.element()));
+            iter.deleteElement(prevElement);
             content.pop_back();
         }
         else
@@ -1480,9 +1481,8 @@ protected:
             std::cout << "[getChildMathMLElements]: rebuild is needed for element: " << _elem << std::endl;
             _elem->resetFlag(Element::FRebuildIsdNeeded);
             iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
-            // incorrect
             content.clear();
-            SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+            _elem = getMathMLElement(iter.element());
         }
         if (_elem->insertSet())
         {
@@ -1500,7 +1500,8 @@ protected:
             {
                 if (!iter.hasValidNodeNext(iter.element()))
                 {
-                    // todo goto parent and then to next
+                    getMathMLElement(el)->setInsertSetCursor();
+                    return;
                 }
                 else
                 {
@@ -1533,8 +1534,8 @@ protected:
             {
                 if (!iter.hasValidNodePrev(iter.element()))
                 {
-                    std::cout << "[insertSetCursorLeft]: has no element prev" << std::endl;
-                    // todo goto parent and then to prev
+                    getMathMLElement(el)->setInsertSetCursorLeft();
+                    return;
                 }
                 else
                 {

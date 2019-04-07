@@ -592,7 +592,7 @@ View::stepCursorRight()
     if (_elem == nullptr)
         return;
 
-    if (!_elem->rawTextElementSet())
+    if (!_elem->rawTextElementSet() || _elem->getContentLength())
         _elem->resetCursor();
     _elem->setInsertSetCursor();
 }
@@ -604,7 +604,7 @@ View::stepCursorLeft()
     if (_elem == nullptr)
         return;
 
-    if (!_elem->rawTextElementSet())
+    if (!_elem->rawTextElementSet() || _elem->getContentLength())
         _elem->resetCursor();
     _elem->setInsertSetCursorLeft();
 }

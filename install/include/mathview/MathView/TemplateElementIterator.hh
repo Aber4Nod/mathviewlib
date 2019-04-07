@@ -69,12 +69,6 @@ typename Model::Element
 swapNext(const typename Model::Element& el)
 {
   typename Model::Element nextValidSibling = findValidNodeForward(Model::getNextSibling(Model::asNode(el)));
-  // if (hasValidNodePrev(el))
-  // {
-      // Model::setNextSibling(Model::getPrevSibling(Model::asNode(el)), Model::asNode(nextValidSibling));
-      // Model::setPrevSibling(Model::asNode(nextValidSibling), Model::getPrevSibling(Model::asNode(el)));
-  // }
-  // Model::unlinkNode(Model::asNode(el));
   Model::replaceNode(Model::asNode(el), Model::asNode(nextValidSibling));
   Model::insertNextSibling(Model::asNode(nextValidSibling), Model::asNode(el));
   setCurrent(nextValidSibling);
@@ -85,13 +79,7 @@ typename Model::Element
 swapPrev(const typename Model::Element& el)
 {
   typename Model::Element prevValidSibling = findValidNodePrev(Model::asNode(el));
-  // if (hasValidNodeNext(el))
-  // {
-      // Model::setNextSibling(Model::asNode(prevValidSibling), Model::getNextSibling(Model::asNode(el)));
-      // Model::setPrevSibling(Model::getNextSibling(Model::asNode(el)), Model::asNode(prevValidSibling));
-  // }
   Model::replaceNode(Model::asNode(el), Model::asNode(prevValidSibling));
-  // Model::unlinkNode(Model::asNode(el));
   Model::insertPrevSibling(Model::asNode(prevValidSibling), Model::asNode(el));
   setCurrent(el);
   return el;
@@ -205,6 +193,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
     deleteElement(const typename Model::Element& el)
     {
         typename Model::Node curNode  = Model::asNode(el);
+        printf("[deleteElement]: preparing to unlink curNode\n");
         typename Model::Node nextNode = Model::asNode(findValidNodeForward(Model::getNextSibling(curNode)));
 
         Model::unlinkNode(curNode);
