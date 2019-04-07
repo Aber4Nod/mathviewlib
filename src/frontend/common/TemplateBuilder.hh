@@ -1494,24 +1494,72 @@ protected:
         else
         if (_elem->insertSetCursor())
         {
-            typename Model::Node node = iter.insertAfter(el, "mtext");
-            _elem = getMathMLElement(Model::asElement(node));
+            _elem->resetFlag(MathMLActionElement::FInsertSetCursor);
+            // replace current rawTextElement with next
+            if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength())
+            {
+                if (!iter.hasValidNodeNext(iter.element()))
+                {
+                    // todo goto parent and then to next
+                }
+                else
+                {
+                    typename Model::Element movedElement = iter.swapNext(iter.element());
+                    _elem->setDirtyLayout();
+                    _elem->setDirtyStructure();
+
+                    _elem = getMathMLElement(iter.element());
+                }
+            }
+            else    // insert rawTextElement next
+            {
+                typename Model::Node node = iter.insertAfter(el, "mtext");
+
+                SmartPtr<MathMLTokenElement> elemAfter = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
+                elemAfter->setDirtyLayout();
+                elemAfter->setDirtyStructure();
+                elemAfter->setCursorSet();
+                elemAfter->setFlag(Element::FRawTextElement);
+                elemAfter->setNodeIndex(0);
+                elemAfter->setNodeContentIndex(-1);
+            }
         }
         else
         if (_elem->insertSetCursorLeft())
         {
             _elem->resetFlag(Element::FInsertSetCursorLeft);
+            // replace current rawTextElement with prev
+            if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength())
+            {
+                if (!iter.hasValidNodePrev(iter.element()))
+                {
+                    std::cout << "[insertSetCursorLeft]: has no element prev" << std::endl;
+                    // todo goto parent and then to prev
+                }
+                else
+                {
+                    typename Model::Element movedElement = iter.swapPrev(iter.element());
+                    _elem->setDirtyLayout();
+                    _elem->setDirtyStructure();
 
-            typename Model::Node node = iter.insertBefore(el, "mtext");
-            iter.setCurrent(Model::asElement(node));
-            _elem = getMathMLElement(iter.element());
-            _elem->setDirtyLayout();
-            _elem->setDirtyStructure();
-            _elem->setCursorSet();
-            _elem->setFlag(Element::FRawTextElement);
-            smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
-            smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(-1);
-            _elem = getMathMLElement(iter.element());
+                    _elem = getMathMLElement(iter.element());
+                    content.pop_back();
+                }
+            }
+            else    // insert rawTextElement prev
+            {
+                std::cout << "[insertSetCursorLeft]: inserting mtext before" << std::endl;
+                typename Model::Node node = iter.insertBefore(el, "mtext");
+                iter.setCurrent(Model::asElement(node));
+                _elem = getMathMLElement(iter.element());
+                _elem->setDirtyLayout();
+                _elem->setDirtyStructure();
+                _elem->setCursorSet();
+                _elem->setFlag(Element::FRawTextElement);
+                smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
+                smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(-1);
+                _elem = getMathMLElement(iter.element());
+            }
         }
         else
         if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())
@@ -1584,23 +1632,8 @@ protected:
                 continue;
             _elem = getMathMLElement(iter.element());
         }
+
         content.push_back(_elem);
-
-        if (_elem->insertSetCursor())
-        {
-            _elem->resetFlag(MathMLActionElement::FInsertSetCursor);
-            iter.next();
-
-            _elem = getMathMLElement(iter.element());
-            _elem->setDirtyLayout();
-            _elem->setDirtyStructure();
-            _elem->setCursorSet();
-            _elem->setFlag(Element::FRawTextElement);
-            smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
-            smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(-1);
-            _elem = getMathMLElement(iter.element());
-            content.push_back(_elem);
-        }
     }
   }
 

@@ -589,10 +589,11 @@ void
 View::stepCursorRight()
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
-    if (_elem == nullptr || _elem->rawTextElementSet())
+    if (_elem == nullptr)
         return;
 
-    _elem->resetCursor();
+    if (!_elem->rawTextElementSet())
+        _elem->resetCursor();
     _elem->setInsertSetCursor();
 }
 
@@ -600,9 +601,10 @@ void
 View::stepCursorLeft()
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
-    if (_elem == nullptr || _elem->rawTextElementSet())
+    if (_elem == nullptr)
         return;
 
-    _elem->resetCursor();
+    if (!_elem->rawTextElementSet())
+        _elem->resetCursor();
     _elem->setInsertSetCursorLeft();
 }

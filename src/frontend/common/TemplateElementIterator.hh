@@ -64,7 +64,27 @@ public:
       Model::freeNode(Model::asNode(xml_element));
       return node;
   }
-  
+
+typename Model::Element
+swapNext(const typename Model::Element& el)
+{
+  typename Model::Element nextValidSibling = findValidNodeForward(Model::getNextSibling(Model::asNode(el)));
+  Model::replaceNode(Model::asNode(el), Model::asNode(nextValidSibling));
+  Model::insertNextSibling(Model::asNode(nextValidSibling), Model::asNode(el));
+  setCurrent(nextValidSibling);
+  return el;
+}
+
+typename Model::Element
+swapPrev(const typename Model::Element& el)
+{
+  typename Model::Element prevValidSibling = findValidNodePrev(Model::asNode(el));
+  Model::replaceNode(Model::asNode(el), Model::asNode(prevValidSibling));
+  Model::insertPrevSibling(Model::asNode(prevValidSibling), Model::asNode(el));
+  setCurrent(el);
+  return el;
+}
+
 typename Model::Node
 insertAfterPrepareMROW(const typename Model::Element& el)
 {
@@ -145,7 +165,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
           Model::insertChild(node, node_text);
       }
       // setCurrent(Model::asElement(node));
-      return Model::asNode(xml_element);
+      return node;
   }
 
   typename Model::Node

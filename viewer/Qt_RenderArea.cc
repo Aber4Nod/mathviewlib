@@ -148,6 +148,7 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
         else
             m_view->moveCursorLeft();
         repaint();
+        m_view->dumpDocument(stdout);
     }
     else
     if (key == Qt::Key_Right)
@@ -157,6 +158,7 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
         else
             m_view->moveCursorRight();
         repaint();
+        m_view->dumpDocument(stdout);
     }
 }
 

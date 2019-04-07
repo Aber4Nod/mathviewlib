@@ -166,6 +166,8 @@ Element::setInsertSetCursor()
 {
     if (!(insertSetCursor()))
         setFlag(FInsertSetCursor);
+    setDirtyStructure();
+    setDirtyLayout();
 }
 
 void
