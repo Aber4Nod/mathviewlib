@@ -70,6 +70,13 @@ public:
   virtual void setMoveNext(void);
   virtual void setMovePrev(void);
   virtual void setInsertSetCursorLeft(void);
+  virtual void setRawRowFlag(void);
+  
+  virtual void setMoveNextIn(void);
+  virtual void setMoveNextOut(void);
+  virtual void setMovePrevIn(void);
+  virtual void setMovePrevOut(void);
+
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
   virtual void setDirtyAttribute(void);
@@ -91,6 +98,12 @@ public:
   bool rawTextElementSet(void) const { return getFlag(FRawTextElement); }
   bool moveNextSet(void) const { return getFlag(FMoveNext); }
   bool movePrevSet(void) const { return getFlag(FMovePrev); }
+  bool rawRowSet(void) const { return getFlag(FRawRowElement); }
+
+  bool moveNextIn(void) const { return getFlag(FMoveNextIn); }
+  bool moveNextOut(void) const { return getFlag(FMoveNextOut); }
+  bool movePrevIn(void) const { return getFlag(FMovePrevIn); }
+  bool movePrevOut(void) const { return getFlag(FMovePrevIn); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -114,6 +127,11 @@ public:
     FRawTextElement,
     FMovePrev,
     FMoveNext,
+    FRawRowElement,
+    FMoveNextIn,
+    FMoveNextOut,
+    FMovePrevIn,
+    FMovePrevOut,
 
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

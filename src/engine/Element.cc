@@ -46,6 +46,7 @@ Element::Element(const SmartPtr<NamespaceContext>& c) : context(c)
   resetFlag(FWrapperSet);
   resetFlag(FWrapperIsNeeded);
   resetFlag(FRebuildIsdNeeded);
+  resetFlag(FMoveNextIn);
 }
 
 Element::~Element()
@@ -221,6 +222,49 @@ Element::setMovePrev()
 {
     if (!(movePrevSet()))
         setFlag(FMovePrev);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+Element::setRawRowFlag()
+{
+    if (!(rawRowSet()))
+        setFlag(FRawRowElement);
+}
+
+void
+Element::setMoveNextIn()
+{
+    if (!(moveNextIn()))
+        setFlag(FMoveNextIn);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+Element::setMoveNextOut()
+{
+    if (!(moveNextOut()))
+        setFlag(FMoveNextOut);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+Element::setMovePrevIn()
+{
+    if (!(movePrevIn()))
+        setFlag(FMovePrevIn);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+Element::setMovePrevOut()
+{
+    if (!(movePrevOut()))
+        setFlag(FMovePrevOut);
     setDirtyStructure();
     setDirtyLayout();
 }
