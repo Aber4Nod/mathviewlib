@@ -143,29 +143,29 @@ MathMLTokenElement::format(FormattingContext& ctxt)
     {
       ctxt.push(this);
       printf("[MathMLTokenElement::format]: beginning to format dirty \n");
-      if (cursorSet()) {
-        // must be binded to prev or next element (to be fitted) -> prevential formatting size (i.e. simple text); 
-        // also there is an actual formatting size - after selecting which element to insert.
-        std::vector<AreaRef> c;
-        if (!getContentLength())
-        {
-            printf("[MathMLTokenElement::format]: no content length \n");
-            // c.push_back(ctxt.MGD()->cursor(ctxt));
-            c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
-        } 
-        else
-        {
-            printf("[MathMLTokenElement::format]: content length = %d | data = %.*s \n", 
-                    getContentLength(), getContentLength(), GetRawContent().c_str());
-            // ctxt.addScriptLevel(-1);
-            // c.push_back(ctxt.MGD()->cursor(ctxt));
-            c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
-        }
-        // c.push_back(ctxt.MGD()->dummy(ctxt));
-        setArea(ctxt.MGD()->getFactory()->horizontalArray(c));
-        // setArea(ctxt.MGD()->wrapper(ctxt, ctxt.MGD()->cursor(ctxt)));
-      }
-      else
+      // if (cursorSet()) {
+      //   // must be binded to prev or next element (to be fitted) -> prevential formatting size (i.e. simple text); 
+      //   // also there is an actual formatting size - after selecting which element to insert.
+      //   std::vector<AreaRef> c;
+      //   if (!getContentLength())
+      //   {
+      //       printf("[MathMLTokenElement::format]: no content length \n");
+      //       // c.push_back(ctxt.MGD()->cursor(ctxt));
+      //       c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+      //   } 
+      //   else
+      //   {
+      //       printf("[MathMLTokenElement::format]: content length = %d | data = %.*s \n", 
+      //               getContentLength(), getContentLength(), GetRawContent().c_str());
+      //       // ctxt.addScriptLevel(-1);
+      //       // c.push_back(ctxt.MGD()->cursor(ctxt));
+      //       c.push_back(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
+      //   }
+      //   // c.push_back(ctxt.MGD()->dummy(ctxt));
+      //   setArea(ctxt.MGD()->getFactory()->horizontalArray(c));
+      //   // setArea(ctxt.MGD()->wrapper(ctxt, ctxt.MGD()->cursor(ctxt)));
+      // }
+      // else
         setArea(ctxt.MGD()->wrapper(ctxt, formatAux(ctxt)));
       ctxt.pop();
       resetDirtyLayout();

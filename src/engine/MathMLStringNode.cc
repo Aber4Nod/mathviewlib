@@ -54,11 +54,11 @@ MathMLStringNode::format(FormattingContext& ctxt)
     std::cout << "[MathMLStringNode::format]: cursorIndex: " << cursorIndex << std::endl;
     if (cursorIndex >= 0) {
         if (currentFormattingIndex == 0) {
-            currentContent = content.substr(0, cursorIndex + 1);
+            currentContent = StringOfUCS4String(UCS4StringOfString(content).substr(0, cursorIndex + 1));
             currentFormattingIndex = cursorIndex + 1;
         }
         else {
-            currentContent = content.substr(currentFormattingIndex);
+            currentContent = StringOfUCS4String(UCS4StringOfString(content).substr(currentFormattingIndex));
             // currentFormattingIndex = 0;
         }
     }
