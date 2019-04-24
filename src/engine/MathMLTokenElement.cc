@@ -104,6 +104,7 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
 		 std::bind2nd(FormatAdapter<FormattingContext,MathMLTextNode,AreaRef>(), &ctxt));
 #else
   uint32_t curIndex = 0;
+  std::cout << "current node index: " << cursorNodeIndex << std::endl;
   for (const auto & elem : content) {
       if (curIndex++ == cursorNodeIndex) {
           elem->setCursorIndex(cursorNodeContentIndex);
@@ -115,13 +116,16 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
               c.push_back(ctxt.MGD()->cursor(ctxt)); 
           }
       }
-      if (elem->GetLogicalContentLength() == 0 || elem->GetLogicalContentLength() > elem->getCursorIndex() + 1)
+
+      if (elem->GetLogicalContentLength() == 0 || elem->GetLogicalContentLength() > elem->getCursorIndex() + 1) {
+          std::cout << "GetLogicalContentLength: " << elem->GetLogicalContentLength() << " [MathMLTokenElement]: getCursorIndex: " << elem->getCursorIndex() << std::endl;
           c.push_back(elem->format(ctxt));
+      }
   }
 #endif
 
   AreaRef res;
-  std::cout << "current size: [MathMLTokenElement]: " << c.size() << std::endl;
+  std::cout << "current size: [MathMLTokenElement]: " << c.size() << " for MathMLTokenElement: " << this << std::endl;
   if (c.size() == 0) res = ctxt.MGD()->dummy(ctxt);
   else if (c.size() == 1) res = c[0];
   else res = ctxt.MGD()->getFactory()->horizontalArray(c);
@@ -225,6 +229,53 @@ MathMLTokenElement::GetRawContent() const
     }
 
   return res;
+}
+
+String
+MathMLTokenElement::GetRawContentBeforeCursor()
+{
+    String res;
+    uint32_t curIndex = 0;
+    for (const auto & elem : content)
+    {
+        if (curIndex < cursorNodeIndex)
+            res += elem->GetRawContent();
+        else
+        if (curIndex == cursorNodeIndex)
+        {
+            String elem_content = elem->GetRawContent();
+            res += StringOfUCS4String(UCS4StringOfString(elem_content).substr(0, cursorNodeContentIndex + 1));
+            return res;
+        }
+        else
+            assert(curIndex <= cursorNodeIndex);
+        ++curIndex;
+    }
+
+    return res;
+}
+
+String
+MathMLTokenElement::GetRawContentAfterCursor()
+{
+    String res;
+    uint32_t curIndex = 0;
+    for (const auto & elem : content)
+    {
+        if (curIndex == cursorNodeIndex)
+        {
+            String elem_content = elem->GetRawContent();
+            res += StringOfUCS4String(UCS4StringOfString(elem_content).substr(cursorNodeContentIndex + 1));
+        }
+        else
+        if (curIndex > cursorNodeIndex)
+            res += elem->GetRawContent();
+        ++curIndex;
+    }
+    
+    std::cout << "[MathMLTokenElement::GetRawContentAfterCursor]: value: " << res << std::endl;
+
+    return res;
 }
 
 unsigned

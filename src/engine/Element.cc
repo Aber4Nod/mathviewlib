@@ -163,6 +163,13 @@ Element::setInsertSet()
 }
 
 void
+Element::setSplitSet()
+{
+    if (!(splitSet()))
+        setFlag(FSplitSet);
+}
+
+void
 Element::setInsertSetCursor()
 {
     if (!(insertSetCursor()))

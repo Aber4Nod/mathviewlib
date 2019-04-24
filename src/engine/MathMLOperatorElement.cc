@@ -106,13 +106,13 @@ MathMLOperatorElement::format(FormattingContext& ctxt)
 	}
       else
 	assert(false);
-
-      if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, stretchy, defaults))
-	stretchy = ToBoolean(value);
-
+    
+    //   if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, stretchy, defaults))
+	// stretchy = ToBoolean(value);
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, symmetric, defaults))
 	symmetric = ToBoolean(value);
-
+    
       float maxMultiplier = 0.0f;
       scaled maxSize;
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, maxsize, defaults))

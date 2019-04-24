@@ -167,6 +167,8 @@ protected:
     String open = ToString(getAttributeValue(el, ATTRIBUTE_SIGNATURE(MathML, Fenced, open)));
     String close = ToString(getAttributeValue(el, ATTRIBUTE_SIGNATURE(MathML, Fenced, close)));
     String separators = ToString(getAttributeValue(el, ATTRIBUTE_SIGNATURE(MathML, Fenced, separators)));
+    
+    std::cout << "[update_MathML_mfenced_Element]: updating mfenced" << std::endl;
 
     std::vector<SmartPtr<MathMLElement> > content;
     getChildMathMLElements(el, content);
@@ -370,6 +372,7 @@ protected:
       else
       if (elem->moveNextOut())
       {
+          std::cout << "[MathMLLinearContainerElementBuilder]:construct // move next out was triggered" << std::endl;
           elem->resetFlag(Element::FMoveNextOut);
           elem->setMoveNextOut();
       }
@@ -884,9 +887,33 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLScriptElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
+      bool moveCursorRight = false;
+
+      elem->setBase(element);
       iter.next();
-      elem->setSubScript(builder.getMathMLElement(iter.element()));
+      element = builder.getMathMLElement(iter.element());
+
+      if (moveCursorRight)
+      {
+          std::cout << "setting insertSetCursor to denominator" << std::endl;
+          moveCursorRight = false;
+
+          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
+          {
+              typename Model::Node node = iter.insertAfterPrepareMROW(el);
+              element = builder.getMathMLElement(Model::asElement(node));
+              element->setRawRowFlag();
+          }
+          else
+          {
+              // todo if content size <= 1 -> remove this wrapper rawRowElement
+          }
+          element->setMoveNextIn();
+          element = builder.getMathMLElement(iter.element());
+      }
+
+      elem->setSubScript(element);
       elem->setSuperScript(0);
     }
 
@@ -920,10 +947,64 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLScriptElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
+      bool moveCursorRight = false;
+
+      if (elem->moveNextIn())
+      {
+          elem->resetFlag(Element::FMoveNextIn);
+          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
+          {
+              typename Model::Node node = iter.insertAfterPrepareMROW(el);
+              element = builder.getMathMLElement(Model::asElement(node));
+              element->setRawRowFlag();
+          }
+          else
+          {
+              // todo if content size <= 1 -> remove this wrapper rawRowElement
+          }
+          element->setMoveNextIn();
+          element = builder.getMathMLElement(iter.element());
+      }
+
+      if (element->moveNextOut())
+      {
+          moveCursorRight = true;
+          element->resetFlag(Element::FMoveNextOut);
+      }
+
+      elem->setBase(element);
       iter.next();
       elem->setSubScript(0);
-      elem->setSuperScript(builder.getMathMLElement(iter.element()));
+      element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
+      if (moveCursorRight)
+      {
+          std::cout << "setting insertSetCursor to denominator" << std::endl;
+          moveCursorRight = false;
+
+          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
+          {
+              typename Model::Node node = iter.insertAfterPrepareMROW(el);
+              element = builder.getMathMLElement(Model::asElement(node));
+              element->setRawRowFlag();
+          }
+          else
+          {
+              // todo if content size <= 1 -> remove this wrapper rawRowElement
+          }
+          element->setMoveNextIn();
+          element = builder.getMathMLElement(iter.element());
+      }
+
+      elem->setSuperScript(element);
+
+      if (element->moveNextOut())
+      {
+          std::cout << "move next out in denominator" << std::endl;
+          element->resetFlag(Element::FMoveNextOut);
+          elem->setMoveNextOut();
+      }
+
     }
 
     static typename Model::Node
@@ -1627,7 +1708,7 @@ protected:
   getChildMathMLElements(const typename Model::Element& el, std::vector<SmartPtr<MathMLElement> >& content) const
   {
       std::cout << "[getChildMathMLElements]: getting child elements" << std::endl;
-
+    String splitContext = "";
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
@@ -1739,9 +1820,19 @@ protected:
             SmartPtr<MathMLTokenElement> cur_element = smart_cast<MathMLTokenElement>(_elem);
             cur_element->setInsertElementName("");
 
+            String strAfterCursor = cur_element->GetRawContentAfterCursor();
+            if (strAfterCursor.length())
+            {
+                String strBeforeCursor = cur_element->GetRawContentBeforeCursor();
+                iter.updateCurrent(el, strBeforeCursor);
+                _elem = getMathMLElement(iter.element());
+                _elem->setSplitSet();
+            }
+            
             typename MathMLBuilderMap::const_iterator m = mathmlMap.find("munderover");
             typename Model::Node node_table;
             typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
+
             Model::insertNextSibling(Model::asNode(iter.element()), node_table);
             _elem->resetFlag(MathMLActionElement::FCursorSet);
             cur_element->setNodeIndex(-1);
@@ -1752,9 +1843,18 @@ protected:
             token_elem->setNodeIndex(0);
             token_elem->setNodeContentIndex(-1);
 
+            if (strAfterCursor.length())
+            {
+                typename Model::Node node = Model::createNode(
+                    Model::getNodeNamespace(Model::asNode(iter.element())), Model::getNodeName(Model::asNode(iter.element())));
+                Model::insertNextSibling(node_table, node);
+                typename Model::Node node_text = Model::NewText(Model::toModelString(strAfterCursor));
+                Model::insertChild(node, node_text);
+                getMathMLElement(Model::asElement(node))->setSplitSet();
+            }
+
             // iter.deleteElement(iter.element());
             // _elem = getMathMLElement(iter.element());
-
 
             // ### old version below
             // typename Model::Node node = (this->*(m->second.createMethod))(el);
@@ -1762,6 +1862,30 @@ protected:
             // // typename Model::Node node = iter.insertAfter(el, "mtable");
             // // _elem = getMathMLElement(Model::asElement(node));
             // _elem = getMathMLElement(iter.element());
+        }
+
+        if (_elem->splitSet()) {
+            String curStr = smart_cast<MathMLTokenElement>(_elem)->GetRawContent();
+            if (!splitContext.empty())
+            {
+                typename Model::Element prevElement = iter.findValidNodePrev(Model::asNode(iter.element()));
+                iter.deleteElement(prevElement);
+                content.pop_back();
+                _elem->resetFlag(Element::FSplitSet);
+
+                std::cout << "setting node value: " << splitContext + curStr << std::endl;
+                Model::setNodeValue(Model::asNode(iter.element()), splitContext + curStr);
+                _elem->setDirtyLayout();
+                _elem->setDirtyStructure();
+                _elem->setCursorSet();
+                smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
+                smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(splitContext.length() - 1);
+                _elem = getMathMLElement(iter.element());
+            }
+            splitContext += curStr;
+        }
+        else {
+            splitContext.clear();
         }
 
         if (_elem->movePrevSet())

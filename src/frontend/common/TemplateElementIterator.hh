@@ -45,16 +45,16 @@ public:
   void setCurrent(typename Model::Element newElement)
   { currentElement = newElement; }
 
-  typename Model::Node updateCurrent(const typename Model::Element& el)
+  typename Model::Node updateCurrent(const typename Model::Element& el, String value)
   {
       typename Model::Element xml_element = element();
-      typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), "mi");
+      typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), Model::getNodeName(Model::asNode(xml_element)));
       Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
       Model::setParent(node, Model::asNode(el));
       Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
       // Model::setPrevSibling(node, Model::getPrevSibling(Model::asNode(xml_element))); // todo useless because of insertPrevSibling
       Model::insertPrevSibling(Model::asNode(xml_element), node);
-      Model::setNodeValue(node, "");
+      Model::setNodeValue(node, value);
 
       setCurrent(Model::asElement(node));
       // iter.next();
@@ -109,7 +109,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
 }
 
   typename Model::Node
-  insertAfter(const typename Model::Element& el, std::string name = "mo")
+  insertAfter(const typename Model::Element& el, std::string name = "mo", String str = "")
   {
       typename Model::Element xml_element = element();
       typename Model::Node nextS = Model::getNextSibling(
@@ -161,7 +161,7 @@ insertAfterPrepareMROW(const typename Model::Element& el)
       Model::insertNextSibling(Model::asNode(xml_element), node);
       // Model::setNodeValue(node, "");
       if (!name.compare("mi") || !name.compare("mo") || !name.compare("mn") || !name.compare("mtext")) {
-          typename Model::Node node_text = Model::NewText(Model::toModelString(""));
+          typename Model::Node node_text = Model::NewText(Model::toModelString(str));
           Model::insertChild(node, node_text);
       }
       // setCurrent(Model::asElement(node));

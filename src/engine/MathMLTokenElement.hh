@@ -60,6 +60,8 @@ public:
   bool           IsNonMarking(void) const;
 
   String         GetRawContent(void) const;
+  String         GetRawContentBeforeCursor(void);
+  String         GetRawContentAfterCursor(void);
   unsigned       GetLogicalContentLength(void) const;
   unsigned getContentLength(void) const;
   

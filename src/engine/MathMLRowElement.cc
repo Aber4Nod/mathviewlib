@@ -50,6 +50,8 @@ MathMLRowElement::create(const SmartPtr<class MathMLNamespaceContext>& context)
   return new MathMLRowElement(context);
 }
 
+#include <iostream>
+
 AreaRef
 MathMLRowElement::format(FormattingContext& ctxt)
 {
@@ -65,6 +67,7 @@ MathMLRowElement::format(FormattingContext& ctxt)
       for (const auto & elem : content)
 	if (elem)
 	  {
+          std::cout << "[MathMLRowElement::format] for element: " << elem << std::endl;
 	    SmartPtr<MathMLOperatorElement> coreOp = elem->getCoreOperatorTop();
 	    /* if we have an operator we must force reformatting cause we want to
 	     * get the minimum size operator

@@ -76,6 +76,7 @@ public:
   virtual void setMoveNextOut(void);
   virtual void setMovePrevIn(void);
   virtual void setMovePrevOut(void);
+  virtual void setSplitSet(void);
 
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
@@ -104,6 +105,7 @@ public:
   bool moveNextOut(void) const { return getFlag(FMoveNextOut); }
   bool movePrevIn(void) const { return getFlag(FMovePrevIn); }
   bool movePrevOut(void) const { return getFlag(FMovePrevIn); }
+  bool splitSet(void) const { return getFlag(FSplitSet); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
   void resetDirtyLayout(void) { resetFlag(FDirtyLayout); }
@@ -132,6 +134,7 @@ public:
     FMoveNextOut,
     FMovePrevIn,
     FMovePrevOut,
+    FSplitSet,
 
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

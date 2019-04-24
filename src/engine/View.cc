@@ -581,8 +581,10 @@ void
 View::moveCursorRight()
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
-    if (_elem->increaseCursorPosition() == -1)
+    if (_elem->increaseCursorPosition() == -1) {
+        std::cout << "[View::moveCursorRight]" << std::endl;
         _elem->setMoveNext();
+    }
 }
 
 void
