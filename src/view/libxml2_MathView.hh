@@ -39,6 +39,7 @@ public:
   virtual void unload(void);
   bool loadURI(const char*);
   bool loadURI(const String&);
+  bool loadNewFormula();
   bool loadBuffer(const char*);
   bool loadDocument(xmlDoc*);
   bool loadRootElement(xmlElement*);
@@ -50,6 +51,7 @@ public:
 
   xmlDoc* getDocument(void) const { return currentDoc; }
   void dumpDocument(FILE *file) const { xmlDocDump(file, currentDoc); }
+  void freeDocument() const { xmlFreeDoc(currentDoc); }
 
 protected:
   xmlDoc* currentDoc;

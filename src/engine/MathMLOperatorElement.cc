@@ -83,10 +83,10 @@ MathMLOperatorElement::format(FormattingContext& ctxt)
 
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, fence, defaults))
 	fence = ToBoolean(value);
-
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, separator, defaults))
 	separator = ToBoolean(value);
-
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, lspace, defaults))
 	{
 	  if (ctxt.getScriptLevel() <= 0)
@@ -96,7 +96,7 @@ MathMLOperatorElement::format(FormattingContext& ctxt)
 	}
       else
 	assert(false);
-
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, rspace, defaults))
 	{
 	  if (ctxt.getScriptLevel() <= 0)
@@ -122,31 +122,31 @@ MathMLOperatorElement::format(FormattingContext& ctxt)
 	else
 	  parseLimitValue(value, ctxt, maxMultiplier, maxSize);
         }
-
+    
       float minMultiplier = 0.0f;
       scaled minSize;
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, minsize, defaults))
 	parseLimitValue(value, ctxt, minMultiplier, minSize);
       else
 	assert(false);
-
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, movablelimits, defaults))
 	movableLimits = ToBoolean(value);
       else
 	assert(false);
-
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, accent, defaults))
 	accent = ToBoolean(value);
       else
 	assert(false);
-
+    
       if (SmartPtr<Value> value = GET_OPERATOR_ATTRIBUTE_VALUE(MathML, Operator, largeop, defaults))
 	largeOp = ToBoolean(value);
-
+    
       // Just make large operators stretchy for now. We might want to handle them a bit differently (like TeX) later, though.
       if (largeOp)
         stretchy = true;
-
+    
       AreaRef res;
       if (stretchy && this == ctxt.getStretchOperator())
 	{
@@ -154,65 +154,65 @@ MathMLOperatorElement::format(FormattingContext& ctxt)
 	  // least once
 	  AreaRef minArea = getArea();
 	  assert(minArea);
-
+    
 	  const BoundingBox minBox = minArea->box();
-
+    
 	  const scaled axis = ctxt.MGD()->axis(ctxt);
 	  const scaled height = ctxt.getStretchToHeight() - axis;
 	  const scaled depth = ctxt.getStretchToDepth() + axis;
-
+    
 	  // Here we have to calculate the desired size of the stretchable symbol.
 	  // If symmetric == true the we have to stretch to cover the maximum among
 	  // height and depth, otherwise we just stretch to ascent + descent
 	  scaled v = std::max(scaled::zero(), symmetric ? (2 * std::max(height, depth)) : (height + depth));
 	  scaled h = std::max(scaled::zero(), ctxt.getStretchToWidth());
-
+    
 	  // ...however, there may be some contraints over the size of the stretchable
 	  // operator. 
           if (v != scaled::zero())
             {
 	      const scaled minV = minBox.height + minBox.depth;
-
+    
 	      if (minMultiplier > 0)
 	        v = std::max(v, minV * minMultiplier);
 	      else
 	        v = std::max(v, minSize);
-
+    
 	      if (minMultiplier > 0)
 	        v = std::max(v, minV * minMultiplier);
 	      else
 	        v = std::max(v, minSize);
             }
-
+    
           if (h != scaled::zero())
             {
 	      const scaled minH = minBox.width;
-
+    
 	      if (minMultiplier > 0)
 	        h = std::max(h, minH * minMultiplier);
 	      else
 	        h = std::max(h, minSize);
-
+    
 	      if (minMultiplier > 0)
 	        h = std::max(h, minH * minMultiplier);
 	      else
 	        h = std::max(h, minSize);
             }
-
+    
 	  ctxt.setStretchV(v);
 	  ctxt.setStretchH(h);
-	  
+    
 	  res = formatAux(ctxt);
-	  
+    
 	  BoundingBox opBox = res->box();
-
+    
 	  if (height + depth > scaled::zero())
 	    {
 	      const scaled aHeight = (symmetric ? v / 2 : (v * height.toFloat()) / (height + depth).toFloat()) + axis;
 	      const scaled aDepth = (symmetric ? v / 2 : (v * depth.toFloat()) / (height + depth).toFloat()) - axis;
-	      
+    
 	      const scaled sh = (aHeight - aDepth - opBox.height + opBox.depth) / 2;
-
+    
 	      res = ctxt.MGD()->getFactory()->shift(res, sh);
 	    }
 	}

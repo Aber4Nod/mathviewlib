@@ -85,6 +85,17 @@ libxml2_MathView::loadURI(const char* name)
 }
 
 bool
+libxml2_MathView::loadNewFormula()
+{
+    const char *buffer = "<math display=\"block\" xmlns=\"http://www.w3.org/1998/Math/MathML\">\n"
+            "<mrow>\n"
+            "<mtext>new formula</mtext>"
+            "</mrow>"
+            "</math>";
+    loadBuffer(buffer);
+}
+
+bool
 libxml2_MathView::loadBuffer(const char* buffer)
 {
   assert(buffer);

@@ -27,6 +27,9 @@
 #include <QPainter>
 #include <QRawFont>
 #include <QDebug>
+#include <QMenuBar>
+#include <QVBoxLayout>
+#include <QFileDialog>
 
 Qt_RenderArea::Qt_RenderArea(SmartPtr<AbstractLogger> logger,
                        QWidget* parent)
@@ -127,7 +130,7 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
             repaint();
     }
     else
-    if (key >= Qt::Key_Space && key <= Qt::Key_AsciiTilde)
+    if (key >= Qt::Key_Space && key <= Qt::Key_AsciiTilde && !event->modifiers())
     {
         // if (m_view->insertElementAfterCursor(std::tolower(key)))
             // repaint();
@@ -162,3 +165,66 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void
+Qt_RenderArea::slotNew()
+{
+    m_view->loadNewFormula();
+    const BoundingBox box = m_view->getBoundingBox();
+    qDebug() << "Got bounding box123!";
+    qreal width = Qt_RenderingContext::toQtPixels(box.horizontalExtent());
+    qreal height = Qt_RenderingContext::toQtPixels(box.verticalExtent());
+    //qDebug() << width << height;
+    setMinimumSize(QSizeF(width, height).toSize());
+    repaint();
+}
+
+void
+Qt_RenderArea::slotLoad()
+{
+    m_strFileName=QFileDialog::getOpenFileName();
+    if (m_strFileName.isEmpty()) {
+        return;
+    }
+
+    loadURI(m_strFileName.toUtf8());
+}
+
+void
+Qt_RenderArea::slotSaveAs()
+{
+    QString str = QFileDialog::getSaveFileName(0, m_strFileName);
+    if (!str.isEmpty()) {
+        m_strFileName = str;
+        slotSave();
+    }
+}
+
+void
+Qt_RenderArea::slotSave()
+{
+    if (m_strFileName.isEmpty()) {
+        slotSaveAs();
+       // return;
+    }
+
+    QFile file(m_strFileName);
+    if (file.open(QIODevice::WriteOnly)) {
+        int fd = file.handle();
+        FILE* f = fdopen(dup(fd), "wb");
+        m_view->dumpDocument(f);
+        fclose(f);
+    }
+}
+
+void
+Qt_RenderArea::close()
+{
+    m_view->unload();
+}
+
+void
+Qt_RenderArea::insert(std::string name)
+{
+    if (m_view->insertElementAfterCursor(name))
+        repaint();
+}

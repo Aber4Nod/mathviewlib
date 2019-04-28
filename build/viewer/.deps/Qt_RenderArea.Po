@@ -356,7 +356,23 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qdebug.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qtextstream.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qlocale.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontiguouscache.h
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontiguouscache.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/QMenuBar \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qmenubar.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qmenu.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qicon.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qaction.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qactiongroup.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/QVBoxLayout \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qboxlayout.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayout.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayoutitem.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qgridlayout.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/QFileDialog \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qfiledialog.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qdir.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qfileinfo.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qdialog.h
 
 ../../viewer/Qt_RenderArea.hh:
 
@@ -1263,3 +1279,35 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qlocale.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontiguouscache.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/QMenuBar:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qmenubar.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qmenu.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qicon.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qaction.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qactiongroup.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/QVBoxLayout:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qboxlayout.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayout.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qlayoutitem.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qgridlayout.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/QFileDialog:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qfiledialog.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qdir.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qfileinfo.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qdialog.h:

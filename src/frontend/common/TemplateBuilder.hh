@@ -1258,6 +1258,7 @@ protected:
     static void
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLUnderOverElement>& elem)
     {
+        bool moveCursorRight = false;
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
       if (_element->insertSetCursor() || _element->insertSetCursorLeft())
@@ -1272,6 +1273,12 @@ protected:
       else
       if (_element->rebuildIsNeeded())
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
+      if (elem->moveNextIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
 
       elem->setBase(_element);
       iter.next();
@@ -1293,6 +1300,9 @@ protected:
           iter.next();
       }
 
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
       elem->setUnderScript(_element);
       iter.next();
       _element = builder.getMathMLElement(iter.element());
@@ -1305,6 +1315,10 @@ protected:
               _element->setRawRowFlag();
           }
       }
+
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
       elem->setOverScript(_element);
     }
 
@@ -1704,6 +1718,46 @@ protected:
     }
   }
 
+  SmartPtr<MathMLElement>
+  updateMathMLElement(const typename Model::Element& el, SmartPtr<MathMLElement> elem, typename Model::ElementIterator& iter) const
+  {
+      if (elem->moveNextIn())
+      {
+          elem->resetFlag(Element::FMoveNextIn);
+          SmartPtr<MathMLElement> _element = getMathMLElement(iter.element());
+          if (!_element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
+          {
+              typename Model::Node node = iter.insertAfterPrepareMROW(el);
+              _element = getMathMLElement(Model::asElement(node));
+              _element->setRawRowFlag();
+          }
+          else
+          {
+              // todo if content size <= 1 -> remove this wrapper rawRowElement
+          }
+          _element->setMoveNextIn();
+          _element = getMathMLElement(iter.element());
+          return _element;
+      }
+      
+      if (elem->moveNextOut())
+      {
+          elem->resetFlag(Element::FMoveNextOut);
+          if (iter.hasValidNodeNext(iter.element()))
+          {
+              std::cout << "has valid node forward! " << std::endl;
+              typename Model::Element nextValidSibling = iter.findValidNodeForward(Model::getNextSibling(Model::asNode(iter.element())));
+              SmartPtr<MathMLElement> nextElem = getMathMLElement(nextValidSibling);
+              nextElem->setMoveNextIn();
+          }
+          else {
+              std::cout << "do not has valid node forward! " << std::endl;
+              getMathMLElement(el)->setMoveNextOut();
+          }
+          return getMathMLElement(iter.element());
+      }
+  }
+
   void
   getChildMathMLElements(const typename Model::Element& el, std::vector<SmartPtr<MathMLElement> >& content) const
   {
@@ -1818,6 +1872,7 @@ protected:
             // if the conditions are not like described upper -> than logic below is true
             printf("[getChildMathMLElements]: cursorSet triggered\n");
             SmartPtr<MathMLTokenElement> cur_element = smart_cast<MathMLTokenElement>(_elem);
+            std::string name = smart_cast<MathMLTokenElement>(_elem)->getInsertElementName();
             cur_element->setInsertElementName("");
 
             String strAfterCursor = cur_element->GetRawContentAfterCursor();
@@ -1828,8 +1883,8 @@ protected:
                 _elem = getMathMLElement(iter.element());
                 _elem->setSplitSet();
             }
-            
-            typename MathMLBuilderMap::const_iterator m = mathmlMap.find("munderover");
+
+            typename MathMLBuilderMap::const_iterator m = mathmlMap.find(name);
             typename Model::Node node_table;
             typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
 

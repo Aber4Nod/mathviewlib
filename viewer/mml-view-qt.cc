@@ -32,6 +32,8 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QPalette>
+#include <QMenuBar>
+#include <QObject>
 
 int
 main(int argc, char *argv[])
@@ -40,6 +42,7 @@ main(int argc, char *argv[])
     QApplication::setApplicationName("mml-view-qt");
     QApplication::setApplicationVersion(PACKAGE_VERSION);
 
+    a.setAttribute(Qt::AA_DontUseNativeMenuBar);
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
@@ -54,18 +57,69 @@ main(int argc, char *argv[])
 
     QMainWindow w;
     Qt_RenderArea* ra = new Qt_RenderArea(logger);
-    ra->loadURI(input_file.toUtf8());
+    // ra->loadURI(input_file.toUtf8());
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget(ra);
     QWidget* window = new QWidget();
+
+    QMenu *pmnuFile = new QMenu("&File");
+    QAction* newFile = pmnuFile->addAction("&New",
+                        ra,
+                        SLOT(slotNew()),
+                        QKeySequence("CTRL+N")
+                        );
+    pmnuFile->addSeparator();
+
+    QAction *openFolder = pmnuFile->addAction("&Open",
+                        ra,
+                        SLOT(slotLoad()),
+                        QKeySequence("CTRL+O")
+                        );
+   
+    QAction *saveFile = pmnuFile->addAction("&Save",
+                        ra,
+                        SLOT(slotSave()),
+                        QKeySequence("CTRL+S")
+                        );
+   
+   pmnuFile->addAction("S&ave As",
+                       ra,
+                       SLOT(slotSaveAs()),
+                       QKeySequence("CTRL+Shift+S")
+                       );
+   pmnuFile->addSeparator();
+   QAction *closeFile = pmnuFile->addAction("&Close",
+                       ra,
+                       SLOT(close()),
+                       QKeySequence("CTRL+W")
+                       );
+
+    QMenu *pmnuInsertion = new QMenu("&Insert");
+    ra->connect(pmnuInsertion->addAction("&underover"),  &QAction::triggered, ra, [ra]{ ra->insert("munderover"); });
+    ra->connect(pmnuInsertion->addAction("&fraction"),  &QAction::triggered, ra, [ra]{ ra->insert("mfrac"); });
+    ra->connect(pmnuInsertion->addAction("&over"),  &QAction::triggered, ra, [ra]{ ra->insert("mover"); });
+    ra->connect(pmnuInsertion->addAction("&under"),  &QAction::triggered, ra, [ra]{ ra->insert("munder"); });
+    ra->connect(pmnuInsertion->addAction("&mi"),  &QAction::triggered, ra, [ra]{ ra->insert("mi"); }); // dont work inserting 
+    ra->connect(pmnuInsertion->addAction("&msqrt"),  &QAction::triggered, ra, [ra]{ ra->insert("msqrt"); });
+    ra->connect(pmnuInsertion->addAction("&mroot"),  &QAction::triggered, ra, [ra]{ ra->insert("mroot"); });
+    ra->connect(pmnuInsertion->addAction("&msub"),  &QAction::triggered, ra, [ra]{ ra->insert("msub"); });
+    ra->connect(pmnuInsertion->addAction("&msup"),  &QAction::triggered, ra, [ra]{ ra->insert("msup"); });
+    ra->connect(pmnuInsertion->addAction("&msubsup"),  &QAction::triggered, ra, [ra]{ ra->insert("msubsup"); });
+
+    QMenuBar* menuBar = new QMenuBar();
+
+    menuBar->addMenu(pmnuFile);
+    menuBar->addMenu(pmnuInsertion);
+    layout->setMenuBar(menuBar);
 
     QPalette Pal;
     Pal.setColor(QPalette::Background, Qt::white);
     window->setAutoFillBackground(true);
     window->setPalette(Pal);
-    
+
     window->setLayout(layout);
     w.setCentralWidget(window);
     w.show();
     return a.exec();
 }
+

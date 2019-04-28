@@ -60,6 +60,14 @@ private:
     SmartPtr<MathView> m_view;
     Qt_RenderingContext m_rc;
     QRawFont m_rawFont;
+    QString m_strFileName;
+public slots:
+    void slotNew();
+    void slotLoad();
+    void slotSave();
+    void slotSaveAs();
+    void close();
+    void insert(std::string name);
 };
 
 #endif // Qt_RenderArea_hh
