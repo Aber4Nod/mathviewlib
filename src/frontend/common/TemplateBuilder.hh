@@ -376,6 +376,25 @@ protected:
           elem->resetFlag(Element::FMoveNextOut);
           elem->setMoveNextOut();
       }
+      else
+      if (elem->movePrevIn())
+      {
+          elem->resetFlag(Element::FMovePrevIn);
+          if (content.size())
+          {
+              std::cout << "[MathMLLinearContainerElementBuilder]:construct // move prev in was triggered" << std::endl;
+              content[content.size()-1]->setInsertSetCursor();
+              builder.getChildMathMLElements(el, content);
+          }
+      }
+      else
+      if (elem->movePrevOut())
+      {
+          std::cout << "[MathMLLinearContainerElementBuilder]:construct // move prev out was triggered" << std::endl;
+          elem->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
+      }
+
       elem->swapContent(content);
     }
   };
@@ -1158,6 +1177,7 @@ protected:
 
       if (_element->moveNextOut())
       {
+          std::cout << "move next out was triggered in constructor! " << std::endl;
           _element->resetFlag(Element::FMoveNextOut);
           elem->setMoveNextOut();
       }
@@ -1258,7 +1278,7 @@ protected:
     static void
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLUnderOverElement>& elem)
     {
-        bool moveCursorRight = false;
+      std::cout << "in construct of munderover! " << std::endl;
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
       if (_element->insertSetCursor() || _element->insertSetCursorLeft())
@@ -1277,8 +1297,14 @@ protected:
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->moveNextOut())
+      if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
+      }
 
       elem->setBase(_element);
       iter.next();
@@ -1300,6 +1326,17 @@ protected:
           iter.next();
       }
 
+      if (_element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
+
       if (_element->moveNextIn() || _element->moveNextOut())
           _element = builder.updateMathMLElement(el, _element, iter);
 
@@ -1314,6 +1351,17 @@ protected:
               _element = builder.getMathMLElement(Model::asElement(node));
               _element->setRawRowFlag();
           }
+      }
+
+      if (elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getUnderScript()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -1721,9 +1769,9 @@ protected:
   SmartPtr<MathMLElement>
   updateMathMLElement(const typename Model::Element& el, SmartPtr<MathMLElement> elem, typename Model::ElementIterator& iter) const
   {
-      if (elem->moveNextIn())
+      if (elem->moveNextIn() || elem->movePrevIn())
       {
-          elem->resetFlag(Element::FMoveNextIn);
+          elem->resetFlag(elem->moveNextIn() ? Element::FMoveNextIn : Element::FMovePrevIn);
           SmartPtr<MathMLElement> _element = getMathMLElement(iter.element());
           if (!_element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
           {
@@ -1735,7 +1783,12 @@ protected:
           {
               // todo if content size <= 1 -> remove this wrapper rawRowElement
           }
-          _element->setMoveNextIn();
+
+          if (elem->moveNextIn())
+            _element->setMoveNextIn();
+          else
+            _element->setMovePrevIn();
+
           _element = getMathMLElement(iter.element());
           return _element;
       }
@@ -1828,9 +1881,10 @@ protected:
             }
         }
         else
-        if (_elem->insertSetCursorLeft())
+        if (_elem->insertSetCursorLeft() || _elem->movePrevOut())
         {
             _elem->resetFlag(Element::FInsertSetCursorLeft);
+            _elem->resetFlag(Element::FMovePrevOut);
             // replace current rawTextElement with prev
             if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength())
             {
@@ -1919,6 +1973,53 @@ protected:
             // _elem = getMathMLElement(iter.element());
         }
 
+        if (_elem->movePrevSet())
+        {
+            _elem->resetFlag(Element::FMovePrev);
+            if (iter.hasValidNodePrev(iter.element()))
+            {
+                typename Model::Element prev_element = iter.findValidNodePrev(Model::asNode(iter.element()));
+                SmartPtr<MathMLTokenElement> prevElem = smart_cast<MathMLTokenElement>(getMathMLElement(prev_element));
+                if (prevElem) // todo move this logic to MathMLTokenElement constr -> set movePrevSet to it and handle there
+                    prevElem->setLastCursorPostition();
+                else
+                if (prev_element)
+                    getMathMLElement(prev_element)->setMovePrevIn();
+
+                iter.setCurrent(prev_element);
+                content.pop_back();
+            }
+            else {
+                std::cout << "setting FMovePrevOut to parent of childmathelements! " << std::endl;
+                getMathMLElement(el)->setMovePrevOut();
+            }
+
+            smart_cast<MathMLTokenElement>(_elem)->resetCursor();
+            _elem = getMathMLElement(iter.element());
+        }
+        else
+        if (_elem->moveNextSet())
+        {
+            _elem->resetFlag(Element::FMoveNext);
+
+            if (iter.hasValidNodeNext(iter.element()))
+            {
+                typename Model::Element next_element = iter.findValidNodeForward(Model::getNextSibling(Model::asNode(iter.element())));
+                SmartPtr<MathMLTokenElement> nextElem = smart_cast<MathMLTokenElement>(getMathMLElement(next_element));
+                if (nextElem)
+                    nextElem->setFirstCursorPostition();
+                else    // next element is not MathMLTokenElement
+                if (next_element) {
+                    getMathMLElement(next_element)->setMoveNextIn();
+                }
+            }
+            else    // no next element exists -> going to parent out flag
+                getMathMLElement(el)->setMoveNextOut();
+
+            smart_cast<MathMLTokenElement>(_elem)->resetCursor();
+            _elem = getMathMLElement(iter.element());
+        }
+        else
         if (_elem->splitSet()) {
             String curStr = smart_cast<MathMLTokenElement>(_elem)->GetRawContent();
             if (!splitContext.empty())
@@ -1941,45 +2042,6 @@ protected:
         }
         else {
             splitContext.clear();
-        }
-
-        if (_elem->movePrevSet())
-        {
-            _elem->resetFlag(Element::FMovePrev);
-            if (iter.hasValidNodePrev(iter.element())) {
-                SmartPtr<MathMLTokenElement> prevElem = smart_cast<MathMLTokenElement>(content.back());
-                if (prevElem) // todo move this logic to MathMLTokenElement constr -> set movePrevSet to it and handle there
-                {
-                    prevElem->setLastCursorPostition();
-                    smart_cast<MathMLTokenElement>(_elem)->resetCursor();
-
-                    iter.setCurrent(iter.findValidNodePrev(Model::asNode(iter.element())));
-                    content.pop_back();
-                    _elem = getMathMLElement(iter.element());
-                }
-            }
-        }
-
-        if (_elem->moveNextSet())
-        {
-            _elem->resetFlag(Element::FMoveNext);
-
-            if (iter.hasValidNodeNext(iter.element()))
-            {
-                typename Model::Element next_element = iter.findValidNodeForward(Model::getNextSibling(Model::asNode(iter.element())));
-                SmartPtr<MathMLTokenElement> nextElem = smart_cast<MathMLTokenElement>(getMathMLElement(next_element));
-                if (nextElem)
-                    nextElem->setFirstCursorPostition();
-                else    // next element is not MathMLTokenElement
-                if (next_element) {
-                    getMathMLElement(next_element)->setMoveNextIn();
-                }
-            }
-            else    // no next element exists -> going to parent out flag
-                getMathMLElement(el)->setMoveNextOut();
-
-            smart_cast<MathMLTokenElement>(_elem)->resetCursor();
-            _elem = getMathMLElement(iter.element());
         }
 
         // else

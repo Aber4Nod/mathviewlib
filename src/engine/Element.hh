@@ -104,7 +104,7 @@ public:
   bool moveNextIn(void) const { return getFlag(FMoveNextIn); }
   bool moveNextOut(void) const { return getFlag(FMoveNextOut); }
   bool movePrevIn(void) const { return getFlag(FMovePrevIn); }
-  bool movePrevOut(void) const { return getFlag(FMovePrevIn); }
+  bool movePrevOut(void) const { return getFlag(FMovePrevOut); }
   bool splitSet(void) const { return getFlag(FSplitSet); }
   virtual void setDirtyLayout(void);
   virtual void setDirtyLayoutD(void);
