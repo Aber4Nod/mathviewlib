@@ -683,132 +683,66 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLFractionElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      bool moveCursorRight = false;
-      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
-      if (element->insertSet())
-      {
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              // element->resetFlag(MathMLActionElement::FInsertSet);
-              // todo remove inserting after element (let if be in getmathmlchildelements)
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-      }
-      else
-      if (element->insertSetCursor() || element->insertSetCursorLeft())
-      {
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-          else
-          {
-              // todo if content size <= 1 -> remove this wrapper rawRowElement
-              
-          }
-      }
-      
       if (elem->moveNextIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveNextOut() || _element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
       {
-          elem->resetFlag(Element::FMoveNextIn);
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-          else
-          {
-              // todo if content size <= 1 -> remove this wrapper rawRowElement
-          }
-          element->setMoveNextIn();
-          element = builder.getMathMLElement(iter.element());
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
       }
 
-      if (element->moveNextOut())
-      {
-          moveCursorRight = true;
-          element->resetFlag(Element::FMoveNextOut);
-      }
+      // // in this case the logic for moving right outside is working
+      // if (_element->insertSetCursor())
+      // {
+      //     moveCursorRight = true;
+      //     _element->resetFlag(Element::FInsertSetCursor);
+      // }
 
-      // in this case the logic for moving right outside is working
-      if (element->insertSetCursor())
-      {
-          moveCursorRight = true;
-          element->resetFlag(Element::FInsertSetCursor);
-      }
-
-      if (element->wrapperSet() || element->wrapperIsNeeded())
+      if (_element->wrapperSet() || _element->wrapperIsNeeded())
       {
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
       }
 
-      elem->setNumerator(element);
+      elem->setNumerator(_element);
       iter.next();
 
-      element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      if (moveCursorRight)
-      {
-          std::cout << "setting insertSetCursor to denominator" << std::endl;
-          moveCursorRight = false;
+      _element = builder.getMathMLElement(iter.element());
+      if (elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
 
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-          else
-          {
-              // todo if content size <= 1 -> remove this wrapper rawRowElement
-          }
-          element->setMoveNextIn();
-          element = builder.getMathMLElement(iter.element());
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getNumerator()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
       }
 
-      if (element->insertSet())
-      {
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              // element->resetFlag(MathMLActionElement::FInsertSet);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-      }
-      else
-      if (element->insertSetCursor() || element->insertSetCursorLeft())
-      {
-          // if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          // {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              // todo handle this flag in rowelement -> insert rawTextElement before last child of after first child
-              element = builder.getMathMLElement(Model::asElement(node));
-              if (!element->rawRowSet())
-                  element->setRawRowFlag();
-          // }
-      }
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (element->wrapperSet() || element->wrapperIsNeeded())
+      if (_element->wrapperSet() || _element->wrapperIsNeeded())
       {
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
           iter.next();
       }
 
-      if (element->moveNextOut())
-      {
-          std::cout << "move next out in denominator" << std::endl;
-          element->resetFlag(Element::FMoveNextOut);
-          elem->setMoveNextOut();
-      }
+      // if (_element->moveNextOut())
+      // {
+      //     std::cout << "move next out in denominator" << std::endl;
+      //     _element->resetFlag(Element::FMoveNextOut);
+      //     elem->setMoveNextOut();
+      // }
 
-
-      elem->setDenominator(element);
+      elem->setDenominator(_element);
     }
 
     static typename Model::Node
@@ -837,9 +771,41 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLRadicalElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
+      if (elem->moveNextIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveNextOut() || _element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
+      }
+
+      elem->setBase(_element);
       iter.next();
-      elem->setIndex(builder.getMathMLElement(iter.element()));
+
+      _element = builder.getMathMLElement(iter.element());
+      if (elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
+
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      elem->setIndex(_element);
     }
 
     static typename Model::Node
@@ -867,16 +833,24 @@ protected:
     static void
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLRadicalElement>& elem)
     {
-      std::vector<SmartPtr<MathMLElement> > content;
-      builder.getChildMathMLElements(el, content);
-      if (content.size() == 1)
-	elem->setBase(content[0]);
-      else
-	{
-	  SmartPtr<MathMLInferredRowElement> row = MathMLInferredRowElement::create(builder.getMathMLNamespaceContext());
-	  row->swapContent(content);
-	  elem->setBase(row);
-	}
+      typename Model::ElementIterator iter(el, MATHML_NS_URI);
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
+      if (elem->moveNextIn() || elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveNextOut() || _element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
+      }
+
+      elem->setBase(_element);
       elem->setIndex(0);
     }
 
@@ -1812,7 +1786,6 @@ protected:
   {
       if (elem->moveNextIn() || elem->movePrevIn())
       {
-          elem->resetFlag(elem->moveNextIn() ? Element::FMoveNextIn : Element::FMovePrevIn);
           SmartPtr<MathMLElement> _element = getMathMLElement(iter.element());
           if (!_element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
           {
@@ -1825,10 +1798,14 @@ protected:
               // todo if content size <= 1 -> remove this wrapper rawRowElement
           }
 
-          if (elem->moveNextIn())
-            _element->setMoveNextIn();
-          else
-            _element->setMovePrevIn();
+          if (elem->moveNextIn()) {
+              elem->resetFlag(Element::FMoveNextIn);
+              _element->setMoveNextIn();
+          }
+          else {
+              elem->resetFlag(Element::FMovePrevIn);
+              _element->setMovePrevIn();
+          }
 
           _element = getMathMLElement(iter.element());
           return _element;
