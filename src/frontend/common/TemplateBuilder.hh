@@ -906,33 +906,40 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLScriptElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      bool moveCursorRight = false;
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
-      elem->setBase(element);
-      iter.next();
-      element = builder.getMathMLElement(iter.element());
+      if (elem->moveNextIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (moveCursorRight)
+      if (_element->moveNextOut() || _element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
       {
-          std::cout << "setting insertSetCursor to denominator" << std::endl;
-          moveCursorRight = false;
-
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-          else
-          {
-              // todo if content size <= 1 -> remove this wrapper rawRowElement
-          }
-          element->setMoveNextIn();
-          element = builder.getMathMLElement(iter.element());
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
       }
 
-      elem->setSubScript(element);
+      elem->setBase(_element);
+      iter.next();
+      _element = builder.getMathMLElement(iter.element());
+      if (elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
+
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      elem->setSubScript(_element);
       elem->setSuperScript(0);
     }
 
@@ -966,64 +973,42 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLScriptElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      SmartPtr<MathMLElement> element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      bool moveCursorRight = false;
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
       if (elem->moveNextIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveNextOut() || _element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
       {
-          elem->resetFlag(Element::FMoveNextIn);
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-          else
-          {
-              // todo if content size <= 1 -> remove this wrapper rawRowElement
-          }
-          element->setMoveNextIn();
-          element = builder.getMathMLElement(iter.element());
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
       }
 
-      if (element->moveNextOut())
-      {
-          moveCursorRight = true;
-          element->resetFlag(Element::FMoveNextOut);
-      }
-
-      elem->setBase(element);
+      elem->setBase(_element);
       iter.next();
       elem->setSubScript(0);
-      element = builder.getMathMLElement(iter.element()); // todo optimize this - w/out double creation of element
-      if (moveCursorRight)
-      {
-          std::cout << "setting insertSetCursor to denominator" << std::endl;
-          moveCursorRight = false;
+      
+      _element = builder.getMathMLElement(iter.element());
+      if (elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
 
-          if (!element->rawRowSet())   // inserting wrapper rawRowElement for current _element and next rawTextElement (with cursor)
-          {
-              typename Model::Node node = iter.insertAfterPrepareMROW(el);
-              element = builder.getMathMLElement(Model::asElement(node));
-              element->setRawRowFlag();
-          }
-          else
-          {
-              // todo if content size <= 1 -> remove this wrapper rawRowElement
-          }
-          element->setMoveNextIn();
-          element = builder.getMathMLElement(iter.element());
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
       }
 
-      elem->setSuperScript(element);
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (element->moveNextOut())
-      {
-          std::cout << "move next out in denominator" << std::endl;
-          element->resetFlag(Element::FMoveNextOut);
-          elem->setMoveNextOut();
-      }
-
+      elem->setSuperScript(_element);
     }
 
     static typename Model::Node
@@ -1059,11 +1044,65 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLScriptElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
-      elem->setBase(builder.getMathMLElement(iter.element()));
+      SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded())
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+
+      if (elem->moveNextIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveNextOut() || _element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->setMovePrevOut();
+      }
+
+      elem->setBase(_element);
+
       iter.next();
-      elem->setSubScript(builder.getMathMLElement(iter.element()));
+      _element = builder.getMathMLElement(iter.element());
+      if (_element->rebuildIsNeeded()) {
+          iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
+          iter.next();
+      }
+
+      if (_element->movePrevIn())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
+
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      elem->setSubScript(_element);
+      
       iter.next();
-      elem->setSuperScript(builder.getMathMLElement(iter.element()));
+      _element = builder.getMathMLElement(iter.element());
+
+      if (elem->movePrevIn())
+          _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->movePrevOut())
+      {
+          _element->resetFlag(Element::FMovePrevOut);
+          elem->getSubScript()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
+
+      if (_element->moveNextIn() || _element->moveNextOut())
+          _element = builder.updateMathMLElement(el, _element, iter);
+
+      elem->setSuperScript(_element);
     }
 
     static typename Model::Node
