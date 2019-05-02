@@ -690,12 +690,21 @@ protected:
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
+      if (_element->moveDown())
+      {
+          // in this case we want to go into denominator
+          // -> we go out of _element and go to next _element -> denominator
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
+      }
+
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->setMovePrevOut();
       }
 
@@ -718,12 +727,22 @@ protected:
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->getNumerator()->setMovePrevIn();
           construct(builder, el, elem);
           return;
+      }
+
+      if (_element->moveDown())
+      {
+          // in this case we want to go out of elem
+          // -> we go out of _element and also parent elem
+          // and go to the next element of elem
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -1833,7 +1852,7 @@ protected:
   getChildMathMLElements(const typename Model::Element& el, std::vector<SmartPtr<MathMLElement> >& content) const
   {
       std::cout << "[getChildMathMLElements]: getting child elements" << std::endl;
-    String splitContext = "";
+    // String splitContext = "";
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
@@ -1991,6 +2010,22 @@ protected:
             // _elem = getMathMLElement(iter.element());
         }
 
+        if (_elem->moveDown())
+        {
+            _elem->resetFlag(Element::FMoveDown);
+            getMathMLElement(el)->setMoveNextOut();
+            smart_cast<MathMLTokenElement>(_elem)->resetCursor();
+            _elem = getMathMLElement(iter.element());
+        }
+        else
+        if (_elem->moveUp())
+        {
+            _elem->resetFlag(Element::FMoveUp);
+            getMathMLElement(el)->setMovePrevOut();
+            smart_cast<MathMLTokenElement>(_elem)->resetCursor();
+            _elem = getMathMLElement(iter.element());
+        }
+        else
         if (_elem->movePrevSet())
         {
             _elem->resetFlag(Element::FMovePrev);
@@ -2037,30 +2072,30 @@ protected:
             smart_cast<MathMLTokenElement>(_elem)->resetCursor();
             _elem = getMathMLElement(iter.element());
         }
-        else
-        if (_elem->splitSet()) {
-            String curStr = smart_cast<MathMLTokenElement>(_elem)->GetRawContent();
-            if (!splitContext.empty())
-            {
-                typename Model::Element prevElement = iter.findValidNodePrev(Model::asNode(iter.element()));
-                iter.deleteElement(prevElement);
-                content.pop_back();
-                _elem->resetFlag(Element::FSplitSet);
-
-                std::cout << "setting node value: " << splitContext + curStr << std::endl;
-                Model::setNodeValue(Model::asNode(iter.element()), splitContext + curStr);
-                _elem->setDirtyLayout();
-                _elem->setDirtyStructure();
-                _elem->setCursorSet();
-                smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
-                smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(splitContext.length() - 1);
-                _elem = getMathMLElement(iter.element());
-            }
-            splitContext += curStr;
-        }
-        else {
-            splitContext.clear();
-        }
+        // else
+        // if (_elem->splitSet()) {
+        //     String curStr = smart_cast<MathMLTokenElement>(_elem)->GetRawContent();
+        //     if (!splitContext.empty())
+        //     {
+        //         typename Model::Element prevElement = iter.findValidNodePrev(Model::asNode(iter.element()));
+        //         iter.deleteElement(prevElement);
+        //         content.pop_back();
+        //         _elem->resetFlag(Element::FSplitSet);
+        // 
+        //         std::cout << "setting node value: " << splitContext + curStr << std::endl;
+        //         Model::setNodeValue(Model::asNode(iter.element()), splitContext + curStr);
+        //         _elem->setDirtyLayout();
+        //         _elem->setDirtyStructure();
+        //         _elem->setCursorSet();
+        //         smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
+        //         smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(splitContext.length() - 1);
+        //         _elem = getMathMLElement(iter.element());
+        //     }
+        //     splitContext += curStr;
+        // }
+        // else {
+        //     splitContext.clear();
+        // }
 
         // else
         if (_elem->rawTextElementSet() && !smart_cast<MathMLTokenElement>(_elem)->getContentLength() && !_elem->cursorSet())

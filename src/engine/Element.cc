@@ -277,6 +277,24 @@ Element::setMovePrevOut()
 }
 
 void
+Element::setMoveUp()
+{
+    if (!(moveUp()))
+        setFlag(FMoveUp);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
+Element::setMoveDown()
+{
+    if (!(moveDown()))
+        setFlag(FMoveDown);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
 Element::setDirtyAttribute()
 {
   //std::cerr << "Element::setDirtyAttribute " << this << " " << dirtyAttribute() << std::endl;

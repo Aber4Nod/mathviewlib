@@ -106,6 +106,9 @@ public:
   void stepCursorRight(void);
   void stepCursorLeft(void);
 
+  void stepCursorUp(void);
+  void stepCursorDown(void);
+
 protected:
   SmartPtr<const class Area> getRootArea(void) const;
   SmartPtr<const class Area> formatElement(const SmartPtr<class Element>&) const;

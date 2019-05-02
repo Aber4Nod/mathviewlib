@@ -610,3 +610,29 @@ View::stepCursorLeft()
         _elem->resetCursor();
     _elem->setInsertSetCursorLeft();
 }
+
+void
+View::stepCursorUp()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem == nullptr)
+        return;
+
+    if (!_elem->rawTextElementSet() || _elem->getContentLength())
+        _elem->resetCursor();
+
+    _elem->setMoveUp();
+}
+
+void
+View::stepCursorDown()
+{
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem == nullptr)
+        return;
+
+    if (!_elem->rawTextElementSet() || _elem->getContentLength())
+        _elem->resetCursor();
+
+    _elem->setMoveDown();
+}

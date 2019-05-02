@@ -163,6 +163,20 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
         repaint();
         m_view->dumpDocument(stdout);
     }
+    else
+    if (key == Qt::Key_Up)
+    {
+        m_view->stepCursorUp();
+        repaint();
+        m_view->dumpDocument(stdout);
+    }
+    else
+    if (key == Qt::Key_Down)
+    {
+        m_view->stepCursorDown();
+        repaint();
+        m_view->dumpDocument(stdout);
+    }
 }
 
 void
