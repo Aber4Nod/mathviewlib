@@ -797,6 +797,12 @@ protected:
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          _element->setMoveNextOut();
+      }
+
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
@@ -806,6 +812,12 @@ protected:
           elem->setMovePrevOut();
       }
 
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          elem->setMoveNextOut();
+      }
+
       elem->setBase(_element);
       iter.next();
 
@@ -813,9 +825,10 @@ protected:
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveDown())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveDown);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
@@ -823,6 +836,12 @@ protected:
 
       if (_element->moveNextIn() || _element->moveNextOut())
           _element = builder.updateMathMLElement(el, _element, iter);
+
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          elem->setMovePrevOut();
+      }
 
       elem->setIndex(_element);
     }
@@ -857,15 +876,22 @@ protected:
       if (_element->rebuildIsNeeded())
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
+      }
+
       if (elem->moveNextIn() || elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->setMovePrevOut();
       }
 
@@ -903,6 +929,18 @@ protected:
       if (_element->rebuildIsNeeded())
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          elem->setMovePrevOut();
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
+      }
+
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
@@ -921,12 +959,19 @@ protected:
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -970,15 +1015,22 @@ protected:
       if (_element->rebuildIsNeeded())
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          _element->setMoveNextOut();
+      }
+
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveDown())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveDown);
           elem->setMovePrevOut();
       }
 
@@ -990,12 +1042,19 @@ protected:
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveDown())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveDown);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
+      }
+
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          _element->setMoveNextOut();
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -1037,12 +1096,27 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLScriptElement>& elem)
     {
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
+      bool moveToSuperScript = false;
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
       if (_element->rebuildIsNeeded())
           iter = TemplateElementIterator<Model>(el, MATHML_NS_URI);
 
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveUp())
+      {
+          // going to superScript -> using tmp variable 'moveToSuperScript'
+          // for jumping over subScript
+          _element->resetFlag(Element::FMoveUp);
+          moveToSuperScript = true;
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
+      }
 
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
@@ -1065,12 +1139,24 @@ protected:
       if (_element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (_element->movePrevOut())
+      if (moveToSuperScript) {
+          moveToSuperScript = false;
+          _element->setMoveNextOut();
+      }
+
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          elem->setMoveNextOut();
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -1083,6 +1169,20 @@ protected:
 
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          elem->setMovePrevOut();
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
 
       if (_element->movePrevOut())
       {
@@ -1153,12 +1253,19 @@ protected:
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
+      }
+
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->setMovePrevOut();
       }
 
@@ -1178,12 +1285,19 @@ protected:
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveUp())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -1240,6 +1354,18 @@ protected:
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          _element->setMoveNextOut();
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          elem->setMoveNextOut();
+      }
+
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
@@ -1266,12 +1392,19 @@ protected:
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
 
-      if (_element->movePrevOut())
+      if (_element->movePrevOut() || _element->moveDown())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveDown);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
+      }
+
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          elem->setMovePrevOut();
       }
 
       if (_element->moveNextIn() || _element->moveNextOut())
@@ -1312,8 +1445,8 @@ protected:
     static void
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLUnderOverElement>& elem)
     {
-      std::cout << "in construct of munderover! " << std::endl;
       typename Model::ElementIterator iter(el, MATHML_NS_URI);
+      bool moveToSuperScript = false;
       SmartPtr<MathMLElement> _element = builder.getMathMLElement(iter.element());
       if (_element->insertSetCursor() || _element->insertSetCursorLeft())
       {
@@ -1330,6 +1463,18 @@ protected:
 
       if (elem->moveNextIn())
           _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          moveToSuperScript = true;
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          _element->setMoveNextOut();
+      }
 
       if (_element->moveNextOut() || _element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
@@ -1363,9 +1508,21 @@ protected:
       if (_element->movePrevIn())
           _element = builder.updateMathMLElement(el, _element, iter);
 
-      if (_element->movePrevOut())
+      if (moveToSuperScript) {
+          moveToSuperScript = false;
+          _element->setMoveNextOut();
+      }
+
+      if (_element->moveDown())
       {
-          _element->resetFlag(Element::FMovePrevOut);
+          _element->resetFlag(Element::FMoveDown);
+          elem->setMoveNextOut();
+      }
+
+      if (_element->movePrevOut() || _element->moveUp())
+      {
+          _element->resetFlag(_element->movePrevOut() ? Element::FMovePrevOut
+                                                      : Element::FMoveUp);
           elem->getBase()->setMovePrevIn();
           construct(builder, el, elem);
           return;
@@ -1389,6 +1546,20 @@ protected:
 
       if (elem->movePrevIn())
           _element = builder.updateMathMLElement(el, elem, iter);
+
+      if (_element->moveUp())
+      {
+          _element->resetFlag(Element::FMoveUp);
+          elem->setMovePrevOut();
+      }
+
+      if (_element->moveDown())
+      {
+          _element->resetFlag(Element::FMoveDown);
+          elem->getBase()->setMovePrevIn();
+          construct(builder, el, elem);
+          return;
+      }
 
       if (_element->movePrevOut())
       {
@@ -2013,7 +2184,8 @@ protected:
         if (_elem->moveDown())
         {
             _elem->resetFlag(Element::FMoveDown);
-            getMathMLElement(el)->setMoveNextOut();
+            // getMathMLElement(el)->setMoveNextOut();
+            getMathMLElement(el)->setMoveDown();
             smart_cast<MathMLTokenElement>(_elem)->resetCursor();
             _elem = getMathMLElement(iter.element());
         }
@@ -2021,7 +2193,8 @@ protected:
         if (_elem->moveUp())
         {
             _elem->resetFlag(Element::FMoveUp);
-            getMathMLElement(el)->setMovePrevOut();
+            // getMathMLElement(el)->setMovePrevOut();
+            getMathMLElement(el)->setMoveUp();
             smart_cast<MathMLTokenElement>(_elem)->resetCursor();
             _elem = getMathMLElement(iter.element());
         }
