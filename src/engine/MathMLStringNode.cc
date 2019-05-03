@@ -221,6 +221,12 @@ MathMLStringNode::insertInnerElementCursor(int32_t index)
     getParentElement()->setCursorSet();
 }
 
+void 
+MathMLStringNode::setSelected()
+{
+    getParentElement()->setSelected();
+}
+
 int32_t
 MathMLStringNode::normalizeGlyphAreaIndex(AreaRef area, int32_t index)
 {

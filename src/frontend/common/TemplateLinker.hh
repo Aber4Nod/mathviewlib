@@ -42,6 +42,14 @@ public:
   }
 
   void
+  selectedAdd(const ELEMENT& el, const ELEMENT& el_style)
+  {
+      assert(el);
+      assert(el_style);
+      selectedMap[el] = el_style;
+  }
+
+  void
   update(const ELEMENT& el, class Element* elem)
   {
     assert(el);
@@ -66,6 +74,19 @@ public:
 	return true;
       }
     else
+      return false;
+  }
+
+  bool
+  selectedRemove(const ELEMENT& el)
+  {
+      assert(el);
+      typename SelectedMap::iterator p = selectedMap.find(el);
+      if (p != selectedMap.end())
+      {
+          selectedMap.erase(p);
+          return true;
+      }
       return false;
   }
 
@@ -106,6 +127,17 @@ public:
       return ELEMENT();
   }
 
+  ELEMENT
+  selectedAssoc(const ELEMENT& el) const
+  {
+      assert(el);
+      typename SelectedMap::const_iterator p = selectedMap.find(el);
+      if (p != selectedMap.end())
+        return (*p).second;
+      else
+        return 0;
+  }
+
 protected:
   struct Element_hash
   {
@@ -118,6 +150,8 @@ protected:
 
   typedef std::unordered_map<ELEMENT, class Element*, typename Model::Hash> ForwardMap;
   typedef std::unordered_map<class Element*, ELEMENT, Element_hash> BackwardMap;
+  typedef std::unordered_map<ELEMENT, ELEMENT, typename Model::Hash> SelectedMap;
+  SelectedMap selectedMap;
   ForwardMap forwardMap;
   BackwardMap backwardMap;
 };

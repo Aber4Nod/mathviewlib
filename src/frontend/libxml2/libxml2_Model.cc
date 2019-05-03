@@ -204,6 +204,13 @@ libxml2_Model::hasAttribute(const Element& el, const String& name)
   return xmlHasProp((xmlNode*) el, toModelString(name));
 }
 
+bool
+libxml2_Model::setAttribute(const Element& el, const String& name, const String& value)
+{
+    assert(el);
+    return xmlSetProp((xmlNode*) el, toModelString(name), toModelString(value));
+}
+
 xmlNsPtr
 libxml2_Model::getNodeNamespace(const Node& n)
 {

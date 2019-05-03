@@ -54,6 +54,10 @@ protected:
   void linkerAdd(xmlElement* el, Element* elem) const { linker.add(el, elem); }
   void linkerRemove(Element* elem) const { linker.remove(elem); }
 
+  xmlElement *linkerSelectedAssoc(xmlElement *el) const { return linker.selectedAssoc(el); }
+  void linkerSelectedAdd(xmlElement *el, xmlElement *el_style) const { linker.selectedAdd(el, el_style); }
+  void linkerSelectedRemove(xmlElement *el) const { linker.selectedRemove(el); }
+
 private:
   mutable TemplateLinker<libxml2_Model> linker;
   xmlElement* root;

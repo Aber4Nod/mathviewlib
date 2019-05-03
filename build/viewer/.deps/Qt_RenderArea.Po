@@ -372,7 +372,13 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qfiledialog.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qdir.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qfileinfo.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qdialog.h
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qdialog.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/QApplication \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qapplication.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qcoreapplication.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/qeventloop.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qguiapplication.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/qinputmethod.h
 
 ../../viewer/Qt_RenderArea.hh:
 
@@ -1311,3 +1317,15 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qfileinfo.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qdialog.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/QApplication:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qapplication.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qcoreapplication.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtCore/qeventloop.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qguiapplication.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/qinputmethod.h:

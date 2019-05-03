@@ -295,6 +295,15 @@ Element::setMoveDown()
 }
 
 void
+Element::setSelected()
+{
+    if (!(selectedSet()))
+        setFlag(FSelected);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
 Element::setDirtyAttribute()
 {
   //std::cerr << "Element::setDirtyAttribute " << this << " " << dirtyAttribute() << std::endl;

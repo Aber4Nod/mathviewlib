@@ -340,16 +340,57 @@ protected:
     construct(const TemplateBuilder& builder, const typename Model::Element& el, const SmartPtr<MathMLNormalizingContainerElement>& elem)
     {
       std::vector<SmartPtr<MathMLElement> > content;
+      std::cout << "pre normalizing contruct! " << std::endl;
       builder.getChildMathMLElements(el, content);
-    
-      if (content.size() == 1)
-	elem->setChild(content[0]);
+      std::cout << "normalizing contruct! " << std::endl;
+      if (elem->moveNextIn())
+      {
+          elem->resetFlag(Element::FMoveNextIn);
+          std::cout << "[MathMLNormalizingContainerElementBuilder]:construct // move next in was triggered" << std::endl;
+          if (content.size())
+          {
+              content[0]->setMoveNextIn();
+              builder.getChildMathMLElements(el, content);
+          }
+      }
       else
-	{
-	  SmartPtr<MathMLInferredRowElement> row = MathMLInferredRowElement::create(builder.getMathMLNamespaceContext());
-	  row->swapContent(content);
-	  elem->setChild(row);
-	}
+      if (elem->moveNextOut())
+      {
+          std::cout << "[MathMLNormalizingContainerElementBuilder]:construct // move next out was triggered" << std::endl;
+          elem->resetFlag(Element::FMoveNextOut);
+          elem->setFlag(Element::FMoveNextOut);
+          // elem->setMoveNextOut();
+      }
+      else
+      if (elem->movePrevIn())
+      {
+          elem->resetFlag(Element::FMovePrevIn);
+          if (content.size())
+          {
+              std::cout << "[MathMLNormalizingContainerElementBuilder]:construct // move prev in was triggered" << std::endl;
+              content[content.size()-1]->setMovePrevIn();
+              builder.getChildMathMLElements(el, content);
+          }
+      }
+      else
+      if (elem->movePrevOut())
+      {
+          std::cout << "[MathMLNormalizingContaineElementBuilder]:construct // move prev out was triggered" << std::endl;
+          elem->resetFlag(Element::FMovePrevOut);
+          elem->setFlag(Element::FMovePrevOut);
+          // elem->setMovePrevOut();
+      }
+
+      std::cout << "[MathMLNormalizingContaineElementBuilder]:construct // went out of container element builder" << std::endl;
+
+      if (content.size() == 1)
+          elem->setChild(content[0]);
+      else
+      {
+          SmartPtr<MathMLInferredRowElement> row = MathMLInferredRowElement::create(builder.getMathMLNamespaceContext());
+          row->swapContent(content);
+          elem->setChild(row);
+      }
     }
   };
 
@@ -1953,16 +1994,7 @@ protected:
   {
     if (SmartPtr<MathMLElement> elem = getMathMLElementNoCreate(el))
     {
-        if (elem->insertSet())
-        {
-            printf("[getMathMLElement]: insertSet triggered\n");
-            // static int counter = 0;
-            // if (counter++ > 1)
-                // assert(0 == 1);
-            // typename Model::Node node = iter.insertAfter(el);
-            // _elem = getMathMLElement(Model::asElement(node));
-        }
-        else
+        std::cout << "created element: " << elem << std::endl;
         return elem;
     }
     else {
@@ -2026,6 +2058,14 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
+        if (_elem->selectedSet() && !this->linkerSelectedAssoc(iter.element()))
+        {
+            typename Model::Element prev_element = iter.insertParent(el);
+            Model::setAttribute(iter.element(), "mathbackground", "#005a9c60");
+            this->linkerSelectedAdd(prev_element, iter.element());
+            _elem = getMathMLElement(iter.element());
+        }
+        else
         if (_elem->deleteSet() && _elem->cursorSet())
         {
             _elem->resetFlag(Element::FDeleteSet);
@@ -2075,7 +2115,9 @@ protected:
                 }
             }
             else    // insert rawTextElement next
+            if (Model::getNodeName(Model::asNode(el)) == "mrow")
             {
+                std::cout << "inserting rawTextElement next" << std::endl;
                 typename Model::Node node = iter.insertAfter(el, "mtext");
 
                 SmartPtr<MathMLTokenElement> elemAfter = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
@@ -2085,6 +2127,11 @@ protected:
                 elemAfter->setFlag(Element::FRawTextElement);
                 elemAfter->setNodeIndex(0);
                 elemAfter->setNodeContentIndex(-1);
+            }
+            else
+            {
+                getMathMLElement(el)->setFlag(Element::FMoveNextOut);
+                _elem = getMathMLElement(iter.element());
             }
         }
         else
@@ -2112,6 +2159,7 @@ protected:
                 }
             }
             else    // insert rawTextElement prev
+            if (Model::getNodeName(Model::asNode(el)) == "mrow")
             {
                 std::cout << "[insertSetCursorLeft]: inserting mtext before" << std::endl;
                 typename Model::Node node = iter.insertBefore(el, "mtext");
@@ -2123,6 +2171,11 @@ protected:
                 _elem->setFlag(Element::FRawTextElement);
                 smart_cast<MathMLTokenElement>(_elem)->setNodeIndex(0);
                 smart_cast<MathMLTokenElement>(_elem)->setNodeContentIndex(-1);
+                _elem = getMathMLElement(iter.element());
+            }
+            else
+            {
+                getMathMLElement(el)->setFlag(Element::FMovePrevOut);
                 _elem = getMathMLElement(iter.element());
             }
         }

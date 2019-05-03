@@ -30,6 +30,7 @@
 #include <QMenuBar>
 #include <QVBoxLayout>
 #include <QFileDialog>
+#include <QApplication>
 
 Qt_RenderArea::Qt_RenderArea(SmartPtr<AbstractLogger> logger,
                        QWidget* parent)
@@ -44,6 +45,7 @@ Qt_RenderArea::Qt_RenderArea(SmartPtr<AbstractLogger> logger,
     m_view->setMathMLNamespaceContext(MathMLNamespaceContext::create(m_view, m_device));
     m_view->setDefaultFontSize(32);
     setFocusPolicy(Qt::StrongFocus);
+    // QCoreApplication::instance()->installEventFilter(this);
 }
 
 Qt_RenderArea::~Qt_RenderArea()
@@ -106,6 +108,12 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
         // if (m_view->insertElementCursor(pos.x() - this->pos().x(), pos.y() - this->pos().y()))
             // repaint();
 
+        if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            m_view->selectElement(pos.x(), pos.y());
+            repaint();
+        }
+        else
         if (m_view->insertElementCursor(pos.x(), pos.y())) {
             repaint();
         }

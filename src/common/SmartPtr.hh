@@ -23,7 +23,11 @@
 #ifndef __SmartPtr_hh__
 #define __SmartPtr_hh__
 
+// #define _GNU_SOURCE
+// #define DBOOST_STACKTRACE_USE_ADDR2LINE
+// #include <boost/stacktrace.hpp>
 #include <cassert>
+// #include <iostream>
 
 template <class P>
 class SmartPtr
@@ -33,7 +37,15 @@ public:
   SmartPtr(const SmartPtr& p) : ptr(p.ptr) { if (ptr) ptr->ref(); }
   // ~SmartPtr() { if (ptr) ptr->unref(); }
 
-  P* operator->() const { assert(ptr); return ptr; }
+  P* operator->() const
+  {
+      // if (!ptr)
+      // {
+      //     std::cout << boost::stacktrace::stacktrace();
+      // }
+      assert(ptr);
+      return ptr;
+  }
   SmartPtr& operator=(const SmartPtr& p)
   { 
     if (ptr == p.ptr) return *this;

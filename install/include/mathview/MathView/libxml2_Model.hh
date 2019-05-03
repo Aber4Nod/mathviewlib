@@ -73,6 +73,7 @@ struct libxml2_Model
   static String getAttribute(const Element&, const String&);
   // MUST be implemented if the default RefinementContext is used
   static bool hasAttribute(const Element&, const String&);
+  static bool setAttribute(const Element&, const String&, const String&);
 
   // methods for navigating the model
   // must be available if the default iterators are used

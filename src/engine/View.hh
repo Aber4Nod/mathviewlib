@@ -109,6 +109,8 @@ public:
   void stepCursorUp(void);
   void stepCursorDown(void);
 
+  bool selectElement(const scaled&, const scaled&) const;
+
 protected:
   SmartPtr<const class Area> getRootArea(void) const;
   SmartPtr<const class Area> formatElement(const SmartPtr<class Element>&) const;

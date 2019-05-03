@@ -79,6 +79,14 @@ public:
   virtual void setMoveUp(void);
   virtual void setMoveDown(void);
   virtual void setSplitSet(void);
+  virtual void setSelected(void);
+
+  void resetSelected(void)
+  {
+      resetFlag(FSelected);
+      setDirtyStructure();
+      setDirtyLayout();
+  }
 
   void resetDirtyStructure(void) { resetFlag(FDirtyStructure); }
   bool dirtyStructure(void) const { return getFlag(FDirtyStructure); }
@@ -102,6 +110,7 @@ public:
   bool moveNextSet(void) const { return getFlag(FMoveNext); }
   bool movePrevSet(void) const { return getFlag(FMovePrev); }
   bool rawRowSet(void) const { return getFlag(FRawRowElement); }
+  bool selectedSet(void) const { return getFlag(FSelected); }
 
   bool moveNextIn(void) const { return getFlag(FMoveNextIn); }
   bool moveNextOut(void) const { return getFlag(FMoveNextOut); }
@@ -141,6 +150,7 @@ public:
     FMoveUp,
     FMoveDown,
     FSplitSet,
+    FSelected,
 
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

@@ -85,6 +85,22 @@ swapPrev(const typename Model::Element& el)
   return el;
 }
 
+typename Model::Element
+insertParent(const typename Model::Element& el, std::string name = "mstyle")
+{
+    typename Model::Element xml_element = element();
+
+    typename Model::Node nodeParent = Model::createNewChild(Model::asNode(el), 
+          Model::getNodeNamespace(Model::asNode(el)),
+          Model::toModelString(name), Model::toModelString(""));
+
+    Model::replaceNode(Model::asNode(xml_element), nodeParent);
+    Model::insertChild(nodeParent, Model::asNode(xml_element));
+
+    setCurrent(Model::asElement(nodeParent));
+    return xml_element;
+}
+
 typename Model::Node
 insertAfterPrepareMROW(const typename Model::Element& el)
 {
@@ -117,45 +133,46 @@ insertAfterPrepareMROW(const typename Model::Element& el)
       typename Model::Node prevS = Model::getPrevSibling(
           Model::asNode(xml_element));
 
-      if (Model::getNodeName(Model::asNode(el)) != "mrow") {
-          // creating mrow parent element
-          typename Model::Node nodeParent = Model::createNewChild(Model::asNode(el), 
-                Model::getNodeNamespace(Model::asNode(el)),
-                Model::toModelString("mrow"), Model::toModelString(""));
-          printf("[insertAfter]: nodeParent node name: %s\n", Model::getNodeName(nodeParent).c_str());
-          Model::replaceNode(Model::asNode(xml_element), nodeParent);
-          Model::insertChild(nodeParent, Model::asNode(xml_element));
-
-          // creating default next element
-          typename Model::Node node = Model::createNewChild(nodeParent, 
-                Model::getNodeNamespace(Model::asNode(xml_element)),
-                Model::toModelString("mi"), Model::toModelString("t"));
-
-          // typename Model::Node node = Model::createNode(
-              // Model::getNodeNamespace(xml_element_copy), "munderover");
-          Model::insertNextSibling(Model::asNode(xml_element), node);
-          // Model::insertChild(nodeParent, node);
-
-          // Model::setParent(xml_element_copy, nodeParent);
-          // Model::setParent(node, nodeParent);
-          
-          Model::setNextSibling(nodeParent, nextS);
-          Model::setPrevSibling(nextS, nodeParent);
-
-          // Model::setNextSibling(xml_element_copy, node);
-          // Model::setPrevSibling(node, xml_element_copy);
-          setCurrent(Model::asElement(nodeParent));
-          // Model::setNodeValue(node, "");
-
-          // inserting cursor
-          // typename Model::Node node1 = Model::createNewChild(Model::asNode(el), 
-                // Model::getNodeNamespace(Model::asNode(xml_element)),
-                // Model::toModelString("mi"), Model::toModelString(""));
-          // Model::insertNextSibling(node, node1);
-
-          return nodeParent;
-      }
-
+      printf("iterator insertAfter now\n");
+      // if (Model::getNodeName(Model::asNode(el)) != "mrow") {
+      //     // creating mrow parent element
+      //     typename Model::Node nodeParent = Model::createNewChild(Model::asNode(el), 
+      //           Model::getNodeNamespace(Model::asNode(el)),
+      //           Model::toModelString("mrow"), Model::toModelString(""));
+      //     printf("[insertAfter]: nodeParent node name: %s\n", Model::getNodeName(nodeParent).c_str());
+      //     Model::replaceNode(Model::asNode(xml_element), nodeParent);
+      //     Model::insertChild(nodeParent, Model::asNode(xml_element));
+      // 
+      //     // creating default next element
+      //     typename Model::Node node = Model::createNewChild(nodeParent, 
+      //           Model::getNodeNamespace(Model::asNode(xml_element)),
+      //           Model::toModelString("mi"), Model::toModelString("t"));
+      // 
+      //     // typename Model::Node node = Model::createNode(
+      //         // Model::getNodeNamespace(xml_element_copy), "munderover");
+      //     Model::insertNextSibling(Model::asNode(xml_element), node);
+      //     // Model::insertChild(nodeParent, node);
+      // 
+      //     // Model::setParent(xml_element_copy, nodeParent);
+      //     // Model::setParent(node, nodeParent);
+      // 
+      //     Model::setNextSibling(nodeParent, nextS);
+      //     Model::setPrevSibling(nextS, nodeParent);
+      // 
+      //     // Model::setNextSibling(xml_element_copy, node);
+      //     // Model::setPrevSibling(node, xml_element_copy);
+      //     setCurrent(Model::asElement(nodeParent));
+      //     // Model::setNodeValue(node, "");
+      // 
+      //     // inserting cursor
+      //     // typename Model::Node node1 = Model::createNewChild(Model::asNode(el), 
+      //           // Model::getNodeNamespace(Model::asNode(xml_element)),
+      //           // Model::toModelString("mi"), Model::toModelString(""));
+      //     // Model::insertNextSibling(node, node1);
+      // 
+      //     return nodeParent;
+      // }
+      // 
       typename Model::Node node = Model::createNode(
           Model::getNodeNamespace(Model::asNode(xml_element)), name);
       Model::insertNextSibling(Model::asNode(xml_element), node);

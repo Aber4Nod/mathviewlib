@@ -53,6 +53,7 @@ public:
   // todo remove this logic to base element class (must be supported by all elements)
   void insertElementCursor(void);
   void insertInnerElementCursor(int32_t index);
+  void setSelected(void);
   int32_t normalizeGlyphAreaIndex(AreaRef area, int32_t index);
   
 private:

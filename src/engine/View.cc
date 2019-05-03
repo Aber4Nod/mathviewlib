@@ -636,3 +636,28 @@ View::stepCursorDown()
 
     _elem->setMoveDown();
 }
+
+bool
+View::selectElement(const scaled& x, const scaled& y) const
+{
+    AreaRef area = getAreaAt(x, y);
+    if (area)
+    {
+        std::cout << "[View::selectElement]:found area: " << std::endl;
+        const WrapperArea *wrapperArea = smart_cast<const WrapperArea>(area);
+        if (wrapperArea)
+        {
+            SmartPtr<Element> wrappedElem = wrapperArea->getElement();
+            std::cout << "[View::selectElement]:testing wrapperElem: " << wrappedElem << std::endl;
+            wrappedElem->setSelected();
+            wrappedElem->setDirtyLayout();
+            wrappedElem->setDirtyStructure();
+            return true;
+        }
+        else
+        {
+            area->getGlyphArea()->getParent()->getParent()->getNode()->setSelected();
+        }
+    }
+    return false;
+}
