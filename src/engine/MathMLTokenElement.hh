@@ -92,12 +92,19 @@ public:
 
   void resetCursor(void);
 
+  void setPreviousSplitElement(Element *_element)
+  {
+      previousSplitElemenet = _element;
+  };
+
+  Element *getPreviousSplitElement() { return previousSplitElemenet; };
+
 private:
   LinearContainerTemplate<MathMLTokenElement,class MathMLTextNode> content;
   int32_t cursorNodeIndex        = -1;
   int32_t cursorNodeContentIndex = -1;
   std::string insertElementName;
-
+  mutable Element *previousSplitElemenet = nullptr;
 
 protected:
   AreaRef formatAux(class FormattingContext&);
