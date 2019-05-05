@@ -250,3 +250,10 @@ Qt_RenderArea::insert(std::string name)
     if (m_view->insertElementAfterCursor(name))
         repaint();
 }
+
+void
+Qt_RenderArea::deleteSelectedElements()
+{
+    m_view->deleteSelectedElements();
+    repaint();
+}

@@ -53,6 +53,7 @@ public:
   };
   Element *getParentElement() const { return parentElement; };
   void setCursorIndex(uint32_t index) { cursorIndex = index; };
+  void resetFormattingIndex(void) { currentFormattingIndex = 0; };
   int32_t getCursorIndex(void) const { return cursorIndex; };
 
 private:

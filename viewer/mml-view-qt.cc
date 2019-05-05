@@ -106,10 +106,14 @@ main(int argc, char *argv[])
     ra->connect(pmnuInsertion->addAction("&msup"),  &QAction::triggered, ra, [ra]{ ra->insert("msup"); });
     ra->connect(pmnuInsertion->addAction("&msubsup"),  &QAction::triggered, ra, [ra]{ ra->insert("msubsup"); });
 
+    QMenu *pmnuDeletion = new QMenu("&Delete");
+    ra->connect(pmnuDeletion->addAction("&DeleteSelected"),  &QAction::triggered, ra, [ra]{ ra->deleteSelectedElements(); });
+
     QMenuBar* menuBar = new QMenuBar();
 
     menuBar->addMenu(pmnuFile);
     menuBar->addMenu(pmnuInsertion);
+    menuBar->addMenu(pmnuDeletion);
     layout->setMenuBar(menuBar);
 
     QPalette Pal;

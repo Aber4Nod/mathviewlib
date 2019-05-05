@@ -121,6 +121,7 @@ MathMLTokenElement::formatAux(FormattingContext& ctxt)
           std::cout << "GetLogicalContentLength: " << elem->GetLogicalContentLength() << " [MathMLTokenElement]: getCursorIndex: " << elem->getCursorIndex() << std::endl;
           c.push_back(elem->format(ctxt));
       }
+      elem->resetFormattingIndex();
   }
 #endif
 
@@ -369,7 +370,7 @@ MathMLTokenElement::setLastCursorPostition()
 }
 
 void
-MathMLTokenElement:: setFirstCursorPostition()
+MathMLTokenElement::setFirstCursorPostition()
 {
     cursorNodeIndex = 0;
     cursorNodeContentIndex = -1;
@@ -430,4 +431,26 @@ MathMLTokenElement::resetCursor()
     setDirtyLayout();
     setNodeIndex(-1);
     setNodeContentIndex(-1);
+}
+
+void
+MathMLTokenElement::setNodeIndex(int32_t index)
+{
+    if (index == -1)
+        std::for_each(content.begin(), content.end(), [](SmartPtr<MathMLTextNode> elem) {
+            elem->setCursorIndex(-1);
+            // smart_cast<MathMLStringNode>(elem)->clearV_Area();
+        });
+    cursorNodeIndex = index;
+}
+
+void
+MathMLTokenElement::setNodeContentIndex(int32_t index)
+{
+    if (index == -1)
+        std::for_each(content.begin(), content.end(), [](SmartPtr<MathMLTextNode> elem) {
+            elem->setCursorIndex(-1);
+            // smart_cast<MathMLStringNode>(elem)->clearV_Area();
+        });
+    cursorNodeContentIndex = index;
 }

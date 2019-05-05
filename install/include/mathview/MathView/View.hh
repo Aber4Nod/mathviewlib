@@ -110,6 +110,7 @@ public:
   void stepCursorDown(void);
 
   bool selectElement(const scaled&, const scaled&) const;
+  void deleteSelectedElements() const;
 
 protected:
   SmartPtr<const class Area> getRootArea(void) const;

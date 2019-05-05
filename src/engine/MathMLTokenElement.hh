@@ -74,8 +74,8 @@ public:
   void insertGlyphAfterCursor(char glyph);
   void deleteGLyphBeforeCursor();
 
-  void setNodeIndex(int32_t index) { cursorNodeIndex = index; };
-  void setNodeContentIndex(int32_t index) { cursorNodeContentIndex = index; };
+  void setNodeIndex(int32_t index);
+  void setNodeContentIndex(int32_t index);
   int32_t getCursorNodeIndex(void) { return cursorNodeIndex; };
   int32_t getcursorNodeContentIndex(void) { return cursorNodeContentIndex; };
 

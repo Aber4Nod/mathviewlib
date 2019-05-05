@@ -24,6 +24,7 @@
 #define __TemplateLinker_hh__
 
 #include <unordered_map>
+#include <functional>
 
 template <class Model, typename ELEMENT = typename Model::Element>
 class TemplateLinker
@@ -136,6 +137,18 @@ public:
         return (*p).second;
       else
         return 0;
+  }
+
+  void
+  executeHandler(std::function<void (std::pair<const ELEMENT&, const ELEMENT&>) > handler) const
+  {
+      std::for_each(selectedMap.begin(), selectedMap.end(), handler);
+  }
+
+  void
+  selectedClear()
+  {
+      selectedMap.clear();
   }
 
 protected:

@@ -138,6 +138,12 @@ View::getRootElement() const
   return rootElement;
 }
 
+void 
+View::deleteSelectedElements() const
+{
+    builder->deleteSelectedElements();
+}
+
 void
 View::resetRootElement()
 {

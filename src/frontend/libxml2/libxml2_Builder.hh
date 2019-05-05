@@ -28,6 +28,7 @@
 #include "Builder.hh"
 #include "String.hh"
 #include "Element.hh"
+#include <functional>
 
 class libxml2_Builder : public Builder
 {
@@ -45,18 +46,27 @@ public:
   xmlElement* findSelfOrAncestorModelElement(const SmartPtr<Element>&) const;
   SmartPtr<Element> findSelfOrAncestorElement(xmlElement*) const;
 
-  bool notifyStructureChanged(xmlElement*);
+  bool notifyStructureChanged(xmlElement*) const;
   bool notifyAttributeChanged(xmlElement*, const xmlChar*);
+  bool notifySelectedChanged(xmlElement*) const;
 
 protected:
   // methods for accessing the linker
   SmartPtr<Element> linkerAssoc(xmlElement* el) const { return linker.assoc(el); }
+  xmlElement *linkerAssoc(SmartPtr<Element> &element) const { return linker.assoc(element); }
   void linkerAdd(xmlElement* el, Element* elem) const { linker.add(el, elem); }
   void linkerRemove(Element* elem) const { linker.remove(elem); }
 
   xmlElement *linkerSelectedAssoc(xmlElement *el) const { return linker.selectedAssoc(el); }
   void linkerSelectedAdd(xmlElement *el, xmlElement *el_style) const { linker.selectedAdd(el, el_style); }
-  void linkerSelectedRemove(xmlElement *el) const { linker.selectedRemove(el); }
+  bool linkerSelectedRemove(xmlElement *el) const { return linker.selectedRemove(el); }
+
+  void executeHandler(std::function<void (std::pair<xmlElement* const &, xmlElement* const &>)> handler) const
+  {
+      linker.executeHandler(handler);
+  }
+
+  void linkerSelectedClear(void) const { linker.selectedClear(); }
 
 private:
   mutable TemplateLinker<libxml2_Model> linker;

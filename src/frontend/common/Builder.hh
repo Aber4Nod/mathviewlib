@@ -36,6 +36,10 @@ public:
   virtual SmartPtr<class Element> getRootElement(void) const = 0;
   virtual void forgetElement(Element*) const = 0;
 
+  virtual void deleteSelectedElements() const = 0;
+
+  virtual void unselectElement(SmartPtr<Element> elem = nullptr) const = 0;
+
   void setLogger(const SmartPtr<class AbstractLogger>&);
   SmartPtr<class AbstractLogger> getLogger(void) const;
 

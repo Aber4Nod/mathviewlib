@@ -54,6 +54,7 @@ public:
   void insertElementCursor(void);
   void insertInnerElementCursor(int32_t index);
   void setSelected(void);
+  void clearV_Area(void) { v_area.clear(); };
   int32_t normalizeGlyphAreaIndex(AreaRef area, int32_t index);
   
 private:

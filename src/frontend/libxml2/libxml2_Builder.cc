@@ -63,7 +63,7 @@ libxml2_Builder::setRootModelElement(xmlElement* el)
 }
 
 bool
-libxml2_Builder::notifyStructureChanged(xmlElement* target)
+libxml2_Builder::notifyStructureChanged(xmlElement* target) const
 {
   if (SmartPtr<Element> elem = findSelfOrAncestorElement(target))
     {
@@ -72,6 +72,20 @@ libxml2_Builder::notifyStructureChanged(xmlElement* target)
       return true;
     }
   else
+    return false;
+}
+
+bool
+libxml2_Builder::notifySelectedChanged(xmlElement* target) const
+{
+    if (SmartPtr<Element> elem = findSelfOrAncestorElement(target))
+    {
+        if (elem->selectedSet())
+            elem->resetSelected();
+        else
+            elem->setSelected();
+        return true;
+    }
     return false;
 }
 

@@ -2058,12 +2058,18 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
-        if (_elem->selectedSet() && !this->linkerSelectedAssoc(iter.element()))
-        {
-            typename Model::Element prev_element = iter.insertParent(el);
-            Model::setAttribute(iter.element(), "mathbackground", "#005a9c60");
-            this->linkerSelectedAdd(prev_element, iter.element());
-            _elem = getMathMLElement(iter.element());
+        if (_elem->selectedSet()) {
+            std::cout << "selected set was found" << std::endl;
+            if (!this->linkerSelectedAssoc(iter.element()))
+            {
+                typename Model::Element prev_element = iter.insertParent(el);
+                Model::setAttribute(iter.element(), "mathbackground", "#005a9c60");
+                this->linkerSelectedAdd(prev_element, iter.element());
+                _elem = getMathMLElement(iter.element());
+            }
+            else {
+                std::cout << "selected set was exist in linker selected assoc" << std::endl;
+            }
         }
         else
         if (_elem->deleteSet() && _elem->cursorSet())
@@ -2454,6 +2460,41 @@ public:
 	if (ns == MATHML_NS_URI) return getMathMLElement(root);
       }
     return 0;
+  }
+
+  void
+  deleteSelectedElements() const
+  {
+      this->executeHandler([*this](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
+          if (typename Model::Node parent = Model::getParent(Model::asNode(pairs.second)))
+              this->notifyStructureChanged(Model::asElement(parent));
+          else
+              this->notifyStructureChanged(this->getRootModelElement());
+          Model::unlinkNode(Model::asNode(pairs.second));
+          Model::freeNode(Model::asNode(pairs.second));
+      });
+      this->linkerSelectedClear();
+  }
+
+  void
+  unselectElement(SmartPtr<Element> elem = nullptr) const
+  {
+      if (!elem)
+      {
+          this->executeHandler([*this](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
+              Model::replaceNode(Model::asNode(pairs.second), Model::asNode(pairs.first));
+              this->notifySelectedChanged(pairs.first);
+              Model::freeNode(Model::asNode(pairs.second));
+          });
+          this->linkerSelectedClear();
+          return;
+      }
+
+      typename Model::Element element = this->linkerAssoc(elem);
+      Model::replaceNode(Model::asNode(this->linkerSelectedAssoc(element)), Model::asNode(element));
+      this->notifySelectedChanged(element);
+      Model::freeNode(Model::asNode(this->linkerSelectedAssoc(element)));
+      this->linkerSelectedRemove(element);
   }
 
 private:
