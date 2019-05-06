@@ -43,6 +43,7 @@ public:
 
   virtual bool copyElement() const = 0;
   virtual bool isCopiedElement() const = 0;
+  virtual void presetModelParentRow(SmartPtr<Element> _element) const = 0;
 
   void setLogger(const SmartPtr<class AbstractLogger>&);
   SmartPtr<class AbstractLogger> getLogger(void) const;

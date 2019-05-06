@@ -49,9 +49,11 @@ public:
   {
       typename Model::Element xml_element = element();
       typename Model::Node node = Model::createNode(Model::getNodeNamespace(Model::asNode(xml_element)), Model::getNodeName(Model::asNode(xml_element)));
-      Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
+      if (hasValidNodeNext(xml_element))
+          Model::setNextSibling(node, Model::getNextSibling(Model::asNode(xml_element)));
       Model::setParent(node, Model::asNode(el));
-      Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
+      if (hasValidNodePrev(xml_element))
+          Model::setNextSibling(Model::getPrevSibling(Model::asNode(xml_element)), node);
       // Model::setPrevSibling(node, Model::getPrevSibling(Model::asNode(xml_element))); // todo useless because of insertPrevSibling
       Model::insertPrevSibling(Model::asNode(xml_element), node);
       Model::setNodeValue(node, value);

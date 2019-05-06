@@ -580,7 +580,10 @@ View::moveCursorLeft()
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
     if (_elem->decreaseCursorPosition() == -1)
+    {
+        builder->presetModelParentRow(_elem);
         _elem->setMovePrev();
+    }
 }
 
 void
@@ -589,6 +592,7 @@ View::moveCursorRight()
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
     if (_elem->increaseCursorPosition() == -1) {
         std::cout << "[View::moveCursorRight]" << std::endl;
+        builder->presetModelParentRow(_elem);
         _elem->setMoveNext();
     }
 }
@@ -683,6 +687,7 @@ View::insertCopiedElement() const
     if (_elem == nullptr)
         return false;
 
+    builder->presetModelParentRow(_elem);
     std::cout << "setting insert copied! " << _elem << std::endl;
     _elem->setInsertCopied();
     std::cout << "insert copied setted! " << _elem << std::endl;

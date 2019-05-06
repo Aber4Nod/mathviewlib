@@ -2192,7 +2192,9 @@ protected:
             if (strAfterCursor.length())
             {
                 String strBeforeCursor = cur_element->GetRawContentBeforeCursor();
-                iter.updateCurrent(el, strBeforeCursor);
+                // iter.updateCurrent(el, strBeforeCursor);
+                Model::setNodeValue(Model::asNode(iter.element()), strBeforeCursor);
+                cur_element->resetCursor();
                 _elem = getMathMLElement(iter.element());
                 _elem->setSplitSet();
             }
@@ -2543,6 +2545,21 @@ public:
 
       Model::setAttribute(Model::asElement(newParentNode), "mathbackground", "#005a9c60");
       this->linkerSelectedAdd(elem, Model::asElement(newParentNode));
+  }
+
+  void
+  presetModelParentRow(SmartPtr<Element> _element) const
+  {
+      typename Model::Element elem = this->linkerAssoc(_element);
+      typename Model::Node parentNode = Model::getParent(Model::asNode(elem));
+      if (!Model::getNodeName(parentNode).compare("mrow"))
+          return;
+
+      typename Model::Node newParentNode = Model::createNewChild(parentNode,
+            Model::getNodeNamespace(parentNode),
+            Model::toModelString("mrow"), Model::toModelString(""));
+      Model::replaceNode(Model::asNode(elem), newParentNode);
+      Model::insertChild(newParentNode, Model::asNode(elem));
   }
 
 private:
