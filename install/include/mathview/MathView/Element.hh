@@ -80,6 +80,7 @@ public:
   virtual void setMoveDown(void);
   virtual void setSplitSet(void);
   virtual void setSelected(void);
+  virtual void setInsertCopied(void);
 
   void resetSelected(void)
   {
@@ -111,6 +112,7 @@ public:
   bool movePrevSet(void) const { return getFlag(FMovePrev); }
   bool rawRowSet(void) const { return getFlag(FRawRowElement); }
   bool selectedSet(void) const { return getFlag(FSelected); }
+  bool insertCopiedSet(void) const { return getFlag(FInsertCopied); }
 
   bool moveNextIn(void) const { return getFlag(FMoveNextIn); }
   bool moveNextOut(void) const { return getFlag(FMoveNextOut); }
@@ -151,6 +153,7 @@ public:
     FMoveDown,
     FSplitSet,
     FSelected,
+    FInsertCopied,
 
     FUnusedFlag       // Just to know how many flags we use without having to count them
   };

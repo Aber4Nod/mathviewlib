@@ -257,3 +257,18 @@ Qt_RenderArea::deleteSelectedElements()
     m_view->deleteSelectedElements();
     repaint();
 }
+
+void
+Qt_RenderArea::copyElement()
+{
+    if (!m_view->copyElement())
+        qDebug() << "copying of element failed";
+}
+
+void
+Qt_RenderArea::insertCopiedElement()
+{
+    if (!m_view->insertCopiedElement())
+        qDebug() << "insertion of copied element failed";
+    repaint();
+}

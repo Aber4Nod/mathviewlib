@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Qt_RenderArea_t {
-    QByteArrayData data[11];
-    char stringdata0[105];
+    QByteArrayData data[13];
+    char stringdata0[137];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,12 +41,15 @@ QT_MOC_LITERAL(6, 52, 5), // "close"
 QT_MOC_LITERAL(7, 58, 6), // "insert"
 QT_MOC_LITERAL(8, 65, 11), // "std::string"
 QT_MOC_LITERAL(9, 77, 4), // "name"
-QT_MOC_LITERAL(10, 82, 22) // "deleteSelectedElements"
+QT_MOC_LITERAL(10, 82, 22), // "deleteSelectedElements"
+QT_MOC_LITERAL(11, 105, 11), // "copyElement"
+QT_MOC_LITERAL(12, 117, 19) // "insertCopiedElement"
 
     },
     "Qt_RenderArea\0slotNew\0\0slotLoad\0"
     "slotSave\0slotSaveAs\0close\0insert\0"
-    "std::string\0name\0deleteSelectedElements"
+    "std::string\0name\0deleteSelectedElements\0"
+    "copyElement\0insertCopiedElement"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +59,7 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,13 +67,15 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x0a /* Public */,
-       3,    0,   50,    2, 0x0a /* Public */,
-       4,    0,   51,    2, 0x0a /* Public */,
-       5,    0,   52,    2, 0x0a /* Public */,
-       6,    0,   53,    2, 0x0a /* Public */,
-       7,    1,   54,    2, 0x0a /* Public */,
-      10,    0,   57,    2, 0x0a /* Public */,
+       1,    0,   59,    2, 0x0a /* Public */,
+       3,    0,   60,    2, 0x0a /* Public */,
+       4,    0,   61,    2, 0x0a /* Public */,
+       5,    0,   62,    2, 0x0a /* Public */,
+       6,    0,   63,    2, 0x0a /* Public */,
+       7,    1,   64,    2, 0x0a /* Public */,
+      10,    0,   67,    2, 0x0a /* Public */,
+      11,    0,   68,    2, 0x0a /* Public */,
+      12,    0,   69,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -79,6 +84,8 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 8,    9,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -97,6 +104,8 @@ void Qt_RenderArea::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 4: _t->close(); break;
         case 5: _t->insert((*reinterpret_cast< std::string(*)>(_a[1]))); break;
         case 6: _t->deleteSelectedElements(); break;
+        case 7: _t->copyElement(); break;
+        case 8: _t->insertCopiedElement(); break;
         default: ;
         }
     }
@@ -127,13 +136,13 @@ int Qt_RenderArea::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

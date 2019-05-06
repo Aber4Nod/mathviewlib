@@ -69,6 +69,8 @@ public slots:
     void close();
     void insert(std::string name);
     void deleteSelectedElements();
+    void copyElement();
+    void insertCopiedElement();
 };
 
 #endif // Qt_RenderArea_hh

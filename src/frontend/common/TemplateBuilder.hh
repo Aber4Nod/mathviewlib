@@ -2058,20 +2058,6 @@ protected:
     content.clear();
     for (typename Model::ElementIterator iter(el, MATHML_NS_URI); iter.more(); iter.next()) {
         SmartPtr<MathMLElement> _elem = getMathMLElement(iter.element());
-        if (_elem->selectedSet()) {
-            std::cout << "selected set was found" << std::endl;
-            if (!this->linkerSelectedAssoc(iter.element()))
-            {
-                typename Model::Element prev_element = iter.insertParent(el);
-                Model::setAttribute(iter.element(), "mathbackground", "#005a9c60");
-                this->linkerSelectedAdd(prev_element, iter.element());
-                _elem = getMathMLElement(iter.element());
-            }
-            else {
-                std::cout << "selected set was exist in linker selected assoc" << std::endl;
-            }
-        }
-        else
         if (_elem->deleteSet() && _elem->cursorSet())
         {
             _elem->resetFlag(Element::FDeleteSet);
@@ -2186,7 +2172,7 @@ protected:
             }
         }
         else
-        if (_elem->cursorSet() && !smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty())
+        if (_elem->cursorSet() && (!smart_cast<MathMLTokenElement>(_elem)->getInsertElementName().empty() || _elem->insertCopiedSet()))
         {
             // TODO if cursor is in element (i.e. mi) and index is not in last node (and not last pos in it node) -> than change the logic below to split current element and insert new element in this place
             // if the conditions are not like described upper -> than logic below is true
@@ -2194,6 +2180,13 @@ protected:
             SmartPtr<MathMLTokenElement> cur_element = smart_cast<MathMLTokenElement>(_elem);
             std::string name = smart_cast<MathMLTokenElement>(_elem)->getInsertElementName();
             cur_element->setInsertElementName("");
+
+            typename Model::Node node_table = nullptr;
+            if (_elem->insertCopiedSet())
+            {
+                node_table = Model::copyNode(Model::asNode(this->linkerGetCopiedElement()), 1);
+                _elem->resetFlag(Element::FInsertCopied);
+            }
 
             String strAfterCursor = cur_element->GetRawContentAfterCursor();
             if (strAfterCursor.length())
@@ -2204,19 +2197,21 @@ protected:
                 _elem->setSplitSet();
             }
 
-            typename MathMLBuilderMap::const_iterator m = mathmlMap.find(name);
-            typename Model::Node node_table;
-            typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
+            if (!node_table)
+            {
+                typename MathMLBuilderMap::const_iterator m = mathmlMap.find(name);
+                typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
+                _elem->resetFlag(MathMLActionElement::FCursorSet);
+                cur_element->setNodeIndex(-1);
+                cur_element->setNodeContentIndex(-1);
+
+                SmartPtr<MathMLTokenElement> token_elem = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
+                token_elem->setFlag(MathMLActionElement::FCursorSet);
+                token_elem->setNodeIndex(0);
+                token_elem->setNodeContentIndex(-1);
+            }
 
             Model::insertNextSibling(Model::asNode(iter.element()), node_table);
-            _elem->resetFlag(MathMLActionElement::FCursorSet);
-            cur_element->setNodeIndex(-1);
-            cur_element->setNodeContentIndex(-1);
-
-            SmartPtr<MathMLTokenElement> token_elem = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
-            token_elem->setFlag(MathMLActionElement::FCursorSet);
-            token_elem->setNodeIndex(0);
-            token_elem->setNodeContentIndex(-1);
 
             if (strAfterCursor.length())
             {
@@ -2465,7 +2460,7 @@ public:
   void
   deleteSelectedElements() const
   {
-      this->executeHandler([*this](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
+      this->executeSelectedHandler([*this](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
           if (typename Model::Node parent = Model::getParent(Model::asNode(pairs.second)))
               this->notifyStructureChanged(Model::asElement(parent));
           else
@@ -2481,7 +2476,7 @@ public:
   {
       if (!elem)
       {
-          this->executeHandler([*this](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
+          this->executeSelectedHandler([*this](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
               Model::replaceNode(Model::asNode(pairs.second), Model::asNode(pairs.first));
               this->notifySelectedChanged(pairs.first);
               Model::freeNode(Model::asNode(pairs.second));
@@ -2495,6 +2490,59 @@ public:
       this->notifySelectedChanged(element);
       Model::freeNode(Model::asNode(this->linkerSelectedAssoc(element)));
       this->linkerSelectedRemove(element);
+  }
+
+  bool
+  copyElement() const
+  {
+      uint8_t selectedNumber = 0;
+      this->executeSelectedHandler([*this, &selectedNumber](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
+          ++selectedNumber;
+      });
+
+      // more than one element was selected -> returning false
+      if (selectedNumber != 1)
+          return false;
+
+      typename Model::Element elem;
+      this->executeSelectedHandler([*this, &elem](std::pair<typename Model::Element const &, typename Model::Element const &> pairs) {
+          elem = pairs.first;
+      });
+      this->linkerSetCopiedElement(Model::asElement(Model::copyNode(Model::asNode(elem), 1)));
+      unselectElement(this->linkerAssoc(elem));
+      return true;
+  }
+
+  bool
+  isCopiedElement() const
+  {
+      return this->linkerIsCopiedElement();
+  }
+
+  void
+  selectElement() const
+  {
+      typename Model::Element elem = this->findHandler(
+         [*this](
+              std::pair<SmartPtr<Element>,
+              typename Model::Element const &> pairs
+          ) {
+              return pairs.first->selectedSet() && !this->linkerSelectedAssoc(pairs.second);
+      });
+
+      if (!elem)
+          return;
+
+      typename Model::Node parentNode = Model::getParent(Model::asNode(elem));
+      typename Model::Node newParentNode = Model::createNewChild(parentNode,
+            Model::getNodeNamespace(parentNode),
+            Model::toModelString("mstyle"), Model::toModelString(""));
+
+      Model::replaceNode(Model::asNode(elem), newParentNode);
+      Model::insertChild(newParentNode, Model::asNode(elem));
+
+      Model::setAttribute(Model::asElement(newParentNode), "mathbackground", "#005a9c60");
+      this->linkerSelectedAdd(elem, Model::asElement(newParentNode));
   }
 
 private:

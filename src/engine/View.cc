@@ -658,12 +658,33 @@ View::selectElement(const scaled& x, const scaled& y) const
             wrappedElem->setSelected();
             wrappedElem->setDirtyLayout();
             wrappedElem->setDirtyStructure();
-            return true;
         }
         else
-        {
             area->getGlyphArea()->getParent()->getParent()->getNode()->setSelected();
-        }
+        builder->selectElement();
+        return true;
     }
     return false;
+}
+
+bool
+View::copyElement() const
+{
+    return builder->copyElement();
+}
+
+bool
+View::insertCopiedElement() const
+{
+    if (!builder->isCopiedElement())
+        return false;
+
+    MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
+    if (_elem == nullptr)
+        return false;
+
+    std::cout << "setting insert copied! " << _elem << std::endl;
+    _elem->setInsertCopied();
+    std::cout << "insert copied setted! " << _elem << std::endl;
+    return true;
 }

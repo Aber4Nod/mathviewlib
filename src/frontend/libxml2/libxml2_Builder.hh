@@ -61,12 +61,27 @@ protected:
   void linkerSelectedAdd(xmlElement *el, xmlElement *el_style) const { linker.selectedAdd(el, el_style); }
   bool linkerSelectedRemove(xmlElement *el) const { return linker.selectedRemove(el); }
 
-  void executeHandler(std::function<void (std::pair<xmlElement* const &, xmlElement* const &>)> handler) const
+  xmlElement*
+  findHandler(std::function<bool (std::pair<class Element*, xmlElement* const &>) > handler) const
+  {
+      return linker.findHandler(handler);
+  }
+
+  void executeHandler(std::function<void (std::pair<class Element*, xmlElement* const &>)> handler) const
   {
       linker.executeHandler(handler);
   }
 
+  void executeSelectedHandler(std::function<void (std::pair<xmlElement* const &, xmlElement* const &>)> handler) const
+  {
+      linker.executeSelectedHandler(handler);
+  }
+
   void linkerSelectedClear(void) const { linker.selectedClear(); }
+  void linkerSetCopiedElement(xmlElement *el) const { linker.setCopiedELement(el); }
+
+  bool linkerIsCopiedElement() const { return linker.isCopiedElement(); }
+  xmlElement* linkerGetCopiedElement() const { return linker.getCopiedElement(); }
 
 private:
   mutable TemplateLinker<libxml2_Model> linker;

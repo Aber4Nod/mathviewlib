@@ -78,6 +78,22 @@ public:
       return false;
   }
 
+  ELEMENT
+  findHandler(std::function<bool (std::pair<class Element*, const ELEMENT&>) > handler) const
+  {
+      auto iter = std::find_if(backwardMap.begin(), backwardMap.end(), handler);
+      if (iter == backwardMap.end())
+          return nullptr;
+
+      return iter->second;
+  }
+
+  void
+  executeHandler(std::function<void (std::pair<class Element*, const ELEMENT&>) > handler) const
+  {
+      std::for_each(backwardMap.begin(), backwardMap.end(), handler);
+  }
+
   bool
   selectedRemove(const ELEMENT& el)
   {
@@ -140,7 +156,7 @@ public:
   }
 
   void
-  executeHandler(std::function<void (std::pair<const ELEMENT&, const ELEMENT&>) > handler) const
+  executeSelectedHandler(std::function<void (std::pair<const ELEMENT&, const ELEMENT&>) > handler) const
   {
       std::for_each(selectedMap.begin(), selectedMap.end(), handler);
   }
@@ -149,6 +165,21 @@ public:
   selectedClear()
   {
       selectedMap.clear();
+  }
+
+  void setCopiedELement(const ELEMENT& el)
+  {
+      copiedElement = el;
+  }
+
+  bool isCopiedElement()
+  {
+      return (copiedElement) ? true : false;
+  }
+
+  ELEMENT getCopiedElement()
+  {
+      return copiedElement;
   }
 
 protected:
@@ -164,6 +195,7 @@ protected:
   typedef std::unordered_map<ELEMENT, class Element*, typename Model::Hash> ForwardMap;
   typedef std::unordered_map<class Element*, ELEMENT, Element_hash> BackwardMap;
   typedef std::unordered_map<ELEMENT, ELEMENT, typename Model::Hash> SelectedMap;
+  ELEMENT copiedElement;
   SelectedMap selectedMap;
   ForwardMap forwardMap;
   BackwardMap backwardMap;

@@ -39,6 +39,10 @@ public:
   virtual void deleteSelectedElements() const = 0;
 
   virtual void unselectElement(SmartPtr<Element> elem = nullptr) const = 0;
+  virtual void selectElement() const = 0;
+
+  virtual bool copyElement() const = 0;
+  virtual bool isCopiedElement() const = 0;
 
   void setLogger(const SmartPtr<class AbstractLogger>&);
   SmartPtr<class AbstractLogger> getLogger(void) const;

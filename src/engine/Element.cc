@@ -304,6 +304,15 @@ Element::setSelected()
 }
 
 void
+Element::setInsertCopied()
+{
+    if (!(insertCopiedSet()))
+        setFlag(FInsertCopied);
+    setDirtyStructure();
+    setDirtyLayout();
+}
+
+void
 Element::setDirtyAttribute()
 {
   //std::cerr << "Element::setDirtyAttribute " << this << " " << dirtyAttribute() << std::endl;

@@ -112,6 +112,9 @@ public:
   bool selectElement(const scaled&, const scaled&) const;
   void deleteSelectedElements() const;
 
+  bool copyElement() const;
+  bool insertCopiedElement() const;
+
 protected:
   SmartPtr<const class Area> getRootArea(void) const;
   SmartPtr<const class Area> formatElement(const SmartPtr<class Element>&) const;

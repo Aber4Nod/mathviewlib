@@ -109,11 +109,16 @@ main(int argc, char *argv[])
     QMenu *pmnuDeletion = new QMenu("&Delete");
     ra->connect(pmnuDeletion->addAction("&DeleteSelected"),  &QAction::triggered, ra, [ra]{ ra->deleteSelectedElements(); });
 
+    QMenu *pmnuCopy = new QMenu("&Copy");
+    ra->connect(pmnuCopy->addAction("&CopySelected"),  &QAction::triggered, ra, [ra]{ ra->copyElement(); });
+    ra->connect(pmnuCopy->addAction("&InsertSelected"),  &QAction::triggered, ra, [ra]{ ra->insertCopiedElement(); });
+
     QMenuBar* menuBar = new QMenuBar();
 
     menuBar->addMenu(pmnuFile);
     menuBar->addMenu(pmnuInsertion);
     menuBar->addMenu(pmnuDeletion);
+    menuBar->addMenu(pmnuCopy);
     layout->setMenuBar(menuBar);
 
     QPalette Pal;
