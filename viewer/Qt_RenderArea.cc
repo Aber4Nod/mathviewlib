@@ -110,7 +110,8 @@ void Qt_RenderArea::mousePressEvent(QMouseEvent *event)
 
         if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
         {
-            m_view->selectElement(pos.x(), pos.y());
+            if (!m_view->selectElement(pos.x(), pos.y()))
+                qDebug() << "selectelement returned false";
             repaint();
         }
         else

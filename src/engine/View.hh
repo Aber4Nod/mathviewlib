@@ -96,6 +96,7 @@ public:
   Element *getElementByFlag(Element::Flags) const;
   int32_t insertElementAfterCursor(char c) const;
   int32_t insertElementAfterCursor(std::string name) const;
+  SmartPtr<Element> getElementAtPos(const scaled&, const scaled&) const;
 
   int32_t insertGlyphAfterCursor(char);
   void deleteGLyphBeforeCursor();
@@ -110,10 +111,13 @@ public:
   void stepCursorDown(void);
 
   bool selectElement(const scaled&, const scaled&) const;
+  bool isSelectedElement(SmartPtr<Element> _element) const;
   void deleteSelectedElements() const;
 
   bool copyElement() const;
   bool insertCopiedElement() const;
+
+  void unselectElement(SmartPtr<Element> _element) const;
 
 protected:
   SmartPtr<const class Area> getRootArea(void) const;

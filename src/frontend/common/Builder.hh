@@ -40,6 +40,7 @@ public:
 
   virtual void unselectElement(SmartPtr<Element> elem = nullptr) const = 0;
   virtual void selectElement() const = 0;
+  virtual bool isSelectedElement(SmartPtr<Element> _element) const = 0;
 
   virtual bool copyElement() const = 0;
   virtual bool isCopiedElement() const = 0;

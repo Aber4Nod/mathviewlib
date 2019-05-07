@@ -647,34 +647,57 @@ View::stepCursorDown()
     _elem->setMoveDown();
 }
 
-bool
-View::selectElement(const scaled& x, const scaled& y) const
+SmartPtr<Element>
+View::getElementAtPos(const scaled& x, const scaled& y) const
 {
     AreaRef area = getAreaAt(x, y);
-    if (area)
-    {
-        std::cout << "[View::selectElement]:found area: " << std::endl;
-        const WrapperArea *wrapperArea = smart_cast<const WrapperArea>(area);
-        if (wrapperArea)
-        {
-            SmartPtr<Element> wrappedElem = wrapperArea->getElement();
-            std::cout << "[View::selectElement]:testing wrapperElem: " << wrappedElem << std::endl;
-            wrappedElem->setSelected();
-            wrappedElem->setDirtyLayout();
-            wrappedElem->setDirtyStructure();
-        }
-        else
-            area->getGlyphArea()->getParent()->getParent()->getNode()->setSelected();
-        builder->selectElement();
-        return true;
-    }
-    return false;
+    if (!area)
+        return nullptr;
+
+    SmartPtr<Element> _element;
+    const WrapperArea *wrapperArea = smart_cast<const WrapperArea>(area);
+    if (wrapperArea)
+        _element = wrapperArea->getElement();
+    else
+        _element = area->getGlyphArea()->getParent()->getParent()->getNode()->getParentElement();
+    return _element;
 }
 
 bool
 View::copyElement() const
 {
     return builder->copyElement();
+}
+
+bool
+View::isSelectedElement(SmartPtr<Element> _element) const
+{
+    return builder->isSelectedElement(_element);
+}
+
+void
+View::unselectElement(SmartPtr<Element> _element) const
+{
+    builder->unselectElement(_element);
+}
+
+bool
+View::selectElement(const scaled& x, const scaled& y) const
+{
+    SmartPtr<Element> _element = getElementAtPos(x, y);
+    if (!_element)
+        return false;
+
+    if (isSelectedElement(_element)) {
+        unselectElement(_element);
+        return true;
+    }
+
+    _element->setSelected();
+    _element->setDirtyLayout();
+    _element->setDirtyStructure();
+    builder->selectElement();
+    return true;
 }
 
 bool

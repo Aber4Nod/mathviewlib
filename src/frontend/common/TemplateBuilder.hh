@@ -2521,6 +2521,16 @@ public:
       return this->linkerIsCopiedElement();
   }
 
+  bool
+  isSelectedElement(SmartPtr<Element> _element) const
+  {
+      typename Model::Element elem = this->linkerAssoc(_element);
+      if (!elem)
+          return false;
+
+      return this->linkerSelectedAssoc(elem);
+  }
+
   void
   selectElement() const
   {
