@@ -71,6 +71,7 @@ public slots:
     void deleteSelectedElements();
     void copyElement();
     void insertCopiedElement();
+    void unselectAllElements();
 };
 
 #endif // Qt_RenderArea_hh

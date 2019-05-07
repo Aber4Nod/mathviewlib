@@ -700,6 +700,12 @@ View::selectElement(const scaled& x, const scaled& y) const
     return true;
 }
 
+void
+View::unselectAllElements() const
+{
+    builder->unselectElement();
+}
+
 bool
 View::insertCopiedElement() const
 {

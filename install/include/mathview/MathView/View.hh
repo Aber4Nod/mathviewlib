@@ -118,6 +118,7 @@ public:
   bool insertCopiedElement() const;
 
   void unselectElement(SmartPtr<Element> _element) const;
+  void unselectAllElements() const;
 
 protected:
   SmartPtr<const class Area> getRootArea(void) const;

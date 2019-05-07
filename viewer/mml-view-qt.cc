@@ -112,6 +112,7 @@ main(int argc, char *argv[])
     QMenu *pmnuCopy = new QMenu("&Copy");
     ra->connect(pmnuCopy->addAction("&CopySelected"),  &QAction::triggered, ra, [ra]{ ra->copyElement(); });
     ra->connect(pmnuCopy->addAction("&InsertSelected"),  &QAction::triggered, ra, [ra]{ ra->insertCopiedElement(); });
+    ra->connect(pmnuCopy->addAction("&UnselectAllElements"),  &QAction::triggered, ra, [ra]{ ra->unselectAllElements(); });
 
     QMenuBar* menuBar = new QMenuBar();
 

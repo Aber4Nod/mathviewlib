@@ -273,3 +273,9 @@ Qt_RenderArea::insertCopiedElement()
         qDebug() << "insertion of copied element failed";
     repaint();
 }
+
+void
+Qt_RenderArea::unselectAllElements()
+{
+    m_view->unselectAllElements();
+}
