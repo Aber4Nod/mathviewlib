@@ -2467,6 +2467,8 @@ public:
               this->notifyStructureChanged(Model::asElement(parent));
           else
               this->notifyStructureChanged(this->getRootModelElement());
+
+          this->notifySelectedChanged(pairs.first);
           Model::unlinkNode(Model::asNode(pairs.second));
           Model::freeNode(Model::asNode(pairs.second));
       });

@@ -56,6 +56,7 @@ protected:
   xmlElement *linkerAssoc(SmartPtr<Element> &element) const { return linker.assoc(element); }
   void linkerAdd(xmlElement* el, Element* elem) const { linker.add(el, elem); }
   void linkerRemove(Element* elem) const { linker.remove(elem); }
+  void linkerRemove(xmlElement* el) const { linker.remove(el); }
 
   xmlElement *linkerSelectedAssoc(xmlElement *el) const { return linker.selectedAssoc(el); }
   void linkerSelectedAdd(xmlElement *el, xmlElement *el_style) const { linker.selectedAdd(el, el_style); }

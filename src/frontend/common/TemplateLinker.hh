@@ -45,8 +45,8 @@ public:
   void
   selectedAdd(const ELEMENT& el, const ELEMENT& el_style)
   {
-      assert(el);
-      assert(el_style);
+      // assert(el);
+      // assert(el_style);
       selectedMap[el] = el_style;
   }
 
