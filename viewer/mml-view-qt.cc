@@ -169,6 +169,8 @@ main(int argc, char *argv[])
             "height: 13px;"
         "}"
       );
+
+    // Sign actions ------------------------------------------------------------
     QToolBar *firstToolBar = new QToolBar("First Toolbar");
     QMenu *alignMenu = new QMenu("signs");
     alignMenu->setStyleSheet(menuStyle);
@@ -178,7 +180,6 @@ main(int argc, char *argv[])
     saveButton->setPopupMode(QToolButton::InstantPopup);
     saveButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
-    // Sign actions
     addSubMenuExt(ra, alignMenu, menuStyle, {
         {"\u227A", "\u227B", "\u22B2", "\u22B3"},
         {"\u007E", "\u2248", "\u2243", "\u2245"},
@@ -194,7 +195,9 @@ main(int argc, char *argv[])
     saveButton->setDefaultAction(insertSign);
     firstToolBar->addWidget(saveButton);
 
-    // fenced braces -----------------------------------------------------------
+    // Sign actions ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // Fenced braces -----------------------------------------------------------
     QToolBar *secondToolBar = new QToolBar;
     QMenu *bracesMenu = new QMenu("braces");
     bracesMenu->setStyleSheet(menuStyle);
@@ -282,8 +285,59 @@ main(int argc, char *argv[])
         }},
     });
     secondToolBar->addWidget(secondButton);
-    // fenced braces ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // Fenced braces ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    // Operator symbols --------------------------------------------------------
+    QMenu *operatorMenu = new QMenu;
+    operatorMenu->setStyleSheet(menuStyle);
+
+    QToolButton *thirdButton = new QToolButton;
+    thirdButton->setMenu(operatorMenu);
+    thirdButton->setPopupMode(QToolButton::InstantPopup);
+    thirdButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, operatorMenu, menuStyle, {
+        {"\u2213", "\u2213", "\u2219", "\u203A"},
+        {"\u00D7", "\u2297", "\u2022", "\u301A"},
+        {"\u002A", "\u2299", "\u2218", "\u301B"},
+    });
+    addToolBarActionsExt(ra, operatorMenu, {
+        "\u00B1", "\u00F7", "\u22C5", "\u2329",
+    });
+
+    QAction *operators = new QAction("operators");
+    operators->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/operators.png"));
+    thirdButton->setDefaultAction(operators);
+    firstToolBar->addWidget(thirdButton);
+
+    // Operator symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // Arrors symbols ----------------------------------------------------------
+    QMenu *arrorsMenu = new QMenu;
+    arrorsMenu->setStyleSheet(menuStyle);
+
+    QToolButton *fourthButton = new QToolButton;
+    fourthButton->setMenu(arrorsMenu);
+    fourthButton->setPopupMode(QToolButton::InstantPopup);
+    fourthButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, arrorsMenu, menuStyle, {
+        {"\u2192", "\u21D2", "\u2197", "\u2942", "\u21B5"},
+        {"\u2190", "\u21D0", "\u2199", "\u2944"},
+        {"\u2195", "\u21D5", "\u2921", "\u21CC"},
+        {"\u2191", "\u21D1", "\u2198", "\u2962"},
+        {"\u2193", "\u21D3", "\u2196", "\u2964"},
+    });
+    addToolBarActionsExt(ra, arrorsMenu, {
+        "\u2194", "\u21D4", "\u2922", "\u21C4", "\u21A6",
+    });
+
+    QAction *arrows = new QAction("arrows");
+    arrows->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/arrows.png"));
+    fourthButton->setDefaultAction(arrows);
+    firstToolBar->addWidget(fourthButton);
+
+    // Arrors symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
