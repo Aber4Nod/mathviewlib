@@ -19,7 +19,7 @@
 //
 // You should have received a copy of the LGPL and of the GPL along with
 // this program in the files COPYING-LGPL-3 and COPYING-GPL-2; if not, see
-// <http://www.gnu.org/licenses/>.
+// <http://www.gnu.org/liczenses/>.
 
 #include <config.h>
 #include <QRawFont>

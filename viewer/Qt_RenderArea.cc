@@ -143,7 +143,7 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
     {
         // if (m_view->insertElementAfterCursor(std::tolower(key)))
             // repaint();
-        m_view->insertGlyphAfterCursor(std::tolower(key));
+        m_view->insertGlyphAfterCursor(std::string(1, std::tolower(key)));
         repaint();
     }
     else
@@ -278,4 +278,11 @@ void
 Qt_RenderArea::unselectAllElements()
 {
     m_view->unselectAllElements();
+}
+
+void 
+Qt_RenderArea::insertGlyphAfter(std::basic_string<char> glyph)
+{
+    m_view->insertGlyphAfterCursor(glyph);
+    repaint();
 }

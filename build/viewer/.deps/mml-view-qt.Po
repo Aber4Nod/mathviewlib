@@ -365,7 +365,13 @@ mml-view-qt.o: ../../viewer/mml-view-qt.cc ../config.h \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qmenu.h \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qaction.h \
   /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qactiongroup.h \
-  /usr/local/Cellar/qt/5.11.2/include/QtCore/QObject
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/QToolBar \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qtoolbar.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtCore/QObject \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/QToolButton \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qtoolbutton.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qabstractbutton.h \
+  /usr/local/Cellar/qt/5.11.2/include/QtGui/QPixmap
 
 ../config.h:
 
@@ -1283,4 +1289,16 @@ mml-view-qt.o: ../../viewer/mml-view-qt.cc ../config.h \
 
 /usr/local/Cellar/qt/5.11.2/include/QtWidgets/qactiongroup.h:
 
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/QToolBar:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qtoolbar.h:
+
 /usr/local/Cellar/qt/5.11.2/include/QtCore/QObject:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/QToolButton:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qtoolbutton.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtWidgets/qabstractbutton.h:
+
+/usr/local/Cellar/qt/5.11.2/include/QtGui/QPixmap:

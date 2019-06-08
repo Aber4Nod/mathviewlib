@@ -34,7 +34,6 @@
 Qt_GlyphArea::Qt_GlyphArea(unsigned glyph, const QRawFont& templateRawFont, qreal size)
     : m_rawFont(templateRawFont)
 {
-    qDebug() << "setting pixel size: " << size;
     m_glyphRun.setGlyphIndexes(QVector<quint32>() << glyph);
     m_glyphRun.setPositions(QVector<QPointF>() << QPointF(0,0));
     m_rawFont.setPixelSize(size);

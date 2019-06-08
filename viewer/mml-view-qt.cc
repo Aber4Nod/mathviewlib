@@ -33,7 +33,14 @@
 #include <QVBoxLayout>
 #include <QPalette>
 #include <QMenuBar>
+#include <QToolBar>
 #include <QObject>
+#include <QToolButton>
+#include <QPixmap>
+
+QAction *addToolBarActions(Qt_RenderArea* ra, QMenu *alignMenu, std::basic_string<char> s);
+QAction *addToolBarActionsExt(Qt_RenderArea* ra, QMenu *alignMenu, std::vector<std::basic_string<char>> actions);
+void addSubMenuExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vector<std::vector<std::basic_string<char>>> actions);
 
 int
 main(int argc, char *argv[])
@@ -59,7 +66,7 @@ main(int argc, char *argv[])
     Qt_RenderArea* ra = new Qt_RenderArea(logger);
     // ra->loadURI(input_file.toUtf8());
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(ra);
+    // layout->addWidget(ra);
     QWidget* window = new QWidget();
 
     QMenu *pmnuFile = new QMenu("&File");
@@ -122,6 +129,70 @@ main(int argc, char *argv[])
     menuBar->addMenu(pmnuCopy);
     layout->setMenuBar(menuBar);
 
+    QToolBar *firstToolBar = new QToolBar("First Toolbar");
+    QMenu *alignMenu = new QMenu("signs");
+    QString  menuStyle(
+        "QMenu {"
+        "background-color: rgba(255,255,255, 0.7);"
+            "margin: 2px; /* some spacing around the menu */"
+        "}"
+        "QMenu::item {"
+            "color: black;"
+            "padding: 2px 25px 2px 20px;"
+            "border: 1px solid transparent; /* reserve space for selection border */"
+        "}"
+        "QMenu::item:selected {"
+            "border-color: darkblue;"
+            "background: rgba(100, 100, 100, 150);"
+        "}"
+        "QMenu::icon:checked { /* appearance of a 'checked' icon */"
+            "background: gray;"
+            "border: 1px inset gray;"
+            "position: absolute;"
+            "top: 1px;"
+            "right: 1px;"
+            "bottom: 1px;"
+            "left: 1px;"
+        "}"
+        "QMenu::separator {"
+            "height: 2px;"
+            "background: lightblue;"
+            "margin-left: 10px;"
+            "margin-right: 5px;"
+        "}"
+        "QMenu::indicator {"
+            "width: 13px;"
+            "height: 13px;"
+        "}"
+      );
+    alignMenu->setStyleSheet(menuStyle);
+
+    QToolButton *saveButton = new QToolButton();
+    saveButton->setMenu(alignMenu);
+    saveButton->setPopupMode(QToolButton::InstantPopup);
+    saveButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    // Sign actions
+    addSubMenuExt(ra, alignMenu, menuStyle, {
+        {"\u227A", "\u227B", "\u22B2", "\u22B3"},
+        {"\u007E", "\u2248", "\u2243", "\u2245"},
+        {"\u2260", "\u2261", "\u225C", "\u2259"},
+        {"\u2250", "\u221D"},
+    });
+    addToolBarActionsExt(ra, alignMenu, {
+        "\u2265", "\u2264", "\u226A", "\u226B",
+    });
+
+    QAction *insertSign = new QAction("Signs");
+    insertSign->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/signs.png"));
+    saveButton->setDefaultAction(insertSign);
+
+    firstToolBar->addWidget(saveButton);
+
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->addWidget(firstToolBar);
+    layout->addWidget(ra);
+
     QPalette Pal;
     Pal.setColor(QPalette::Background, Qt::white);
     window->setAutoFillBackground(true);
@@ -133,3 +204,36 @@ main(int argc, char *argv[])
     return a.exec();
 }
 
+QAction *
+addToolBarActions(Qt_RenderArea* ra, QMenu *alignMenu, std::basic_string<char> s)
+{
+    QAction *preceds = new QAction(QString::fromStdString(s), ra);
+    alignMenu->addAction(preceds);
+    ra->connect(preceds, &QAction::triggered, ra, [ra, s]{ ra->insertGlyphAfter(s); });
+    return preceds;
+}
+
+QAction *
+addToolBarActionsExt(Qt_RenderArea* ra, QMenu *alignMenu, std::vector<std::basic_string<char>> actions)
+{
+    QAction *defAct = addToolBarActions(ra, alignMenu, actions[0]);
+    actions.erase(actions.begin());
+    for (const auto & i : actions)
+        addToolBarActions(ra, alignMenu, i);
+    return defAct;
+}
+
+void
+addSubMenuExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vector<std::vector<std::basic_string<char>>> actions)
+{
+    if (actions.empty())
+        return;
+
+    QMenu *alignMenu2 = new QMenu("...");
+    std::vector<std::basic_string<char>> act = actions[0];
+    actions.erase(actions.begin());
+    addSubMenuExt(ra, alignMenu2, menuStyle, actions);
+    addToolBarActionsExt(ra, alignMenu2, act);
+    alignMenu2->setStyleSheet(menuStyle);
+    alignMenu->addMenu(alignMenu2);
+}

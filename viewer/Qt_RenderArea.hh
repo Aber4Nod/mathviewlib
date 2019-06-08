@@ -72,6 +72,7 @@ public slots:
     void copyElement();
     void insertCopiedElement();
     void unselectAllElements();
+    void insertGlyphAfter(std::basic_string<char>);
 };
 
 #endif // Qt_RenderArea_hh

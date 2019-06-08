@@ -150,7 +150,7 @@ MathMLOperatorElement::format(FormattingContext& ctxt)
       AreaRef res;
       if (stretchy && this == ctxt.getStretchOperator())
 	{
-	  // before stretchying the operator need to be formatted at
+	  // before ing the operator need to be formatted at
 	  // least once
 	  AreaRef minArea = getArea();
 	  assert(minArea);

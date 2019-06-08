@@ -401,7 +401,7 @@ View::deleteGlyph(const scaled& x, const scaled& y) const
 }
 
 int32_t
-View::insertGlyphAfter(const scaled& x, const scaled& y, char c) const
+View::insertGlyphAfter(const scaled& x, const scaled& y, std::basic_string<char> c) const
 {
     AreaRef area = getAreaAt(x, y);
     if (area)
@@ -540,7 +540,7 @@ View::insertElementAfterCursor(char c) const
     return 1;
 }
 
-int32_t 
+int32_t
 View::insertElementAfterCursor(std::string name) const
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
@@ -551,12 +551,14 @@ View::insertElementAfterCursor(std::string name) const
 }
 
 int32_t
-View::insertGlyphAfterCursor(char c)
+View::insertGlyphAfterCursor(std::basic_string<char> c)
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
-    _elem->insertGlyphAfterCursor(c);
-    _elem->setDirtyLayout();
-    _elem->setDirtyStructure();
+    if (_elem) {
+        _elem->insertGlyphAfterCursor(c);
+        _elem->setDirtyLayout();
+        _elem->setDirtyStructure();
+    }
 }
 
 void

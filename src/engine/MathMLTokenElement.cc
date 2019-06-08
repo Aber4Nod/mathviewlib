@@ -331,7 +331,7 @@ MathMLTokenElement::setCursorPosition(const SmartPtr<class MathMLTextNode>& node
 }
 
 void
-MathMLTokenElement::insertGlyphAfterCursor(char glyph)
+MathMLTokenElement::insertGlyphAfterCursor(std::basic_string<char> glyph)
 {
     uint32_t curIndex = 0;
     for (const auto & elem : content) {

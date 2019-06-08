@@ -46,7 +46,7 @@ public:
   virtual void     DeleteContent();
   
   void DeleteGlyph(uint32_t index);
-  void InsertGlyphAfter(int32_t index, char glyph);
+  void InsertGlyphAfter(int32_t index, std::basic_string<char> glyph);
   void InsertGlyphBefore(int32_t index, char glyph);
   void DeleteParentElement(void);
   void InsertElementAfter(void);

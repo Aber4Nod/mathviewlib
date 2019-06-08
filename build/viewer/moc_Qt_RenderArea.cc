@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Qt_RenderArea_t {
-    QByteArrayData data[14];
-    char stringdata0[157];
+    QByteArrayData data[16];
+    char stringdata0[198];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,14 +44,17 @@ QT_MOC_LITERAL(9, 77, 4), // "name"
 QT_MOC_LITERAL(10, 82, 22), // "deleteSelectedElements"
 QT_MOC_LITERAL(11, 105, 11), // "copyElement"
 QT_MOC_LITERAL(12, 117, 19), // "insertCopiedElement"
-QT_MOC_LITERAL(13, 137, 19) // "unselectAllElements"
+QT_MOC_LITERAL(13, 137, 19), // "unselectAllElements"
+QT_MOC_LITERAL(14, 157, 16), // "insertGlyphAfter"
+QT_MOC_LITERAL(15, 174, 23) // "std::basic_string<char>"
 
     },
     "Qt_RenderArea\0slotNew\0\0slotLoad\0"
     "slotSave\0slotSaveAs\0close\0insert\0"
     "std::string\0name\0deleteSelectedElements\0"
     "copyElement\0insertCopiedElement\0"
-    "unselectAllElements"
+    "unselectAllElements\0insertGlyphAfter\0"
+    "std::basic_string<char>"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +64,7 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,16 +72,17 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   64,    2, 0x0a /* Public */,
-       3,    0,   65,    2, 0x0a /* Public */,
-       4,    0,   66,    2, 0x0a /* Public */,
-       5,    0,   67,    2, 0x0a /* Public */,
-       6,    0,   68,    2, 0x0a /* Public */,
-       7,    1,   69,    2, 0x0a /* Public */,
-      10,    0,   72,    2, 0x0a /* Public */,
-      11,    0,   73,    2, 0x0a /* Public */,
-      12,    0,   74,    2, 0x0a /* Public */,
-      13,    0,   75,    2, 0x0a /* Public */,
+       1,    0,   69,    2, 0x0a /* Public */,
+       3,    0,   70,    2, 0x0a /* Public */,
+       4,    0,   71,    2, 0x0a /* Public */,
+       5,    0,   72,    2, 0x0a /* Public */,
+       6,    0,   73,    2, 0x0a /* Public */,
+       7,    1,   74,    2, 0x0a /* Public */,
+      10,    0,   77,    2, 0x0a /* Public */,
+      11,    0,   78,    2, 0x0a /* Public */,
+      12,    0,   79,    2, 0x0a /* Public */,
+      13,    0,   80,    2, 0x0a /* Public */,
+      14,    1,   81,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -91,6 +95,7 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 15,    2,
 
        0        // eod
 };
@@ -111,6 +116,7 @@ void Qt_RenderArea::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 7: _t->copyElement(); break;
         case 8: _t->insertCopiedElement(); break;
         case 9: _t->unselectAllElements(); break;
+        case 10: _t->insertGlyphAfter((*reinterpret_cast< std::basic_string<char>(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -141,13 +147,13 @@ int Qt_RenderArea::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 11;
     }
     return _id;
 }

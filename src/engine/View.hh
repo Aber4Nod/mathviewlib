@@ -86,7 +86,7 @@ public:
   void setAvailableWidth(const scaled&);
 
   int32_t deleteGlyph(const scaled&, const scaled&) const;
-  int32_t insertGlyphAfter(const scaled&, const scaled&, char) const;
+  int32_t insertGlyphAfter(const scaled&, const scaled&, std::basic_string<char>) const;
   int32_t insertGlyphBefore(const scaled&, const scaled&, char) const;
   void lookUpContent(const scaled&, const scaled&) const;
 
@@ -98,7 +98,7 @@ public:
   int32_t insertElementAfterCursor(std::string name) const;
   SmartPtr<Element> getElementAtPos(const scaled&, const scaled&) const;
 
-  int32_t insertGlyphAfterCursor(char);
+  int32_t insertGlyphAfterCursor(std::basic_string<char>);
   void deleteGLyphBeforeCursor();
 
   void moveCursorLeft(void);

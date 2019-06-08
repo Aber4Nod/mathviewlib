@@ -71,7 +71,7 @@ public:
   void setInsertElementName(std::string name) { insertElementName = name; }
 
   void setCursorPosition(const SmartPtr<class MathMLTextNode>& node, int32_t index);
-  void insertGlyphAfterCursor(char glyph);
+  void insertGlyphAfterCursor(std::basic_string<char> glyph);
   void deleteGLyphBeforeCursor();
 
   void setNodeIndex(int32_t index);

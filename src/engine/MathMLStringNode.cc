@@ -134,9 +134,12 @@ void
 MathMLStringNode::DeleteGlyph(uint32_t index)
 {
     std::cout << "[MathMLStringNode::DeleteGlyph]: got index: " << index << std::endl;
-    if (index >= content.length())
+    UCS4String ucontent = UCS4StringOfString(content);
+    if (index >= ucontent.length())
         return;
-    content.erase(index, 1);
+
+    ucontent.erase(index, 1);
+    content = StringOfUCS4String(ucontent);
     std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
     getParentElement()->setDirtyLayout();
     getParentElement()->setDirtyStructure();
@@ -144,20 +147,26 @@ MathMLStringNode::DeleteGlyph(uint32_t index)
 }
 
 void
-MathMLStringNode::InsertGlyphAfter(int32_t index, char glyph)
+MathMLStringNode::InsertGlyphAfter(int32_t index, std::basic_string<char> glyph)
 {
     std::cout << "[MathMLStringNode::InsertGlyphAfter]: got index: " << index << std::endl;
     std::cout << "[MathMLStringNode::InsertGlyphAfter]: current content: " << content << " length: " << content.length() << std::endl;
-    if (content.length() == 0)
-        content.push_back(glyph);
-    else
-    if (index >= 0 && index >= content.length())
-    {
-        std::cout << "[MathMLStringNode::InsertGlyphAfter]: index exceeded number of glyphes, pushing back: " << std::endl;
-        content.push_back(glyph);
+    if (content.length() == 0) {
+        content.insert(content.end(), std::begin(glyph), std::end(glyph));
+        // content.push_back(glyph);
     }
     else
-        content.insert(index + 1, 1, glyph);
+    if (index >= 0 && index >= UCS4StringOfString(content).length())
+    {
+        std::cout << "[MathMLStringNode::InsertGlyphAfter]: index exceeded number of glyphes, pushing back: " << std::endl;
+        content.insert(content.end(), std::begin(glyph), std::end(glyph));
+        // content.push_back(glyph);
+    }
+    else {
+        UCS4String ucontent = UCS4StringOfString(content);
+        ucontent.insert(index + 1, UCS4StringOfString(glyph));
+        content = StringOfUCS4String(ucontent);
+    }
     std::cout << "[MathMLStringNode::DeleteGlyph]: content after erasing: " << content << std::endl;
     getParentElement()->setDirtyLayout();
     getParentElement()->setDirtyStructure();
