@@ -187,6 +187,8 @@ engine/MathMLTokenElement.lo: ../../src/engine/MathMLTokenElement.cc \
   ../../src/engine/MathMLGlyphNode.hh \
   ../../src/engine/MathMLIdentifierElement.hh \
   ../../src/engine/MathMLTokenElement.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/engine/MathMLInferredRowElement.hh \
   ../../src/engine/MathMLRowElement.hh \
   ../../src/engine/MathMLInvisibleTimesNode.hh \
@@ -768,6 +770,10 @@ engine/MathMLTokenElement.lo: ../../src/engine/MathMLTokenElement.cc \
 ../../src/engine/MathMLIdentifierElement.hh:
 
 ../../src/engine/MathMLTokenElement.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/engine/MathMLInferredRowElement.hh:
 

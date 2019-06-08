@@ -177,6 +177,8 @@ engine/MathMLActionElement.lo: ../../src/engine/MathMLActionElement.cc \
   ../../src/engine/MathMLOperatorElement.hh \
   ../../src/engine/MathMLTokenElement.hh \
   ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/common/token.hh ../../auto/token.dec \
   ../../src/backend/FormattingContext.hh ../../src/common/Variant.hh \
   ../../src/common/RGBColor.hh ../../src/common/Length.hh \
@@ -709,6 +711,10 @@ engine/MathMLActionElement.lo: ../../src/engine/MathMLActionElement.cc \
 ../../src/engine/MathMLTextNode.hh:
 
 ../../src/engine/MathMLNode.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/common/token.hh:
 

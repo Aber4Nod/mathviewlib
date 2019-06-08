@@ -170,7 +170,9 @@ engine/MathMLIdentifierElement.lo: \
   ../../src/engine/LinearContainerTemplate.hh \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer \
-  ../../src/common/for_each_if.h ../../src/engine/Adapters.hh
+  ../../src/common/for_each_if.h ../../src/engine/Adapters.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree
 
 ../config.h:
 
@@ -649,3 +651,7 @@ engine/MathMLIdentifierElement.lo: \
 ../../src/common/for_each_if.h:
 
 ../../src/engine/Adapters.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:

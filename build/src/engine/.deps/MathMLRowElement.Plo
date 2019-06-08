@@ -198,6 +198,8 @@ engine/MathMLRowElement.lo: ../../src/engine/MathMLRowElement.cc \
   ../../src/engine/MathMLSpaceElement.hh \
   ../../src/engine/MathMLOperatorElement.hh \
   ../../src/engine/MathMLTokenElement.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/backend/FormattingContext.hh ../../src/common/Variant.hh \
   ../../src/common/Value.hh ../../src/common/Length.hh \
   ../../src/common/MathVariant.hh ../../src/common/FastScopedHashMap.hh \
@@ -772,6 +774,10 @@ engine/MathMLRowElement.lo: ../../src/engine/MathMLRowElement.cc \
 ../../src/engine/MathMLOperatorElement.hh:
 
 ../../src/engine/MathMLTokenElement.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/backend/FormattingContext.hh:
 

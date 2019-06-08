@@ -187,6 +187,8 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
   ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/frontend/libxml2/libxml2_Model.hh \
   ../../src/frontend/common/TemplateNodeIterator.hh \
   ../../src/frontend/common/TemplateElementIterator.hh \
@@ -724,6 +726,10 @@ view/libxml2_MathView.lo: ../../src/view/libxml2_MathView.cc ../config.h \
 ../../src/common/WeakPtr.hh:
 
 ../../src/engine/Element.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/frontend/libxml2/libxml2_Model.hh:
 

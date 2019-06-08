@@ -541,10 +541,10 @@ View::insertElementAfterCursor(char c) const
 }
 
 int32_t
-View::insertElementAfterCursor(std::string name) const
+View::insertElementAfterCursor(std::string name, std::map<std::string, std::string> opts) const
 {
     MathMLTokenElement *_elem = static_cast<MathMLTokenElement *>(getElementByFlag(Element::FCursorSet));
-    _elem->setInsertElementName(name);
+    _elem->setInsertElementName(name, opts);
     _elem->setDirtyLayout();
     _elem->setDirtyStructure();
     return 1;

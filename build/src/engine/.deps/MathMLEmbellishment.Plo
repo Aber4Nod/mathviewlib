@@ -194,6 +194,8 @@ engine/MathMLEmbellishment.lo: ../../src/engine/MathMLEmbellishment.cc \
   ../../src/engine/MathMLTokenElement.hh \
   ../../src/engine/LinearContainerTemplate.hh \
   ../../src/common/for_each_if.h ../../src/engine/Adapters.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/common/token.hh ../../auto/token.dec \
   ../../src/backend/MathGraphicDevice.hh \
   ../../src/backend/GraphicDevice.hh ../../src/common/Length.hh \
@@ -758,6 +760,10 @@ engine/MathMLEmbellishment.lo: ../../src/engine/MathMLEmbellishment.cc \
 ../../src/common/for_each_if.h:
 
 ../../src/engine/Adapters.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/common/token.hh:
 

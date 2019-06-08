@@ -170,14 +170,14 @@ engine/Element.lo: ../../src/engine/Element.cc ../config.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
   ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/common/AbstractLogger.hh \
   ../../src/frontend/common/Builder.hh \
   ../../src/engine/ElementFactory.hh \
   ../../src/engine/AttributeSignature.hh ../../src/common/Value.hh \
-  ../../src/engine/AttributeSet.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
-  ../../src/engine/Attribute.hh ../../src/engine/NamespaceContext.hh
+  ../../src/engine/AttributeSet.hh ../../src/engine/Attribute.hh \
+  ../../src/engine/NamespaceContext.hh
 
 ../config.h:
 
@@ -659,6 +659,10 @@ engine/Element.lo: ../../src/engine/Element.cc ../config.h \
 
 ../../src/engine/Element.hh:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
+
 ../../src/common/AbstractLogger.hh:
 
 ../../src/frontend/common/Builder.hh:
@@ -670,10 +674,6 @@ engine/Element.lo: ../../src/engine/Element.cc ../config.h \
 ../../src/common/Value.hh:
 
 ../../src/engine/AttributeSet.hh:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/engine/Attribute.hh:
 

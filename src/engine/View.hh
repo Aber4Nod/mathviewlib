@@ -30,6 +30,7 @@
 // Area.hh moved down here for Win32 build
 #include "Area.hh"
 #include "GlyphArea.hh"
+#include <map>
 
 class View : public Object
 {
@@ -95,7 +96,7 @@ public:
   int32_t insertElementCursor(const scaled&, const scaled&) const;
   Element *getElementByFlag(Element::Flags) const;
   int32_t insertElementAfterCursor(char c) const;
-  int32_t insertElementAfterCursor(std::string name) const;
+  int32_t insertElementAfterCursor(std::string, std::map<std::string, std::string> = {}) const;
   SmartPtr<Element> getElementAtPos(const scaled&, const scaled&) const;
 
   int32_t insertGlyphAfterCursor(std::basic_string<char>);

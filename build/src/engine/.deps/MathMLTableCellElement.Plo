@@ -184,6 +184,8 @@ engine/MathMLTableCellElement.lo: \
   ../../src/backend/BoxedLayoutArea.hh \
   ../../src/backend/ContainerArea.hh \
   ../../src/engine/MathMLTokenElement.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/common/ValueConversion.hh ../../src/common/Length.hh \
   ../../src/common/Value.hh ../../src/common/Variant.hh \
   ../../src/common/RGBColor.hh \
@@ -697,6 +699,10 @@ engine/MathMLTableCellElement.lo: \
 ../../src/backend/ContainerArea.hh:
 
 ../../src/engine/MathMLTokenElement.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/common/ValueConversion.hh:
 

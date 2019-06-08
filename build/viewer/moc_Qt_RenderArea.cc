@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Qt_RenderArea_t {
-    QByteArrayData data[16];
-    char stringdata0[198];
+    QByteArrayData data[18];
+    char stringdata0[257];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,7 +46,9 @@ QT_MOC_LITERAL(11, 105, 11), // "copyElement"
 QT_MOC_LITERAL(12, 117, 19), // "insertCopiedElement"
 QT_MOC_LITERAL(13, 137, 19), // "unselectAllElements"
 QT_MOC_LITERAL(14, 157, 16), // "insertGlyphAfter"
-QT_MOC_LITERAL(15, 174, 23) // "std::basic_string<char>"
+QT_MOC_LITERAL(15, 174, 23), // "std::basic_string<char>"
+QT_MOC_LITERAL(16, 198, 24), // "insertElementAfterCursor"
+QT_MOC_LITERAL(17, 223, 33) // "std::map<std::string,std::str..."
 
     },
     "Qt_RenderArea\0slotNew\0\0slotLoad\0"
@@ -54,7 +56,9 @@ QT_MOC_LITERAL(15, 174, 23) // "std::basic_string<char>"
     "std::string\0name\0deleteSelectedElements\0"
     "copyElement\0insertCopiedElement\0"
     "unselectAllElements\0insertGlyphAfter\0"
-    "std::basic_string<char>"
+    "std::basic_string<char>\0"
+    "insertElementAfterCursor\0"
+    "std::map<std::string,std::string>"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +68,7 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -72,17 +76,18 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x0a /* Public */,
-       3,    0,   70,    2, 0x0a /* Public */,
-       4,    0,   71,    2, 0x0a /* Public */,
-       5,    0,   72,    2, 0x0a /* Public */,
-       6,    0,   73,    2, 0x0a /* Public */,
-       7,    1,   74,    2, 0x0a /* Public */,
-      10,    0,   77,    2, 0x0a /* Public */,
-      11,    0,   78,    2, 0x0a /* Public */,
-      12,    0,   79,    2, 0x0a /* Public */,
-      13,    0,   80,    2, 0x0a /* Public */,
-      14,    1,   81,    2, 0x0a /* Public */,
+       1,    0,   74,    2, 0x0a /* Public */,
+       3,    0,   75,    2, 0x0a /* Public */,
+       4,    0,   76,    2, 0x0a /* Public */,
+       5,    0,   77,    2, 0x0a /* Public */,
+       6,    0,   78,    2, 0x0a /* Public */,
+       7,    1,   79,    2, 0x0a /* Public */,
+      10,    0,   82,    2, 0x0a /* Public */,
+      11,    0,   83,    2, 0x0a /* Public */,
+      12,    0,   84,    2, 0x0a /* Public */,
+      13,    0,   85,    2, 0x0a /* Public */,
+      14,    1,   86,    2, 0x0a /* Public */,
+      16,    2,   89,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -96,6 +101,7 @@ static const uint qt_meta_data_Qt_RenderArea[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 15,    2,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 17,    2,    2,
 
        0        // eod
 };
@@ -117,6 +123,7 @@ void Qt_RenderArea::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 8: _t->insertCopiedElement(); break;
         case 9: _t->unselectAllElements(); break;
         case 10: _t->insertGlyphAfter((*reinterpret_cast< std::basic_string<char>(*)>(_a[1]))); break;
+        case 11: _t->insertElementAfterCursor((*reinterpret_cast< std::string(*)>(_a[1])),(*reinterpret_cast< std::map<std::string,std::string>(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -147,13 +154,13 @@ int Qt_RenderArea::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }

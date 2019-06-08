@@ -171,6 +171,8 @@ engine/MathMLNamespaceContext.lo: \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
   ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/engine/MathMLNamespaceContext.hh \
   ../../src/engine/NamespaceContext.hh \
   ../../src/backend/MathGraphicDevice.hh \
@@ -686,6 +688,10 @@ engine/MathMLNamespaceContext.lo: \
 ../../src/common/WeakPtr.hh:
 
 ../../src/engine/Element.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/engine/MathMLNamespaceContext.hh:
 

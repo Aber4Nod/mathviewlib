@@ -27,6 +27,7 @@
 #include "MathMLTextNode.hh"
 #include "LinearContainerTemplate.hh"
 #include <iostream>
+#include <map>
 
 // base class for token element. Token elemens can contain character data
 // and a very limited set of other MathML elements (e.g. <malignmark>)
@@ -68,7 +69,8 @@ public:
   uint32_t getContentSize(void) const;
   
   std::string getInsertElementName(void) const { return insertElementName; }
-  void setInsertElementName(std::string name) { insertElementName = name; }
+  std::map<std::string, std::string> getInsertElementOpts(void) const { return insertElementOpts; }
+  void setInsertElementName(std::string name, std::map<std::string,std::string> opts) { insertElementName = name; insertElementOpts = opts; }
 
   void setCursorPosition(const SmartPtr<class MathMLTextNode>& node, int32_t index);
   void insertGlyphAfterCursor(std::basic_string<char> glyph);
@@ -104,6 +106,7 @@ private:
   int32_t cursorNodeIndex        = -1;
   int32_t cursorNodeContentIndex = -1;
   std::string insertElementName;
+  std::map<std::string, std::string> insertElementOpts;
   mutable Element *previousSplitElemenet = nullptr;
 
 protected:

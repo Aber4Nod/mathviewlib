@@ -188,6 +188,8 @@ engine/MathMLOperatorElement.lo: \
   ../../src/common/AbstractLogger.hh \
   ../../src/engine/NamespaceContext.hh ../../src/engine/View.hh \
   ../../src/backend/GlyphArea.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/engine/MathMLOperatorElement.hh \
   ../../src/engine/MathMLEmbellishment.hh \
   ../../src/engine/MathMLTokenElement.hh \
@@ -225,8 +227,6 @@ engine/MathMLOperatorElement.lo: \
   /usr/local/include/harfbuzz/hb-shape-plan.h \
   /usr/local/include/harfbuzz/hb-version.h \
   ../../src/backend/MathTable.hh ../../src/engine/AttributeSet.hh \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/engine/Attribute.hh \
   ../../src/engine/MathMLAttributeSignatures.hh
 
@@ -764,6 +764,10 @@ engine/MathMLOperatorElement.lo: \
 
 ../../src/backend/GlyphArea.hh:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
+
 ../../src/engine/MathMLOperatorElement.hh:
 
 ../../src/engine/MathMLEmbellishment.hh:
@@ -857,10 +861,6 @@ engine/MathMLOperatorElement.lo: \
 ../../src/backend/MathTable.hh:
 
 ../../src/engine/AttributeSet.hh:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/engine/Attribute.hh:
 

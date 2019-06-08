@@ -174,8 +174,11 @@ engine/MathMLMultiScriptsElement.lo: \
   ../../src/engine/MathMLOperatorElement.hh \
   ../../src/engine/MathMLTokenElement.hh \
   ../../src/engine/MathMLTextNode.hh ../../src/common/String.hh \
-  ../../src/engine/MathMLNode.hh ../../src/common/token.hh \
-  ../../auto/token.dec ../../src/engine/MathMLAttributeSignatures.hh \
+  ../../src/engine/MathMLNode.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
+  ../../src/common/token.hh ../../auto/token.dec \
+  ../../src/engine/MathMLAttributeSignatures.hh \
   ../../src/engine/AttributeSignature.hh ../../src/common/Value.hh \
   ../../src/backend/FormattingContext.hh ../../src/common/Variant.hh \
   ../../src/common/RGBColor.hh ../../src/common/Length.hh \
@@ -700,6 +703,10 @@ engine/MathMLMultiScriptsElement.lo: \
 ../../src/common/String.hh:
 
 ../../src/engine/MathMLNode.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/common/token.hh:
 

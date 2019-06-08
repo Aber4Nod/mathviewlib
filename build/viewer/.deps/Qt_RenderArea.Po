@@ -188,6 +188,8 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bitset \
   ../../src/common/WeakPtr.hh ../../src/engine/Element.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/common/Logger.hh ../../src/common/AbstractLogger.hh \
   ../../src/engine/MathMLOperatorDictionary.hh \
   ../../src/engine/AttributeSignature.hh ../../src/common/Value.hh \
@@ -250,8 +252,6 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qmetatype.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qvarlengtharray.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontainerfwd.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qobject_impl.h \
   /usr/local/Cellar/qt/5.11.2/include/QtCore/qpoint.h \
   /usr/local/Cellar/qt/5.11.2/include/QtGui/qfont.h \
@@ -904,6 +904,10 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 
 ../../src/engine/Element.hh:
 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
+
 ../../src/common/Logger.hh:
 
 ../../src/common/AbstractLogger.hh:
@@ -1035,10 +1039,6 @@ Qt_RenderArea.o: ../../viewer/Qt_RenderArea.cc \
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qvarlengtharray.h:
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qcontainerfwd.h:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 /usr/local/Cellar/qt/5.11.2/include/QtCore/qobject_impl.h:
 

@@ -38,9 +38,15 @@
 #include <QToolButton>
 #include <QPixmap>
 
+using namespace std;
+
 QAction *addToolBarActions(Qt_RenderArea* ra, QMenu *alignMenu, std::basic_string<char> s);
 QAction *addToolBarActionsExt(Qt_RenderArea* ra, QMenu *alignMenu, std::vector<std::basic_string<char>> actions);
 void addSubMenuExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vector<std::vector<std::basic_string<char>>> actions);
+
+QAction *addToolBarActionsElements(Qt_RenderArea* ra, QMenu *alignMenu, std::string icon, std::string name, std::map<string, string> opts);
+QAction *addToolBarActionsElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>> actions);
+void addSubMenuElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vector<std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>>> actions);
 
 int
 main(int argc, char *argv[])
@@ -129,8 +135,6 @@ main(int argc, char *argv[])
     menuBar->addMenu(pmnuCopy);
     layout->setMenuBar(menuBar);
 
-    QToolBar *firstToolBar = new QToolBar("First Toolbar");
-    QMenu *alignMenu = new QMenu("signs");
     QString  menuStyle(
         "QMenu {"
         "background-color: rgba(255,255,255, 0.7);"
@@ -165,6 +169,8 @@ main(int argc, char *argv[])
             "height: 13px;"
         "}"
       );
+    QToolBar *firstToolBar = new QToolBar("First Toolbar");
+    QMenu *alignMenu = new QMenu("signs");
     alignMenu->setStyleSheet(menuStyle);
 
     QToolButton *saveButton = new QToolButton();
@@ -186,11 +192,105 @@ main(int argc, char *argv[])
     QAction *insertSign = new QAction("Signs");
     insertSign->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/signs.png"));
     saveButton->setDefaultAction(insertSign);
-
     firstToolBar->addWidget(saveButton);
 
+    // fenced braces -----------------------------------------------------------
+    QToolBar *secondToolBar = new QToolBar;
+    QMenu *bracesMenu = new QMenu("braces");
+    bracesMenu->setStyleSheet(menuStyle);
+    QToolButton *secondButton = new QToolButton();
+
+    QAction *fences = new QAction("fences");
+    fences->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced.png"));
+
+    secondButton->setMenu(bracesMenu);
+    secondButton->setPopupMode(QToolButton::InstantPopup);
+    secondButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    secondButton->setDefaultAction(fences);
+    addSubMenuElementsExt(ra, bracesMenu, menuStyle, {
+        {
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced5.png", "mfenced"}, {
+                {"open", "["},
+                {"close", "]"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced6.png", "mfenced"}, {
+                {"open", "\u2016"},
+                {"close", "\u2016"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced7.png", "mfenced"}, {
+                {"open", "("},
+                {"close", "]"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced8.png", "mfenced"}, {
+                {"open", "]"},
+                {"close", "]"},
+            }},
+        },
+        {
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced9.png", "mfenced"}, {
+                {"open", "{"},
+                {"close", "}"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced10.png", "mfenced"}, {
+                {"open", "\u230A"},
+                {"close", "\u230B"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced11.png", "mfenced"}, {
+                {"open", "|"},
+                {"close", ">"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced12.png", "mfenced"}, {
+                {"open", "]"},
+                {"close", "["},
+            }},
+        },
+        {
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced13.png", "mfenced"}, {
+                {"open", "<"},
+                {"close", ">"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced14.png", "mfenced"}, {
+                {"open", "\u2308"},
+                {"close", "\u2309"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced15.png", "mfenced"}, {
+                {"open", "<"},
+                {"close", "|"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced16.png", "mfenced"}, {
+                {"open", "\u301A"},
+                {"close", "\u301B"},
+            }},
+        },
+    });
+    addToolBarActionsElementsExt(ra, bracesMenu, {
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced1.png", "mfenced"}, {
+            {"open", "("},
+            {"close", ")"},
+        }},
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced2.png", "mfenced"}, {
+            {"open", "|"},
+            {"close", "|"},
+        }},
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced3.png", "mfenced"}, {
+            {"open", "["},
+            {"close", ")"},
+        }},
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/mfenced4.png", "mfenced"}, {
+            {"open", "["},
+            {"close", "["},
+        }},
+    });
+    secondToolBar->addWidget(secondButton);
+    // fenced braces ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
     layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    layout->setMargin(0);
+
     layout->addWidget(firstToolBar);
+    layout->addWidget(secondToolBar);
     layout->addWidget(ra);
 
     QPalette Pal;
@@ -234,6 +334,41 @@ addSubMenuExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vecto
     actions.erase(actions.begin());
     addSubMenuExt(ra, alignMenu2, menuStyle, actions);
     addToolBarActionsExt(ra, alignMenu2, act);
+    alignMenu2->setStyleSheet(menuStyle);
+    alignMenu->addMenu(alignMenu2);
+}
+
+QAction *
+addToolBarActionsElements(Qt_RenderArea* ra, QMenu *alignMenu, std::string icon, std::string name, std::map<string, string> opts)
+{
+    QAction *preceds = new QAction(ra);
+    preceds->setIcon(QIcon(QString::fromStdString(icon)));
+    alignMenu->addAction(preceds);
+    ra->connect(preceds, &QAction::triggered, ra, [ra, name, opts]{ ra->insertElementAfterCursor(name, opts); });
+    return preceds;
+}
+
+QAction *
+addToolBarActionsElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>> actions)
+{
+    QAction *defAct = addToolBarActionsElements(ra, alignMenu, actions.begin()->first.first, actions.begin()->first.second, actions.begin()->second);
+    actions.erase(actions.begin());
+    for (const auto & i : actions)
+        addToolBarActionsElements(ra, alignMenu, i.first.first, i.first.second, i.second);
+    return defAct;
+}
+
+void
+addSubMenuElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vector<std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>>> actions)
+{
+    if (actions.empty())
+        return;
+
+    QMenu *alignMenu2 = new QMenu("...");
+    std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>> act = actions[0];
+    actions.erase(actions.begin());
+    addSubMenuElementsExt(ra, alignMenu2, menuStyle, actions);
+    addToolBarActionsElementsExt(ra, alignMenu2, act);
     alignMenu2->setStyleSheet(menuStyle);
     alignMenu->addMenu(alignMenu2);
 }

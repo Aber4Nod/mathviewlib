@@ -135,7 +135,10 @@ void Qt_RenderArea::keyPressEvent(QKeyEvent *event)
     qDebug() << "[Qt_RenderArea::keyPressEvent]: pressed on key: " << key;
     if (key == Qt::Key_Q && (event->modifiers() & Qt::ShiftModifier))
     {
-        if (m_view->insertElementAfterCursor("munderover"))
+        if (m_view->insertElementAfterCursor("mfenced", {
+            {"open", "{"},
+            {"close", "]"},
+        }))
             repaint();
     }
     else
@@ -284,5 +287,12 @@ void
 Qt_RenderArea::insertGlyphAfter(std::basic_string<char> glyph)
 {
     m_view->insertGlyphAfterCursor(glyph);
+    repaint();
+}
+
+void
+Qt_RenderArea::insertElementAfterCursor(std::string name, std::map<std::string, std::string> opts)
+{
+    m_view->insertElementAfterCursor(name, opts);
     repaint();
 }

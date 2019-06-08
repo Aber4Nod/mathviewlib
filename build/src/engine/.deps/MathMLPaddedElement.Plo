@@ -181,6 +181,8 @@ engine/MathMLPaddedElement.lo: ../../src/engine/MathMLPaddedElement.cc \
   ../../src/engine/MathMLTextNode.hh ../../src/engine/MathMLNode.hh \
   ../../src/engine/LinearContainerTemplate.hh \
   ../../src/common/for_each_if.h ../../src/engine/Adapters.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/engine/MathMLAttributeSignatures.hh \
   ../../src/engine/AttributeSignature.hh \
   ../../src/backend/FormattingContext.hh \
@@ -729,6 +731,10 @@ engine/MathMLPaddedElement.lo: ../../src/engine/MathMLPaddedElement.cc \
 ../../src/common/for_each_if.h:
 
 ../../src/engine/Adapters.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/engine/MathMLAttributeSignatures.hh:
 

@@ -57,10 +57,10 @@ protected:
 
   template <typename ElementBuilder>
   typename Model::Node
-  createNode(const typename Model::NameSpace& ns, typename Model::Node& new_elem) const
+  createNode(const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem) const
   {
       // todo make creating default nodes like in updateElement
-      return ElementBuilder::create(*this, ns, new_elem);
+      return ElementBuilder::create(*this, ns, opts, new_elem);
   }
   
   template <typename ElementBuilder>
@@ -127,7 +127,7 @@ protected:
       { "merror",        &TemplateBuilder::template updateElement<MathML_merror_ElementBuilder> },
       { "mpadded",       &TemplateBuilder::template updateElement<MathML_mpadded_ElementBuilder> },
       { "mphantom",      &TemplateBuilder::template updateElement<MathML_mphantom_ElementBuilder> },
-      { "mfenced",       &TemplateBuilder::update_MathML_mfenced_Element },
+      { "mfenced",       &TemplateBuilder::update_MathML_mfenced_Element,                           &TemplateBuilder::create_MathML_mfenced_Element },
       { "msub",          &TemplateBuilder::template updateElement<MathML_msub_ElementBuilder> ,     &TemplateBuilder::template createNode<MathML_msub_ElementBuilder> },
       { "msup",          &TemplateBuilder::template updateElement<MathML_msup_ElementBuilder> ,     &TemplateBuilder::template createNode<MathML_msup_ElementBuilder> },
       { "msubsup",       &TemplateBuilder::template updateElement<MathML_msubsup_ElementBuilder> ,  &TemplateBuilder::template createNode<MathML_msubsup_ElementBuilder> },
@@ -217,6 +217,29 @@ protected:
     outerRow->swapContent(outerRowContent);
 
     return outerRow;
+  }
+
+  typename Model::Node
+  create_MathML_mfenced_Element(const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem) const
+  {
+      typename Model::Node node = Model::createNode(ns, "mfenced");
+      typename std::map<std::string, std::string>::const_iterator it = opts.find("open");
+      if (it != opts.end()) {
+          Model::setAttribute(Model::asElement(node), "open", it->second);
+      }
+      it = opts.find("close");
+      if (it != opts.end()) {
+          Model::setAttribute(Model::asElement(node), "close", it->second);
+      }
+
+      typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
+      typename Model::Node node_table_1;
+      typename Model::Node node_child = (this->*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
+      Model::insertChild(node, node_table_1);
+
+      new_elem = node;
+      return node_child;
+
   }
 
   SmartPtr<MathMLElement>
@@ -321,7 +344,7 @@ protected:
     { }
     
     static typename Model::Node
-    create(const TemplateBuilder&, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder&, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         return Model::createNode(ns, "mi");
     }
@@ -478,7 +501,7 @@ protected:
       typedef MathMLIdentifierElement type;
 
       static typename Model::Node
-      create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+      create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
       {
           typename Model::Node node = Model::createNode(ns, "mtable");
           Model::setNewProp(node, Model::toModelString("frame"), Model::toModelString("dashed"));
@@ -806,16 +829,16 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "mfrac");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_numerator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_numerator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_denominator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_denominator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         new_elem = node;
@@ -888,16 +911,16 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "mroot");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_index = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_index = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         new_elem = node;
@@ -941,12 +964,12 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "msqrt");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         new_elem = node;
@@ -1023,16 +1046,16 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "msub");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         new_elem = node;
@@ -1105,16 +1128,16 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "msup");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         new_elem = node;
@@ -1240,20 +1263,20 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "msubsup");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_subscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         typename Model::Node node_table_3;
-        typename Model::Node node_superscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_3);
+        typename Model::Node node_superscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_3);
         Model::insertNextSibling(node_table_2, node_table_3);
 
         new_elem = node;
@@ -1349,16 +1372,16 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "munder");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         new_elem = node;
@@ -1455,16 +1478,16 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "mover");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         new_elem = node;
@@ -1617,20 +1640,20 @@ protected:
     }
 
     static typename Model::Node
-    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, typename Model::Node& new_elem)
+    create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "munderover");
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
-        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_1);
+        typename Model::Node node_base = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
         Model::insertChild(node, node_table_1);
 
         typename Model::Node node_table_2;
-        typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_2);
+        typename Model::Node node_underscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_2);
         Model::insertNextSibling(node_table_1, node_table_2);
 
         typename Model::Node node_table_3;
-        typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), node_table_3);
+        typename Model::Node node_overscript = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_3);
         Model::insertNextSibling(node_table_2, node_table_3);
 
         new_elem = node;
@@ -2179,7 +2202,8 @@ protected:
             printf("[getChildMathMLElements]: cursorSet triggered\n");
             SmartPtr<MathMLTokenElement> cur_element = smart_cast<MathMLTokenElement>(_elem);
             std::string name = smart_cast<MathMLTokenElement>(_elem)->getInsertElementName();
-            cur_element->setInsertElementName("");
+            std::map<std::string, std::string> opts = smart_cast<MathMLTokenElement>(_elem)->getInsertElementOpts();
+            cur_element->setInsertElementName("", {});
 
             typename Model::Node node_table = nullptr;
             if (_elem->insertCopiedSet())
@@ -2202,7 +2226,7 @@ protected:
             if (!node_table)
             {
                 typename MathMLBuilderMap::const_iterator m = mathmlMap.find(name);
-                typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), node_table); // returning node where cursor must be set
+                typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), opts, node_table); // returning node where cursor must be set
                 _elem->resetFlag(MathMLActionElement::FCursorSet);
                 cur_element->setNodeIndex(-1);
                 cur_element->setNodeContentIndex(-1);
@@ -2576,7 +2600,7 @@ public:
 
 private:
   typedef SmartPtr<class MathMLElement> (TemplateBuilder::* MathMLUpdateMethod)(const typename Model::Element&) const;
-  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::NameSpace&, typename Model::Node&) const;
+  typedef typename Model::Node (TemplateBuilder:: *MathMLCreateNode)(const typename Model::NameSpace&, std::map<std::string, std::string>&, typename Model::Node&) const;
   typedef struct { MathMLUpdateMethod updateMethod; MathMLCreateNode createMethod; } servingMethods; 
   typedef std::unordered_map<String, servingMethods, StringHash, StringEq> MathMLBuilderMap;
   static MathMLBuilderMap mathmlMap;

@@ -206,7 +206,9 @@ engine/MathMLStringNode.lo: ../../src/engine/MathMLStringNode.cc \
   /usr/local/include/harfbuzz/hb-version.h \
   ../../src/backend/MathTable.hh ../../src/engine/MathMLTokenElement.hh \
   ../../src/engine/LinearContainerTemplate.hh \
-  ../../src/common/for_each_if.h ../../src/engine/Adapters.hh
+  ../../src/common/for_each_if.h ../../src/engine/Adapters.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree
 
 ../config.h:
 
@@ -787,3 +789,7 @@ engine/MathMLStringNode.lo: ../../src/engine/MathMLStringNode.cc \
 ../../src/common/for_each_if.h:
 
 ../../src/engine/Adapters.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:

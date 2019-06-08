@@ -199,6 +199,8 @@ engine/MathMLStyleElement.lo: ../../src/engine/MathMLStyleElement.cc \
   ../../src/engine/MathMLTokenElement.hh \
   ../../src/engine/LinearContainerTemplate.hh \
   ../../src/common/for_each_if.h ../../src/engine/Adapters.hh \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree \
   ../../src/engine/MathMLAttributeSignatures.hh \
   ../../src/engine/AttributeSignature.hh \
   ../../src/backend/FormattingContext.hh ../../src/common/MathVariant.hh \
@@ -780,6 +782,10 @@ engine/MathMLStyleElement.lo: ../../src/engine/MathMLStyleElement.cc \
 ../../src/common/for_each_if.h:
 
 ../../src/engine/Adapters.hh:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree:
 
 ../../src/engine/MathMLAttributeSignatures.hh:
 
