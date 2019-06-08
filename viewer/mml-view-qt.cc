@@ -339,6 +339,52 @@ main(int argc, char *argv[])
 
     // Arrors symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    // Logical symbols ---------------------------------------------------------
+    QMenu *logicalMenu = new QMenu;
+    logicalMenu->setStyleSheet(menuStyle);
+
+    QToolButton *fifthButton = new QToolButton;
+    fifthButton->setMenu(logicalMenu);
+    fifthButton->setPopupMode(QToolButton::InstantPopup);
+    fifthButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, logicalMenu, menuStyle, {
+        {"\u2235", "\u2203", "\u00AC", "\u2228"},
+    });
+    addToolBarActionsExt(ra, logicalMenu, {
+        "\u2234", "\u220B", "\u2200", "\u2227",
+    });
+
+    QAction *logical = new QAction("logical");
+    logical->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/logical.png"));
+    fifthButton->setDefaultAction(logical);
+    firstToolBar->addWidget(fifthButton);
+
+    // Logical symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // SetTheory symbols -------------------------------------------------------
+    QMenu *setTheoryMenu = new QMenu;
+    setTheoryMenu->setStyleSheet(menuStyle);
+
+    QToolButton *sixthButton = new QToolButton;
+    sixthButton->setMenu(setTheoryMenu);
+    sixthButton->setPopupMode(QToolButton::InstantPopup);
+    sixthButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, setTheoryMenu, menuStyle, {
+        {"\u2209", "\u2229", "\u2283", "\u2287", "\u2205"},
+    });
+    addToolBarActionsExt(ra, setTheoryMenu, {
+        "\u2208", "\u222A", "\u2282", "\u2286", "\u2284",
+    });
+
+    QAction *setTheory = new QAction("setTheory");
+    setTheory->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/setTheory.png"));
+    sixthButton->setDefaultAction(setTheory);
+    firstToolBar->addWidget(sixthButton);
+
+    // SetTheory symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->setMargin(0);
