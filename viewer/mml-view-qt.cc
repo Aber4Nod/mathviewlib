@@ -48,6 +48,9 @@ QAction *addToolBarActionsElements(Qt_RenderArea* ra, QMenu *alignMenu, std::str
 QAction *addToolBarActionsElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>> actions);
 void addSubMenuElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, std::vector<std::map<std::pair<std::string, std::string>, std::map<std::string, std::string>>> actions);
 
+QToolButton *makeSumsMenu(Qt_RenderArea* ra, QString menuStyle);
+QToolButton *makeIntegralsMenu(Qt_RenderArea* ra, QString menuStyle);
+
 int
 main(int argc, char *argv[])
 {
@@ -526,92 +529,8 @@ main(int argc, char *argv[])
     secondToolBar->addWidget(underoverButton);
     // UnderOvers ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    // Sums --------------------------------------------------------------------
-    QMenu *sumsMenu = new QMenu("sums");
-    sumsMenu->setStyleSheet(menuStyle);
-    QToolButton *sumsButton = new QToolButton();
-
-    QAction *sums = new QAction("sums");
-    sums->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums.png"));
-
-    sumsButton->setMenu(sumsMenu);
-    sumsButton->setPopupMode(QToolButton::InstantPopup);
-    sumsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    sumsButton->setDefaultAction(sums);
-    addSubMenuElementsExt(ra, sumsMenu, menuStyle, {
-        {
-            {
-                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums3.png",
-                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
-                            "<mrow>"
-                                "<munder>"
-                                    "<mo movablelimits=\"false\">&Sum;</mo>"
-                                    "<mi/>"
-                                "</munder>"
-                                "<mi/>"
-                            "</mrow>"
-                        "</math>"
-                }, {}
-            },
-            {
-                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums4.png",
-                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
-                            "<mrow>"
-                                "<msubsup>"
-                                    "<mo movablelimits=\"false\">&Sum;</mo>"
-                                    "<mi/>"
-                                    "<mi/>"
-                                "</msubsup>"
-                                "<mi/>"
-                            "</mrow>"
-                        "</math>"
-                }, {}
-            },
-        },
-        {
-            {
-                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums5.png",
-                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
-                            "<mrow>"
-                                "<munderover>"
-                                    "<mo movablelimits=\"false\">&Sum;</mo>"
-                                    "<mi/>"
-                                    "<mi/>"
-                                "</munderover>"
-                                "<mi/>"
-                            "</mrow>"
-                        "</math>"
-                }, {}
-            },
-        },
-    });
-    addToolBarActionsElementsExt(ra, sumsMenu, {
-        {
-            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums1.png",
-                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
-                        "<mrow>"
-                            "<mo movablelimits=\"false\">&Sum;</mo>"
-                            "<mi></mi>"
-                        "</mrow>"
-                    "</math>"
-            }, {}
-        },
-        {
-            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums2.png",
-                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
-                        "<mrow>"
-                            "<msub>"
-                                "<mo movablelimits=\"false\">&Sum;</mo>"
-                                "<mi/>"
-                            "</msub>"
-                            "<mi/>"
-                        "</mrow>"
-                    "</math>"
-            }, {}
-        },
-    });
-    secondToolBar->addWidget(sumsButton);
-    // Sums ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    secondToolBar->addWidget(makeSumsMenu(ra, menuStyle));
+    secondToolBar->addWidget(makeIntegralsMenu(ra, menuStyle));
 
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
@@ -700,3 +619,294 @@ addSubMenuElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyle, st
     alignMenu2->setStyleSheet(menuStyle);
     alignMenu->addMenu(alignMenu2);
 }
+
+// Sums ------------------------------------------------------------------------
+QToolButton *makeSumsMenu(Qt_RenderArea* ra, QString menuStyle)
+{
+    QMenu *sumsMenu = new QMenu("sums");
+    sumsMenu->setStyleSheet(menuStyle);
+    QToolButton *sumsButton = new QToolButton();
+
+    QAction *sums = new QAction("sums");
+    sums->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums.png"));
+
+    sumsButton->setMenu(sumsMenu);
+    sumsButton->setPopupMode(QToolButton::InstantPopup);
+    sumsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    sumsButton->setDefaultAction(sums);
+    addSubMenuElementsExt(ra, sumsMenu, menuStyle, {
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums3.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&Sum;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums4.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msubsup>"
+                                    "<mo movablelimits=\"false\">&Sum;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</msubsup>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums5.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munderover>"
+                                    "<mo movablelimits=\"false\">&Sum;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</munderover>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, sumsMenu, {
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums1.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&Sum;</mo>"
+                            "<mi></mi>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums2.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<msub>"
+                                "<mo movablelimits=\"false\">&Sum;</mo>"
+                                "<mi/>"
+                            "</msub>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+    });
+
+    return sumsButton;
+}
+// Sums ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Integrals -------------------------------------------------------------------
+QToolButton *makeIntegralsMenu(Qt_RenderArea* ra, QString menuStyle)
+{
+    QMenu *integralsMenu = new QMenu("integrals");
+    integralsMenu->setStyleSheet(menuStyle);
+    QToolButton *integralsButton = new QToolButton();
+
+    QAction *integrals = new QAction("integrals");
+    integrals->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals.png"));
+
+    integralsButton->setMenu(integralsMenu);
+    integralsButton->setPopupMode(QToolButton::InstantPopup);
+    integralsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    integralsButton->setDefaultAction(integrals);
+    addSubMenuElementsExt(ra, integralsMenu, menuStyle, {
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals6.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munderover>"
+                                    "<mo movablelimits=\"false\">&#x222B;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</munderover>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals7.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&#x222B;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals8.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&#x222C;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals9.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&#x222D;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals10.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&#x222E;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals11.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msupsup>"
+                                    "<mo movablelimits=\"false\">&#x222B;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</msupsup>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals12.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msub>"
+                                    "<mo movablelimits=\"false\">&#x222B;</mo>"
+                                    "<mi/>"
+                                "</msub>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals13.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msub>"
+                                    "<mo movablelimits=\"false\">&#x222C;</mo>"
+                                    "<mi/>"
+                                "</msub>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals14.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msub>"
+                                    "<mo movablelimits=\"false\">&#x222D;</mo>"
+                                    "<mi/>"
+                                "</msub>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals15.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msub>"
+                                    "<mo movablelimits=\"false\">&#x222E;</mo>"
+                                    "<mi/>"
+                                "</msub>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, integralsMenu, {
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals1.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&#x222B;</mo>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals3.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&#x222C;</mo>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals4.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&#x222D;</mo>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/integrals5.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&#x222E;</mo>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+    });
+
+    return integralsButton;
+}
+// Integrals ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
