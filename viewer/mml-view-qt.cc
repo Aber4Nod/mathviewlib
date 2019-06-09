@@ -461,6 +461,158 @@ main(int argc, char *argv[])
 
     // GreekCapital symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    // Fracts  -----------------------------------------------------------------
+    QMenu *fractsMenu = new QMenu("fracts");
+    fractsMenu->setStyleSheet(menuStyle);
+    QToolButton *fractsButton = new QToolButton();
+
+    QAction *fracts = new QAction("fracts");
+    fracts->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/fracts.png"));
+
+    fractsButton->setMenu(fractsMenu);
+    fractsButton->setPopupMode(QToolButton::InstantPopup);
+    fractsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    fractsButton->setDefaultAction(fracts);
+    addSubMenuElementsExt(ra, fractsMenu, menuStyle, {
+        {
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/fracts2.png", "mfrac"}, {
+                {"bevelled", "true"},
+            }},
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/fracts4.png", "mroot"}, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, fractsMenu, {
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/fracts1.png", "mfrac"}, {}
+        },
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/fracts3.png", "msqrt"}, {}
+        },
+    });
+    secondToolBar->addWidget(fractsButton);
+    // Fracts ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // UnderOvers --------------------------------------------------------------
+    QMenu *underoverMenu = new QMenu("underovers");
+    underoverMenu->setStyleSheet(menuStyle);
+    QToolButton *underoverButton = new QToolButton();
+
+    QAction *underovers = new QAction("underovers");
+    underovers->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers.png"));
+
+    underoverButton->setMenu(underoverMenu);
+    underoverButton->setPopupMode(QToolButton::InstantPopup);
+    underoverButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    underoverButton->setDefaultAction(underovers);
+    addSubMenuElementsExt(ra, underoverMenu, menuStyle, {
+        {
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers2.png", "munder"}, {}
+            },
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers5.png", "msub"}, {}
+            },
+        },
+        {
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers3.png", "munderover"}, {}
+            },
+            {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers6.png", "msubsup"}, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, underoverMenu, {
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers1.png", "mover"}, {}
+        },
+        {{"/Users/n.mikhnenko/mathviewlib/src/backend/qt/underovers4.png", "msup"}, {}
+        },
+    });
+    secondToolBar->addWidget(underoverButton);
+    // UnderOvers ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // Sums --------------------------------------------------------------------
+    QMenu *sumsMenu = new QMenu("sums");
+    sumsMenu->setStyleSheet(menuStyle);
+    QToolButton *sumsButton = new QToolButton();
+
+    QAction *sums = new QAction("sums");
+    sums->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums.png"));
+
+    sumsButton->setMenu(sumsMenu);
+    sumsButton->setPopupMode(QToolButton::InstantPopup);
+    sumsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    sumsButton->setDefaultAction(sums);
+    addSubMenuElementsExt(ra, sumsMenu, menuStyle, {
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums3.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&Sum;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums4.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<msubsup>"
+                                    "<mo movablelimits=\"false\">&Sum;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</msubsup>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums5.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munderover>"
+                                    "<mo movablelimits=\"false\">&Sum;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</munderover>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, sumsMenu, {
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums1.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&Sum;</mo>"
+                            "<mi></mi>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sums2.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<msub>"
+                                "<mo movablelimits=\"false\">&Sum;</mo>"
+                                "<mi/>"
+                            "</msub>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+    });
+    secondToolBar->addWidget(sumsButton);
+    // Sums ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->setMargin(0);

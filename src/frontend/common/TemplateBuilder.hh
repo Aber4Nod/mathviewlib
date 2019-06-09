@@ -487,7 +487,17 @@ protected:
       // }
 
       builder.getChildMathMLTextNodes(el, content, elem);
+      if (!content.size())
+      {
+          typename Model::Node node_text = Model::NewText(Model::toModelString("wrapping"));
+          Model::insertChild(Model::asNode(el), node_text);
+          Model::setNodeValue(node_text, "");
+          construct(builder, el, elem);
+          return;
+      }
+
       elem->swapContent(content); // should normalize spaces etc.
+
       if (is_a<MathMLIdentifierElement>(SmartPtr<MathMLTokenElement>(elem)) 
               || is_a<MathMLOperatorElement>(SmartPtr<MathMLTokenElement>(elem))
               || is_a<MathMLNumberElement>(SmartPtr<MathMLTokenElement>(elem)))
@@ -545,7 +555,13 @@ protected:
               builder.getMathMLElement(Model::asElement(node))->setFlag(MathMLActionElement::FWrapperSet);
               SmartPtr<MathMLElement> node_default_elem = builder.getMathMLElement(Model::asElement(node_default));
               node_default_elem->setFlag(MathMLActionElement::FWrapperSet);
-              Model::setNodeValue(node_text, "");
+
+              typename std::map<std::string, std::string>::const_iterator it = opts.find("name");
+              if (it != opts.end()) {
+                  Model::setNodeValue(node_text, it->second);
+              } else {
+                  Model::setNodeValue(node_text, "");
+              }
               node_default_elem->setDirtyLayout();
               node_default_elem->setDirtyStructure();
 
@@ -832,6 +848,11 @@ protected:
     create(const TemplateBuilder& builder, const typename Model::NameSpace& ns, std::map<std::string, std::string>& opts, typename Model::Node& new_elem)
     {
         typename Model::Node node = Model::createNode(ns, "mfrac");
+        typename std::map<std::string, std::string>::const_iterator it = opts.find("bevelled");
+        if (it != opts.end()) {
+            Model::setAttribute(Model::asElement(node), "bevelled", it->second);
+        }
+
         typename MathMLBuilderMap::const_iterator m = mathmlMap.find("mi");
         typename Model::Node node_table_1;
         typename Model::Node node_numerator = (builder.*(m->second.createMethod))(Model::getNodeNamespace(node), opts, node_table_1);
@@ -2226,15 +2247,24 @@ protected:
             if (!node_table)
             {
                 typename MathMLBuilderMap::const_iterator m = mathmlMap.find(name);
-                typename Model::Node node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), opts, node_table); // returning node where cursor must be set
-                _elem->resetFlag(MathMLActionElement::FCursorSet);
-                cur_element->setNodeIndex(-1);
-                cur_element->setNodeContentIndex(-1);
+                typename Model::Node node;
+                if (m != mathmlMap.end()) {
+                    node = (this->*(m->second.createMethod))(Model::getNodeNamespace(Model::asNode(iter.element())), opts, node_table); // returning node where cursor must be set
 
-                SmartPtr<MathMLTokenElement> token_elem = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
-                token_elem->setFlag(MathMLActionElement::FCursorSet);
-                token_elem->setNodeIndex(0);
-                token_elem->setNodeContentIndex(-1);
+                    SmartPtr<MathMLTokenElement> token_elem = smart_cast<MathMLTokenElement>(getMathMLElement(Model::asElement(node)));
+                    token_elem->setFlag(MathMLActionElement::FCursorSet);
+                    token_elem->setNodeIndex(0);
+                    token_elem->setNodeContentIndex(-1);
+
+                    _elem->resetFlag(MathMLActionElement::FCursorSet);
+                    cur_element->setNodeIndex(-1);
+                    cur_element->setNodeContentIndex(-1);
+
+                } else {
+                    typename Model::Document doc = Model::documentFromBuffer(*this->getLogger(), name, true);
+                    node_table = Model::asNode(Model::getDocumentElement(doc));
+                    Model::unlinkNode(node_table);
+                }
             }
 
             Model::insertNextSibling(Model::asNode(iter.element()), node_table);
