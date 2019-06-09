@@ -50,6 +50,8 @@ void addSubMenuElementsExt(Qt_RenderArea* ra, QMenu *alignMenu, QString menuStyl
 
 QToolButton *makeSumsMenu(Qt_RenderArea* ra, QString menuStyle);
 QToolButton *makeIntegralsMenu(Qt_RenderArea* ra, QString menuStyle);
+QToolButton *makeBarsMenu(Qt_RenderArea* ra, QString menuStyle);
+QToolButton *makeSetsMenu(Qt_RenderArea* ra, QString menuStyle);
 
 int
 main(int argc, char *argv[])
@@ -531,6 +533,8 @@ main(int argc, char *argv[])
 
     secondToolBar->addWidget(makeSumsMenu(ra, menuStyle));
     secondToolBar->addWidget(makeIntegralsMenu(ra, menuStyle));
+    secondToolBar->addWidget(makeBarsMenu(ra, menuStyle));
+    secondToolBar->addWidget(makeSetsMenu(ra, menuStyle));
 
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
@@ -910,3 +914,239 @@ QToolButton *makeIntegralsMenu(Qt_RenderArea* ra, QString menuStyle)
     return integralsButton;
 }
 // Integrals ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Bars ------------------------------------------------------------------------
+QToolButton
+*makeBarsMenu(Qt_RenderArea* ra, QString menuStyle)
+{
+    QMenu *barsMenu = new QMenu("bars");
+    barsMenu->setStyleSheet(menuStyle);
+    QToolButton *barsButton = new QToolButton();
+
+    QAction *bars = new QAction("bars");
+    bars->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars.png"));
+
+    barsButton->setMenu(barsMenu);
+    barsButton->setPopupMode(QToolButton::InstantPopup);
+    barsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    barsButton->setDefaultAction(bars);
+    addSubMenuElementsExt(ra, barsMenu, menuStyle, {
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars5.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mover>"
+                                "<mi/>"
+                                "<mo>\u2227</mo>"
+                            "</mover>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars7.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mover>"
+                                "<mi/>"
+                                "<mo>&#8592;</mo>"
+                            "</mover>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars8.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<munder>"
+                                "<mi/>"
+                                "<mo>&#8592;</mo>"
+                            "</munder>"
+                        "</math>"
+                }, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, barsMenu, {
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars1.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mover>"
+                            "<mi/>"
+                            "<mo>&#x223C;<mo>"
+                        "</mover>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars2.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mover>"
+                            "<mi/>"
+                            "<mo>&#x2015;<mo>"
+                        "</mover>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars3.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mover>"
+                            "<mi/>"
+                            "<mo>&#x2192;<mo>"
+                        "</mover>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/bars4.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<munder>"
+                            "<mi/>"
+                            "<mo>&#x2192;<mo>"
+                        "</munder>"
+                    "</math>"
+            }, {}
+        },
+    });
+
+    return barsButton;
+}
+// Bars ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Sets ------------------------------------------------------------------------
+QToolButton
+*makeSetsMenu(Qt_RenderArea* ra, QString menuStyle)
+{
+    QMenu *setsMenu = new QMenu("bars");
+    setsMenu->setStyleSheet(menuStyle);
+    QToolButton *setsButton = new QToolButton();
+
+    QAction *sets = new QAction("sets");
+    sets->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets1.png"));
+
+    setsButton->setMenu(setsMenu);
+    setsButton->setPopupMode(QToolButton::InstantPopup);
+    setsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    setsButton->setDefaultAction(sets);
+    addSubMenuElementsExt(ra, setsMenu, menuStyle, {
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets5.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&prod;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets6.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&#x22c2;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets7.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munder>"
+                                    "<mo movablelimits=\"false\">&#x22c3;</mo>"
+                                    "<mi/>"
+                                "</munder>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets8.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munderover>"
+                                    "<mo movablelimits=\"false\">&prod;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</munderover>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets9.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munderover>"
+                                    "<mo movablelimits=\"false\">&#x22c2;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</munderover>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets10.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mrow>"
+                                "<munderover>"
+                                    "<mo movablelimits=\"false\">&#x22c3;</mo>"
+                                    "<mi/>"
+                                    "<mi/>"
+                                "</munderover>"
+                                "<mi/>"
+                            "</mrow>"
+                        "</math>"
+                }, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, setsMenu, {
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets2.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&prod;</mo>"
+                            "<mi></mi>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets3.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&#x22c2;</mo>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/sets4.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mrow>"
+                            "<mo movablelimits=\"false\">&#x22c3;</mo>"
+                            "<mi/>"
+                        "</mrow>"
+                    "</math>"
+            }, {}
+        },
+    });
+
+    return setsButton;
+}
+// Sets ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
