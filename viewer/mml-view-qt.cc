@@ -385,6 +385,82 @@ main(int argc, char *argv[])
 
     // SetTheory symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    // Miscellanious symbols ---------------------------------------------------
+    QMenu *miscellaniousMenu = new QMenu;
+    miscellaniousMenu->setStyleSheet(menuStyle);
+
+    QToolButton *seventhButton = new QToolButton;
+    seventhButton->setMenu(miscellaniousMenu);
+    seventhButton->setPopupMode(QToolButton::InstantPopup);
+    seventhButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, miscellaniousMenu, menuStyle, {
+        {"\u2118", "\u2124", "\u210F", "\u2207", "\u220F", "\u2221", "\u25A1"},
+        {"\u2135", "\u2115", "\u2020", "\u22C4", "\u00B0", "\u2225", "\u25CB"},
+        {"\u2102", "\u019B", "\u03A9", "\u2210", "\u2222", "\u25AD"},
+        {"\u2113", "\u2127", "\u222B", "\u27C2", "\u25B1"},
+    });
+    addToolBarActionsExt(ra, miscellaniousMenu, {
+        "\u2202", "\u211D", "\u221E", "\u0394", "\u2211", "\u2220", "\u25B3",
+    });
+
+    QAction *miscellanious = new QAction("setTheory");
+    miscellanious->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/miscellanious.png"));
+    seventhButton->setDefaultAction(miscellanious);
+    firstToolBar->addWidget(seventhButton);
+
+    // Miscellanious symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // GreekSmall symbols ------------------------------------------------------
+    QMenu *greekSmallMenu = new QMenu;
+    greekSmallMenu->setStyleSheet(menuStyle);
+
+    QToolButton *eightButton = new QToolButton;
+    eightButton->setMenu(greekSmallMenu);
+    eightButton->setPopupMode(QToolButton::InstantPopup);
+    eightButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, greekSmallMenu, menuStyle, {
+        {"\u03B2", "\u03D5", "\u03B9", "\u03BD", "\u03B8", "\u03C2", "\u03BE"},
+        {"\u03C7", "\u03C6", "\u03BA", "\u03BF", "\u03D1", "\u03C4", "\u03C8"},
+        {"\u03B4", "\u03B3", "\u03BB", "\u03C0", "\u03C1", "\u03C5", "\u03B6"},
+    });
+    addToolBarActionsExt(ra, greekSmallMenu, {
+        "\u03B1", "\u03B5", "\u03B7", "\u03BC", "\u03D6", "\u03C3", "\u03C9",
+    });
+
+    QAction *greekSmall = new QAction("setTheory");
+    greekSmall->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/greekSmall.png"));
+    eightButton->setDefaultAction(greekSmall);
+    firstToolBar->addWidget(eightButton);
+
+    // GreekSmall symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    // GreekCapital symbols ----------------------------------------------------
+    QMenu *greekCapitalMenu = new QMenu;
+    greekCapitalMenu->setStyleSheet(menuStyle);
+
+    QToolButton *ninthButton = new QToolButton;
+    ninthButton->setMenu(greekCapitalMenu);
+    ninthButton->setPopupMode(QToolButton::InstantPopup);
+    ninthButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    addSubMenuExt(ra, greekCapitalMenu, menuStyle, {
+        {"\u0392", "\u03A6", "\u039A", "\u039F", "\u03A3", "\u039E"},
+        {"\u03A7", "\u0393", "\u039B", "\u03A0", "\u03A4", "\u03A8"},
+        {"\u0394", "\u0397", "\u039C", "\u0398", "\u03D2", "\u0396"},
+    });
+    addToolBarActionsExt(ra, greekCapitalMenu, {
+        "\u0391", "\u0395", "\u0399", "\u039D", "\u03A1", "\u03A9",
+    });
+
+    QAction *greekCapital = new QAction("setTheory");
+    greekCapital->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/greekCapital.png"));
+    ninthButton->setDefaultAction(greekCapital);
+    firstToolBar->addWidget(ninthButton);
+
+    // GreekCapital symbols ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->setMargin(0);
