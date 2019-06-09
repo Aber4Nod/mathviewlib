@@ -52,6 +52,7 @@ QToolButton *makeSumsMenu(Qt_RenderArea* ra, QString menuStyle);
 QToolButton *makeIntegralsMenu(Qt_RenderArea* ra, QString menuStyle);
 QToolButton *makeBarsMenu(Qt_RenderArea* ra, QString menuStyle);
 QToolButton *makeSetsMenu(Qt_RenderArea* ra, QString menuStyle);
+QToolButton *makeTablesMenu(Qt_RenderArea* ra, QString menuStyle);
 
 int
 main(int argc, char *argv[])
@@ -535,6 +536,7 @@ main(int argc, char *argv[])
     secondToolBar->addWidget(makeIntegralsMenu(ra, menuStyle));
     secondToolBar->addWidget(makeBarsMenu(ra, menuStyle));
     secondToolBar->addWidget(makeSetsMenu(ra, menuStyle));
+    secondToolBar->addWidget(makeTablesMenu(ra, menuStyle));
 
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
@@ -1150,3 +1152,104 @@ QToolButton
     return setsButton;
 }
 // Sets ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Tables ----------------------------------------------------------------------
+QToolButton
+*makeTablesMenu(Qt_RenderArea* ra, QString menuStyle)
+{
+    QMenu *tablesMenu = new QMenu("tables");
+    tablesMenu->setStyleSheet(menuStyle);
+    QToolButton *tablesButton = new QToolButton();
+
+    QAction *tables = new QAction("tables");
+    tables->setIcon(QIcon("/Users/n.mikhnenko/mathviewlib/src/backend/qt/tables.png"));
+
+    tablesButton->setMenu(tablesMenu);
+    tablesButton->setPopupMode(QToolButton::InstantPopup);
+    tablesButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    tablesButton->setDefaultAction(tables);
+    addSubMenuElementsExt(ra, tablesMenu, menuStyle, {
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/tables3.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mtable>"
+                            "<mtr>"
+                                  "<mtd><mi/></mtd>"
+                             "</mtr>"
+                             "<mtr>"
+                                   "<mtd><mi/></mtd>"
+                              "</mtr>"
+                             "</table>"
+                        "</math>"
+                }, {}
+            },
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/tables4.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mtable>"
+                            "<mtr>"
+                                  "<mtd><mi/></mtd>"
+                             "</mtr>"
+                             "<mtr>"
+                                   "<mtd><mi/></mtd>"
+                              "</mtr>"
+                              "<mtr>"
+                                    "<mtd><mi/></mtd>"
+                               "</mtr>"
+                             "</table>"
+                        "</math>"
+                }, {}
+            },
+        },
+    
+        {
+            {
+                {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/tables5.png",
+                        "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                            "<mtable>"
+                            "<mtr>"
+                                  "<mtd><mi/></mtd>"
+                                  "<mtd><mi/></mtd>"
+                             "</mtr>"
+                             "<mtr>"
+                                   "<mtd><mi/></mtd>"
+                                  "<mtd><mi/></mtd>"
+                              "</mtr>"
+                             "</table>"
+                        "</math>"
+                }, {}
+            },
+        },
+    });
+    addToolBarActionsElementsExt(ra, tablesMenu, {
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/tables1.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mtable>"
+                        "<mtr>"
+                              "<mtd><mi/></mtd>"
+                              "<mtd><mi/></mtd>"
+                         "</mtr>"
+                         "</table>"
+                    "</math>"
+            }, {}
+        },
+        {
+            {"/Users/n.mikhnenko/mathviewlib/src/backend/qt/tables2.png",
+                    "<math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\">"
+                        "<mtable>"
+                        "<mtr>"
+                              "<mtd><mi/></mtd>"
+                              "<mtd><mi/></mtd>"
+                              "<mtd><mi/></mtd>"
+                         "</mtr>"
+                         "</table>"
+                    "</math>"
+            }, {}
+        },
+    });
+
+    return tablesButton;
+}
+// Tables ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
